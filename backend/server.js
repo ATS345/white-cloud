@@ -43,7 +43,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({
     success: true,
-    message: '游戏商店平台API运行正常',
+    message: '木鱼游戏平台API运行正常',
     timestamp: new Date().toISOString(),
     version: '1.0.0'
   })

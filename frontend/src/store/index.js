@@ -3,6 +3,7 @@ import userReducer from './userSlice'
 import gameReducer from './gameSlice'
 import cartReducer from './cartSlice'
 import developerReducer from './developerSlice'
+import paymentReducer from './paymentSlice'
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     game: gameReducer,
     cart: cartReducer,
     developer: developerReducer,
+    payment: paymentReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

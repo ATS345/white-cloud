@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from '../utils/axios'
+import api from '../utils/api'
 
 // 异步Thunk - 创建支付意图
 export const createPaymentIntent = createAsyncThunk(
   'payment/createPaymentIntent',
   async ({ gameIds }, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/payments/intent', { gameIds })
+      const response = await api.post('/payments/intent', { gameIds })
       return response.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || '创建支付意图失败')
@@ -19,7 +19,7 @@ export const confirmPayment = createAsyncThunk(
   'payment/confirmPayment',
   async ({ orderId, paymentIntentId }, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/payments/confirm', { orderId, paymentIntentId })
+      const response = await api.post('/payments/confirm', { orderId, paymentIntentId })
       return response.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || '确认支付失败')
@@ -32,7 +32,7 @@ export const fetchOrderHistory = createAsyncThunk(
   'payment/fetchOrderHistory',
   async ({ page = 1, limit = 10 }, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/payments/orders', { params: { page, limit } })
+      const response = await api.get('/payments/orders', { params: { page, limit } })
       return response.data.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || '获取订单历史失败')
@@ -45,7 +45,7 @@ export const fetchOrderDetail = createAsyncThunk(
   'payment/fetchOrderDetail',
   async (orderId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/payments/orders/${orderId}`)
+      const response = await api.get(`/payments/orders/${orderId}`)
       return response.data.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || '获取订单详情失败')

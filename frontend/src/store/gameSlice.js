@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from '../utils/axios'
+import api from '../utils/api'
 
 // 异步Thunk - 获取游戏列表
 export const fetchGames = createAsyncThunk(
@@ -14,7 +14,7 @@ export const fetchGames = createAsyncThunk(
       }
 
       // 发送请求
-      const response = await axios.get('/games', { params })
+      const response = await api.get('/games', { params })
       return response.data.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || '获取游戏列表失败')
@@ -27,7 +27,7 @@ export const fetchCategories = createAsyncThunk(
   'game/fetchCategories',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/games/categories/all')
+      const response = await api.get('/games/categories/all')
       return response.data.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || '获取游戏分类失败')
@@ -40,7 +40,7 @@ export const fetchTags = createAsyncThunk(
   'game/fetchTags',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/games/tags/all')
+      const response = await api.get('/games/tags/all')
       return response.data.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || '获取游戏标签失败')
@@ -53,7 +53,7 @@ export const fetchGameDetail = createAsyncThunk(
   'game/fetchGameDetail',
   async (gameId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/games/${gameId}`)
+      const response = await api.get(`/games/${gameId}`)
       return response.data.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || '获取游戏详情失败')

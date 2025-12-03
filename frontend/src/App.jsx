@@ -1,8 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useEffect } from 'react-router-dom'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import { Provider } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 import store from './store'
+import { initializeCart } from './store/cartSlice'
 
 // 导入页面组件
 import HomePage from './pages/HomePage'
@@ -24,6 +25,18 @@ import NotFoundPage from './pages/NotFoundPage'
 // 导入布局组件
 import Header from './components/Header'
 import Footer from './components/Footer'
+
+// 初始化组件
+const AppInitializer = () => {
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    // 初始化购物车统计信息
+    dispatch(initializeCart())
+  }, [dispatch])
+  
+  return null
+}
 
 // 创建主题
 const theme = createTheme({
@@ -57,6 +70,7 @@ const theme = createTheme({
 function App() {
   return (
     <Provider store={store}>
+      <AppInitializer />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>

@@ -1,7 +1,7 @@
 {
-  "name": "game-store-backend",
+  "name": "muyu-game-backend",
   "version": "0.0.1",
-  "description": "Game Store Platform Backend API",
+  "description": "木鱼游戏平台后端API",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -15,9 +15,10 @@
     "game",
     "store",
     "api",
-    "backend"
+    "backend",
+    "muyu"
   ],
-  "author": "Game Store Team",
+  "author": "木鱼游戏团队",
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",

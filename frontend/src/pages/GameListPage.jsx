@@ -62,7 +62,7 @@ const GameListPage = () => {
     <Container maxWidth="xl">
       <Box sx={{ py: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 700 }}>
-          游戏商店
+          木鱼游戏
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" gutterBottom>
           发现最新、最热门的游戏
