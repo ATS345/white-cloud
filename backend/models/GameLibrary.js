@@ -26,6 +26,42 @@ const GameLibrary = sequelize.define('GameLibrary', {
         msg: '游玩时间不能为负数'
       }
     }
+  },
+  // 是否已安装
+  installed: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  // 是否需要更新
+  needs_update: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  // 安装状态
+  installation_status: {
+    type: DataTypes.ENUM('pending', 'downloading', 'installing', 'completed', 'failed'),
+    allowNull: true,
+    defaultValue: null
+  },
+  // 安装任务ID
+  installation_id: {
+    type: DataTypes.STRING(50),
+    allowNull: true,
+    defaultValue: null
+  },
+  // 已安装版本
+  installed_version: {
+    type: DataTypes.STRING(20),
+    allowNull: true,
+    defaultValue: null
+  },
+  // 最后更新时间
+  last_updated_at: {
+    type: DataTypes.DATE,
+    allowNull: true,
+    defaultValue: null
   }
 }, {
   // 模型配置

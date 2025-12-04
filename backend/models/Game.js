@@ -105,6 +105,31 @@ const Game = sequelize.define('Game', {
         msg: '游戏主图是必填项'
       }
     }
+  },
+  // 游戏封面图
+  cover_image: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
+  // 可执行文件路径
+  executable_path: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
+  // 游戏启动参数
+  launch_parameters: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
+  // 最新版本
+  latest_version: {
+    type: DataTypes.STRING(20),
+    allowNull: true
+  },
+  // 下载URL
+  download_url: {
+    type: DataTypes.STRING(255),
+    allowNull: true
   }
 }, {
   // 模型配置

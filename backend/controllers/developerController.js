@@ -479,3 +479,242 @@ export const getWithdrawalRequests = async (req, res) => {
     })
   }
 }
+
+// 获取游戏数据分析
+export const getGameAnalytics = async (req, res) => {
+  try {
+    const userId = req.user.id
+    const { gameId, startDate, endDate, metric = 'sales' } = req.query
+
+    // 查找开发者
+    const developer = await Developer.findOne({
+      where: { user_id: userId }
+    })
+
+    if (!developer) {
+      return res.status(404).json({
+        success: false,
+        message: '开发者账户不存在'
+      })
+    }
+
+    // 构建查询条件
+    const whereClause = {
+      '$OrderItem.game.developer_id$': developer.id
+    }
+
+    if (gameId) {
+      whereClause.game_id = gameId
+    }
+
+    if (startDate && endDate) {
+      whereClause.created_at = {
+        [sequelize.Op.between]: [startDate, endDate]
+      }
+    }
+
+    // 根据指标类型获取不同的数据
+    let analyticsData = []
+    let groupBy = ['date']
+    let attributes = [
+      [sequelize.fn('DATE', sequelize.col('Order.created_at')), 'date']
+    ]
+
+    switch (metric) {
+      case 'sales':
+        attributes.push(
+          [sequelize.fn('COUNT', sequelize.col('id')), 'value']
+        )
+        break
+      case 'revenue':
+        attributes.push(
+          [sequelize.fn('SUM', sequelize.col('price')), 'value']
+        )
+        break
+      case 'downloads':
+        // 这里需要根据实际的下载记录模型进行调整
+        attributes.push(
+          [sequelize.fn('COUNT', sequelize.col('id')), 'value']
+        )
+        break
+      case 'active_users':
+        // 这里需要根据实际的用户活动记录模型进行调整
+        attributes.push(
+          [sequelize.fn('COUNT', sequelize.fn('DISTINCT', sequelize.col('Order.user_id'))), 'value']
+        )
+        break
+      case 'rating':
+        // 这里需要根据实际的评价记录模型进行调整
+        attributes.push(
+          [sequelize.fn('AVG', sequelize.col('rating')), 'value']
+        )
+        break
+      default:
+        attributes.push(
+          [sequelize.fn('COUNT', sequelize.col('id')), 'value']
+        )
+    }
+
+    // 获取数据分析数据
+    analyticsData = await OrderItem.findAll({
+      where: whereClause,
+      include: [
+        {
+          model: Game,
+          as: 'game',
+          attributes: ['id', 'title']
+        },
+        {
+          model: Order,
+          as: 'order',
+          attributes: ['id', 'created_at', 'status', 'user_id']
+        }
+      ],
+      attributes,
+      group: groupBy,
+      order: [[sequelize.fn('DATE', sequelize.col('Order.created_at')), 'asc']]
+    })
+
+    // 格式化数据
+    const formattedData = analyticsData.map(item => ({
+      date: item.dataValues.date,
+      value: parseFloat(item.dataValues.value) || 0
+    }))
+
+    return res.status(200).json({
+      success: true,
+      message: '获取游戏数据分析成功',
+      data: {
+        metric,
+        data: formattedData
+      }
+    })
+  } catch (error) {
+    console.error('获取游戏数据分析错误:', error)
+    return res.status(500).json({
+      success: false,
+      message: '获取游戏数据分析过程中发生错误',
+      error: error.message
+    })
+  }
+}
+
+// 获取游戏对比分析
+export const getGameComparison = async (req, res) => {
+  try {
+    const userId = req.user.id
+    const { gameIds = [], startDate, endDate } = req.query
+
+    // 查找开发者
+    const developer = await Developer.findOne({
+      where: { user_id: userId }
+    })
+
+    if (!developer) {
+      return res.status(404).json({
+        success: false,
+        message: '开发者账户不存在'
+      })
+    }
+
+    // 构建查询条件
+    const whereClause = {
+      '$OrderItem.game.developer_id$': developer.id
+    }
+
+    if (gameIds.length > 0) {
+      whereClause.game_id = {
+        [sequelize.Op.in]: gameIds
+      }
+    }
+
+    if (startDate && endDate) {
+      whereClause.created_at = {
+        [sequelize.Op.between]: [startDate, endDate]
+      }
+    }
+
+    // 获取游戏对比数据
+    const comparisonData = await OrderItem.findAll({
+      where: whereClause,
+      include: [
+        {
+          model: Game,
+          as: 'game',
+          attributes: ['id', 'title']
+        },
+        {
+          model: Order,
+          as: 'order',
+          attributes: ['id', 'created_at', 'status']
+        }
+      ],
+      attributes: [
+        'game_id',
+        [sequelize.col('game.title'), 'game_title'],
+        [sequelize.fn('COUNT', sequelize.col('id')), 'total_sales'],
+        [sequelize.fn('SUM', sequelize.col('price')), 'total_revenue'],
+        [sequelize.fn('AVG', sequelize.col('price')), 'avg_price']
+      ],
+      group: ['game_id', 'game.title'],
+      order: [[sequelize.fn('SUM', sequelize.col('price')), 'desc']]
+    })
+
+    return res.status(200).json({
+      success: true,
+      message: '获取游戏对比分析成功',
+      data: {
+        comparison: comparisonData
+      }
+    })
+  } catch (error) {
+    console.error('获取游戏对比分析错误:', error)
+    return res.status(500).json({
+      success: false,
+      message: '获取游戏对比分析过程中发生错误',
+      error: error.message
+    })
+  }
+}
+
+// 获取用户行为分析
+export const getUserBehaviorAnalytics = async (req, res) => {
+  try {
+    const userId = req.user.id
+    const { gameId, startDate, endDate } = req.query
+
+    // 查找开发者
+    const developer = await Developer.findOne({
+      where: { user_id: userId }
+    })
+
+    if (!developer) {
+      return res.status(404).json({
+        success: false,
+        message: '开发者账户不存在'
+      })
+    }
+
+    // 这里可以根据实际的用户行为记录模型进行调整
+    // 以下是一个示例实现，需要根据实际数据模型进行修改
+    const behaviorData = {
+      daily_active_users: [],
+      monthly_active_users: [],
+      user_retention: [],
+      user_acquisition: []
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: '获取用户行为分析成功',
+      data: behaviorData
+    })
+  } catch (error) {
+    console.error('获取用户行为分析错误:', error)
+    return res.status(500).json({
+      success: false,
+      message: '获取用户行为分析过程中发生错误',
+      error: error.message
+    })
+  }
+}

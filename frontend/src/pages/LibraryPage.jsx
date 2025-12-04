@@ -124,4 +124,94 @@ const LibraryPage = () => {
               onClick={() => navigate('/games')}
             >
               浏览游戏
-            </
+            </Button>
+          </Box>
+        </Box>
+      ) : (
+        <Grid container spacing={3}>
+          {games.map((game) => (
+            <Grid item xs={12} sm={6} md={4} key={game.id}>
+              <Paper
+                sx={{
+                  borderRadius: 2,
+                  overflow: 'hidden',
+                  transition: 'transform 0.3s, box-shadow 0.3s',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)'
+                  }
+                }}
+              >
+                {/* 游戏封面 */}
+                <Box sx={{ position: 'relative' }}>
+                  <img
+                    src={game.image}
+                    alt={game.title}
+                    style={{
+                      width: '100%',
+                      height: 180,
+                      objectFit: 'cover'
+                    }}
+                  />
+                  {/* 状态标签 */}
+                  <Chip
+                    label={game.status === 'installed' ? '已安装' : '已购买'}
+                    color={game.status === 'installed' ? 'success' : 'primary'}
+                    size="small"
+                    sx={{
+                      position: 'absolute',
+                      top: 8,
+                      right: 8,
+                      fontWeight: 'bold'
+                    }}
+                  />
+                </Box>
+
+                {/* 游戏信息 */}
+                <Box sx={{ p: 3 }}>
+                  <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', mb: 1 }}>
+                    {game.title}
+                  </Typography>
+
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                    <Typography variant="body2" color="text.secondary">
+                      最近游玩: {game.lastPlayed}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      游玩时间: {game.playTime}
+                    </Typography>
+                  </Box>
+
+                  {/* 操作按钮 */}
+                  <Box sx={{ display: 'flex', gap: 1 }}>
+                    {game.status === 'installed' ? (
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        startIcon={<PlayArrowIcon />}
+                        sx={{ bgcolor: '#6366f1', '&:hover': { bgcolor: '#4f46e5' }, borderRadius: 1.5 }}
+                      >
+                        开始游戏
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        startIcon={<DownloadIcon />}
+                        sx={{ bgcolor: '#6366f1', '&:hover': { bgcolor: '#4f46e5' }, borderRadius: 1.5 }}
+                      >
+                        下载
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      )}
+    </Container>
+  )
+}
+
+export default LibraryPage

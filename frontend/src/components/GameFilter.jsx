@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { 
   Box, Typography, TextField, Button, FormControl, InputLabel, Select, 
-  MenuItem, Slider, Divider, IconButton, Paper 
+  MenuItem, Slider, Divider, IconButton, Paper, Chip, Autocomplete 
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import FilterListIcon from '@mui/icons-material/FilterList'
@@ -12,10 +12,23 @@ import { fetchCategories, fetchTags } from '../store/gameSlice'
 const GameFilter = ({ filters, onChange }) => {
   const dispatch = useDispatch()
   
-  const [localFilters, setLocalFilters] = useState(filters)
+  const [localFilters, setLocalFilters] = useState({
+    ...filters,
+    categories: [], // 改为数组，支持多选
+    tags: [], // 改为数组，支持多选
+    minRating: 0,
+    maxRating: 5,
+    platform: '',
+    releaseDate: {
+      from: '',
+      to: ''
+    }
+  })
   const [categories, setCategories] = useState([])
   const [tags, setTags] = useState([])
   const [expanded, setExpanded] = useState(true)
+  const [selectedCategories, setSelectedCategories] = useState([])
+  const [selectedTags, setSelectedTags] = useState([])
 
   // 初始化加载分类和标签
   useEffect(() => {
@@ -33,22 +46,6 @@ const GameFilter = ({ filters, onChange }) => {
     setLocalFilters(prev => ({
       ...prev,
       search: e.target.value
-    }))
-  }
-
-  // 处理分类变化
-  const handleCategoryChange = (e) => {
-    setLocalFilters(prev => ({
-      ...prev,
-      category: e.target.value
-    }))
-  }
-
-  // 处理标签变化
-  const handleTagChange = (e) => {
-    setLocalFilters(prev => ({
-      ...prev,
-      tag: e.target.value
     }))
   }
 
@@ -86,14 +83,23 @@ const GameFilter = ({ filters, onChange }) => {
   const handleResetFilters = () => {
     const resetFilters = {
       search: '',
-      category: '',
-      tag: '',
+      categories: [],
+      tags: [],
       minPrice: 0,
       maxPrice: 1000,
+      minRating: 0,
+      maxRating: 5,
+      platform: '',
+      releaseDate: {
+        from: '',
+        to: ''
+      },
       sortBy: 'release_date',
       sortOrder: 'desc'
     }
     setLocalFilters(resetFilters)
+    setSelectedCategories([])
+    setSelectedTags([])
     onChange(resetFilters)
   }
 
@@ -127,134 +133,197 @@ const GameFilter = ({ filters, onChange }) => {
 
       {expanded && (
         <>
-          {/* 搜索框 */}
+          {/* 搜索框 - 增强版 */}
           <Box sx={{ mb: 3 }}>
-            <TextField
-              fullWidth
-              label="搜索游戏"
-              variant="outlined"
-              size="small"
-              value={localFilters.search}
-              onChange={handleSearchChange}
-              sx={{ 
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#475569',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: '#6366f1',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#6366f1',
-                  },
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#94a3b8',
-                },
-                '& .MuiInputBase-input': {
-                  color: 'white',
-                },
-              }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton onClick={handleApplyFilters} sx={{ color: '#94a3b8' }}>
-                    <SearchIcon />
-                  </IconButton>
-                ),
-              }}
+            <Autocomplete
+              freeSolo
+              disableClearable
+              options={[]} // 这里可以添加搜索建议选项，后续可以从后端获取
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  fullWidth
+                  label="搜索游戏"
+                  variant="outlined"
+                  size="small"
+                  value={localFilters.search}
+                  onChange={(e) => {
+                    handleSearchChange(e)
+                    // 实现实时搜索，延迟300ms避免频繁请求
+                    clearTimeout(window.searchTimeout)
+                    window.searchTimeout = setTimeout(() => {
+                      handleApplyFilters()
+                    }, 300)
+                  }}
+                  sx={{ 
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: '#475569',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#6366f1',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#6366f1',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: '#94a3b8',
+                    },
+                    '& .MuiInputBase-input': {
+                      color: 'white',
+                    },
+                  }}
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <>
+                        {params.InputProps.endAdornment}
+                        <IconButton onClick={handleApplyFilters} sx={{ color: '#94a3b8', ml: 1 }}>
+                          <SearchIcon />
+                        </IconButton>
+                      </>
+                    ),
+                  }}
+                />
+              )}
             />
           </Box>
 
           <Divider sx={{ my: 2, bgcolor: '#334155' }} />
 
-          {/* 分类筛选 */}
+          {/* 分类筛选 - 支持多选 */}
           <Box sx={{ mb: 3 }}>
             <Typography variant="subtitle2" sx={{ mb: 1, color: '#94a3b8', fontWeight: 600 }}>
               游戏分类
             </Typography>
-            <FormControl fullWidth size="small">
-              <InputLabel sx={{ color: '#94a3b8' }}>选择分类</InputLabel>
-              <Select
-                label="选择分类"
-                value={localFilters.category}
-                onChange={handleCategoryChange}
-                sx={{ 
-                  '& .MuiOutlinedInput-root': {
-                    color: 'white',
-                    '& fieldset': {
-                      borderColor: '#475569',
+            <Autocomplete
+              multiple
+              options={categories}
+              getOptionLabel={(option) => option.name}
+              value={selectedCategories}
+              onChange={(event, newValue) => {
+                setSelectedCategories(newValue)
+                setLocalFilters(prev => ({
+                  ...prev,
+                  categories: newValue.map(category => category.name)
+                }))
+              }}
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip
+                    key={option.id}
+                    label={option.name}
+                    {...getTagProps({ index })}
+                    sx={{
+                      backgroundColor: '#475569',
+                      color: 'white',
+                      '&:hover': {
+                        backgroundColor: '#64748b'
+                      }
+                    }}
+                  />
+                ))
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  size="small"
+                  sx={{ 
+                    '& .MuiOutlinedInput-root': {
+                      color: 'white',
+                      '& fieldset': {
+                        borderColor: '#475569',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#6366f1',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#6366f1',
+                      },
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#6366f1',
+                    '& .MuiMenuList-root': {
+                      backgroundColor: '#1e293b',
+                      color: 'white',
                     },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#6366f1',
+                    '& .MuiMenuItem-root': {
+                      '&:hover': {
+                        backgroundColor: '#334155',
+                      },
                     },
-                  },
-                  '& .MuiMenuList-root': {
-                    backgroundColor: '#1e293b',
-                    color: 'white',
-                  },
-                  '& .MuiMenuItem-root': {
-                    '&:hover': {
-                      backgroundColor: '#334155',
-                    },
-                  },
-                }}
-              >
-                <MenuItem value="">所有分类</MenuItem>
-                {categories.map(category => (
-                  <MenuItem key={category.id} value={category.name}>
-                    {category.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                  }}
+                  placeholder="选择游戏分类"
+                />
+              )}
+            />
           </Box>
 
-          {/* 标签筛选 */}
+          {/* 标签筛选 - 支持多选 */}
           <Box sx={{ mb: 3 }}>
             <Typography variant="subtitle2" sx={{ mb: 1, color: '#94a3b8', fontWeight: 600 }}>
               游戏标签
             </Typography>
-            <FormControl fullWidth size="small">
-              <InputLabel sx={{ color: '#94a3b8' }}>选择标签</InputLabel>
-              <Select
-                label="选择标签"
-                value={localFilters.tag}
-                onChange={handleTagChange}
-                sx={{ 
-                  '& .MuiOutlinedInput-root': {
-                    color: 'white',
-                    '& fieldset': {
-                      borderColor: '#475569',
+            <Autocomplete
+              multiple
+              options={tags}
+              getOptionLabel={(option) => option.name}
+              value={selectedTags}
+              onChange={(event, newValue) => {
+                setSelectedTags(newValue)
+                setLocalFilters(prev => ({
+                  ...prev,
+                  tags: newValue.map(tag => tag.name)
+                }))
+              }}
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip
+                    key={option.id}
+                    label={option.name}
+                    {...getTagProps({ index })}
+                    sx={{
+                      backgroundColor: '#475569',
+                      color: 'white',
+                      '&:hover': {
+                        backgroundColor: '#64748b'
+                      }
+                    }}
+                  />
+                ))
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  size="small"
+                  sx={{ 
+                    '& .MuiOutlinedInput-root': {
+                      color: 'white',
+                      '& fieldset': {
+                        borderColor: '#475569',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#6366f1',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#6366f1',
+                      },
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#6366f1',
+                    '& .MuiMenuList-root': {
+                      backgroundColor: '#1e293b',
+                      color: 'white',
                     },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#6366f1',
+                    '& .MuiMenuItem-root': {
+                      '&:hover': {
+                        backgroundColor: '#334155',
+                      },
                     },
-                  },
-                  '& .MuiMenuList-root': {
-                    backgroundColor: '#1e293b',
-                    color: 'white',
-                  },
-                  '& .MuiMenuItem-root': {
-                    '&:hover': {
-                      backgroundColor: '#334155',
-                    },
-                  },
-                }}
-              >
-                <MenuItem value="">所有标签</MenuItem>
-                {tags.map(tag => (
-                  <MenuItem key={tag.id} value={tag.name}>
-                    {tag.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                  }}
+                  placeholder="选择游戏标签"
+                />
+              )}
+            />
           </Box>
 
           {/* 价格范围 */}
@@ -292,6 +361,96 @@ const GameFilter = ({ filters, onChange }) => {
                 },
               }}
             />
+          </Box>
+
+          {/* 评分范围 */}
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="subtitle2" sx={{ mb: 1, color: '#94a3b8', fontWeight: 600 }}>
+              评分范围
+            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+              <Typography variant="body2" sx={{ color: '#cbd5e1' }}>
+                {localFilters.minRating}
+              </Typography>
+              <Typography variant="body2" sx={{ color: '#cbd5e1' }}>
+                {localFilters.maxRating}
+              </Typography>
+            </Box>
+            <Slider
+              value={[localFilters.minRating, localFilters.maxRating]}
+              onChange={(event, newValue) => {
+                setLocalFilters(prev => ({
+                  ...prev,
+                  minRating: newValue[0],
+                  maxRating: newValue[1]
+                }))
+              }}
+              min={0}
+              max={5}
+              step={0.5}
+              valueLabelDisplay="auto"
+              getAriaLabel={() => '评分范围'}
+              sx={{
+                color: '#f59e0b',
+                '& .MuiSlider-thumb': {
+                  backgroundColor: '#f59e0b',
+                },
+                '& .MuiSlider-track': {
+                  backgroundColor: '#f59e0b',
+                },
+                '& .MuiSlider-rail': {
+                  backgroundColor: '#475569',
+                },
+              }}
+            />
+          </Box>
+
+          {/* 游戏平台 */}
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="subtitle2" sx={{ mb: 1, color: '#94a3b8', fontWeight: 600 }}>
+              游戏平台
+            </Typography>
+            <FormControl fullWidth size="small">
+              <Select
+                value={localFilters.platform}
+                onChange={(e) => {
+                  setLocalFilters(prev => ({
+                    ...prev,
+                    platform: e.target.value
+                  }))
+                }}
+                sx={{ 
+                  '& .MuiOutlinedInput-root': {
+                    color: 'white',
+                    '& fieldset': {
+                      borderColor: '#475569',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#6366f1',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#6366f1',
+                    },
+                  },
+                  '& .MuiMenuList-root': {
+                    backgroundColor: '#1e293b',
+                    color: 'white',
+                  },
+                  '& .MuiMenuItem-root': {
+                    '&:hover': {
+                      backgroundColor: '#334155',
+                    },
+                  },
+                }}
+              >
+                <MenuItem value="">所有平台</MenuItem>
+                <MenuItem value="windows">Windows</MenuItem>
+                <MenuItem value="mac">Mac</MenuItem>
+                <MenuItem value="linux">Linux</MenuItem>
+                <MenuItem value="ios">iOS</MenuItem>
+                <MenuItem value="android">Android</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
 
           {/* 排序选项 */}
