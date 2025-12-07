@@ -1,4 +1,9 @@
-#!/bin/bash
+// frontend/package.json
+{
+  "scripts": {
+    "dev": "\"C:\\Program Files\\nodejs\\node.exe\" \"node_modules\\vite\\bin\\vite.js\""
+  }
+}#!/bin/bash
 
 # 游戏商店平台部署脚本
 

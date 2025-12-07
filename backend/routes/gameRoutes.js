@@ -20,7 +20,7 @@ import {
   createGameVersion,
   createGameSystemRequirement
 } from '../controllers/gameController.js'
-import { protect, isDeveloper } from '../middleware/auth.js'
+import { authenticate, isDeveloper } from '../middleware/auth.js'
 
 // 创建路由器
 const router = express.Router()
@@ -68,10 +68,10 @@ router.get('/:gameId/data', getGameData)
 router.delete('/:gameId/data/:dataId', deleteGameData)
 
 // 游戏发布管理路由
-router.post('/create', protect, isDeveloper, createGame) // 创建游戏
-router.put('/:id', protect, isDeveloper, updateGameDetails) // 更新游戏
-router.post('/:id/submit-review', protect, isDeveloper, submitGameForReview) // 提交游戏审核
-router.post('/:id/versions', protect, isDeveloper, createGameVersion) // 创建游戏版本
-router.post('/:id/system-requirements', protect, isDeveloper, createGameSystemRequirement) // 创建游戏系统需求
+router.post('/create', authenticate, isDeveloper, createGame) // 创建游戏
+router.put('/:id', authenticate, isDeveloper, updateGameDetails) // 更新游戏
+router.post('/:id/submit-review', authenticate, isDeveloper, submitGameForReview) // 提交游戏审核
+router.post('/:id/versions', authenticate, isDeveloper, createGameVersion) // 创建游戏版本
+router.post('/:id/system-requirements', authenticate, isDeveloper, createGameSystemRequirement) // 创建游戏系统需求
 
 export default router
