@@ -5,6 +5,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import sequelize from './config/database.js'
 import logger from './config/logger.js'
+import redisClient from './config/redis.js'
 
 // 加载环境变量
 dotenv.config()
@@ -102,13 +103,45 @@ const PORT = process.env.PORT || 5000
     
     // 2. 启动服务器
     console.log('准备启动服务器...')
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
       console.log(`\n🚀 服务器启动成功！`)
       console.log(`📡 服务器地址: http://localhost:${PORT}`)
       console.log(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`)
       console.log(`🔧 环境: ${process.env.NODE_ENV}`)
       console.log(`\n按 Ctrl+C 停止服务器`)
     })
+    
+    // 监听进程终止信号，确保资源正确释放
+    const handleShutdown = async () => {
+      logger.info('[SERVER] 正在关闭服务器...')
+      
+      try {
+        // 关闭Redis连接
+        if (redisClient && redisClient.disconnect) {
+          await redisClient.disconnect()
+          logger.info('[REDIS] Redis连接已关闭')
+        }
+        
+        // 关闭Sequelize连接
+        if (sequelize && sequelize.close) {
+          await sequelize.close()
+          logger.info('[DATABASE] 数据库连接已关闭')
+        }
+        
+        // 关闭HTTP服务器
+        server.close(() => {
+          logger.info('[SERVER] 服务器已成功关闭')
+          process.exit(0)
+        })
+      } catch (error) {
+        logger.error(`[SERVER SHUTDOWN ERROR] ${error.message}`)
+        process.exit(1)
+      }
+    }
+    
+    // 监听SIGINT和SIGTERM信号
+    process.on('SIGINT', handleShutdown)
+    process.on('SIGTERM', handleShutdown)
   } catch (error) {
     console.error('启动过程中发生错误:', error)
     console.error('错误堆栈:', error.stack)
