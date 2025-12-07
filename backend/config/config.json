@@ -1,0 +1,17 @@
+{
+  "development": {
+    "dialect": "sqlite",
+    "storage": "./database/muyu_game.db",
+    "timezone": "+08:00"
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": "./database/muyu_game_test.db",
+    "timezone": "+08:00"
+  },
+  "production": {
+    "dialect": "sqlite",
+    "storage": "./database/muyu_game_production.db",
+    "timezone": "+08:00"
+  }
+}
