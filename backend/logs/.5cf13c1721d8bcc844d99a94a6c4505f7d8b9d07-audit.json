@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\项目开发\\游戏商店平台项目开发\\backend\\logs\\.5cf13c1721d8bcc844d99a94a6c4505f7d8b9d07-audit.json",
+    "files": [
+        {
+            "date": 1765106631673,
+            "name": "C:\\项目开发\\游戏商店平台项目开发\\backend\\logs\\access-2025-12-07.log",
+            "hash": "523f5e2dbc5d1c933dbfbef30756cd7b3ddeb804913345877a4c50603c4f3f6c"
+        }
+    ],
+    "hashType": "sha256"
+}

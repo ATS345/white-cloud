@@ -4,6 +4,9 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import sequelize from './config/database.js'
+import logger from './config/logger.js'
+import pkg from 'express-prometheus-middleware'
+const { prometheusMiddleware } = pkg
 
 // 导入路由
 import authRoutes from './routes/authRoutes.js'
@@ -39,6 +42,15 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'))
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 
+// 添加Prometheus监控中间件
+app.use(prometheusMiddleware({
+  metricsPath: '/metrics',
+  collectDefaultMetrics: true,
+  requestDurationBuckets: [0.1, 0.5, 1, 1.5, 2, 3, 5, 10],
+  requestLengthBuckets: [100, 500, 1000, 5000, 10000],
+  responseLengthBuckets: [100, 500, 1000, 5000, 10000]
+}))
+
 // 健康检查路由
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({
@@ -69,7 +81,7 @@ app.use((req, res) => {
 
 // 全局错误处理中间件
 app.use((err, req, res, next) => {
-  console.error('全局错误:', err)
+  logger.error('全局错误:', err)
   
   // 设置默认状态码
   const statusCode = err.statusCode || 500
@@ -89,28 +101,28 @@ const PORT = process.env.PORT || 5000
 // 同步数据库模型
 sequelize.sync({ alter: false, force: false }) // 生产环境应使用 migrate
   .then(() => {
-    console.log('数据库模型同步完成')
+    logger.info('数据库模型同步完成')
     
     // 启动服务器
     app.listen(PORT, () => {
-      console.log(`\n🚀 服务器启动成功！`)
-      console.log(`📡 服务器地址: http://localhost:${PORT}`)
-      console.log(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`)
-      console.log(`🔧 环境: ${process.env.NODE_ENV}`)
-      console.log(`\n按 Ctrl+C 停止服务器`)
+      logger.info(`\n🚀 服务器启动成功！`)
+      logger.info(`📡 服务器地址: http://localhost:${PORT}`)
+      logger.info(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`)
+      logger.info(`🔧 环境: ${process.env.NODE_ENV}`)
+      logger.info(`\n按 Ctrl+C 停止服务器`)
     })
   })
   .catch((error) => {
-    console.error('数据库模型同步失败:', error)
-    console.warn('⚠️  模型同步失败，但服务器将继续启动，某些功能可能受限')
+    logger.error('数据库模型同步失败:', error)
+    logger.warn('⚠️  模型同步失败，但服务器将继续启动，某些功能可能受限')
     
     // 即使模型同步失败，也尝试启动服务器
     app.listen(PORT, () => {
-      console.log(`\n🚀 服务器启动成功！`)
-      console.log(`📡 服务器地址: http://localhost:${PORT}`)
-      console.log(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`)
-      console.log(`🔧 环境: ${process.env.NODE_ENV}`)
-      console.log(`\n按 Ctrl+C 停止服务器`)
-      console.warn('⚠️  注意：数据库模型同步失败，某些功能可能无法正常工作')
+      logger.info(`\n🚀 服务器启动成功！`)
+      logger.info(`📡 服务器地址: http://localhost:${PORT}`)
+      logger.info(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`)
+      logger.info(`🔧 环境: ${process.env.NODE_ENV}`)
+      logger.info(`\n按 Ctrl+C 停止服务器`)
+      logger.warn('⚠️  注意：数据库模型同步失败，某些功能可能无法正常工作')
     })
   })

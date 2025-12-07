@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize'
 import dotenv from 'dotenv'
 import fs from 'fs'
 import path from 'path'
+import logger from './logger.js'
 
 // 加载环境变量
 dotenv.config()
@@ -19,7 +20,7 @@ try {
   const dialect = process.env.DB_DIALECT || 'sqlite';
   const sequelizeConfig = {
     dialect: dialect,
-    logging: process.env.NODE_ENV === 'development' ? console.log : false,
+    logging: process.env.NODE_ENV === 'development' ? logger.info : false,
     pool: {
       max: 5,
       min: 0,
@@ -50,18 +51,18 @@ try {
   const testConnection = async () => {
     try {
       await sequelize.authenticate();
-      console.log('数据库连接成功');
+      logger.info('数据库连接成功');
     } catch (error) {
-      console.warn('数据库连接失败，服务器将继续运行但部分功能可能受限:', error.message);
-      console.debug('详细错误:', error);
+      logger.warn('数据库连接失败，服务器将继续运行但部分功能可能受限:', error.message);
+      logger.debug('详细错误:', error);
     }
   };
 
   // 延迟执行连接测试，允许服务器先启动
   setTimeout(testConnection, 1000);
 } catch (error) {
-  console.error('创建数据库连接时发生错误:', error.message);
-  console.warn('服务器将继续启动，但数据库功能将不可用');
+  logger.error('创建数据库连接时发生错误:', error.message);
+  logger.warn('服务器将继续启动，但数据库功能将不可用');
   
   // 创建一个模拟的sequelize实例，避免服务器完全崩溃
   sequelize = {
