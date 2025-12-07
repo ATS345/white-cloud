@@ -235,20 +235,10 @@ const GameListPage = () => {
         </Box>
       )}
 
-      {/* 游戏筛选和列表 */}
+      {/* 游戏列表 - 移除了左侧筛选栏 */}
       <Grid container spacing={4}>
-        {/* 筛选栏 */}
-        <Grid item xs={12} md={3}>
-          <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
-            <GameFilter
-              filters={filters}
-              onChange={handleFilterChange}
-            />
-          </Paper>
-        </Grid>
-
-        {/* 游戏列表 */}
-        <Grid item xs={12} md={9}>
+        {/* 游戏列表占据整个宽度 */}
+        <Grid item xs={12}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
             <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>
               所有游戏

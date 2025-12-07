@@ -1,14 +1,9 @@
 import winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-// 获取当前文件的目录路径
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // 创建日志目录
-const logDirectory = path.join(__dirname, '..', 'logs');
+const logDirectory = path.join(process.cwd(), 'logs');
 
 // 定义日志格式
 const logFormat = winston.format.combine(

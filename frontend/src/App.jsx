@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
+import Box from '@mui/material/Box'
 import { Provider, useDispatch } from 'react-redux'
 import store from './store'
 import { initializeCart } from './store/cartSlice'
@@ -22,10 +23,12 @@ import DeveloperGamesPage from './pages/DeveloperGamesPage'
 import DeveloperSalesPage from './pages/DeveloperSalesPage'
 import DeveloperFinancesPage from './pages/DeveloperFinancesPage'
 import NotFoundPage from './pages/NotFoundPage'
+import DownloadClientPage from './pages/DownloadClientPage'
 
 // 导入布局组件
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Sidebar from './components/Sidebar'
 
 // 初始化组件
 const AppInitializer = () => {
@@ -69,41 +72,60 @@ const theme = createTheme({
 })
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = React.useState(false)
+  
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen)
+  }
+  
   return (
     <Provider store={store}>
       <AppInitializer />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-          <div className="app-container">
-            <Header />
-            <main className="main-content">
-              <Routes>
-                {/* 公共路由 */}
-                <Route path="/" element={<HomePage />} />
-                <Route path="/games" element={<GameListPage />} />
-                <Route path="/game/:id" element={<GameDetailPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/404" element={<NotFoundPage />} />
-                <Route path="*" element={<NotFoundPage />} />
+          <Box className="app-container" sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <Header onToggleSidebar={toggleSidebar} />
+            <Box sx={{ display: 'flex', flex: 1 }}>
+              {/* 侧边栏 */}
+              <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+              
+              {/* 主要内容区域 */}
+              <Box className="main-content" sx={{
+                flex: 1,
+                padding: { xs: 2, md: 4 },
+                transition: 'margin-left 0.3s ease',
+                marginLeft: { md: sidebarOpen ? 280 : 0 },
+                backgroundColor: '#0f172a'
+              }}>
+                <Routes>
+                  {/* 公共路由 */}
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/games" element={<GameListPage />} />
+                  <Route path="/game/:id" element={<GameDetailPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
+                  <Route path="/download" element={<DownloadClientPage />} />
+                  <Route path="/404" element={<NotFoundPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
 
-                {/* 需要登录的路由 */}
-                <Route path="/library" element={<LibraryPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/cart" element={<CartPage />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
-                <Route path="/orders" element={<OrderHistoryPage />} />
+                  {/* 需要登录的路由 */}
+                  <Route path="/library" element={<LibraryPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/cart" element={<CartPage />} />
+                  <Route path="/checkout" element={<CheckoutPage />} />
+                  <Route path="/orders" element={<OrderHistoryPage />} />
 
-                {/* 开发者路由 */}
-                <Route path="/developer" element={<DeveloperDashboard />} />
-                <Route path="/developer/games" element={<DeveloperGamesPage />} />
-                <Route path="/developer/sales" element={<DeveloperSalesPage />} />
-                <Route path="/developer/finances" element={<DeveloperFinancesPage />} />
-              </Routes>
-            </main>
+                  {/* 开发者路由 */}
+                  <Route path="/developer" element={<DeveloperDashboard />} />
+                  <Route path="/developer/games" element={<DeveloperGamesPage />} />
+                  <Route path="/developer/sales" element={<DeveloperSalesPage />} />
+                  <Route path="/developer/finances" element={<DeveloperFinancesPage />} />
+                </Routes>
+              </Box>
+            </Box>
             <Footer />
-          </div>
+          </Box>
         </BrowserRouter>
       </ThemeProvider>
     </Provider>

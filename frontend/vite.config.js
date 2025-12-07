@@ -12,7 +12,14 @@ export default defineConfig({
         changeOrigin: true,
         secure: false
       }
-    }
+    },
+    // 开发服务器配置：当找不到资源时，返回index.html，支持SPA应用的路由
+    historyApiFallback: true
+  },
+  preview: {
+    port: 4173,
+    // 预览服务器配置：当找不到资源时，返回index.html，支持SPA应用的路由
+    historyApiFallback: true
   },
   build: {
     outDir: 'dist',
