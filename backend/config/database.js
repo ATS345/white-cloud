@@ -20,7 +20,7 @@ try {
   const dialect = process.env.DB_DIALECT || 'sqlite';
   const sequelizeConfig = {
     dialect: dialect,
-    logging: process.env.NODE_ENV === 'development' ? logger.info : false,
+    logging: process.env.NODE_ENV === 'development' ? console.log : false,
     pool: {
       max: 5,
       min: 0,

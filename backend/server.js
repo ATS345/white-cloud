@@ -5,8 +5,6 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import sequelize from './config/database.js'
 import logger from './config/logger.js'
-import pkg from 'express-prometheus-middleware'
-const { prometheusMiddleware } = pkg
 
 // 导入路由
 import authRoutes from './routes/authRoutes.js'
@@ -41,15 +39,6 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'))
 // 解析请求体
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
-
-// 添加Prometheus监控中间件
-app.use(prometheusMiddleware({
-  metricsPath: '/metrics',
-  collectDefaultMetrics: true,
-  requestDurationBuckets: [0.1, 0.5, 1, 1.5, 2, 3, 5, 10],
-  requestLengthBuckets: [100, 500, 1000, 5000, 10000],
-  responseLengthBuckets: [100, 500, 1000, 5000, 10000]
-}))
 
 // 健康检查路由
 app.get('/api/v1/health', (req, res) => {

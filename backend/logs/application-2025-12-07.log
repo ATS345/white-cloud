@@ -1,0 +1,23 @@
+{"level":"error","message":"数据库模型同步失败: self.log is not a function","stack":"TypeError: self.log is not a function\n    at DerivedLogger.<computed> [as logging] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\winston\\lib\\winston\\create-logger.js:95:19)\n    at Sequelize.log (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\sequelize\\lib\\sequelize.js:552:15)\n    at Query._logQuery (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\sequelize\\lib\\dialects\\abstract\\query.js:268:22)\n    at Query.run (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\sequelize\\lib\\dialects\\sqlite\\query.js:182:27)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\sequelize\\lib\\sequelize.js:315:28\n    at async SQLiteQueryInterface.tableExists (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\sequelize\\lib\\dialects\\abstract\\query-interface.js:102:17)\n    at async User.sync (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\sequelize\\lib\\model.js:939:21)\n    at async Sequelize.sync (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\sequelize\\lib\\sequelize.js:377:9)","timestamp":"2025-12-07 19:25:20"}
+{"level":"warn","message":"⚠️  模型同步失败，但服务器将继续启动，某些功能可能受限","timestamp":"2025-12-07 19:25:20"}
+{"level":"info","message":"\n🚀 服务器启动成功！","timestamp":"2025-12-07 19:25:20"}
+{"level":"info","message":"📡 服务器地址: http://localhost:5000","timestamp":"2025-12-07 19:25:20"}
+{"level":"info","message":"📝 API文档地址: http://localhost:5000/api/v1/docs","timestamp":"2025-12-07 19:25:20"}
+{"level":"info","message":"🔧 环境: development","timestamp":"2025-12-07 19:25:20"}
+{"level":"info","message":"\n按 Ctrl+C 停止服务器","timestamp":"2025-12-07 19:25:20"}
+{"level":"warn","message":"⚠️  注意：数据库模型同步失败，某些功能可能无法正常工作","timestamp":"2025-12-07 19:25:20"}
+{"0":"s","1":"e","10":"s","11":" ","12":"n","13":"o","14":"t","15":" ","16":"a","17":" ","18":"f","19":"u","2":"l","20":"n","21":"c","22":"t","23":"i","24":"o","25":"n","3":"f","4":".","5":"l","6":"o","7":"g","8":" ","9":"i","level":"warn","message":"数据库连接失败，服务器将继续运行但部分功能可能受限:","timestamp":"2025-12-07 19:25:21"}
+{"level":"info","message":"数据库模型同步完成","timestamp":"2025-12-07 19:25:51"}
+{"level":"info","message":"\n🚀 服务器启动成功！","timestamp":"2025-12-07 19:25:51"}
+{"level":"info","message":"📡 服务器地址: http://localhost:5000","timestamp":"2025-12-07 19:25:51"}
+{"level":"info","message":"📝 API文档地址: http://localhost:5000/api/v1/docs","timestamp":"2025-12-07 19:25:51"}
+{"level":"info","message":"🔧 环境: development","timestamp":"2025-12-07 19:25:51"}
+{"level":"info","message":"\n按 Ctrl+C 停止服务器","timestamp":"2025-12-07 19:25:51"}
+{"level":"info","message":"数据库连接成功","timestamp":"2025-12-07 19:25:52"}
+{"level":"info","message":"数据库模型同步完成","timestamp":"2025-12-07 19:28:18"}
+{"level":"info","message":"\n🚀 服务器启动成功！","timestamp":"2025-12-07 19:28:18"}
+{"level":"info","message":"📡 服务器地址: http://localhost:5000","timestamp":"2025-12-07 19:28:18"}
+{"level":"info","message":"📝 API文档地址: http://localhost:5000/api/v1/docs","timestamp":"2025-12-07 19:28:18"}
+{"level":"info","message":"🔧 环境: development","timestamp":"2025-12-07 19:28:18"}
+{"level":"info","message":"\n按 Ctrl+C 停止服务器","timestamp":"2025-12-07 19:28:18"}
+{"level":"info","message":"数据库连接成功","timestamp":"2025-12-07 19:28:19"}
