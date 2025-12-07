@@ -137,8 +137,11 @@ const GameDetailPage = () => {
   
   // 处理下载游戏
   const handleDownloadGame = () => {
-    setSnackbarMessage('开始下载游戏...')
+    setSnackbarMessage('正在准备下载...')
     setSnackbarOpen(true)
+    
+    // 这里可以添加跳转到下载页面或调用下载API的逻辑
+    // 例如：navigate('/download', { state: { gameId: currentGame.id } })
   }
   
   // 处理启动游戏

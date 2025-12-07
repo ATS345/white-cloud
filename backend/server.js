@@ -93,26 +93,26 @@ const PORT = process.env.PORT || 5000
 // 启动服务器和初始化数据库
 (async () => {
   try {
-    logger.info('开始启动服务器...')
+    console.log('开始启动服务器...')
     
     // 1. 同步数据库模型和关联
-    logger.info('正在初始化数据库模型和关联...')
+    console.log('正在初始化数据库模型和关联...')
     await syncModels()
-    logger.info('数据库模型和关联初始化成功')
+    console.log('数据库模型和关联初始化成功')
     
     // 2. 启动服务器
-    logger.info('准备启动服务器...')
+    console.log('准备启动服务器...')
     app.listen(PORT, () => {
-      logger.info(`\n🚀 服务器启动成功！`)
-      logger.info(`📡 服务器地址: http://localhost:${PORT}`)
-      logger.info(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`)
-      logger.info(`🔧 环境: ${process.env.NODE_ENV}`)
-      logger.info(`\n按 Ctrl+C 停止服务器`)
+      console.log(`\n🚀 服务器启动成功！`)
+      console.log(`📡 服务器地址: http://localhost:${PORT}`)
+      console.log(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`)
+      console.log(`🔧 环境: ${process.env.NODE_ENV}`)
+      console.log(`\n按 Ctrl+C 停止服务器`)
     })
   } catch (error) {
     console.error('启动过程中发生错误:', error)
-    logger.error('启动过程中发生错误:', error)
-    logger.warn('⚠️  服务器启动失败，详细错误已打印到控制台')
+    console.error('错误堆栈:', error.stack)
+    console.warn('⚠️  服务器启动失败，详细错误已打印到控制台')
     
     // 立即退出进程，显示详细错误
     process.exit(1)
