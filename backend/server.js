@@ -87,7 +87,7 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000
 
 // 同步数据库模型
-sequelize.sync({ alter: false }) // 生产环境应使用 migrate
+sequelize.sync({ alter: false, force: false }) // 生产环境应使用 migrate
   .then(() => {
     console.log('数据库模型同步完成')
     
@@ -102,5 +102,15 @@ sequelize.sync({ alter: false }) // 生产环境应使用 migrate
   })
   .catch((error) => {
     console.error('数据库模型同步失败:', error)
-    process.exit(1)
+    console.warn('⚠️  模型同步失败，但服务器将继续启动，某些功能可能受限')
+    
+    // 即使模型同步失败，也尝试启动服务器
+    app.listen(PORT, () => {
+      console.log(`\n🚀 服务器启动成功！`)
+      console.log(`📡 服务器地址: http://localhost:${PORT}`)
+      console.log(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`)
+      console.log(`🔧 环境: ${process.env.NODE_ENV}`)
+      console.log(`\n按 Ctrl+C 停止服务器`)
+      console.warn('⚠️  注意：数据库模型同步失败，某些功能可能无法正常工作')
+    })
   })

@@ -31,6 +31,11 @@ const Order = sequelize.define('Order', {
     type: DataTypes.STRING(100),
     allowNull: true,
     defaultValue: null
+  },
+  // 用户ID，与User模型关联
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   // 模型配置

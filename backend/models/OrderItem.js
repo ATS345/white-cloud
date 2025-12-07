@@ -25,6 +25,16 @@ const OrderItem = sequelize.define('OrderItem', {
         msg: '购买数量至少为1'
       }
     }
+  },
+  // 订单ID，与Order模型关联
+  order_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  // 游戏ID，与Game模型关联
+  game_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   // 模型配置

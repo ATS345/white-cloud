@@ -49,6 +49,11 @@ const GameVersion = sequelize.define('GameVersion', {
   platform: {
     type: DataTypes.ENUM('windows', 'mac', 'linux'),
     allowNull: false
+  },
+  // 游戏ID，与Game模型关联
+  game_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   // 模型配置

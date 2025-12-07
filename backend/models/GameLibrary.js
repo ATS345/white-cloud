@@ -62,6 +62,16 @@ const GameLibrary = sequelize.define('GameLibrary', {
     type: DataTypes.DATE,
     allowNull: true,
     defaultValue: null
+  },
+  // 用户ID，与User模型关联
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  // 游戏ID，与Game模型关联
+  game_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   // 模型配置

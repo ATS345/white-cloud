@@ -62,6 +62,11 @@ const GameSystemRequirement = sequelize.define('GameSystemRequirement', {
         msg: '需求类型不能为空'
       }
     }
+  },
+  // 游戏ID，与Game模型关联
+  game_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   // 模型配置

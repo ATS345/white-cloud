@@ -70,6 +70,11 @@ const DeveloperFinance = sequelize.define('DeveloperFinance', {
         msg: '财务状态必须是pending、processed或paid'
       }
     }
+  },
+  // 开发者ID，与Developer模型关联
+  developer_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   // 模型配置

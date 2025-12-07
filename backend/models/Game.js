@@ -130,6 +130,11 @@ const Game = sequelize.define('Game', {
   download_url: {
     type: DataTypes.STRING(255),
     allowNull: true
+  },
+  // 开发者ID，与Developer模型关联
+  developer_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   // 模型配置

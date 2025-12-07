@@ -36,7 +36,7 @@ import WarningIcon from '@mui/icons-material/Warning'
 import ErrorIcon from '@mui/icons-material/Error'
 import StorageIcon from '@mui/icons-material/Storage'
 import NetworkWifiIcon from '@mui/icons-material/NetworkWifi'
-import CpuIcon from '@mui/icons-material/Cpu'
+import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent'
 import MemoryIcon from '@mui/icons-material/Memory'
 import GpsFixedIcon from '@mui/icons-material/GpsFixed'
 import {
@@ -277,7 +277,7 @@ const GameDetailPage = () => {
           <Button
             variant="contained"
             size="large"
-            startIcon={systemCheck.isChecking ? <CircularProgress size={20} color="inherit" /> : <CpuIcon />}
+            startIcon={systemCheck.isChecking ? <CircularProgress size={20} color="inherit" /> : <SettingsInputComponentIcon />}
             onClick={handleCheckSystemRequirements}
             disabled={systemCheck.isChecking}
             sx={{ bgcolor: '#6366f1', '&:hover': { bgcolor: '#4f46e5' } }}
@@ -429,7 +429,7 @@ const GameDetailPage = () => {
                   </Box>
                   <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <CpuIcon sx={{ mr: 1, color: '#6366f1' }} />
+                      <SettingsInputComponentIcon sx={{ mr: 1, color: '#6366f1' }} />
                       <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
                         处理器
                       </Typography>
@@ -491,7 +491,7 @@ const GameDetailPage = () => {
                   </Box>
                   <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <CpuIcon sx={{ mr: 1, color: '#6366f1' }} />
+                      <SettingsInputComponentIcon sx={{ mr: 1, color: '#6366f1' }} />
                       <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
                         处理器
                       </Typography>

@@ -59,6 +59,11 @@ const WithdrawalRequest = sequelize.define('WithdrawalRequest', {
     type: DataTypes.DATE,
     allowNull: true,
     defaultValue: null
+  },
+  // 开发者ID，与Developer模型关联
+  developer_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   // 模型配置

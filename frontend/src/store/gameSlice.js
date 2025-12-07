@@ -330,7 +330,7 @@ const gameSlice = createSlice({
         state.operationLoading = true
         state.operationError = null
       })
-      .addCase(launchGame.fulfilled, (state, action) => {
+      .addCase(launchGame.fulfilled, (state) => {
         state.operationLoading = false
         // 这里可以添加游戏启动成功后的逻辑
       })

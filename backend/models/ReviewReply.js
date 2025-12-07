@@ -16,6 +16,16 @@ const ReviewReply = sequelize.define('ReviewReply', {
         msg: '回复内容长度必须在5到1000个字符之间'
       }
     }
+  },
+  // 用户ID，与User模型关联
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  // 评论ID，与Review模型关联
+  review_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   // 模型配置

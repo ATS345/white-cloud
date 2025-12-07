@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppBar, Toolbar, Typography, Button, Box, IconButton, Menu, MenuItem, Badge } from '@mui/material'
-import { ShoppingCart, User, Search, Menu as MenuIcon, Logout } from '@mui/icons-material'
+import { ShoppingCart, Person, Search, Menu as MenuIcon, Logout } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../store/userSlice'
@@ -106,7 +106,7 @@ const Header = () => {
             </Badge>
           </IconButton>
           <IconButton color="inherit" onClick={handleUserMenuOpen}>
-            <User />
+            <Person />
           </IconButton>
           <Menu
             id="user-menu"
@@ -119,36 +119,36 @@ const Header = () => {
           >
             {user ? (
               // 已登录状态
-              [
+              <>
                 <MenuItem key="profile" onClick={() => handleNavigate('/profile')}>
                   个人中心
-                </MenuItem>,
+                </MenuItem>
                 <MenuItem key="orders" onClick={() => handleNavigate('/orders')}>
                   订单历史
-                </MenuItem>,
+                </MenuItem>
                 <MenuItem key="library" onClick={() => handleNavigate('/library')}>
                   游戏库
-                </MenuItem>,
+                </MenuItem>
                 {user.role === 'developer' && (
                   <MenuItem key="developer" onClick={() => handleNavigate('/developer')}>
                     开发者中心
                   </MenuItem>
-                )},
+                )}
                 <MenuItem key="logout" onClick={handleLogout}>
                   <Logout sx={{ mr: 1 }} />
                   登出
                 </MenuItem>
-              ]
+              </>
             ) : (
               // 未登录状态
-              [
+              <>
                 <MenuItem key="login" onClick={() => handleNavigate('/login')}>
                   登录
-                </MenuItem>,
+                </MenuItem>
                 <MenuItem key="register" onClick={() => handleNavigate('/register')}>
                   注册
                 </MenuItem>
-              ]
+              </>
             )}
           </Menu>
         </Box>

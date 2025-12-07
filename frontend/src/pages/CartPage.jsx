@@ -9,15 +9,15 @@ import {
   Paper,
   Button,
   IconButton,
-  RemoveIcon,
-  AddIcon,
-  DeleteIcon,
   Divider,
   Alert,
   Snackbar
 } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import RemoveIcon from '@mui/icons-material/Remove'
+import AddIcon from '@mui/icons-material/Add'
+import DeleteIcon from '@mui/icons-material/Delete'
 import { removeFromCart, updateQuantity, clearCart } from '../store/cartSlice'
 
 const CartPage = () => {

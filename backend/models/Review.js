@@ -31,6 +31,16 @@ const Review = sequelize.define('Review', {
         msg: '评价内容长度必须在10到5000个字符之间'
       }
     }
+  },
+  // 用户ID，与User模型关联
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  // 游戏ID，与Game模型关联
+  game_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   // 模型配置
