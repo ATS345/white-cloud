@@ -119,7 +119,7 @@ const PaymentForm = ({ games, onPaymentSuccess }) => {
                 <CardMedia
                   component="img"
                   height="80"
-                  image={game.main_image_url || 'https://via.placeholder.com/80x80?text=Game+Image'}
+                  image={game.main_image_url || 'https://picsum.photos/80/80?grayscale'}
                   alt={game.title}
                   sx={{ borderRadius: 1, objectFit: 'cover' }}
                 />

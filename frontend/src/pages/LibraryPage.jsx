@@ -30,7 +30,7 @@ const LibraryPage = () => {
     {
       id: 1,
       title: '赛博朋克2077',
-      image: 'https://via.placeholder.com/300x200/6366f1/ffffff?text=Cyberpunk+2077',
+      image: 'https://picsum.photos/300/200?random=3',
       status: 'installed',
       lastPlayed: '2025-12-01',
       playTime: '25h 30m'
@@ -38,7 +38,7 @@ const LibraryPage = () => {
     {
       id: 2,
       title: '艾尔登法环',
-      image: 'https://via.placeholder.com/300x200/ec4899/ffffff?text=Elden+Ring',
+      image: 'https://picsum.photos/300/200?random=1',
       status: 'installed',
       lastPlayed: '2025-11-28',
       playTime: '45h 15m'
@@ -46,7 +46,7 @@ const LibraryPage = () => {
     {
       id: 3,
       title: '星穹铁道',
-      image: 'https://via.placeholder.com/300x200/10b981/ffffff?text=Star+Rail',
+      image: 'https://picsum.photos/300/200?random=2',
       status: 'downloaded',
       lastPlayed: '2025-11-25',
       playTime: '15h 45m'

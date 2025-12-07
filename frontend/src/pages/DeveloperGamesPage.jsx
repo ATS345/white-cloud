@@ -28,6 +28,7 @@ const DeveloperGamesPage = () => {
   
   const [dialogOpen, setDialogOpen] = useState(false)
   const [dialogType, setDialogType] = useState('create') // 'create' or 'edit'
+  const [selectedGame, setSelectedGame] = useState(null)
 
   // 初始化加载游戏列表
   useEffect(() => {
@@ -181,7 +182,7 @@ const DeveloperGamesPage = () => {
                 {/* 游戏卡片内容 */}
                 <Box sx={{ position: 'relative' }}>
                   <img
-                    src={game.main_image_url || 'https://via.placeholder.com/400x200?text=Game+Cover'}
+                    src={game.main_image_url || 'https://picsum.photos/400/200?grayscale'}
                     alt={game.title}
                     style={{
                       width: '100%',

@@ -140,7 +140,7 @@ const GameListPage = () => {
               <Grid item xs={12} md={4}>
                 <Box sx={{ borderRadius: 2, overflow: 'hidden', boxShadow: 3 }}>
                   <img
-                    src={featuredGames[0].main_image_url || 'https://via.placeholder.com/400x200?text=Game+Image'}
+                    src={featuredGames[0].main_image_url || 'https://picsum.photos/400/200?text=Game+Image'}
                     alt={featuredGames[0].title}
                     style={{
                       width: '100%',

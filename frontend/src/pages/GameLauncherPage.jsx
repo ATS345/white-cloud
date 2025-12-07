@@ -114,7 +114,7 @@ const GameLauncherPage = () => {
       const mappedGames = games.map(game => ({
         id: game.id,
         title: game.title,
-        image: game.cover_image || 'https://via.placeholder.com/400x200?text=Game+Cover',
+        image: game.cover_image || 'https://picsum.photos/400/200?text=Game+Cover',
         status: 'not_installed', // 默认未安装，实际应从本地存储或后端获取
         progress: 0,
         lastPlayed: '',

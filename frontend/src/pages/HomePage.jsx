@@ -36,7 +36,7 @@ const HomePage = () => {
       title: '赛博朋克2077',
       price: 298,
       discountPrice: 149,
-      image: 'https://via.placeholder.com/300x200/6366f1/ffffff?text=Cyberpunk+2077',
+      image: 'https://picsum.photos/300/200?random=11',        
       rating: 4.5
     },
     {
@@ -44,7 +44,7 @@ const HomePage = () => {
       title: '艾尔登法环',
       price: 298,
       discountPrice: 199,
-      image: 'https://via.placeholder.com/300x200/ec4899/ffffff?text=Elden+Ring',
+      image: 'https://picsum.photos/300/200?random=1',
       rating: 4.8
     },
     {
@@ -52,7 +52,7 @@ const HomePage = () => {
       title: '星穹铁道',
       price: 0,
       discountPrice: 0,
-      image: 'https://via.placeholder.com/300x200/10b981/ffffff?text=Star+Rail',
+      image: 'https://picsum.photos/300/200?random=4',
       rating: 4.6
     },
     {
@@ -60,7 +60,7 @@ const HomePage = () => {
       title: '原神',
       price: 0,
       discountPrice: 0,
-      image: 'https://via.placeholder.com/300x200/f59e0b/ffffff?text=Genshin+Impact',
+      image: 'https://picsum.photos/300/200?random=2',
       rating: 4.7
     }
   ]
@@ -72,7 +72,7 @@ const HomePage = () => {
       title: '黑神话：悟空',
       price: 268,
       discountPrice: 268,
-      image: 'https://via.placeholder.com/300x200/ef4444/ffffff?text=Black+Myth',
+      image: 'https://picsum.photos/300/200?random=3',
       rating: 4.9
     },
     {
@@ -80,15 +80,15 @@ const HomePage = () => {
       title: '星球大战：亡命徒',
       price: 298,
       discountPrice: 249,
-      image: 'https://via.placeholder.com/300x200/6366f1/ffffff?text=Star+Wars',
-      rating: 4.4
+      image: 'https://picsum.photos/300/200?random=5',
+      rating: 4.3
     },
     {
       id: 7,
       title: '漫威蜘蛛人2',
       price: 468,
       discountPrice: 399,
-      image: 'https://via.placeholder.com/300x200/8b5cf6/ffffff?text=Spider+Man+2',
+      image: 'https://picsum.photos/300/200?random=6',
       rating: 4.7
     },
     {
@@ -96,7 +96,7 @@ const HomePage = () => {
       title: '霍格沃茨之遗',
       price: 298,
       discountPrice: 199,
-      image: 'https://via.placeholder.com/300x200/14b8a6/ffffff?text=Hogwarts+Legacy',
+      image: 'https://picsum.photos/300/200?random=6',
       rating: 4.5
     }
   ]
@@ -162,7 +162,7 @@ const HomePage = () => {
             <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'center', mt: { xs: 4, md: 0 } }}>
               <Box sx={{ position: 'relative', width: '100%', maxWidth: 400 }}>
                 <img
-                  src="https://via.placeholder.com/400x300/6366f1/ffffff?text=木鱼游戏"
+                  src="https://picsum.photos/400/300?random=8"
                   alt="木鱼游戏"
                   style={{ width: '100%', borderRadius: 12, boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)' }}
                 />
@@ -473,7 +473,7 @@ const HomePage = () => {
             <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', order: { xs: 1, md: 2 }, mt: { xs: 4, md: 0 } }}>
               <Box sx={{ position: 'relative', width: '100%', maxWidth: 400 }}>
                 <img
-                  src="https://via.placeholder.com/400x300/6366f1/ffffff?text=木鱼游戏客户端"
+                  src="https://picsum.photos/400/300?random=9"
                   alt="木鱼游戏客户端"
                   style={{ width: '100%', borderRadius: 12, boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)' }}
                 />

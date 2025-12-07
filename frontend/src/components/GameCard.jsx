@@ -75,7 +75,7 @@ const GameCard = ({ game, onGameClick, onAddToCart }) => {
           <CardMedia
             component="img"
             height="200"
-            image={game.main_image_url || 'https://via.placeholder.com/400x200?text=Game+Image'}
+            image={game.main_image_url || 'https://picsum.photos/400/200?grayscale'}
             alt={game.title}
             sx={{ objectFit: 'cover', borderRadius: 2 }}
           />

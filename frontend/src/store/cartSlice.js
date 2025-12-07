@@ -32,7 +32,7 @@ const cartSlice = createSlice({
           title: game.title,
           price: game.discount_price || game.price,
           originalPrice: game.price,
-          image: game.main_image_url || 'https://via.placeholder.com/300x200/6366f1/ffffff?text=Game+Image',
+          image: game.main_image_url || 'https://picsum.photos/300/200?random=10',
           quantity: 1,
           isFree: game.price === 0
         })
