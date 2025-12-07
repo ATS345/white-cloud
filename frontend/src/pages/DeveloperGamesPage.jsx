@@ -13,17 +13,13 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions,
-  TextField,
-  FormControlLabel,
-  Switch
+  DialogActions
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import ShareIcon from '@mui/icons-material/Share'
-import GameCard from '../components/GameCard'
 import { fetchGames } from '../store/gameSlice'
 
 const DeveloperGamesPage = () => {
@@ -32,7 +28,6 @@ const DeveloperGamesPage = () => {
   
   const [dialogOpen, setDialogOpen] = useState(false)
   const [dialogType, setDialogType] = useState('create') // 'create' or 'edit'
-  const [selectedGame, setSelectedGame] = useState(null)
 
   // 初始化加载游戏列表
   useEffect(() => {
@@ -77,16 +72,7 @@ const DeveloperGamesPage = () => {
     console.log('Update game status:', game.id, 'to', status)
   }
 
-  // 处理游戏点击
-  const handleGameClick = (gameId) => {
-    // 跳转到游戏编辑页面或详情页
-    window.location.href = `/developer/games/${gameId}`
-  }
 
-  // 处理添加到购物车（开发者页面不需要，但GameCard组件需要此函数）
-  const handleAddToCart = (game) => {
-    console.log('Add to cart:', game.id)
-  }
 
   return (
     <Container maxWidth="xl">

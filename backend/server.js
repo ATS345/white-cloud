@@ -6,6 +6,12 @@ import morgan from 'morgan'
 import sequelize from './config/database.js'
 import logger from './config/logger.js'
 
+// 加载环境变量
+dotenv.config()
+
+// 导入模型和同步函数
+import { syncModels } from './models/index.js'
+
 // 导入路由
 import authRoutes from './routes/authRoutes.js'
 import gameRoutes from './routes/gameRoutes.js'
@@ -14,9 +20,6 @@ import downloadRoutes from './routes/downloadRoutes.js'
 import reviewRoutes from './routes/reviewRoutes.js'
 import gameLibraryRoutes from './routes/gameLibraryRoutes.js'
 import developerRoutes from './routes/developerRoutes.js'
-
-// 加载环境变量
-dotenv.config()
 
 // 初始化Express应用
 const app = express()
@@ -87,12 +90,18 @@ app.use((err, req, res, next) => {
 // 启动服务器
 const PORT = process.env.PORT || 5000
 
-// 同步数据库模型
-sequelize.sync({ alter: false, force: false }) // 生产环境应使用 migrate
-  .then(() => {
-    logger.info('数据库模型同步完成')
+// 启动服务器和初始化数据库
+(async () => {
+  try {
+    logger.info('开始启动服务器...')
     
-    // 启动服务器
+    // 1. 同步数据库模型和关联
+    logger.info('正在初始化数据库模型和关联...')
+    await syncModels()
+    logger.info('数据库模型和关联初始化成功')
+    
+    // 2. 启动服务器
+    logger.info('准备启动服务器...')
     app.listen(PORT, () => {
       logger.info(`\n🚀 服务器启动成功！`)
       logger.info(`📡 服务器地址: http://localhost:${PORT}`)
@@ -100,18 +109,12 @@ sequelize.sync({ alter: false, force: false }) // 生产环境应使用 migrate
       logger.info(`🔧 环境: ${process.env.NODE_ENV}`)
       logger.info(`\n按 Ctrl+C 停止服务器`)
     })
-  })
-  .catch((error) => {
-    logger.error('数据库模型同步失败:', error)
-    logger.warn('⚠️  模型同步失败，但服务器将继续启动，某些功能可能受限')
+  } catch (error) {
+    console.error('启动过程中发生错误:', error)
+    logger.error('启动过程中发生错误:', error)
+    logger.warn('⚠️  服务器启动失败，详细错误已打印到控制台')
     
-    // 即使模型同步失败，也尝试启动服务器
-    app.listen(PORT, () => {
-      logger.info(`\n🚀 服务器启动成功！`)
-      logger.info(`📡 服务器地址: http://localhost:${PORT}`)
-      logger.info(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`)
-      logger.info(`🔧 环境: ${process.env.NODE_ENV}`)
-      logger.info(`\n按 Ctrl+C 停止服务器`)
-      logger.warn('⚠️  注意：数据库模型同步失败，某些功能可能无法正常工作')
-    })
-  })
+    // 立即退出进程，显示详细错误
+    process.exit(1)
+  }
+})()

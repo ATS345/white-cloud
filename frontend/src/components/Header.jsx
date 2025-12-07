@@ -11,7 +11,6 @@ const Header = ({ onToggleSidebar }) => {
   const { user } = useSelector((state) => state.user)
   const { totalItems } = useSelector((state) => state.cart)
   
-  const [anchorEl, setAnchorEl] = React.useState(null)
   const [userAnchorEl, setUserAnchorEl] = React.useState(null)
   const [searchQuery, setSearchQuery] = useState('')
   
@@ -24,16 +23,8 @@ const Header = ({ onToggleSidebar }) => {
     }
   }
 
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
-
   const handleUserMenuOpen = (event) => {
     setUserAnchorEl(event.currentTarget)
-  }
-
-  const handleMenuClose = () => {
-    setAnchorEl(null)
   }
 
   const handleUserMenuClose = () => {
@@ -42,7 +33,6 @@ const Header = ({ onToggleSidebar }) => {
 
   const handleNavigate = (path) => {
     navigate(path)
-    handleMenuClose()
     handleUserMenuClose()
   }
 

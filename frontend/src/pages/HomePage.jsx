@@ -257,9 +257,9 @@ const HomePage = () => {
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', color: '#f59e0b' }}>
                       {Array.from({ length: 5 }).map((_, index) => (
-                        <span key={index} sx={{ fontSize: '1rem' }}>
+                        <Box key={index} sx={{ fontSize: '1rem' }}>
                           {index < Math.floor(game.rating) ? '★' : index < game.rating ? '★' : '☆'}
-                        </span>
+                        </Box>
                       ))}
                     </Box>
                     <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
@@ -354,9 +354,9 @@ const HomePage = () => {
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', color: '#f59e0b' }}>
                       {Array.from({ length: 5 }).map((_, index) => (
-                        <span key={index} sx={{ fontSize: '1rem' }}>
+                        <Box key={index} sx={{ fontSize: '1rem' }}>
                           {index < Math.floor(game.rating) ? '★' : index < game.rating ? '★' : '☆'}
-                        </span>
+                        </Box>
                       ))}
                     </Box>
                     <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>

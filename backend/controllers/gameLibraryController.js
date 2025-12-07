@@ -1,6 +1,6 @@
 import GameLibrary from '../models/GameLibrary.js'
 import Game from '../models/Game.js'
-import sequelize from 'sequelize'
+import { Op } from 'sequelize'
 
 // 获取用户游戏库
 export const getUserGameLibrary = async (req, res) => {

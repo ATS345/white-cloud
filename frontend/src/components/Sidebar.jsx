@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { 
-  Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, 
-  Divider, IconButton, Box, Typography, Collapse, Tooltip 
+  Drawer, List, ListItem, ListItemIcon, ListItemText, 
+  Divider, IconButton, Box, Typography, Collapse 
 } from '@mui/material'
 import { 
-  Home, Gamepad, LibraryBooks, ShoppingCart, Person, Settings, 
+  Home, Gamepad, LibraryBooks, ShoppingCart, Person, 
   DeveloperMode, BarChart, AttachMoney, TrendingUp, ExpandLess, ExpandMore,
-  Menu, ChevronLeft, Star, NewReleases, Tag, Search
+  ChevronLeft, Star, NewReleases, Search
 } from '@mui/icons-material'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'

@@ -7,7 +7,6 @@ import {
   Box,
   Grid,
   Paper,
-  CircularProgress,
   Alert,
   Button,
   Chip,
@@ -20,19 +19,13 @@ import {
   Select,
   MenuItem,
   FormControl,
-  InputLabel,
-  TextField,
-  Divider,
   Tabs,
-  Tab,
-  Box as MuiBox
+  Tab
 } from '@mui/material'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import GamepadIcon from '@mui/icons-material/Gamepad'
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import PieChartIcon from '@mui/icons-material/PieChart'
 import LineChartIcon from '@mui/icons-material/ShowChart'
@@ -42,7 +35,6 @@ const DeveloperSalesPage = () => {
   
   const { user } = useSelector((state) => state.user)
   
-  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [timeRange, setTimeRange] = useState('month') // 'week', 'month', 'quarter', 'year'
   const [chartType, setChartType] = useState('line') // 'line', 'bar', 'pie'
@@ -97,11 +89,9 @@ const DeveloperSalesPage = () => {
       return
     }
     
-    setLoading(true)
-    
     // 模拟加载数据
     setTimeout(() => {
-      setLoading(false)
+      // 加载完成后不需要更新状态
     }, 1000)
   }, [user, navigate])
 
@@ -111,10 +101,7 @@ const DeveloperSalesPage = () => {
     // 这里可以根据时间范围重新加载数据
   }
 
-  // 处理图表类型变化
-  const handleChartTypeChange = (event) => {
-    setChartType(event.target.value)
-  }
+
 
   // 处理标签页切换
   const handleTabChange = (event, newValue) => {

@@ -1,9 +1,8 @@
 import { Op } from 'sequelize'
-import Game from '../models/Game.js'
-import GameCategory from '../models/GameCategory.js'
-import GameTag from '../models/GameTag.js'
-import GameVersion from '../models/GameVersion.js'
-import GameSystemRequirement from '../models/GameSystemRequirement.js'
+import models from '../models/index.js'
+
+// 从models中获取所有需要的模型
+const { Game, GameCategory, GameTag, GameVersion, GameSystemRequirement, GameLibrary, Developer, GameData } = models
 
 // 获取游戏列表 - 支持筛选、排序和分页
 export const getGames = async (req, res) => {
@@ -139,15 +138,13 @@ export const getGameById = async (req, res) => {
           attributes: ['id', 'name']
         },
         {
-          model: GameVersion,
-          as: 'versions',
-          attributes: ['id', 'version_number', 'release_date', 'platform', 'file_size'],
-          order: [['release_date', 'desc']]
-        },
-        {
           model: GameSystemRequirement,
           as: 'system_requirements',
           attributes: ['id', 'os', 'processor', 'memory', 'graphics', 'storage', 'type']
+        },
+        {
+          model: Developer,
+          attributes: ['id', 'name', 'description']
         }
       ]
     })

@@ -20,21 +20,18 @@ import {
   Tab,
   Pagination
 } from '@mui/material'
-import { fetchOrderHistory } from '../store/paymentSlice'
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import PaidIcon from '@mui/icons-material/Paid'
-import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 
 const OrderHistoryPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   
   const { user } = useSelector((state) => state.user)
-  const { orders, loading, error, totalPages, currentPage } = useSelector((state) => state.payment)
+  const { loading, error, totalPages, currentPage } = useSelector((state) => state.payment)
   
   const [activeTab, setActiveTab] = useState(0)
-  const [filter, setFilter] = useState('all')
 
   // 模拟订单数据
   const mockOrders = [
@@ -84,27 +81,11 @@ const OrderHistoryPage = () => {
   // 处理标签页变化
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue)
-    switch (newValue) {
-      case 0:
-        setFilter('all')
-        break
-      case 1:
-        setFilter('completed')
-        break
-      case 2:
-        setFilter('pending')
-        break
-      case 3:
-        setFilter('cancelled')
-        break
-      default:
-        setFilter('all')
-    }
   }
 
   // 处理分页变化
-  const handlePageChange = (event, page) => {
-    // dispatch(fetchOrderHistory({ page, limit: 10, filter }))
+  const handlePageChange = () => {
+    // dispatch(fetchOrderHistory({ page, limit: 10 }))
   }
 
   // 处理查看订单详情

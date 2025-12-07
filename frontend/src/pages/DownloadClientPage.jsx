@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container, Grid, Typography, Box, Paper, Button, Divider, Alert } from '@mui/material'
-import { Download, CheckCircle } from '@mui/icons-material'
+import { Container, Grid, Typography, Box, Paper, Button, Alert } from '@mui/material'
+import { CheckCircle } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import DownloadCard from '../components/DownloadCard'
 import SystemRequirements from '../components/SystemRequirements'

@@ -7,7 +7,6 @@ import {
   Box,
   Grid,
   Paper,
-  CircularProgress,
   Alert,
   Button,
   Chip,
@@ -20,7 +19,6 @@ import {
   Select,
   MenuItem,
   FormControl,
-  InputLabel,
   Divider,
   Tabs,
   Tab,
@@ -35,6 +33,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemIcon,
   ListItemAvatar,
   Avatar
 } from '@mui/material'
@@ -44,11 +43,9 @@ import CreditCardIcon from '@mui/icons-material/CreditCard'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import DownloadIcon from '@mui/icons-material/Download'
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import PaymentIcon from '@mui/icons-material/Payment'
-import ReceiptIcon from '@mui/icons-material/Receipt'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import PendingIcon from '@mui/icons-material/Pending'
@@ -60,8 +57,6 @@ const DeveloperFinancesPage = () => {
   const navigate = useNavigate()
   
   const { user } = useSelector((state) => state.user)
-  
-  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [timeRange, setTimeRange] = useState('month') // 'week', 'month', 'quarter', 'year'
   const [tabValue, setTabValue] = useState(0) // 0: 财务概览, 1: 收支明细, 2: 提现记录
@@ -124,11 +119,9 @@ const DeveloperFinancesPage = () => {
       return
     }
     
-    setLoading(true)
-    
     // 模拟加载数据
     setTimeout(() => {
-      setLoading(false)
+      // 加载完成后不需要更新状态
     }, 1000)
   }, [user, navigate])
 

@@ -8,7 +8,6 @@ import {
   Alert,
   Grid,
   Card,
-  CardContent,
   CardMedia,
   Divider
 } from '@mui/material'
@@ -22,7 +21,7 @@ const PaymentForm = ({ games, onPaymentSuccess }) => {
   const elements = useElements()
   const dispatch = useDispatch()
   
-  const { loading, error, paymentIntent } = useSelector((state) => state.payment)
+  const { loading, error } = useSelector((state) => state.payment)
   
   const [isProcessing, setIsProcessing] = useState(false)
   const [clientSecret, setClientSecret] = useState(null)

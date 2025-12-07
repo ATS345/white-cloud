@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { 
   fetchGames, 
@@ -18,8 +18,6 @@ import {
   Alert,
   Button,
   Grid,
-  Divider,
-  Chip,
   IconButton,
   Tabs,
   Tab,
@@ -48,7 +46,6 @@ import DownloadIcon from '@mui/icons-material/Download'
 import SettingsIcon from '@mui/icons-material/Settings'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import InfoIcon from '@mui/icons-material/Info'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import WarningIcon from '@mui/icons-material/Warning'
@@ -61,7 +58,6 @@ import MemoryIcon from '@mui/icons-material/Memory'
 import DisplayIcon from '@mui/icons-material/Display'
 
 const GameLauncherPage = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
   
   // 从Redux store获取游戏数据
@@ -224,15 +220,6 @@ const GameLauncherPage = () => {
 
   // 处理数据同步
   const handleSyncData = () => {
-    // 模拟系统信息（实际应用中应该从客户端获取）
-    const systemInfo = {
-      os: 'Windows 10 Pro 64位',
-      processor: 'Intel Core i7-11700K @ 3.60GHz',
-      memory: '16 GB DDR4 3200MHz',
-      graphics: 'NVIDIA GeForce RTX 3070 (8 GB)',
-      storage: '512 GB SSD'
-    }
-    
     // 使用Redux Thunk同步游戏数据
     dispatch(syncGameData({ 
       gameId: selectedGame?.id || 0, 

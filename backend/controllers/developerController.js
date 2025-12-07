@@ -8,7 +8,7 @@ import Order from '../models/Order.js'
 import OrderItem from '../models/OrderItem.js'
 import DeveloperFinance from '../models/DeveloperFinance.js'
 import WithdrawalRequest from '../models/WithdrawalRequest.js'
-import sequelize from 'sequelize'
+import { Op } from 'sequelize'
 
 // 开发者注册
 export const registerDeveloper = async (req, res) => {

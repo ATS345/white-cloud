@@ -2,7 +2,7 @@ import Review from '../models/Review.js'
 import ReviewReply from '../models/ReviewReply.js'
 import Game from '../models/Game.js'
 import GameLibrary from '../models/GameLibrary.js'
-import sequelize from 'sequelize'
+import { Op } from 'sequelize'
 
 // 创建评价
 export const createReview = async (req, res) => {

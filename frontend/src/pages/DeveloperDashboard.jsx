@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   Container,
   Typography,
   Box,
   Grid,
   Paper,
-  CircularProgress,
   Alert,
   Button,
   Chip,
@@ -33,11 +32,8 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 
 const DeveloperDashboard = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   
   const { user } = useSelector((state) => state.user)
-  
-  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   
   // 模拟数据
@@ -70,11 +66,9 @@ const DeveloperDashboard = () => {
       return
     }
     
-    setLoading(true)
-    
     // 模拟加载数据
     setTimeout(() => {
-      setLoading(false)
+      // 加载完成后不需要更新状态
     }, 1000)
   }, [user, navigate])
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   Container,
   Typography,
@@ -8,7 +8,6 @@ import {
   Grid,
   Paper,
   CircularProgress,
-  Alert,
   Button,
   Chip,
   Tabs,
@@ -16,18 +15,14 @@ import {
 } from '@mui/material'
 import DownloadIcon from '@mui/icons-material/Download'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
-import FilterListIcon from '@mui/icons-material/FilterList'
-import SearchIcon from '@mui/icons-material/Search'
 
 const LibraryPage = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   
   const { user } = useSelector((state) => state.user)
   
   const [activeTab, setActiveTab] = useState(0)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
   const [games, setGames] = useState([])
 
   // 模拟数据
@@ -102,12 +97,6 @@ const LibraryPage = () => {
       {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 400 }}>
           <CircularProgress size={60} />
-        </Box>
-      ) : error ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 400 }}>
-          <Alert severity="error" sx={{ width: '100%', maxWidth: 500 }}>
-            {error}
-          </Alert>
         </Box>
       ) : games.length === 0 ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 400, textAlign: 'center' }}>

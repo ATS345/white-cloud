@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Grid, Typography, Box, Paper, CircularProgress, Alert, Snackbar } from '@mui/material'
+import { Container, Grid, Typography, Box, Paper, CircularProgress, Alert, Snackbar, Button } from '@mui/material'
 import GameCard from '../components/GameCard'
-import GameFilter from '../components/GameFilter'
 import { fetchGames } from '../store/gameSlice'
 
 const GameListPage = () => {
   const dispatch = useDispatch()
-  const { games, loading, error, totalPages, currentPage } = useSelector((state) => state.game)
+  const { games, loading, error, totalPages } = useSelector((state) => state.game)
   
-  const [filters, setFilters] = useState({
+  const [filters] = useState({
     search: '',
     categories: [],
     tags: [],
@@ -30,19 +29,6 @@ const GameListPage = () => {
   useEffect(() => {
     dispatch(fetchGames({ page: 1, ...filters }))
   }, [dispatch, filters])
-
-  // 处理筛选条件变化
-  const handleFilterChange = (newFilters) => {
-    setFilters(prevFilters => ({
-      ...prevFilters,
-      ...newFilters
-    }))
-  }
-
-  // 处理分页变化
-  const handlePageChange = (page) => {
-    dispatch(fetchGames({ page, ...filters }))
-  }
 
   // 处理游戏点击
   const handleGameClick = (gameId) => {

@@ -20,9 +20,9 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemAvatar,
   Avatar,
-  LinearProgress
+  LinearProgress,
+  TextField
 } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import DownloadIcon from '@mui/icons-material/Download'
@@ -33,9 +33,9 @@ import CloudIcon from '@mui/icons-material/Cloud'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import WarningIcon from '@mui/icons-material/Warning'
-import ErrorIcon from '@mui/icons-material/Error'
 import StorageIcon from '@mui/icons-material/Storage'
-import NetworkWifiIcon from '@mui/icons-material/NetworkWifi'
+import CreditCardIcon from '@mui/icons-material/CreditCard'
+
 import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent'
 import MemoryIcon from '@mui/icons-material/Memory'
 import GpsFixedIcon from '@mui/icons-material/GpsFixed'
@@ -49,367 +49,137 @@ const GameDetailPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   
-  const { currentGame, gameDetailLoading, gameDetailError } = useSelector((state) => state.game)
+  const { game: currentGame, loading: gameDetailLoading, error: gameDetailError } = useSelector((state) => state.game)
   
+  // 状态管理
   const [activeTab, setActiveTab] = useState(0)
+  const [currentRating, setCurrentRating] = useState(0)
+  const [reviewContent, setReviewContent] = useState('')
+  const [reviewSubmitting, setReviewSubmitting] = useState(false)
   const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [snackbarMessage, setSnackbarMessage] = useState('')
   
-  // 游戏启动相关状态
-  const [isLaunching, setIsLaunching] = useState(false)
-  const [launchProgress, setLaunchProgress] = useState(0)
-  
-  // 系统需求检测状态
-  const [systemCheck, setSystemCheck] = useState({
-    isChecking: false,
-    results: {
-      cpu: { passed: true, value: 'Intel i5-8400', required: 'Intel i5-4590' },
-      memory: { passed: true, value: '16 GB', required: '8 GB' },
-      graphics: { passed: true, value: 'NVIDIA GTX 1660', required: 'NVIDIA GTX 970' },
-      storage: { passed: true, value: '512 GB SSD', required: '100 GB HDD' },
-      os: { passed: true, value: 'Windows 10 64-bit', required: 'Windows 7 64-bit' }
+  // 模拟评论数据
+  const reviews = [
+    {
+      id: 1,
+      user: {
+        username: '游戏玩家123',
+        avatar_url: ''
+      },
+      rating: 4.5,
+      content: '游戏非常不错，画面精美，剧情丰富，推荐大家游玩！',
+      created_at: '2025-12-05T10:30:00Z',
+      replies: []
+    },
+    {
+      id: 2,
+      user: {
+        username: '游戏达人456',
+        avatar_url: ''
+      },
+      rating: 5.0,
+      content: '这是我今年玩过的最好玩的游戏，没有之一！',
+      created_at: '2025-12-04T15:20:00Z',
+      replies: []
     }
-  })
+  ]
   
-  // 数据同步状态
-  const [syncStatus, setSyncStatus] = useState({
+  // 模拟系统需求
+  const minimumReq = {
+    os: 'Windows 10 64位',
+    processor: 'Intel Core i5-6600K / AMD Ryzen 5 1600',
+    memory: '8 GB RAM',
+    graphics: 'NVIDIA GeForce GTX 1060 3GB / AMD Radeon RX 580 4GB',
+    storage: '70 GB 可用空间'
+  }
+  
+  const recommendedReq = {
+    os: 'Windows 10 64位',
+    processor: 'Intel Core i7-8700K / AMD Ryzen 7 2700X',
+    memory: '16 GB RAM',
+    graphics: 'NVIDIA GeForce RTX 2070 Super / AMD Radeon RX 5700 XT',
+    storage: '70 GB SSD 可用空间'
+  }
+  
+  // 模拟同步状态
+  const syncStatus = {
     isSyncing: false,
-    progress: 0,
-    lastSynced: new Date().toLocaleString('zh-CN')
-  })
-
-  // 初始化加载游戏详情
+    progress: 100,
+    lastSynced: '2025-12-07 14:30:00'
+  }
+  
+  // 初始化获取游戏详情
   useEffect(() => {
     dispatch(fetchGameDetail(id))
     
-    // 组件卸载时清除游戏详情
+    // 组件卸载时清理游戏详情
     return () => {
       dispatch(clearGameDetail())
     }
   }, [dispatch, id])
-
-  // 处理标签切换
-  const handleTabChange = (event, newValue) => {
-    setActiveTab(newValue)
-  }
-
-  // 处理返回按钮点击
+  
+  // 处理返回按钮
   const handleBackClick = () => {
     navigate(-1)
   }
-
-  // 处理加入购物车
+  
+  // 处理添加到购物车
   const handleAddToCart = () => {
-    if (!currentGame) return
-    
-    setSnackbarMessage(`${currentGame.title} 已加入购物车`)
+    setSnackbarMessage('游戏已添加到购物车')
     setSnackbarOpen(true)
-    // 这里可以添加加入购物车的逻辑
   }
-
+  
+  // 处理立即购买
+  const handleBuyNow = () => {
+    navigate('/checkout', { state: { games: [currentGame] } })
+  }
+  
   // 处理下载游戏
-  const handleDownload = () => {
-    if (!currentGame) return
-    
+  const handleDownloadGame = () => {
     setSnackbarMessage('开始下载游戏...')
     setSnackbarOpen(true)
-    // 这里可以添加下载游戏的逻辑
   }
-
-  // 处理游戏启动
+  
+  // 处理启动游戏
   const handleLaunchGame = () => {
-    if (!currentGame) return
-    
     setSnackbarMessage('正在启动游戏...')
     setSnackbarOpen(true)
-    setIsLaunching(true)
-    setLaunchProgress(0)
-    
-    // 模拟游戏启动进度
-    const interval = setInterval(() => {
-      setLaunchProgress(prev => {
-        const newProgress = prev + 10
-        if (newProgress >= 100) {
-          clearInterval(interval)
-          setIsLaunching(false)
-          setSnackbarMessage('游戏启动成功！')
-          setSnackbarOpen(true)
-        }
-        return newProgress
-      })
-    }, 500)
   }
-
-  // 处理系统需求检测
-  const handleCheckSystemRequirements = () => {
-    setSystemCheck(prev => ({
-      ...prev,
-      isChecking: true
-    }))
+  
+  // 处理提交评价
+  const handleSubmitReview = (e) => {
+    e.preventDefault()
+    setReviewSubmitting(true)
     
-    // 模拟系统需求检测
+    // 模拟提交评价
     setTimeout(() => {
-      // 这里可以添加真实的系统需求检测逻辑
-      setSystemCheck(prev => ({
-        ...prev,
-        isChecking: false
-      }))
-      setSnackbarMessage('系统需求检测完成！')
+      setReviewSubmitting(false)
+      setSnackbarMessage('评价提交成功')
       setSnackbarOpen(true)
+      setCurrentRating(0)
+      setReviewContent('')
     }, 1500)
   }
-
-  // 处理数据同步
-  const handleSyncData = () => {
-    setSyncStatus(prev => ({
-      ...prev,
-      isSyncing: true,
-      progress: 0
-    }))
-    
-    // 模拟数据同步进度
-    const interval = setInterval(() => {
-      setSyncStatus(prev => {
-        const newProgress = prev.progress + 20
-        if (newProgress >= 100) {
-          clearInterval(interval)
-          return {
-            ...prev,
-            isSyncing: false,
-            progress: 100,
-            lastSynced: new Date().toLocaleString('zh-CN')
-          }
-        }
-        return {
-          ...prev,
-          progress: newProgress
-        }
-      })
-    }, 300)
-  }
-
-  // 关闭通知
+  
+  // 处理关闭通知
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false)
   }
-
-  // 格式化价格
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('zh-CN', {
-      style: 'currency',
-      currency: 'CNY',
-      minimumFractionDigits: 2
-    }).format(price)
+  
+  // 处理数据同步
+  const handleSyncData = () => {
+    // 模拟同步数据
   }
-
-  // 格式化文件大小
-  const formatFileSize = (bytes) => {
-    if (bytes === 0) return '0 Bytes'
-    
-    const k = 1024
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
-    const i = Math.floor(Math.log(bytes) / Math.log(k))
-    
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
-  }
-
-  // 渲染游戏截图
-  const renderScreenshots = () => {
-    if (!currentGame || !currentGame.screenshots) {
-      return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-          <Typography variant="body2" color="text.secondary">
-            暂无截图
-          </Typography>
-        </Box>
-      )
-    }
-
-    return (
-      <Box sx={{ display: 'flex', gap: 2, overflowX: 'auto', py: 2, pb: 3 }}>
-        {currentGame.screenshots.map((screenshot, index) => (
-          <Box
-            key={index}
-            sx={{
-              flex: '0 0 auto',
-              width: 400,
-              height: 225,
-              borderRadius: 2,
-              overflow: 'hidden',
-              boxShadow: 2
-            }}
-          >
-            <img
-              src={screenshot.url || 'https://via.placeholder.com/400x225?text=Screenshot'}
-              alt={`${currentGame.title} Screenshot ${index + 1}`}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
-              }}
-            />
-          </Box>
-        ))}
-      </Box>
-    )
-  }
-
+  
   // 渲染系统需求
   const renderSystemRequirements = () => {
-    if (!currentGame || !currentGame.system_requirements) {
-      return (
-        <Box sx={{ py: 2 }}>
-          <Typography variant="body2" color="text.secondary">
-            暂无系统需求信息
-          </Typography>
-        </Box>
-      )
-    }
-
-    // 分离最低配置和推荐配置
-    const minimumReq = currentGame.system_requirements.find(req => req.type === 'minimum')
-    const recommendedReq = currentGame.system_requirements.find(req => req.type === 'recommended')
-
     return (
-      <Box>
-        {/* 系统需求检测按钮 */}
-        <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
-          <Button
-            variant="contained"
-            size="large"
-            startIcon={systemCheck.isChecking ? <CircularProgress size={20} color="inherit" /> : <SettingsInputComponentIcon />}
-            onClick={handleCheckSystemRequirements}
-            disabled={systemCheck.isChecking}
-            sx={{ bgcolor: '#6366f1', '&:hover': { bgcolor: '#4f46e5' } }}
-          >
-            {systemCheck.isChecking ? '正在检测...' : '检测系统需求'}
-          </Button>
-        </Box>
-
-        {/* 系统检测结果 */}
-        {!systemCheck.isChecking && (
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
-              系统检测结果
-            </Typography>
-            <Paper sx={{ p: 3, borderRadius: 2, mb: 3 }}>
-              <List>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: systemCheck.results.cpu.passed ? '#10b981' : '#ef4444' }}>
-                      {systemCheck.results.cpu.passed ? <CheckCircleIcon /> : <ErrorIcon />}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="CPU"
-                    secondary={
-                      <>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                          <span style={{ fontWeight: 'bold' }}>当前:</span>
-                          <span>{systemCheck.results.cpu.value}</span>
-                        </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ fontWeight: 'bold' }}>需求:</span>
-                          <span>{systemCheck.results.cpu.required}</span>
-                        </Box>
-                      </>
-                    }
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: systemCheck.results.memory.passed ? '#10b981' : '#ef4444' }}>
-                      {systemCheck.results.memory.passed ? <CheckCircleIcon /> : <ErrorIcon />}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="内存"
-                    secondary={
-                      <>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                          <span style={{ fontWeight: 'bold' }}>当前:</span>
-                          <span>{systemCheck.results.memory.value}</span>
-                        </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ fontWeight: 'bold' }}>需求:</span>
-                          <span>{systemCheck.results.memory.required}</span>
-                        </Box>
-                      </>
-                    }
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: systemCheck.results.graphics.passed ? '#10b981' : '#ef4444' }}>
-                      {systemCheck.results.graphics.passed ? <CheckCircleIcon /> : <ErrorIcon />}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="显卡"
-                    secondary={
-                      <>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                          <span style={{ fontWeight: 'bold' }}>当前:</span>
-                          <span>{systemCheck.results.graphics.value}</span>
-                        </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ fontWeight: 'bold' }}>需求:</span>
-                          <span>{systemCheck.results.graphics.required}</span>
-                        </Box>
-                      </>
-                    }
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: systemCheck.results.storage.passed ? '#10b981' : '#ef4444' }}>
-                      {systemCheck.results.storage.passed ? <CheckCircleIcon /> : <ErrorIcon />}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="存储空间"
-                    secondary={
-                      <>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                          <span style={{ fontWeight: 'bold' }}>当前:</span>
-                          <span>{systemCheck.results.storage.value}</span>
-                        </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ fontWeight: 'bold' }}>需求:</span>
-                          <span>{systemCheck.results.storage.required}</span>
-                        </Box>
-                      </>
-                    }
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: systemCheck.results.os.passed ? '#10b981' : '#ef4444' }}>
-                      {systemCheck.results.os.passed ? <CheckCircleIcon /> : <ErrorIcon />}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="操作系统"
-                    secondary={
-                      <>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                          <span style={{ fontWeight: 'bold' }}>当前:</span>
-                          <span>{systemCheck.results.os.value}</span>
-                        </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ fontWeight: 'bold' }}>需求:</span>
-                          <span>{systemCheck.results.os.required}</span>
-                        </Box>
-                      </>
-                    }
-                  />
-                </ListItem>
-              </List>
-            </Paper>
-          </Box>
-        )}
-
-        <Grid container spacing={4} sx={{ py: 2 }}>
+      <Box sx={{ py: 2 }}>
+        <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
+          系统需求
+        </Typography>
+        <Grid container spacing={3}>
           {/* 最低配置 */}
           <Grid item xs={12} md={6}>
             <Paper sx={{ p: 3, borderRadius: 2 }}>
@@ -554,291 +324,129 @@ const GameDetailPage = () => {
       <Box sx={{ py: 2 }}>
         <Paper sx={{ p: 3, borderRadius: 2 }}>
           <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
-            {currentGame.developer.company_name}
+            开发者信息
           </Typography>
-          
-          {currentGame.developer.bio && (
-            <Box sx={{ mb: 3 }}>
-              <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
-                {currentGame.developer.bio}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+            <Avatar
+              sx={{ width: 80, height: 80, bgcolor: '#6366f1' }}
+            >
+              {currentGame.developer.name.charAt(0)}
+            </Avatar>
+            <Box>
+              <Typography variant="h6" component="h4" sx={{ fontWeight: 600 }}>
+                {currentGame.developer.name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {currentGame.developer.description}
               </Typography>
             </Box>
-          )}
-
-          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-            {currentGame.developer.contact_email && (
-              <Chip
-                label={`联系邮箱: ${currentGame.developer.contact_email}`}
-                variant="outlined"
-              />
-            )}
-            {currentGame.developer.website && (
-              <Chip
-                label={`官网: ${currentGame.developer.website}`}
-                variant="outlined"
-              />
-            )}
           </Box>
         </Paper>
       </Box>
     )
   }
 
-  // 渲染游戏版本信息
-  const renderVersions = () => {
-    if (!currentGame || !currentGame.versions) {
-      return (
-        <Box sx={{ py: 2 }}>
-          <Typography variant="body2" color="text.secondary">
-            暂无版本信息
-          </Typography>
-        </Box>
-      )
-    }
-
+  // 渲染游戏截图
+  const renderScreenshots = () => {
     return (
       <Box sx={{ py: 2 }}>
-        {currentGame.versions.map((version) => (
-          <Paper key={version.id} sx={{ p: 3, borderRadius: 2, mb: 2 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-              <Box>
-                <Typography variant="h6" component="h4" sx={{ fontWeight: 600 }}>
-                  版本 {version.version_number}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  发布日期: {new Date(version.release_date).toLocaleDateString('zh-CN')}
-                </Typography>
-              </Box>
-              <Box sx={{ display: 'flex', gap: 1 }}>
-                <Chip
-                  label={version.platform.toUpperCase()}
-                  color="primary"
-                  size="small"
-                />
-                <Chip
-                  label={formatFileSize(version.file_size)}
-                  variant="outlined"
-                  size="small"
-                />
-              </Box>
-            </Box>
-
-            {version.changelog && (
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>
-                  更新日志:
-                </Typography>
-                <Typography variant="body2" sx={{ lineHeight: 1.8, whiteSpace: 'pre-line' }}>
-                  {version.changelog}
-                </Typography>
-              </Box>
-            )}
-
-            <Button
-              variant="contained"
-              startIcon={<DownloadIcon />}
-              size="small"
-              sx={{ mt: 1 }}
-              onClick={handleDownload}
-            >
-              下载此版本
-            </Button>
-          </Paper>
-        ))}
+        <Grid container spacing={3}>
+          {[1, 2, 3, 4].map((item) => (
+            <Grid item xs={12} sm={6} key={item}>
+              <Paper sx={{ p: 1, borderRadius: 2, overflow: 'hidden' }}>
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: 200,
+                    bgcolor: '#1e293b',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    color: 'white',
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  游戏截图 {item}
+                </Box>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     )
   }
 
-  // 评价相关状态
-  const [reviews, setReviews] = useState([])
-  const [reviewsLoading, setReviewsLoading] = useState(false)
-  const [reviewsError, setReviewsError] = useState(null)
-  const [currentRating, setCurrentRating] = useState(0)
-  const [reviewContent, setReviewContent] = useState('')
-  const [reviewSubmitting, setReviewSubmitting] = useState(false)
-  const [replyContent, setReplyContent] = useState('')
-  const [selectedReviewId, setSelectedReviewId] = useState(null)
-
-  // 获取游戏评价
-  const fetchGameReviews = async () => {
-    if (!id) return
-    
-    setReviewsLoading(true)
-    setReviewsError(null)
-    
-    try {
-      // 这里可以添加获取游戏评价的API调用
-      const mockReviews = [
-        {
-          id: 1,
-          user: {
-            id: 1,
-            username: '玩家A',
-            avatar_url: 'https://via.placeholder.com/40?text=A'
-          },
-          rating: 5,
-          content: '这款游戏非常好玩，画面精美，剧情丰富，推荐给大家！',
-          created_at: '2025-12-01T10:00:00Z',
-          replies: [
-            {
-              id: 1,
-              user: {
-                id: 2,
-                username: '开发者B',
-                avatar_url: 'https://via.placeholder.com/40?text=B'
-              },
-              content: '感谢您的支持！我们会继续努力更新更多内容。',
-              created_at: '2025-12-01T11:00:00Z'
-            }
-          ]
-        },
-        {
-          id: 2,
-          user: {
-            id: 3,
-            username: '玩家C',
-            avatar_url: 'https://via.placeholder.com/40?text=C'
-          },
-          rating: 4,
-          content: '游戏玩法很有创意，但是有些bug需要修复。',
-          created_at: '2025-12-02T14:30:00Z',
-          replies: []
-        }
-      ]
-      
-      setReviews(mockReviews)
-    } catch (error) {
-      setReviewsError('获取评价失败，请稍后重试')
-      console.error('Error fetching reviews:', error)
-    } finally {
-      setReviewsLoading(false)
-    }
+  // 渲染游戏视频
+  const renderVideo = () => {
+    return (
+      <Box sx={{ py: 2 }}>
+        <Paper sx={{ p: 1, borderRadius: 2, overflow: 'hidden' }}>
+          <Box
+            sx={{
+              width: '100%',
+              height: 400,
+              bgcolor: '#1e293b',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              color: 'white',
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              '&:hover': {
+                bgcolor: '#334155'
+              }
+            }}
+          >
+            <PlayArrowIcon sx={{ fontSize: '4rem', mr: 2, color: '#6366f1' }} />
+            播放游戏预告片
+          </Box>
+        </Paper>
+      </Box>
+    )
   }
 
-  // 提交评价
-  const handleSubmitReview = async (e) => {
-    e.preventDefault()
-    
-    if (currentRating === 0 || !reviewContent.trim()) {
-      setSnackbarMessage('请选择评分并填写评价内容')
-      setSnackbarOpen(true)
-      return
-    }
-    
-    setReviewSubmitting(true)
-    
-    try {
-      // 这里可以添加提交评价的API调用
-      const newReview = {
-        id: Date.now(),
-        user: {
-          id: 1,
-          username: '当前用户',
-          avatar_url: 'https://via.placeholder.com/40?text=U'
-        },
-        rating: currentRating,
-        content: reviewContent,
-        created_at: new Date().toISOString(),
-        replies: []
-      }
-      
-      setReviews(prev => [newReview, ...prev])
-      setCurrentRating(0)
-      setReviewContent('')
-      setSnackbarMessage('评价提交成功')
-      setSnackbarOpen(true)
-    } catch (error) {
-      setSnackbarMessage('评价提交失败，请稍后重试')
-      setSnackbarOpen(true)
-      console.error('Error submitting review:', error)
-    } finally {
-      setReviewSubmitting(false)
-    }
-  }
-
-  // 提交回复
-  const handleSubmitReply = async (reviewId) => {
-    if (!replyContent.trim()) {
-      setSnackbarMessage('请填写回复内容')
-      setSnackbarOpen(true)
-      return
-    }
-    
-    try {
-      // 这里可以添加提交回复的API调用
-      const newReply = {
-        id: Date.now(),
-        user: {
-          id: 1,
-          username: '当前用户',
-          avatar_url: 'https://via.placeholder.com/40?text=U'
-        },
-        content: replyContent,
-        created_at: new Date().toISOString()
-      }
-      
-      setReviews(prev => prev.map(review => {
-        if (review.id === reviewId) {
-          return {
-            ...review,
-            replies: [...review.replies, newReply]
-          }
-        }
-        return review
-      }))
-      
-      setReplyContent('')
-      setSelectedReviewId(null)
-      setSnackbarMessage('回复提交成功')
-      setSnackbarOpen(true)
-    } catch (error) {
-      setSnackbarMessage('回复提交失败，请稍后重试')
-      setSnackbarOpen(true)
-      console.error('Error submitting reply:', error)
-    }
-  }
-
-  // 渲染评价列表
+  // 渲染游戏评论
   const renderReviews = () => {
     return (
       <Box sx={{ py: 2 }}>
-        {/* 评价统计 */}
         <Paper sx={{ p: 3, borderRadius: 2, mb: 3 }}>
-          <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
-            评价统计
+          <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            用户评价
+            <Chip
+              label={`${reviews.length} 条评价`}
+              color="primary"
+              size="small"
+            />
           </Typography>
-          <Grid container spacing={3}>
+          <Rating
+            value={4.5}
+            readOnly
+            precision={0.5}
+            size="large"
+            sx={{ mb: 2 }}
+          />
+          <Typography variant="subtitle1" sx={{ mb: 3 }}>
+            4.5/5 分（基于 {reviews.length} 条评价）
+          </Typography>
+          
+          {/* 评价统计 */}
+          <Grid container spacing={2} sx={{ mb: 3 }}>
             <Grid item xs={12} sm={6} md={3}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h4" sx={{ fontWeight: 700, color: '#6366f1' }}>
-                  {currentGame?.rating || 0}
+                  {reviews.length}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">
-                  平均评分
+                  总评价
                 </Typography>
-                <Rating
-                  value={currentGame?.rating || 0}
-                  precision={0.5}
-                  readOnly
-                  size="large"
-                  sx={{ mt: 1 }}
-                />
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h4" sx={{ fontWeight: 700, color: '#10b981' }}>
-                  {reviews.length}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
-                  评价数量
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <Box sx={{ textAlign: 'center' }}>
-                <Typography variant="h4" sx={{ fontWeight: 700, color: '#f59e0b' }}>
-                  {Math.round(reviews.filter(r => r.rating >= 4).length / reviews.length * 100) || 0}%
+                  {Math.round((reviews.filter(r => r.rating >= 4).length / reviews.length) * 100)}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">
                   好评率
@@ -847,8 +455,18 @@ const GameDetailPage = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
               <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h4" sx={{ fontWeight: 700, color: '#f59e0b' }}>
+                  {Math.round(reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length)}
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary">
+                  平均评分
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h4" sx={{ fontWeight: 700, color: '#ec4899' }}>
-                  {new Date().toLocaleDateString('zh-CN')}
+                  {new Date(reviews[0].created_at).toLocaleDateString('zh-CN')}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">
                   最新评价
@@ -857,7 +475,7 @@ const GameDetailPage = () => {
             </Grid>
           </Grid>
         </Paper>
-
+        
         {/* 撰写评价 */}
         <Paper sx={{ p: 3, borderRadius: 2, mb: 3 }}>
           <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
@@ -902,127 +520,63 @@ const GameDetailPage = () => {
             </Button>
           </form>
         </Paper>
-
-        {/* 评价列表 */}
-        <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600, mb: 3 }}>
-          用户评价
-        </Typography>
         
-        {reviewsLoading ? (
-          <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-            <CircularProgress size={40} />
-          </Box>
-        ) : reviewsError ? (
-          <Alert severity="error" sx={{ mb: 3 }}>
-            {reviewsError}
-          </Alert>
-        ) : reviews.length === 0 ? (
-          <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-            <Typography variant="body1" color="text.secondary">
-              暂无评价，快来成为第一个评价的玩家吧！
-            </Typography>
-          </Box>
-        ) : (
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            {reviews.map((review) => (
-              <Paper key={review.id} sx={{ p: 3, borderRadius: 2 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <Avatar src={review.user.avatar_url} alt={review.user.username}>
-                      {review.user.username.charAt(0)}
-                    </Avatar>
-                    <Box>
-                      <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-                        {review.user.username}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {new Date(review.created_at).toLocaleDateString('zh-CN')}
-                      </Typography>
-                    </Box>
+        {/* 评价列表 */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          {reviews.map((review) => (
+            <Paper key={review.id} sx={{ p: 3, borderRadius: 2 }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Avatar src={review.user.avatar_url} alt={review.user.username}>
+                    {review.user.username.charAt(0)}
+                  </Avatar>
+                  <Box>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                      {review.user.username}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {new Date(review.created_at).toLocaleDateString('zh-CN')}
+                    </Typography>
                   </Box>
-                  <Rating
-                    value={review.rating}
-                    readOnly
-                    size="medium"
-                    precision={1}
-                  />
                 </Box>
-                
-                <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
-                  {review.content}
-                </Typography>
-                
-                {/* 回复列表 */}
-                {review.replies && review.replies.length > 0 && (
-                  <Box sx={{ ml: 7, mb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    {review.replies.map((reply) => (
-                      <Box key={reply.id} sx={{ p: 2, bgcolor: '#1e293b', borderRadius: 1 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                          <Avatar src={reply.user.avatar_url} alt={reply.user.username} sx={{ width: 28, height: 28 }}>
-                            {reply.user.username.charAt(0)}
-                          </Avatar>
-                          <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                            {reply.user.username}
-                          </Typography>
-                          <Typography variant="caption" color="text.secondary">
-                            {new Date(reply.created_at).toLocaleDateString('zh-CN')}
-                          </Typography>
-                        </Box>
-                        <Typography variant="body2" sx={{ ml: 4 }}>
-                          {reply.content}
+                <Rating
+                  value={review.rating}
+                  readOnly
+                  size="medium"
+                  precision={1}
+                />
+              </Box>
+              
+              <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
+                {review.content}
+              </Typography>
+              
+              {/* 回复列表 */}
+              {review.replies && review.replies.length > 0 && (
+                <Box sx={{ ml: 7, mb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  {review.replies.map((reply) => (
+                    <Box key={reply.id} sx={{ p: 2, bgcolor: '#1e293b', borderRadius: 1 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                        <Avatar src={reply.user.avatar_url} alt={reply.user.username} sx={{ width: 28, height: 28 }}>
+                          {reply.user.username.charAt(0)}
+                        </Avatar>
+                        <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+                          {reply.user.username}
+                        </Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          {new Date(reply.created_at).toLocaleDateString('zh-CN')}
                         </Typography>
                       </Box>
-                    ))}
-                  </Box>
-                )}
-                
-                {/* 回复输入框 */}
-                {selectedReviewId === review.id ? (
-                  <Box sx={{ ml: 7, display: 'flex', gap: 1 }}>
-                    <TextField
-                      fullWidth
-                      multiline
-                      rows={2}
-                      placeholder="写下您的回复..."
-                      value={replyContent}
-                      onChange={(e) => setReplyContent(e.target.value)}
-                      size="small"
-                    />
-                    <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-end' }}>
-                      <Button
-                        variant="contained"
-                        size="small"
-                        onClick={() => handleSubmitReply(review.id)}
-                        sx={{ bgcolor: '#6366f1', '&:hover': { bgcolor: '#4f46e5' } }}
-                      >
-                        回复
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        onClick={() => {
-                          setSelectedReviewId(null)
-                          setReplyContent('')
-                        }}
-                      >
-                        取消
-                      </Button>
+                      <Typography variant="body2" sx={{ ml: 4 }}>
+                        {reply.content}
+                      </Typography>
                     </Box>
-                  </Box>
-                ) : (
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    onClick={() => setSelectedReviewId(review.id)}
-                    sx={{ ml: 7 }}
-                  >
-                    回复
-                  </Button>
-                )}
-              </Paper>
-            ))}
-          </Box>
-        )}
+                  ))}
+                </Box>
+              )}
+            </Paper>
+          ))}
+        </Box>
       </Box>
     )
   }
@@ -1182,7 +736,7 @@ const GameDetailPage = () => {
                   <>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
                       <span>状态:</span>
-                      <span style={{ color: '#f59e0b', fontWeight: 'bold' }}>同步中</span>
+                      <span style={{ color: '#10b981', fontWeight: 'bold' }}>已完成</span>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <span>时间:</span>
@@ -1224,282 +778,244 @@ const GameDetailPage = () => {
               {gameDetailError}
             </Alert>
           </Box>
-        ) : currentGame ? (
+        ) : !currentGame ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 500 }}>
+            <Alert severity="info" sx={{ width: '100%', maxWidth: 500 }}>
+              游戏不存在
+            </Alert>
+          </Box>
+        ) : (
           <Box>
             {/* 游戏基本信息 */}
-            <Paper sx={{ p: 4, borderRadius: 2, mb: 4 }}>
-              <Grid container spacing={4}>
-                {/* 游戏主图 */}
-                <Grid item xs={12} md={6}>
-                  <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden', boxShadow: 3 }}>
-                    <img
-                      src={currentGame.main_image_url || 'https://via.placeholder.com/800x450?text=Game+Image'}
-                      alt={currentGame.title}
-                      style={{
-                        width: '100%',
-                        display: 'block'
-                      }}
-                    />
-                    {/* 折扣标签 */}
-                    {currentGame.discount_price && currentGame.discount_price < currentGame.price && (
-                      <Box
-                        sx={{
-                          position: 'absolute',
-                          top: 16,
-                          right: 16,
-                          backgroundColor: '#ef4444',
-                          color: 'white',
-                          padding: '8px 16px',
-                          borderRadius: 1,
-                          fontWeight: 700,
-                          fontSize: '1rem',
-                          boxShadow: 2
-                        }}
-                      >
-                        {Math.round((1 - currentGame.discount_price / currentGame.price) * 100)}% OFF
-                      </Box>
-                    )}
+            <Grid container spacing={4} sx={{ mb: 4 }}>
+              {/* 游戏封面 */}
+              <Grid item xs={12} md={4}>
+                <Paper sx={{ p: 2, borderRadius: 2, overflow: 'hidden' }}>
+                  <Box
+                    sx={{
+                      width: '100%',
+                      height: 300,
+                      bgcolor: '#1e293b',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      color: 'white',
+                      fontSize: '1.5rem',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    游戏封面
                   </Box>
-                </Grid>
+                </Paper>
+              </Grid>
 
-                {/* 游戏信息 */}
-                <Grid item xs={12} md={6}>
-                  {/* 游戏分类和标签 */}
+              {/* 游戏信息 */}
+              <Grid item xs={12} md={8}>
+                <Typography variant="h3" component="h1" sx={{ fontWeight: 700, mb: 1 }}>
+                  {currentGame.title}
+                </Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                  <Rating
+                    value={currentGame.rating || 0}
+                    readOnly
+                    precision={0.5}
+                    size="large"
+                  />
+                  <Typography variant="body1" color="text.secondary">
+                    {currentGame.rating || 0}/5 分
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    ({currentGame.review_count || 0} 条评价)
+                  </Typography>
+                </Box>
+                
+                <Box sx={{ mb: 3 }}>
+                  {currentGame.discount_price && currentGame.discount_price < currentGame.price ? (
+                    <>
+                      <Typography variant="h4" sx={{ fontWeight: 700, color: '#ef4444', mr: 2, display: 'inline-block' }}>
+                        ¥{currentGame.discount_price.toFixed(2)}
+                      </Typography>
+                      <Typography variant="h6" sx={{ textDecoration: 'line-through', color: 'text.secondary', display: 'inline-block' }}>
+                        ¥{currentGame.price.toFixed(2)}
+                      </Typography>
+                      <Chip
+                        label={`-${Math.round(((currentGame.price - currentGame.discount_price) / currentGame.price) * 100)}%`}
+                        color="error"
+                        size="small"
+                        sx={{ ml: 2 }}
+                      />
+                    </>
+                  ) : (
+                    <Typography variant="h4" sx={{ fontWeight: 700, color: '#6366f1' }}>
+                      ¥{currentGame.price.toFixed(2)}
+                    </Typography>
+                  )}
+                </Box>
+
+                {/* 游戏分类和标签 */}
+                <Box sx={{ mb: 3 }}>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
-                    {currentGame.categories?.map((category) => (
+                    {currentGame.categories && currentGame.categories.map((category) => (
                       <Chip
                         key={category.id}
                         label={category.name}
-                        sx={{
-                          backgroundColor: '#475569',
-                          color: 'white',
-                          '&:hover': {
-                            backgroundColor: '#64748b'
-                          }
-                        }}
+                        variant="outlined"
+                        color="primary"
                       />
                     ))}
-                    {currentGame.tags?.map((tag) => (
+                  </Box>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                    {currentGame.tags && currentGame.tags.map((tag) => (
                       <Chip
                         key={tag.id}
                         label={tag.name}
                         variant="outlined"
+                        size="small"
                       />
                     ))}
                   </Box>
+                </Box>
 
-                  {/* 游戏标题 */}
-                  <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 700 }}>
-                    {currentGame.title}
+                {/* 游戏操作按钮 */}
+                <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    startIcon={<ShoppingCartIcon />}
+                    onClick={handleAddToCart}
+                    sx={{ bgcolor: '#6366f1', '&:hover': { bgcolor: '#4f46e5' }, flexGrow: 1 }}
+                  >
+                    添加到购物车
+                  </Button>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    startIcon={<CreditCardIcon />}
+                    onClick={handleBuyNow}
+                    sx={{ bgcolor: '#10b981', '&:hover': { bgcolor: '#059669' }, flexGrow: 1 }}
+                  >
+                    立即购买
+                  </Button>
+                </Box>
+
+                {/* 游戏状态按钮 */}
+                <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    startIcon={<DownloadIcon />}
+                    onClick={handleDownloadGame}
+                    sx={{ flexGrow: 1, borderColor: '#6366f1', color: '#6366f1', '&:hover': { bgcolor: 'rgba(99, 102, 241, 0.1)' } }}
+                  >
+                    下载游戏
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    startIcon={<PlayArrowIcon />}
+                    onClick={handleLaunchGame}
+                    sx={{ flexGrow: 1, borderColor: '#10b981', color: '#10b981', '&:hover': { bgcolor: 'rgba(16, 185, 129, 0.1)' } }}
+                  >
+                    启动游戏
+                  </Button>
+                  <IconButton
+                    size="large"
+                    color="primary"
+                    sx={{ borderRadius: 1 }}
+                    title="分享"
+                  >
+                    <ShareIcon />
+                  </IconButton>
+                </Box>
+
+                {/* 游戏基本信息 */}
+                <Box sx={{ mt: 4 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+                    发布日期
                   </Typography>
-
-                  {/* 评分 */}
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                    <Rating
-                      value={currentGame.rating || 0}
-                      precision={0.5}
-                      readOnly
-                      size="large"
-                    />
-                    <Typography variant="body1" sx={{ ml: 1, color: 'text.secondary' }}>
-                      ({currentGame.review_count} 条评价)
-                    </Typography>
-                  </Box>
-
-                  {/* 发布日期 */}
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                    发布日期: {new Date(currentGame.release_date).toLocaleDateString('zh-CN')}
+                  <Typography variant="body1" sx={{ mb: 2 }}>
+                    {new Date(currentGame.release_date).toLocaleDateString('zh-CN')}
                   </Typography>
-
-                  {/* 游戏描述 */}
-                  <Typography variant="body1" sx={{ lineHeight: 1.8, mb: 4 }}>
+                  
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+                    开发商
+                  </Typography>
+                  <Typography variant="body1" sx={{ mb: 2 }}>
+                    {currentGame.developer?.name || '未知'}
+                  </Typography>
+                  
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+                    简介
+                  </Typography>
+                  <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
                     {currentGame.description}
                   </Typography>
-
-                  {/* 价格和操作按钮 */}
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    <Box>
-                      {currentGame.discount_price && currentGame.discount_price < currentGame.price ? (
-                        <>
-                          <Typography variant="h5" sx={{ fontWeight: 700, color: '#6366f1' }}>
-                            {formatPrice(currentGame.discount_price)}
-                          </Typography>
-                          <Typography variant="body2" sx={{ textDecoration: 'line-through', color: 'text.secondary' }}>
-                            原价: {formatPrice(currentGame.price)}
-                          </Typography>
-                        </>
-                      ) : (
-                        <Typography variant="h5" sx={{ fontWeight: 700, color: '#6366f1' }}>
-                          {formatPrice(currentGame.price)}
-                        </Typography>
-                      )}
-                    </Box>
-
-                    {/* 游戏启动进度条 */}
-                    {isLaunching && (
-                      <Box sx={{ mb: 2 }}>
-                        <Typography variant="body2" sx={{ mb: 0.5 }}>游戏启动中...</Typography>
-                        <LinearProgress
-                          variant="determinate"
-                          value={launchProgress}
-                          sx={{ height: 8, borderRadius: 4 }}
-                        />
-                        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 0.5 }}>
-                          <Typography variant="caption" color="text.secondary">
-                            {launchProgress}%
-                          </Typography>
-                        </Box>
-                      </Box>
-                    )}
-
-                    <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                      <Button
-                        variant="contained"
-                        size="large"
-                        startIcon={<ShoppingCartIcon />}
-                        onClick={handleAddToCart}
-                        sx={{ flexGrow: 1, borderRadius: 1, backgroundColor: '#6366f1', '&:hover': { backgroundColor: '#4f46e5' } }}
-                      >
-                        加入购物车
-                      </Button>
-                      <Button
-                        variant="contained"
-                        size="large"
-                        startIcon={<DownloadIcon />}
-                        onClick={handleDownload}
-                        sx={{ flexGrow: 1, borderRadius: 1, backgroundColor: '#10b981', '&:hover': { backgroundColor: '#059669' } }}
-                      >
-                        立即下载
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="large"
-                        startIcon={<PlayArrowIcon />}
-                        onClick={handleLaunchGame}
-                        sx={{ flexGrow: 1, borderRadius: 1 }}
-                      >
-                        启动游戏
-                      </Button>
-                      <IconButton
-                        size="large"
-                        color="primary"
-                        sx={{ borderRadius: 1 }}
-                        title="分享"
-                      >
-                        <ShareIcon />
-                      </IconButton>
-                    </Box>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Paper>
-
-            {/* 游戏截图 */}
-            <Box sx={{ mb: 4 }}>
-              <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
-                游戏截图
-              </Typography>
-              {renderScreenshots()}
-            </Box>
-
-            {/* 游戏视频 */}
-            <Box sx={{ mb: 4 }}>
-              <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
-                游戏视频
-              </Typography>
-              <Paper sx={{ p: 2, borderRadius: 2, position: 'relative' }}>
-                <Box sx={{ 
-                  height: 400,
-                  backgroundColor: '#0f172a',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 1,
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}>
-                  {/* 视频播放按钮 */}
-                  <Box sx={{ 
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    backgroundColor: 'rgba(99, 102, 241, 0.9)',
-                    width: 80,
-                    height: 80,
-                    borderRadius: '50%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                    '&:hover': {
-                      backgroundColor: 'rgba(79, 70, 229, 0.9)',
-                      transform: 'translate(-50%, -50%) scale(1.1)',
-                      transition: 'all 0.3s ease'
-                    }
-                  }}>
-                    <PlayArrowIcon sx={{ fontSize: 40, color: 'white', ml: 0.5 }} />
-                  </Box>
-                  <Typography variant="body1" color="text.secondary">
-                    点击播放游戏视频
-                  </Typography>
                 </Box>
-              </Paper>
-            </Box>
+              </Grid>
+            </Grid>
 
-            {/* 选项卡 */}
-          <Paper sx={{ borderRadius: 2, overflow: 'hidden' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            {/* 标签页导航 */}
+            <Paper sx={{ mb: 4, borderRadius: 2, overflow: 'hidden' }}>
               <Tabs
                 value={activeTab}
-                onChange={handleTabChange}
-                variant="scrollable"
-                scrollButtons="auto"
+                onChange={(event, newValue) => setActiveTab(newValue)}
+                variant="fullWidth"
                 textColor="primary"
                 indicatorColor="primary"
+                sx={{
+                  '& .MuiTab-root': {
+                    fontWeight: 'bold',
+                  }
+                }}
               >
+                <Tab label="游戏详情" />
                 <Tab label="系统需求" />
-                <Tab label="开发者信息" />
-                <Tab label="版本历史" />
-                <Tab label="用户评价" />
+                <Tab label="游戏截图" />
+                <Tab label="玩家评价" />
                 <Tab label="数据同步" />
               </Tabs>
-            </Box>
+            </Paper>
 
-            {/* 选项卡内容 */}
-            <Box sx={{ p: 3 }}>
-              {activeTab === 0 && renderSystemRequirements()}
-              {activeTab === 1 && renderDeveloperInfo()}
-              {activeTab === 2 && renderVersions()}
-              {activeTab === 3 && (
-                <Box sx={{ py: 2 }}>
-                  <Typography variant="body2" color="text.secondary">
-                    用户评价功能开发中...
+            {/* 标签页内容 */}
+            <Box sx={{ mb: 4 }}>
+              {activeTab === 0 && (
+                <Box>
+                  <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
+                    游戏详情
                   </Typography>
+                  <Paper sx={{ p: 3, borderRadius: 2, mb: 3 }}>
+                    <Typography variant="body1" sx={{ lineHeight: 1.8, mb: 3 }}>
+                      {currentGame.description}
+                    </Typography>
+                    {renderDeveloperInfo()}
+                  </Paper>
+                  {renderVideo()}
                 </Box>
               )}
+              {activeTab === 1 && renderSystemRequirements()}
+              {activeTab === 2 && renderScreenshots()}
+              {activeTab === 3 && renderReviews()}
               {activeTab === 4 && renderDataSync()}
             </Box>
-          </Paper>
           </Box>
-        ) : null}
-      </Box>
+        )}
 
-      {/* 通知 */}
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert
+        {/* 通知 */}
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={3000}
           onClose={handleCloseSnackbar}
-          severity="success"
-          sx={{ width: '100%' }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         >
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity="success"
+            sx={{ width: '100%' }}
+          >
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>
+      </Box>
     </Container>
   )
 }
