@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
 // 定义GameSystemRequirement模型
 const GameSystemRequirement = sequelize.define('GameSystemRequirement', {
@@ -9,9 +9,9 @@ const GameSystemRequirement = sequelize.define('GameSystemRequirement', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '操作系统不能为空'
-      }
-    }
+        msg: '操作系统不能为空',
+      },
+    },
   },
   // 处理器
   processor: {
@@ -19,9 +19,9 @@ const GameSystemRequirement = sequelize.define('GameSystemRequirement', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '处理器不能为空'
-      }
-    }
+        msg: '处理器不能为空',
+      },
+    },
   },
   // 内存
   memory: {
@@ -29,9 +29,9 @@ const GameSystemRequirement = sequelize.define('GameSystemRequirement', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '内存不能为空'
-      }
-    }
+        msg: '内存不能为空',
+      },
+    },
   },
   // 显卡
   graphics: {
@@ -39,9 +39,9 @@ const GameSystemRequirement = sequelize.define('GameSystemRequirement', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '显卡不能为空'
-      }
-    }
+        msg: '显卡不能为空',
+      },
+    },
   },
   // 存储
   storage: {
@@ -49,9 +49,9 @@ const GameSystemRequirement = sequelize.define('GameSystemRequirement', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '存储不能为空'
-      }
-    }
+        msg: '存储不能为空',
+      },
+    },
   },
   // 需求类型
   type: {
@@ -59,20 +59,20 @@ const GameSystemRequirement = sequelize.define('GameSystemRequirement', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '需求类型不能为空'
-      }
-    }
+        msg: '需求类型不能为空',
+      },
+    },
   },
   // 游戏ID，与Game模型关联
   game_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 }, {
   // 模型配置
   tableName: 'game_system_requirements',
-  timestamps: false // 系统需求表不需要时间戳
-})
+  timestamps: false, // 系统需求表不需要时间戳
+});
 
 // 定义模型之间的关联
 GameSystemRequirement.associate = (models) => {
@@ -80,8 +80,8 @@ GameSystemRequirement.associate = (models) => {
   GameSystemRequirement.belongsTo(models.Game, {
     foreignKey: 'game_id',
     as: 'game',
-    onDelete: 'CASCADE'
-  })
-}
+    onDelete: 'CASCADE',
+  });
+};
 
-export default GameSystemRequirement
+export default GameSystemRequirement;

@@ -70,5 +70,5 @@ export {
   AuthenticationError,
   DatabaseError,
   ServerError,
-  BusinessLogicError
+  BusinessLogicError,
 };

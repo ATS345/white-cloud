@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
 // 定义Order模型
 const Order = sequelize.define('Order', {
@@ -10,33 +10,33 @@ const Order = sequelize.define('Order', {
     validate: {
       min: {
         args: [0],
-        msg: '订单总金额不能为负数'
-      }
-    }
+        msg: '订单总金额不能为负数',
+      },
+    },
   },
   // 订单状态
   status: {
     type: DataTypes.ENUM('pending', 'paid', 'failed', 'refunded'),
     allowNull: false,
-    defaultValue: 'pending'
+    defaultValue: 'pending',
   },
   // 支付方式
   payment_method: {
     type: DataTypes.STRING(50),
     allowNull: true,
-    defaultValue: null
+    defaultValue: null,
   },
   // 交易ID
   transaction_id: {
     type: DataTypes.STRING(100),
     allowNull: true,
-    defaultValue: null
+    defaultValue: null,
   },
   // 用户ID，与User模型关联
   user_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 }, {
   // 模型配置
   tableName: 'orders',
@@ -49,9 +49,9 @@ const Order = sequelize.define('Order', {
     // 状态索引
     { fields: ['status'], name: 'idx_orders_status' },
     // 创建时间索引
-    { fields: ['created_at'], name: 'idx_orders_created_at' }
-  ]
-})
+    { fields: ['created_at'], name: 'idx_orders_created_at' },
+  ],
+});
 
 // 定义模型之间的关联
 Order.associate = (models) => {
@@ -59,15 +59,15 @@ Order.associate = (models) => {
   Order.belongsTo(models.User, {
     foreignKey: 'user_id',
     as: 'user',
-    onDelete: 'CASCADE'
-  })
-  
+    onDelete: 'CASCADE',
+  });
+
   // 订单与订单商品的一对多关联
   Order.hasMany(models.OrderItem, {
     foreignKey: 'order_id',
     as: 'items',
-    onDelete: 'CASCADE'
-  })
-}
+    onDelete: 'CASCADE',
+  });
+};
 
-export default Order
+export default Order;

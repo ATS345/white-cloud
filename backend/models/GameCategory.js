@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
 // 定义GameCategory模型
 const GameCategory = sequelize.define('GameCategory', {
@@ -10,24 +10,24 @@ const GameCategory = sequelize.define('GameCategory', {
     unique: true,
     validate: {
       notEmpty: {
-        msg: '分类名称不能为空'
-      }
-    }
+        msg: '分类名称不能为空',
+      },
+    },
   },
   // 分类描述
   description: {
     type: DataTypes.TEXT,
-    allowNull: true
-  }
+    allowNull: true,
+  },
 }, {
   // 模型配置
   tableName: 'game_categories',
   timestamps: false, // 分类表不需要时间戳
   indexes: [
     // 名称索引，用于搜索
-    { fields: ['name'], name: 'idx_game_categories_name' }
-  ]
-})
+    { fields: ['name'], name: 'idx_game_categories_name' },
+  ],
+});
 
 // 定义模型之间的关联
 GameCategory.associate = (models) => {
@@ -35,8 +35,8 @@ GameCategory.associate = (models) => {
   GameCategory.belongsToMany(models.Game, {
     through: 'game_category_relations',
     foreignKey: 'category_id',
-    as: 'games'
-  })
-}
+    as: 'games',
+  });
+};
 
-export default GameCategory
+export default GameCategory;

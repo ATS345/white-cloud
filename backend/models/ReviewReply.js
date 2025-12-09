@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
 // 定义ReviewReply模型
 const ReviewReply = sequelize.define('ReviewReply', {
@@ -9,24 +9,24 @@ const ReviewReply = sequelize.define('ReviewReply', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '回复内容不能为空'
+        msg: '回复内容不能为空',
       },
       len: {
         args: [5, 1000],
-        msg: '回复内容长度必须在5到1000个字符之间'
-      }
-    }
+        msg: '回复内容长度必须在5到1000个字符之间',
+      },
+    },
   },
   // 用户ID，与User模型关联
   user_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   // 评论ID，与Review模型关联
   review_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 }, {
   // 模型配置
   tableName: 'review_replies',
@@ -39,9 +39,9 @@ const ReviewReply = sequelize.define('ReviewReply', {
     // 用户ID索引
     { fields: ['user_id'], name: 'idx_review_replies_user_id' },
     // 创建时间索引
-    { fields: ['created_at'], name: 'idx_review_replies_created_at' }
-  ]
-})
+    { fields: ['created_at'], name: 'idx_review_replies_created_at' },
+  ],
+});
 
 // 定义模型之间的关联
 ReviewReply.associate = (models) => {
@@ -49,15 +49,15 @@ ReviewReply.associate = (models) => {
   ReviewReply.belongsTo(models.User, {
     foreignKey: 'user_id',
     as: 'user',
-    onDelete: 'CASCADE'
-  })
-  
+    onDelete: 'CASCADE',
+  });
+
   // 回复与评论的多对一关联
   ReviewReply.belongsTo(models.Review, {
     foreignKey: 'review_id',
     as: 'review',
-    onDelete: 'CASCADE'
-  })
-}
+    onDelete: 'CASCADE',
+  });
+};
 
-export default ReviewReply
+export default ReviewReply;

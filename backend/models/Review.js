@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
 // 定义Review模型
 const Review = sequelize.define('Review', {
@@ -10,13 +10,13 @@ const Review = sequelize.define('Review', {
     validate: {
       min: {
         args: [1],
-        msg: '评分必须至少为1星'
+        msg: '评分必须至少为1星',
       },
       max: {
         args: [5],
-        msg: '评分不能超过5星'
-      }
-    }
+        msg: '评分不能超过5星',
+      },
+    },
   },
   // 评价内容
   content: {
@@ -24,24 +24,24 @@ const Review = sequelize.define('Review', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '评价内容不能为空'
+        msg: '评价内容不能为空',
       },
       len: {
         args: [10, 5000],
-        msg: '评价内容长度必须在10到5000个字符之间'
-      }
-    }
+        msg: '评价内容长度必须在10到5000个字符之间',
+      },
+    },
   },
   // 用户ID，与User模型关联
   user_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   // 游戏ID，与Game模型关联
   game_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 }, {
   // 模型配置
   tableName: 'reviews',
@@ -56,9 +56,9 @@ const Review = sequelize.define('Review', {
     // 评分索引
     { fields: ['rating'], name: 'idx_reviews_rating' },
     // 创建时间索引
-    { fields: ['created_at'], name: 'idx_reviews_created_at' }
-  ]
-})
+    { fields: ['created_at'], name: 'idx_reviews_created_at' },
+  ],
+});
 
 // 定义模型之间的关联
 Review.associate = (models) => {
@@ -66,22 +66,22 @@ Review.associate = (models) => {
   Review.belongsTo(models.User, {
     foreignKey: 'user_id',
     as: 'user',
-    onDelete: 'CASCADE'
-  })
-  
+    onDelete: 'CASCADE',
+  });
+
   // 评价与游戏的多对一关联
   Review.belongsTo(models.Game, {
     foreignKey: 'game_id',
     as: 'game',
-    onDelete: 'CASCADE'
-  })
-  
+    onDelete: 'CASCADE',
+  });
+
   // 评价与评论回复的一对多关联
   Review.hasMany(models.ReviewReply, {
     foreignKey: 'review_id',
     as: 'replies',
-    onDelete: 'CASCADE'
-  })
-}
+    onDelete: 'CASCADE',
+  });
+};
 
-export default Review
+export default Review;

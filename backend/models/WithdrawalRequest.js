@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
 // 定义WithdrawalRequest模型
 const WithdrawalRequest = sequelize.define('WithdrawalRequest', {
@@ -9,13 +9,13 @@ const WithdrawalRequest = sequelize.define('WithdrawalRequest', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '提现金额不能为空'
+        msg: '提现金额不能为空',
       },
       min: {
         args: [10],
-        msg: '提现金额不能低于10元'
-      }
-    }
+        msg: '提现金额不能低于10元',
+      },
+    },
   },
   // 提现方式
   payment_method: {
@@ -23,9 +23,9 @@ const WithdrawalRequest = sequelize.define('WithdrawalRequest', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '提现方式不能为空'
-      }
-    }
+        msg: '提现方式不能为空',
+      },
+    },
   },
   // 支付账号
   payment_account: {
@@ -33,9 +33,9 @@ const WithdrawalRequest = sequelize.define('WithdrawalRequest', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '支付账号不能为空'
-      }
-    }
+        msg: '支付账号不能为空',
+      },
+    },
   },
   // 提现状态
   status: {
@@ -45,33 +45,33 @@ const WithdrawalRequest = sequelize.define('WithdrawalRequest', {
     validate: {
       isIn: {
         args: [['pending', 'approved', 'rejected', 'processed']],
-        msg: '提现状态必须是pending、approved、rejected或processed'
-      }
-    }
+        msg: '提现状态必须是pending、approved、rejected或processed',
+      },
+    },
   },
   // 审核备注
   admin_note: {
     type: DataTypes.TEXT,
-    allowNull: true
+    allowNull: true,
   },
   // 处理日期
   processed_at: {
     type: DataTypes.DATE,
     allowNull: true,
-    defaultValue: null
+    defaultValue: null,
   },
   // 开发者ID，与Developer模型关联
   developer_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 }, {
   // 模型配置
   tableName: 'withdrawal_requests',
   timestamps: true,
   createdAt: 'created_at',
-  updatedAt: 'updated_at'
-})
+  updatedAt: 'updated_at',
+});
 
 // 定义模型之间的关联
 WithdrawalRequest.associate = (models) => {
@@ -79,8 +79,8 @@ WithdrawalRequest.associate = (models) => {
   WithdrawalRequest.belongsTo(models.Developer, {
     foreignKey: 'developer_id',
     as: 'developer',
-    onDelete: 'CASCADE'
-  })
-}
+    onDelete: 'CASCADE',
+  });
+};
 
-export default WithdrawalRequest
+export default WithdrawalRequest;

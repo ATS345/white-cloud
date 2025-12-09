@@ -9,12 +9,12 @@ export default {
       presets: [
         ['@babel/preset-env', {
           targets: {
-            node: 'current'
-          }
-        }]
-      ]
-    }]
+            node: 'current',
+          },
+        }],
+      ],
+    }],
   },
   setupFiles: ['dotenv/config'],
-  transformIgnorePatterns: ['/node_modules/']
-}
+  transformIgnorePatterns: ['/node_modules/'],
+};

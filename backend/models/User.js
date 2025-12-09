@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
 // 定义User模型
 const User = sequelize.define('User', {
@@ -10,13 +10,13 @@ const User = sequelize.define('User', {
     unique: true,
     validate: {
       notEmpty: {
-        msg: '用户名不能为空'
+        msg: '用户名不能为空',
       },
       len: {
         args: [3, 50],
-        msg: '用户名长度必须在3到50个字符之间'
-      }
-    }
+        msg: '用户名长度必须在3到50个字符之间',
+      },
+    },
   },
   // 邮箱
   email: {
@@ -25,12 +25,12 @@ const User = sequelize.define('User', {
     unique: true,
     validate: {
       notEmpty: {
-        msg: '邮箱不能为空'
+        msg: '邮箱不能为空',
       },
       isEmail: {
-        msg: '请输入有效的邮箱地址'
-      }
-    }
+        msg: '请输入有效的邮箱地址',
+      },
+    },
   },
   // 密码哈希
   password_hash: {
@@ -38,26 +38,26 @@ const User = sequelize.define('User', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '密码不能为空'
+        msg: '密码不能为空',
       },
       len: {
         args: [6, 255],
-        msg: '密码长度必须至少为6个字符'
-      }
-    }
+        msg: '密码长度必须至少为6个字符',
+      },
+    },
   },
   // 头像URL
   avatar_url: {
     type: DataTypes.STRING(255),
     allowNull: true,
-    defaultValue: null
+    defaultValue: null,
   },
   // 角色
   role: {
     type: DataTypes.ENUM('user', 'developer', 'admin'),
     allowNull: false,
-    defaultValue: 'user'
-  }
+    defaultValue: 'user',
+  },
 }, {
   // 模型配置
   tableName: 'users',
@@ -68,9 +68,9 @@ const User = sequelize.define('User', {
     // 在创建用户前进行的操作
     beforeCreate: (user) => {
       // 可以在这里添加额外的逻辑，比如生成默认头像等
-    }
-  }
-})
+    },
+  },
+});
 
 // 定义模型之间的关联
 User.associate = (models) => {
@@ -78,29 +78,29 @@ User.associate = (models) => {
   User.hasOne(models.Developer, {
     foreignKey: 'user_id',
     as: 'developer',
-    onDelete: 'CASCADE'
-  })
-  
+    onDelete: 'CASCADE',
+  });
+
   // 用户与游戏库的一对多关联
   User.hasMany(models.GameLibrary, {
     foreignKey: 'user_id',
     as: 'library',
-    onDelete: 'CASCADE'
-  })
-  
+    onDelete: 'CASCADE',
+  });
+
   // 用户与评价的一对多关联
   User.hasMany(models.Review, {
     foreignKey: 'user_id',
     as: 'reviews',
-    onDelete: 'CASCADE'
-  })
-  
+    onDelete: 'CASCADE',
+  });
+
   // 用户与订单的一对多关联
   User.hasMany(models.Order, {
     foreignKey: 'user_id',
     as: 'orders',
-    onDelete: 'CASCADE'
-  })
-}
+    onDelete: 'CASCADE',
+  });
+};
 
-export default User
+export default User;

@@ -2,16 +2,14 @@ import logger from '../config/logger.js';
 import { AppError } from '../utils/errors.js';
 
 // 开发环境错误处理
-const sendErrorDev = (err, res) => {
-  return res.status(err.statusCode).json({
-    success: false,
-    error: err,
-    message: err.message,
-    errorCode: err.errorCode,
-    details: err.details,
-    stack: err.stack
-  });
-};
+const sendErrorDev = (err, res) => res.status(err.statusCode).json({
+  success: false,
+  error: err,
+  message: err.message,
+  errorCode: err.errorCode,
+  details: err.details,
+  stack: err.stack,
+});
 
 // 生产环境错误处理
 const sendErrorProd = (err, res) => {
@@ -21,16 +19,16 @@ const sendErrorProd = (err, res) => {
       success: false,
       message: err.message,
       errorCode: err.errorCode,
-      details: err.details || undefined
+      details: err.details || undefined,
     });
   }
 
   // 编程错误：不暴露细节给客户端
   logger.error('未处理的编程错误:', err);
-  
+
   return res.status(500).json({
     success: false,
-    message: '服务器内部错误，请稍后再试'
+    message: '服务器内部错误，请稍后再试',
   });
 };
 
@@ -43,11 +41,11 @@ const handleDatabaseError = (err) => {
   if (err.name === 'SequelizeUniqueConstraintError') {
     message = '数据已存在';
     errorCode = 'DUPLICATE_DATA';
-    details = err.errors.map(e => e.message);
+    details = err.errors.map((e) => e.message);
   } else if (err.name === 'SequelizeValidationError') {
     message = '数据验证失败';
     errorCode = 'VALIDATION_ERROR';
-    details = err.errors.map(e => e.message);
+    details = err.errors.map((e) => e.message);
   } else if (err.name === 'SequelizeForeignKeyConstraintError') {
     message = '外键约束错误';
     errorCode = 'FOREIGN_KEY_ERROR';
@@ -61,13 +59,9 @@ const handleDatabaseError = (err) => {
 };
 
 // JWT错误处理
-const handleJWTError = () => {
-  return new AppError(401, '认证失败，请重新登录', 'INVALID_TOKEN');
-};
+const handleJWTError = () => new AppError(401, '认证失败，请重新登录', 'INVALID_TOKEN');
 
-const handleJWTExpiredError = () => {
-  return new AppError(401, '登录已过期，请重新登录', 'TOKEN_EXPIRED');
-};
+const handleJWTExpiredError = () => new AppError(401, '登录已过期，请重新登录', 'TOKEN_EXPIRED');
 
 // 主要错误处理中间件
 const errorHandler = (err, req, res, next) => {
@@ -83,7 +77,7 @@ const errorHandler = (err, req, res, next) => {
     method: req.method,
     url: req.originalUrl,
     ip: req.ip,
-    stack: err.stack
+    stack: err.stack,
   });
 
   // 根据环境选择错误响应格式

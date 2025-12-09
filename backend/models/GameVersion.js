@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
 // 定义GameVersion模型
 const GameVersion = sequelize.define('GameVersion', {
@@ -9,20 +9,20 @@ const GameVersion = sequelize.define('GameVersion', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '版本号不能为空'
-      }
-    }
+        msg: '版本号不能为空',
+      },
+    },
   },
   // 发布日期
   release_date: {
     type: DataTypes.DATE,
     allowNull: false,
-    defaultValue: DataTypes.NOW
+    defaultValue: DataTypes.NOW,
   },
   // 更新日志
   changelog: {
     type: DataTypes.TEXT,
-    allowNull: true
+    allowNull: true,
   },
   // 文件URL
   file_url: {
@@ -30,9 +30,9 @@ const GameVersion = sequelize.define('GameVersion', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '文件URL不能为空'
-      }
-    }
+        msg: '文件URL不能为空',
+      },
+    },
   },
   // 文件大小
   file_size: {
@@ -41,20 +41,20 @@ const GameVersion = sequelize.define('GameVersion', {
     validate: {
       min: {
         args: [0],
-        msg: '文件大小不能为负数'
-      }
-    }
+        msg: '文件大小不能为负数',
+      },
+    },
   },
   // 平台
   platform: {
     type: DataTypes.ENUM('windows', 'mac', 'linux'),
-    allowNull: false
+    allowNull: false,
   },
   // 游戏ID，与Game模型关联
   game_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 }, {
   // 模型配置
   tableName: 'game_versions',
@@ -65,9 +65,9 @@ const GameVersion = sequelize.define('GameVersion', {
     // 游戏ID索引
     { fields: ['game_id'], name: 'idx_game_versions_game_id' },
     // 平台索引
-    { fields: ['platform'], name: 'idx_game_versions_platform' }
-  ]
-})
+    { fields: ['platform'], name: 'idx_game_versions_platform' },
+  ],
+});
 
 // 定义模型之间的关联
 GameVersion.associate = (models) => {
@@ -75,8 +75,8 @@ GameVersion.associate = (models) => {
   GameVersion.belongsTo(models.Game, {
     foreignKey: 'game_id',
     as: 'game',
-    onDelete: 'CASCADE'
-  })
-}
+    onDelete: 'CASCADE',
+  });
+};
 
-export default GameVersion
+export default GameVersion;

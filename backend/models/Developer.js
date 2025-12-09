@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
 // 定义Developer模型
 const Developer = sequelize.define('Developer', {
@@ -9,9 +9,9 @@ const Developer = sequelize.define('Developer', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '公司名称不能为空'
-      }
-    }
+        msg: '公司名称不能为空',
+      },
+    },
   },
   // 联系邮箱
   contact_email: {
@@ -19,12 +19,12 @@ const Developer = sequelize.define('Developer', {
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: '联系邮箱不能为空'
+        msg: '联系邮箱不能为空',
       },
       isEmail: {
-        msg: '请输入有效的邮箱地址'
-      }
-    }
+        msg: '请输入有效的邮箱地址',
+      },
+    },
   },
   // 官网
   website: {
@@ -32,22 +32,22 @@ const Developer = sequelize.define('Developer', {
     allowNull: true,
     validate: {
       isUrl: {
-        msg: '请输入有效的网址'
-      }
-    }
+        msg: '请输入有效的网址',
+      },
+    },
   },
   // 简介
   bio: {
     type: DataTypes.TEXT,
-    allowNull: true
-  }
+    allowNull: true,
+  },
 }, {
   // 模型配置
   tableName: 'developers',
   timestamps: true,
   createdAt: 'created_at',
-  updatedAt: 'updated_at'
-})
+  updatedAt: 'updated_at',
+});
 
 // 定义模型之间的关联
 Developer.associate = (models) => {
@@ -55,29 +55,29 @@ Developer.associate = (models) => {
   Developer.belongsTo(models.User, {
     foreignKey: 'user_id',
     as: 'user',
-    onDelete: 'CASCADE'
-  })
-  
+    onDelete: 'CASCADE',
+  });
+
   // 开发者与游戏的一对多关联
   Developer.hasMany(models.Game, {
     foreignKey: 'developer_id',
     as: 'games',
-    onDelete: 'CASCADE'
-  })
-  
+    onDelete: 'CASCADE',
+  });
+
   // 开发者与财务报表的一对多关联
   Developer.hasMany(models.DeveloperFinance, {
     foreignKey: 'developer_id',
     as: 'finances',
-    onDelete: 'CASCADE'
-  })
-  
+    onDelete: 'CASCADE',
+  });
+
   // 开发者与提现申请的一对多关联
   Developer.hasMany(models.WithdrawalRequest, {
     foreignKey: 'developer_id',
     as: 'withdrawalRequests',
-    onDelete: 'CASCADE'
-  })
-}
+    onDelete: 'CASCADE',
+  });
+};
 
-export default Developer
+export default Developer;

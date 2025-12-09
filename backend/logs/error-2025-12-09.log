@@ -1,0 +1,702 @@
+{"0":"T","1":"h","10":"n","11":"t","12":" ","13":"'","14":"u","15":"r","16":"l","17":"'","18":" ","19":"s","2":"e","20":"q","21":"l","22":"i","23":"t","24":"e","25":":","26":":","27":"m","28":"e","29":"m","3":" ","30":"o","31":"r","32":"y","33":":","34":".","35":" ","36":"R","37":"e","38":"c","39":"e","4":"a","40":"i","41":"v","42":"e","43":"d","44":" ","45":"'","46":"I","47":"n","48":"v","49":"a","5":"r","50":"l","51":"i","52":"d","53":" ","54":"p","55":"o","56":"r","57":"t","58":" ","59":"i","6":"g","60":"n","61":" ","62":"u","63":"r","64":"l","65":"'","7":"u","8":"m","9":"e","level":"error","message":"创建数据库连接时发生错误:","timestamp":"2025-12-09 21:30:30"}
+{"0":"T","1":"h","10":"n","11":"t","12":" ","13":"'","14":"u","15":"r","16":"l","17":"'","18":" ","19":"s","2":"e","20":"q","21":"l","22":"i","23":"t","24":"e","25":":","26":":","27":"m","28":"e","29":"m","3":" ","30":"o","31":"r","32":"y","33":":","34":".","35":" ","36":"R","37":"e","38":"c","39":"e","4":"a","40":"i","41":"v","42":"e","43":"d","44":" ","45":"'","46":"I","47":"n","48":"v","49":"a","5":"r","50":"l","51":"i","52":"d","53":" ","54":"p","55":"o","56":"r","57":"t","58":" ","59":"i","6":"g","60":"n","61":" ","62":"u","63":"r","64":"l","65":"'","7":"u","8":"m","9":"e","level":"error","message":"创建数据库连接时发生错误:","timestamp":"2025-12-09 21:30:32"}
+{"0":"T","1":"h","10":"n","11":"t","12":" ","13":"'","14":"u","15":"r","16":"l","17":"'","18":" ","19":"s","2":"e","20":"q","21":"l","22":"i","23":"t","24":"e","25":":","26":":","27":"m","28":"e","29":"m","3":" ","30":"o","31":"r","32":"y","33":":","34":".","35":" ","36":"R","37":"e","38":"c","39":"e","4":"a","40":"i","41":"v","42":"e","43":"d","44":" ","45":"'","46":"I","47":"n","48":"v","49":"a","5":"r","50":"l","51":"i","52":"d","53":" ","54":"p","55":"o","56":"r","57":"t","58":" ","59":"i","6":"g","60":"n","61":" ","62":"u","63":"r","64":"l","65":"'","7":"u","8":"m","9":"e","level":"error","message":"创建数据库连接时发生错误:","timestamp":"2025-12-09 21:30:38"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:31:10"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:31:10"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:32:15"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:32:51"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:32:51"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:32:54"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:32:54"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:32:58"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:32:58"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:33:02"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:33:02"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:33:11"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:33:11"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:33:28"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:33:28"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:33:45"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:33:45"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:33:48"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:33:48"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:33:50"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:33:50"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:33:55"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:33:55"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:34:04"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:34:04"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:34:22"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:34:22"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:34:55"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:34:55"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:35:55"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:35:55"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:36:55"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:36:55"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:37:55"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:37:55"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:38:55"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:38:55"}
+{"level":"error","message":"[REDIS] 达到最大重连尝试次数 (10)，停止重连","timestamp":"2025-12-09 21:39:56"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:39:56"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-09 21:39:56"}
+{"level":"error","message":"[REDIS INIT ERROR] 达到最大重连尝试次数","timestamp":"2025-12-09 21:39:56"}
+{"level":"error","message":"[SERVER SHUTDOWN ERROR] The client is closed","timestamp":"2025-12-09 21:47:08"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:47:59"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:47:59"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:48:02"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:48:02"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:48:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:48:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:48:11"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:48:11"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:48:20"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:48:20"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:48:42"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:48:42"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:48:44"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:48:44"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:48:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:48:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:48:53"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:48:53"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:49:03"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:49:03"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:49:20"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:49:20"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:49:52"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:49:52"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:50:52"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:50:52"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:51:52"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:51:52"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:52:52"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:52:52"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:53:52"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:53:52"}
+{"level":"error","message":"[REDIS] 达到最大重连尝试次数 (10)，停止重连","timestamp":"2025-12-09 21:54:52"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 21:54:52"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 21:54:52"}
+{"level":"error","message":"[REDIS INIT ERROR] 达到最大重连尝试次数","timestamp":"2025-12-09 21:54:52"}
+{"level":"error","message":"[REDIS] Redis连接失败，详细信息：\n  - 错误代码: 未知\n  - 错误信息: 达到最大重连尝试次数\n  - 堆栈跟踪: Error: 达到最大重连尝试次数\n    at RedisSocket._RedisSocket_shouldReconnect (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\@redis\\client\\dist\\lib\\client\\socket.js:140:16)\n    at RedisSocket._RedisSocket_connect (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\@redis\\client\\dist\\lib\\client\\socket.js:162:117)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async Commander.connect (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\@redis\\client\\dist\\lib\\client\\index.js:185:9)\n    at async initRedis (file:///C:/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/%E6%B8%B8%E6%88%8F%E5%95%86%E5%BA%97%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/backend/config/redis.js:538:5)\n  - 回退策略: 切换到内存缓存模式","timestamp":"2025-12-09 21:54:52"}
+{"errorCode":"RESOURCE_NOT_FOUND","ip":"::1","level":"error","message":"请求的资源不存在: /?ide_webview_request_time=1765289679706","method":"GET","stack":"Error: 请求的资源不存在: /?ide_webview_request_time=1765289679706\n    at file:///C:/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/%E6%B8%B8%E6%88%8F%E5%95%86%E5%BA%97%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/backend/server.js:76:8\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at urlencodedParser (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\body-parser\\lib\\types\\urlencoded.js:91:7)\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9","statusCode":404,"timestamp":"2025-12-09 22:14:39","url":"/?ide_webview_request_time=1765289679706"}
+{"errorCode":"RESOURCE_NOT_FOUND","ip":"::1","level":"error","message":"请求的资源不存在: /?ide_webview_request_time=1765289679706","method":"GET","stack":"Error: 请求的资源不存在: /?ide_webview_request_time=1765289679706\n    at file:///C:/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/%E6%B8%B8%E6%88%8F%E5%95%86%E5%BA%97%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/backend/server.js:76:8\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at urlencodedParser (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\body-parser\\lib\\types\\urlencoded.js:91:7)\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9","statusCode":404,"timestamp":"2025-12-09 22:16:14","url":"/?ide_webview_request_time=1765289679706"}
+{"errorCode":"RESOURCE_NOT_FOUND","ip":"::1","level":"error","message":"请求的资源不存在: /?ide_webview_request_time=1765289679706","method":"GET","stack":"Error: 请求的资源不存在: /?ide_webview_request_time=1765289679706\n    at file:///C:/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/%E6%B8%B8%E6%88%8F%E5%95%86%E5%BA%97%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/backend/server.js:76:8\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at urlencodedParser (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\body-parser\\lib\\types\\urlencoded.js:91:7)\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9","statusCode":404,"timestamp":"2025-12-09 22:16:15","url":"/?ide_webview_request_time=1765289679706"}
+{"errorCode":"RESOURCE_NOT_FOUND","ip":"::1","level":"error","message":"请求的资源不存在: /?ide_webview_request_time=1765289679706","method":"GET","stack":"Error: 请求的资源不存在: /?ide_webview_request_time=1765289679706\n    at file:///C:/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/%E6%B8%B8%E6%88%8F%E5%95%86%E5%BA%97%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/backend/server.js:76:8\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at urlencodedParser (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\body-parser\\lib\\types\\urlencoded.js:91:7)\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9","statusCode":404,"timestamp":"2025-12-09 22:18:42","url":"/?ide_webview_request_time=1765289679706"}
+{"errorCode":"RESOURCE_NOT_FOUND","ip":"::1","level":"error","message":"请求的资源不存在: /","method":"GET","stack":"Error: 请求的资源不存在: /\n    at file:///C:/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/%E6%B8%B8%E6%88%8F%E5%95%86%E5%BA%97%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/backend/server.js:76:8\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at urlencodedParser (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\body-parser\\lib\\types\\urlencoded.js:91:7)\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9","statusCode":404,"timestamp":"2025-12-09 22:21:51","url":"/"}
+{"level":"error","message":"[CACHE] 缓存操作失败: The client is closed","timestamp":"2025-12-09 22:22:13"}
+{"errorCode":"RESOURCE_NOT_FOUND","ip":"::1","level":"error","message":"请求的资源不存在: /","method":"GET","stack":"Error: 请求的资源不存在: /\n    at file:///C:/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/%E6%B8%B8%E6%88%8F%E5%95%86%E5%BA%97%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/backend/server.js:76:8\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at urlencodedParser (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\body-parser\\lib\\types\\urlencoded.js:91:7)\n    at Layer.handle [as handle_request] (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\express\\lib\\router\\index.js:286:9","statusCode":404,"timestamp":"2025-12-09 22:28:10","url":"/"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:28:45"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:28:45"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:28:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:28:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:28:51"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:28:51"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:29:10"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:29:10"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:29:13"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:29:13"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:29:15"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:29:15"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:29:20"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:29:20"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:29:29"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:29:29"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:29:46"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:29:46"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:30:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:30:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:31:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:31:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:32:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:32:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:33:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:33:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:34:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:34:18"}
+{"level":"error","message":"[REDIS] 达到最大重连尝试次数 (10)，停止重连","timestamp":"2025-12-09 22:35:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:35:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:35:18"}
+{"level":"error","message":"[REDIS INIT ERROR] 达到最大重连尝试次数","timestamp":"2025-12-09 22:35:18"}
+{"level":"error","message":"[REDIS] Redis连接失败，详细信息：\n  - 错误代码: 未知\n  - 错误信息: 达到最大重连尝试次数\n  - 堆栈跟踪: Error: 达到最大重连尝试次数\n    at RedisSocket._RedisSocket_shouldReconnect (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\@redis\\client\\dist\\lib\\client\\socket.js:140:16)\n    at RedisSocket._RedisSocket_connect (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\@redis\\client\\dist\\lib\\client\\socket.js:162:117)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async Commander.connect (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\@redis\\client\\dist\\lib\\client\\index.js:185:9)\n    at async initRedis (file:///C:/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/%E6%B8%B8%E6%88%8F%E5%95%86%E5%BA%97%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/backend/config/redis.js:538:5)\n  - 回退策略: 切换到内存缓存模式","timestamp":"2025-12-09 22:35:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:10"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:10"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:11"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:11"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:12"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:12"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:14"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:14"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:16"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:16"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:19"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:19"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:24"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:24"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:33"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:33"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:50"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:50"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:53"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:53"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:56"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:56"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:53:59"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:53:59"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:04"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:04"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:14"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:14"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:19"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:19"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:22"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:22"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:28"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:28"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:39"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:39"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:41"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:41"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:43"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:43"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:54:57"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:54:57"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:55:06"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:55:06"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:55:09"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:55:09"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:55:12"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:55:12"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:55:17"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:55:17"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:55:21"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:55:21"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:55:24"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:55:24"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:55:26"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:55:26"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:55:32"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:55:32"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:55:41"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:55:41"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:55:58"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:55:58"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:06"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:06"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:08"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:08"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:10"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:10"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:15"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:15"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:24"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:24"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:41"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:41"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:45"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:45"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:50"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:50"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:57:55"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:57:55"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:19"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:19"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:21"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:21"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:23"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:23"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:27"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:27"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:37"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:37"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:40"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:40"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:42"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:42"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:44"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:44"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:48"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:48"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:58:58"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:58:58"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:59:14"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:59:14"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 22:59:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 22:59:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:00:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:00:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:01:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:01:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:02:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:02:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:03:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:03:47"}
+{"level":"error","message":"[REDIS] 达到最大重连尝试次数 (10)，停止重连","timestamp":"2025-12-09 23:04:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:04:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:04:47"}
+{"level":"error","message":"[REDIS INIT ERROR] 达到最大重连尝试次数","timestamp":"2025-12-09 23:04:47"}
+{"level":"error","message":"[REDIS] Redis连接失败，详细信息：\n  - 错误代码: 未知\n  - 错误信息: 达到最大重连尝试次数\n  - 堆栈跟踪: Error: 达到最大重连尝试次数\n    at RedisSocket._RedisSocket_shouldReconnect (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\@redis\\client\\dist\\lib\\client\\socket.js:140:16)\n    at RedisSocket._RedisSocket_connect (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\@redis\\client\\dist\\lib\\client\\socket.js:162:117)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async Commander.connect (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\@redis\\client\\dist\\lib\\client\\index.js:185:9)\n    at async initRedis (file:///C:/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/%E6%B8%B8%E6%88%8F%E5%95%86%E5%BA%97%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/backend/config/redis.js:538:5)\n  - 回退策略: 切换到内存缓存模式","timestamp":"2025-12-09 23:04:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:09:30"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:09:30"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:09:31"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:09:31"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:09:35"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:09:35"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:09:40"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:09:40"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:09:51"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:09:51"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:09:53"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:09:53"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:09:57"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:09:57"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:10:02"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:10:02"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:10:11"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:10:11"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:10:29"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:10:29"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:11:02"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:11:02"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:11:23"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:11:23"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:11:26"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:11:26"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:11:28"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:11:28"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:11:34"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:11:34"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:11:42"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:11:42"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:12:00"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:12:00"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:12:22"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:12:22"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:12:24"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:12:24"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:12:28"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:12:28"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:12:33"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:12:33"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:12:42"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:12:42"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:12:59"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:12:59"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:13:01"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:13:01"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:13:03"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:13:03"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:13:08"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:13:08"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:13:17"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:13:17"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:13:23"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:13:23"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:13:25"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:13:25"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:13:28"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:13:28"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:13:33"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:13:33"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:13:42"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:13:42"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:13:59"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:13:59"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:14:33"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:14:33"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:31"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:31"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:32"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:32"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:34"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:34"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:39"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:39"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:40"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:40"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:42"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:42"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:45"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:45"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:49"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:49"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:51"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:51"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:54"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:54"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:57"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:57"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:15:58"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:15:58"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:16:00"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:16:00"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:16:06"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:16:06"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:16:15"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:16:15"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:16:32"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:16:32"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:16:50"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:16:50"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:16:52"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:16:52"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:16:55"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:16:55"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:00"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:00"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:08"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:08"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:11"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:11"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:15"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:15"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:24"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:24"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:27"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:27"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:30"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:30"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:34"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:34"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:38"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:38"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:17:48"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:17:48"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:18:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:18:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:18:38"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:18:38"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:19:20"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:19:20"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:19:22"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:19:22"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:19:25"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:19:25"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:19:30"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:19:30"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:19:40"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:19:40"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:19:57"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:19:57"}
+{"level":"error","message":"获取游戏列表错误: Game.findAndCountAll is not a function","stack":"TypeError: Game.findAndCountAll is not a function\n    at findAndCountAll (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:212:19)\n    at queryFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:49:74)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:397:39\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:404:13\n    at mockConstructor (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:148:19)\n    at cacheQuery (eval at _createMockFunction (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:566:31), <anonymous>:3:56)\n    at getGames (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:155:35)\n    at Object.<anonymous> (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:87:21)\n    at Promise.then.completed (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at _runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)","timestamp":"2025-12-09 23:20:25"}
+{"level":"error","message":"获取游戏列表错误: Game.findAndCountAll is not a function","stack":"TypeError: Game.findAndCountAll is not a function\n    at findAndCountAll (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:212:19)\n    at queryFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:115:74)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:397:39\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:404:13\n    at mockConstructor (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:148:19)\n    at cacheQuery (eval at _createMockFunction (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:566:31), <anonymous>:3:56)\n    at getGames (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:155:35)\n    at Object.<anonymous> (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:119:21)\n    at Promise.then.completed (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at _runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)","timestamp":"2025-12-09 23:20:25"}
+{"level":"error","message":"获取游戏详情错误: Game.findByPk is not a function","stack":"TypeError: Game.findByPk is not a function\n    at findByPk (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:292:81)\n    at queryFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:138:74)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:397:39\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:404:13\n    at mockConstructor (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:148:19)\n    at cacheQuery (eval at _createMockFunction (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:566:31), <anonymous>:3:56)\n    at getGameById (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:292:34)\n    at Object.<anonymous> (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:160:24)\n    at Promise.then.completed (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at _runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)","timestamp":"2025-12-09 23:20:25"}
+{"level":"error","message":"获取游戏详情错误: Game.findByPk is not a function","stack":"TypeError: Game.findByPk is not a function\n    at findByPk (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:292:81)\n    at queryFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:177:74)\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:397:39\n    at C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:404:13\n    at mockConstructor (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:148:19)\n    at cacheQuery (eval at _createMockFunction (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-mock\\build\\index.js:566:31), <anonymous>:3:56)\n    at getGameById (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:292:34)\n    at Object.<anonymous> (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:181:24)\n    at Promise.then.completed (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at _runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)","timestamp":"2025-12-09 23:20:25"}
+{"level":"error","message":"[REDIS INIT ERROR] Cannot read properties of undefined (reading 'createClient')","timestamp":"2025-12-09 23:20:25"}
+{"level":"error","message":"[REDIS] Redis连接失败，详细信息：\n  - 错误代码: 未知\n  - 错误信息: Cannot read properties of undefined (reading 'createClient')\n  - 堆栈跟踪: TypeError: Cannot read properties of undefined (reading 'createClient')\n    at createClient (C:\\项目开发\\游戏商店平台项目开发\\backend\\config\\redis.js:441:25)\n    at Object.initRedis (C:\\项目开发\\游戏商店平台项目开发\\backend\\config\\redis.js:589:1)\n    at Runtime._execModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at Runtime.requireModuleOrMock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1048:21)\n    at Object.require (C:\\项目开发\\游戏商店平台项目开发\\backend\\utils\\cacheUtils.js:1:1)\n    at Runtime._execModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at Runtime._generateMock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1690:34)\n    at Runtime.requireMock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:996:39)\n    at Runtime.requireModuleOrMock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1046:21)\n    at Object.require (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:4:1)\n    at Runtime._execModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at Runtime.requireModuleOrMock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1048:21)\n    at Object.require (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:18:1)\n    at Runtime._execModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at jestAdapter (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:77:13)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runTestInternal (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)\n  - 回退策略: 切换到内存缓存模式","timestamp":"2025-12-09 23:20:25"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:20:30"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:20:30"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:20:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:20:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:20:49"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:20:49"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:20:52"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:20:52"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:20:58"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:20:58"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:21:06"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:21:06"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:21:24"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:21:24"}
+{"level":"error","message":"获取游戏列表错误: Cannot read properties of undefined (reading 'count')","stack":"TypeError: Cannot read properties of undefined (reading 'count')\n    at count (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:223:40)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at Object.<anonymous> (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:90:7)","timestamp":"2025-12-09 23:21:41"}
+{"level":"error","message":"获取游戏列表错误: Cannot read properties of undefined (reading 'count')","stack":"TypeError: Cannot read properties of undefined (reading 'count')\n    at count (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:223:40)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at Object.<anonymous> (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:122:7)","timestamp":"2025-12-09 23:21:41"}
+{"level":"error","message":"[REDIS INIT ERROR] Cannot read properties of undefined (reading 'createClient')","timestamp":"2025-12-09 23:21:41"}
+{"level":"error","message":"[REDIS] Redis连接失败，详细信息：\n  - 错误代码: 未知\n  - 错误信息: Cannot read properties of undefined (reading 'createClient')\n  - 堆栈跟踪: TypeError: Cannot read properties of undefined (reading 'createClient')\n    at createClient (C:\\项目开发\\游戏商店平台项目开发\\backend\\config\\redis.js:441:25)\n    at Object.initRedis (C:\\项目开发\\游戏商店平台项目开发\\backend\\config\\redis.js:589:1)\n    at Runtime._execModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at Runtime.requireModuleOrMock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1048:21)\n    at Object.require (C:\\项目开发\\游戏商店平台项目开发\\backend\\utils\\cacheUtils.js:1:1)\n    at Runtime._execModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at Runtime._generateMock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1690:34)\n    at Runtime.requireMock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:996:39)\n    at Runtime.requireModuleOrMock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1046:21)\n    at Object.require (C:\\项目开发\\游戏商店平台项目开发\\backend\\controllers\\game\\gameListController.js:4:1)\n    at Runtime._execModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at Runtime.requireModuleOrMock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1048:21)\n    at Object.require (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:21:1)\n    at Runtime._execModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at jestAdapter (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:77:13)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runTestInternal (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)\n  - 回退策略: 切换到内存缓存模式","timestamp":"2025-12-09 23:21:41"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:21:56"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:21:56"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:22:11"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:22:11"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:22:12"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:22:12"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:22:15"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:22:15"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:22:20"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:22:20"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:22:28"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:22:28"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:22:46"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:22:46"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:23:19"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:23:19"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:23:46"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:23:46"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:23:48"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:23:48"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:23:51"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:23:51"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:23:56"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:23:56"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:24:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:24:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:24:22"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:24:22"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:24:36"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:24:36"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:24:38"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:24:38"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:24:41"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:24:41"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:24:46"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:24:46"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:24:56"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:24:56"}
+{"level":"error","message":"获取游戏列表错误: Database error","stack":"Error: Database error\n    at Object.<anonymous> (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:146:53)\n    at Promise.then.completed (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at _runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)","timestamp":"2025-12-09 23:25:09"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:25:12"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:25:12"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:25:45"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:25:45"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:26:03"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:26:03"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:26:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:26:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:26:08"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:26:08"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:26:14"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:26:14"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:26:22"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:26:22"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:26:35"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:26:35"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:26:37"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:26:37"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:26:40"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:26:40"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:26:45"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:26:45"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:26:54"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:26:54"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:27:11"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:27:11"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:27:44"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:27:44"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:28:44"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:28:44"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:28:53"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:28:53"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:28:56"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:28:56"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:29:03"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:29:03"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:29:09"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:29:09"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:29:21"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:29:21"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:29:23"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:29:23"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:29:25"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:29:25"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:29:31"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:29:31"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:29:40"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:29:40"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:29:57"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:29:57"}
+{"level":"error","message":"获取游戏列表错误: Database error","stack":"Error: Database error\n    at Object.<anonymous> (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:143:53)\n    at Promise.then.completed (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at _runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)","timestamp":"2025-12-09 23:30:06"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:30:29"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:30:29"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:31:29"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:31:29"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:32:29"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:32:29"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:33:09"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:33:09"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:33:10"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:33:10"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:33:13"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:33:13"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:33:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:33:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:33:27"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:33:27"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:33:45"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:33:45"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:34:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:34:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:35:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:35:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:35:44"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:35:44"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:35:45"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:35:45"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:35:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:35:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:35:53"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:35:53"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:35:56"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:35:57"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:35:57"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:35:59"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:35:59"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:07"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:07"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:08"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:10"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:10"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:13"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:13"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:15"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:15"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:21"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:21"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:23"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:23"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:24"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:24"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:29"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:29"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:43"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:43"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:36:56"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:36:56"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:37:09"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:37:09"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:37:11"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:37:11"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:37:13"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:37:13"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:37:19"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:37:19"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:37:27"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:37:27"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:37:45"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:37:45"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:38:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:38:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:39:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:39:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:39:55"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:39:55"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:39:57"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:39:57"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:00"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:00"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:13"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:13"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:16"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:16"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:20"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:20"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:24"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:24"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:26"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:26"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:28"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:28"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:34"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:34"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:43"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:43"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:45"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:45"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:48"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:48"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:52"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:52"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:55"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:55"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:40:58"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:40:58"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:03"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:03"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:06"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:06"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:08"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:08"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:11"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:11"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:16"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:16"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:22"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:22"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:28"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:28"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:32"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:32"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:35"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:35"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:37"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:37"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:43"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:43"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:49"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:49"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:51"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:51"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:54"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:54"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:41:59"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:41:59"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:07"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:07"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:17"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:17"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:19"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:19"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:23"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:23"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:27"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:27"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:29"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:29"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:33"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:33"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:36"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:36"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:39"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:39"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:42"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:42"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:47"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:47"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:49"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:49"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:52"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:52"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:42:58"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:42:58"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:43:00"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:43:00"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:43:02"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:43:02"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:43:08"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:43:08"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:43:16"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:43:16"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:43:32"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:43:32"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:43:39"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:43:39"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:43:40"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:43:40"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:43:43"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:43:43"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:43:48"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:43:48"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:43:57"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:43:57"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-09 23:44:14"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-09 23:44:14"}
+{"level":"error","message":"获取游戏列表错误: Database error","stack":"Error: Database error\n    at Object.<anonymous> (C:\\项目开发\\游戏商店平台项目开发\\backend\\tests\\unit\\gameListController.test.js:143:53)\n    at Promise.then.completed (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at _runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at _runTestsForDescribeBlock (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\项目开发\\游戏商店平台项目开发\\backend\\node_modules\\jest-runner\\build\\testWorker.js:106:12)","timestamp":"2025-12-09 23:44:38"}
