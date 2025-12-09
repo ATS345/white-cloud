@@ -1,6 +1,7 @@
 import winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import path from 'path';
+import { LOG_LEVEL } from './envConfig.js';
 
 // 创建日志目录
 const logDirectory = path.join(process.cwd(), 'logs');
@@ -59,7 +60,7 @@ const accessTransport = new DailyRotateFile({
 
 // 创建日志记录器
 const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
+  level: LOG_LEVEL,
   format: logFormat,
   transports: [
     fileTransport,

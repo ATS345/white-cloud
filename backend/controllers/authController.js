@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
+import logger from '../config/logger.js'
 
 // 注册新用户
 export const register = async (req, res) => {
@@ -78,7 +79,7 @@ export const register = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('注册错误:', error)
+    logger.error('注册错误:', error)
     res.status(500).json({
       success: false,
       message: '注册过程中发生错误',
@@ -147,7 +148,7 @@ export const login = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('登录错误:', error)
+    logger.error('登录错误:', error)
     res.status(500).json({
       success: false,
       message: '登录过程中发生错误',
@@ -167,7 +168,7 @@ export const getCurrentUser = async (req, res) => {
       user
     })
   } catch (error) {
-    console.error('获取用户信息错误:', error)
+    logger.error('获取用户信息错误:', error)
     res.status(500).json({
       success: false,
       message: '获取用户信息过程中发生错误',
@@ -253,7 +254,7 @@ export const updateUserProfile = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('更新用户信息错误:', error)
+    logger.error('更新用户信息错误:', error)
     res.status(500).json({
       success: false,
       message: '更新用户信息过程中发生错误',
@@ -313,7 +314,7 @@ export const changePassword = async (req, res) => {
       message: '密码修改成功'
     })
   } catch (error) {
-    console.error('修改密码错误:', error)
+    logger.error('修改密码错误:', error)
     res.status(500).json({
       success: false,
       message: '修改密码过程中发生错误',

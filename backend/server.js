@@ -1,14 +1,13 @@
 import express from 'express'
-import dotenv from 'dotenv'
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import sequelize from './config/database.js'
 import logger from './config/logger.js'
 import redisClient from './config/redis.js'
-
-// 加载环境变量
-dotenv.config()
+import { PORT, CORS_ORIGIN, NODE_ENV } from './config/envConfig.js'
+import swaggerUi from 'swagger-ui-express'
+import swaggerSpec from './config/swagger.js'
 
 // 导入模型和同步函数
 import { syncModels } from './models/index.js'
@@ -22,6 +21,10 @@ import reviewRoutes from './routes/reviewRoutes.js'
 import gameLibraryRoutes from './routes/gameLibraryRoutes.js'
 import developerRoutes from './routes/developerRoutes.js'
 
+// 导入错误处理中间件
+import errorHandler from './middleware/errorHandler.js'
+import { NotFoundError } from './utils/errors.js'
+
 // 初始化Express应用
 const app = express()
 
@@ -31,14 +34,14 @@ app.use(helmet())
 
 // CORS中间件
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  origin: CORS_ORIGIN,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
 }))
 
 // 日志中间件
-app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'))
+app.use(morgan(NODE_ENV === 'development' ? 'dev' : 'combined'))
 
 // 解析请求体
 app.use(express.json({ limit: '10mb' }))
@@ -54,6 +57,9 @@ app.get('/api/v1/health', (req, res) => {
   })
 })
 
+// Swagger API文档路由
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+
 // 注册API路由
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/games', gameRoutes)
@@ -63,33 +69,13 @@ app.use('/api/v1/reviews', reviewRoutes)
 app.use('/api/v1/library', gameLibraryRoutes)
 app.use('/api/v1/developer', developerRoutes)
 
-// 处理404错误
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: '请求的资源不存在',
-    path: req.originalUrl
-  })
+// 处理404错误 - 抛出NotFoundError，由全局错误处理中间件处理
+app.use((req, res, next) => {
+  next(new NotFoundError(`请求的资源不存在: ${req.originalUrl}`, 'RESOURCE_NOT_FOUND'))
 })
 
 // 全局错误处理中间件
-app.use((err, req, res, next) => {
-  logger.error('全局错误:', err)
-  
-  // 设置默认状态码
-  const statusCode = err.statusCode || 500
-  
-  // 返回错误响应
-  res.status(statusCode).json({
-    success: false,
-    message: err.message || '服务器内部错误',
-    // 仅在开发环境返回错误堆栈
-    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
-  })
-})
-
-// 启动服务器
-const PORT = process.env.PORT || 5000
+app.use(errorHandler)
 
 // 启动服务器和初始化数据库
 (async () => {
@@ -107,7 +93,7 @@ const PORT = process.env.PORT || 5000
       console.log(`\n🚀 服务器启动成功！`)
       console.log(`📡 服务器地址: http://localhost:${PORT}`)
       console.log(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`)
-      console.log(`🔧 环境: ${process.env.NODE_ENV}`)
+      console.log(`🔧 环境: ${NODE_ENV}`)
       console.log(`\n按 Ctrl+C 停止服务器`)
     })
     

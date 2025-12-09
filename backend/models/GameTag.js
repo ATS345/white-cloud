@@ -17,7 +17,11 @@ const GameTag = sequelize.define('GameTag', {
 }, {
   // 模型配置
   tableName: 'game_tags',
-  timestamps: false // 标签表不需要时间戳
+  timestamps: false, // 标签表不需要时间戳
+  indexes: [
+    // 名称索引，用于搜索
+    { fields: ['name'], name: 'idx_game_tags_name' }
+  ]
 })
 
 // 定义模型之间的关联

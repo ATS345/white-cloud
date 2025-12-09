@@ -8,7 +8,8 @@ import Order from '../models/Order.js'
 import OrderItem from '../models/OrderItem.js'
 import DeveloperFinance from '../models/DeveloperFinance.js'
 import WithdrawalRequest from '../models/WithdrawalRequest.js'
-import { Op } from 'sequelize'
+import { Op, fn, col } from 'sequelize'
+import logger from '../config/logger.js'
 
 // 开发者注册
 export const registerDeveloper = async (req, res) => {
@@ -56,7 +57,7 @@ export const registerDeveloper = async (req, res) => {
       data: developer
     })
   } catch (error) {
-    console.error('注册开发者错误:', error)
+    logger.error('注册开发者错误:', error)
     return res.status(500).json({
       success: false,
       message: '注册开发者过程中发生错误',
@@ -88,7 +89,7 @@ export const getDeveloperInfo = async (req, res) => {
       data: developer
     })
   } catch (error) {
-    console.error('获取开发者信息错误:', error)
+    logger.error('获取开发者信息错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取开发者信息过程中发生错误',
@@ -134,7 +135,7 @@ export const updateDeveloperInfo = async (req, res) => {
       data: developer
     })
   } catch (error) {
-    console.error('更新开发者信息错误:', error)
+    logger.error('更新开发者信息错误:', error)
     return res.status(500).json({
       success: false,
       message: '更新开发者信息过程中发生错误',
@@ -205,7 +206,7 @@ export const getDeveloperGames = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取开发者游戏列表错误:', error)
+    logger.error('获取开发者游戏列表错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取开发者游戏列表过程中发生错误',
@@ -243,7 +244,7 @@ export const getGameSalesStats = async (req, res) => {
 
     if (startDate && endDate) {
       whereClause.created_at = {
-        [sequelize.Op.between]: [startDate, endDate]
+        [Op.between]: [startDate, endDate]
       }
     }
 
@@ -263,20 +264,20 @@ export const getGameSalesStats = async (req, res) => {
         }
       ],
       attributes: [
-        [sequelize.fn('COUNT', sequelize.col('id')), 'total_sales'],
-        [sequelize.fn('SUM', sequelize.col('price')), 'total_revenue'],
-        [sequelize.fn('DATE', sequelize.col('Order.created_at')), 'date']
+        [fn('COUNT', col('id')), 'total_sales'],
+        [fn('SUM', col('price')), 'total_revenue'],
+        [fn('DATE', col('Order.created_at')), 'date']
       ],
       group: ['date', 'game.id', 'game.title', 'order.id', 'order.created_at', 'order.status'],
-      order: [[sequelize.fn('DATE', sequelize.col('Order.created_at')), 'asc']]
+      order: [[fn('DATE', col('Order.created_at')), 'asc']]
     })
 
     // 获取总销售额和总销量
     const totalStats = await OrderItem.findOne({
       where: whereClause,
       attributes: [
-        [sequelize.fn('COUNT', sequelize.col('id')), 'total_sales'],
-        [sequelize.fn('SUM', sequelize.col('price')), 'total_revenue']
+        [fn('COUNT', col('id')), 'total_sales'],
+        [fn('SUM', col('price')), 'total_revenue']
       ]
     })
 
@@ -292,7 +293,7 @@ export const getGameSalesStats = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取游戏销售数据统计错误:', error)
+    logger.error('获取游戏销售数据统计错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取游戏销售数据统计过程中发生错误',
@@ -332,7 +333,7 @@ export const getDeveloperEarnings = async (req, res) => {
         status: 'processed'
       },
       attributes: [
-        [sequelize.fn('SUM', sequelize.col('developer_earnings')), 'total_earnings']
+        [fn('SUM', col('developer_earnings')), 'total_earnings']
       ]
     })
 
@@ -345,7 +346,7 @@ export const getDeveloperEarnings = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取开发者收益分析错误:', error)
+    logger.error('获取开发者收益分析错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取开发者收益分析过程中发生错误',
@@ -387,7 +388,7 @@ export const createWithdrawalRequest = async (req, res) => {
         status: 'processed'
       },
       attributes: [
-        [sequelize.fn('SUM', sequelize.col('developer_earnings')), 'total_earnings']
+        [fn('SUM', col('developer_earnings')), 'total_earnings']
       ]
     })
 
@@ -413,7 +414,7 @@ export const createWithdrawalRequest = async (req, res) => {
       data: withdrawalRequest
     })
   } catch (error) {
-    console.error('创建提现请求错误:', error)
+    logger.error('创建提现请求错误:', error)
     return res.status(500).json({
       success: false,
       message: '创建提现请求过程中发生错误',
@@ -471,7 +472,7 @@ export const getWithdrawalRequests = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取提现请求列表错误:', error)
+    logger.error('获取提现请求列表错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取提现请求列表过程中发生错误',
@@ -509,7 +510,7 @@ export const getGameAnalytics = async (req, res) => {
 
     if (startDate && endDate) {
       whereClause.created_at = {
-        [sequelize.Op.between]: [startDate, endDate]
+        [Op.between]: [startDate, endDate]
       }
     }
 
@@ -523,35 +524,35 @@ export const getGameAnalytics = async (req, res) => {
     switch (metric) {
       case 'sales':
         attributes.push(
-          [sequelize.fn('COUNT', sequelize.col('id')), 'value']
+          [fn('COUNT', col('id')), 'value']
         )
         break
       case 'revenue':
         attributes.push(
-          [sequelize.fn('SUM', sequelize.col('price')), 'value']
+          [fn('SUM', col('price')), 'value']
         )
         break
       case 'downloads':
         // 这里需要根据实际的下载记录模型进行调整
         attributes.push(
-          [sequelize.fn('COUNT', sequelize.col('id')), 'value']
+          [fn('COUNT', col('id')), 'value']
         )
         break
       case 'active_users':
         // 这里需要根据实际的用户活动记录模型进行调整
         attributes.push(
-          [sequelize.fn('COUNT', sequelize.fn('DISTINCT', sequelize.col('Order.user_id'))), 'value']
+          [fn('COUNT', fn('DISTINCT', col('Order.user_id'))), 'value']
         )
         break
       case 'rating':
         // 这里需要根据实际的评价记录模型进行调整
         attributes.push(
-          [sequelize.fn('AVG', sequelize.col('rating')), 'value']
+          [fn('AVG', col('rating')), 'value']
         )
         break
       default:
         attributes.push(
-          [sequelize.fn('COUNT', sequelize.col('id')), 'value']
+          [fn('COUNT', col('id')), 'value']
         )
     }
 
@@ -572,7 +573,7 @@ export const getGameAnalytics = async (req, res) => {
       ],
       attributes,
       group: groupBy,
-      order: [[sequelize.fn('DATE', sequelize.col('Order.created_at')), 'asc']]
+      order: [[fn('DATE', col('Order.created_at')), 'asc']]
     })
 
     // 格式化数据
@@ -590,7 +591,7 @@ export const getGameAnalytics = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取游戏数据分析错误:', error)
+    logger.error('获取游戏数据分析错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取游戏数据分析过程中发生错误',
@@ -630,7 +631,7 @@ export const getGameComparison = async (req, res) => {
 
     if (startDate && endDate) {
       whereClause.created_at = {
-        [sequelize.Op.between]: [startDate, endDate]
+        [Op.between]: [startDate, endDate]
       }
     }
 
@@ -652,12 +653,12 @@ export const getGameComparison = async (req, res) => {
       attributes: [
         'game_id',
         [sequelize.col('game.title'), 'game_title'],
-        [sequelize.fn('COUNT', sequelize.col('id')), 'total_sales'],
-        [sequelize.fn('SUM', sequelize.col('price')), 'total_revenue'],
-        [sequelize.fn('AVG', sequelize.col('price')), 'avg_price']
+        [fn('COUNT', col('id')), 'total_sales'],
+        [fn('SUM', col('price')), 'total_revenue'],
+        [fn('AVG', col('price')), 'avg_price']
       ],
       group: ['game_id', 'game.title'],
-      order: [[sequelize.fn('SUM', sequelize.col('price')), 'desc']]
+      order: [[fn('SUM', col('price')), 'desc']]
     })
 
     return res.status(200).json({
@@ -668,7 +669,7 @@ export const getGameComparison = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取游戏对比分析错误:', error)
+    logger.error('获取游戏对比分析错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取游戏对比分析过程中发生错误',
@@ -710,7 +711,7 @@ export const getUserBehaviorAnalytics = async (req, res) => {
       data: behaviorData
     })
   } catch (error) {
-    console.error('获取用户行为分析错误:', error)
+    logger.error('获取用户行为分析错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取用户行为分析过程中发生错误',

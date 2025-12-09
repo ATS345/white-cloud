@@ -3,6 +3,7 @@ import Order from '../models/Order.js'
 import OrderItem from '../models/OrderItem.js'
 import Game from '../models/Game.js'
 import GameLibrary from '../models/GameLibrary.js'
+import logger from '../config/logger.js'
 
 // 初始化Stripe客户端
 const stripeClient = stripe(process.env.STRIPE_SECRET_KEY)
@@ -91,7 +92,7 @@ export const createPaymentIntent = async (req, res) => {
       games: games
     })
   } catch (error) {
-    console.error('创建支付意图错误:', error)
+    logger.error('创建支付意图错误:', error)
     
     return res.status(500).json({
       success: false,
@@ -183,7 +184,7 @@ export const confirmPayment = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('确认支付错误:', error)
+    logger.error('确认支付错误:', error)
     
     return res.status(500).json({
       success: false,
@@ -240,7 +241,7 @@ export const getOrderHistory = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取订单历史错误:', error)
+    logger.error('获取订单历史错误:', error)
     
     return res.status(500).json({
       success: false,
@@ -290,7 +291,7 @@ export const getOrderDetail = async (req, res) => {
       data: order
     })
   } catch (error) {
-    console.error('获取订单详情错误:', error)
+    logger.error('获取订单详情错误:', error)
     
     return res.status(500).json({
       success: false,
@@ -314,7 +315,7 @@ export const handleStripeWebhook = async (req, res) => {
         process.env.STRIPE_WEBHOOK_SECRET
       )
     } catch (err) {
-      console.error('Webhook签名验证失败:', err.message)
+      logger.error('Webhook签名验证失败:', err.message)
       return res.status(400).send(`Webhook Error: ${err.message}`)
     }
 
@@ -381,7 +382,7 @@ export const handleStripeWebhook = async (req, res) => {
 
     return res.status(200).json({ received: true })
   } catch (error) {
-    console.error('处理Stripe Webhook错误:', error)
+    logger.error('处理Stripe Webhook错误:', error)
     return res.status(500).json({
       success: false,
       message: '处理Webhook失败'

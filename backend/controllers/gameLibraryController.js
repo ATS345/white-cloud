@@ -1,6 +1,7 @@
 import GameLibrary from '../models/GameLibrary.js'
 import Game from '../models/Game.js'
-import { Op } from 'sequelize'
+import { Op, fn, col } from 'sequelize'
+import logger from '../config/logger.js'
 
 // 获取用户游戏库
 export const getUserGameLibrary = async (req, res) => {
@@ -44,7 +45,7 @@ export const getUserGameLibrary = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取用户游戏库错误:', error)
+    logger.error('获取用户游戏库错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取用户游戏库失败',
@@ -92,7 +93,7 @@ export const updateGameLibrary = async (req, res) => {
       data: gameLibrary
     })
   } catch (error) {
-    console.error('更新游戏库信息错误:', error)
+    logger.error('更新游戏库信息错误:', error)
     return res.status(500).json({
       success: false,
       message: '更新游戏库信息失败',
@@ -110,8 +111,8 @@ export const getGameLibraryStats = async (req, res) => {
     const stats = await GameLibrary.findOne({
       where: { user_id: userId },
       attributes: [
-        [sequelize.fn('COUNT', sequelize.col('id')), 'total_games'],
-        [sequelize.fn('SUM', sequelize.col('playtime')), 'total_playtime']
+        [fn('COUNT', col('id')), 'total_games'],
+        [fn('SUM', col('playtime')), 'total_playtime']
       ]
     })
 
@@ -139,7 +140,7 @@ export const getGameLibraryStats = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取游戏库统计信息错误:', error)
+    logger.error('获取游戏库统计信息错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取游戏库统计信息失败',
@@ -170,7 +171,7 @@ export const checkGameOwnership = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('检查游戏所有权错误:', error)
+    logger.error('检查游戏所有权错误:', error)
     return res.status(500).json({
       success: false,
       message: '检查游戏所有权失败',
@@ -220,7 +221,7 @@ export const updatePlaytime = async (req, res) => {
       data: gameLibrary
     })
   } catch (error) {
-    console.error('更新游玩时间错误:', error)
+    logger.error('更新游玩时间错误:', error)
     return res.status(500).json({
       success: false,
       message: '更新游玩时间失败',

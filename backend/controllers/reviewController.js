@@ -3,6 +3,10 @@ import ReviewReply from '../models/ReviewReply.js'
 import Game from '../models/Game.js'
 import GameLibrary from '../models/GameLibrary.js'
 import { Op } from 'sequelize'
+import models from '../models/index.js'
+import logger from '../config/logger.js'
+
+const { sequelize } = models
 
 // 创建评价
 export const createReview = async (req, res) => {
@@ -84,7 +88,7 @@ export const createReview = async (req, res) => {
       data: newReview
     })
   } catch (error) {
-    console.error('创建评价错误:', error)
+    logger.error('创建评价错误:', error)
     return res.status(500).json({
       success: false,
       message: '创建评价失败',
@@ -165,7 +169,7 @@ export const getGameReviews = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取游戏评价列表错误:', error)
+    logger.error('获取游戏评价列表错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取游戏评价列表失败',
@@ -226,7 +230,7 @@ export const updateReview = async (req, res) => {
       data: updatedReview
     })
   } catch (error) {
-    console.error('更新评价错误:', error)
+    logger.error('更新评价错误:', error)
     return res.status(500).json({
       success: false,
       message: '更新评价失败',
@@ -274,7 +278,7 @@ export const deleteReview = async (req, res) => {
       message: '评价删除成功'
     })
   } catch (error) {
-    console.error('删除评价错误:', error)
+    logger.error('删除评价错误:', error)
     return res.status(500).json({
       success: false,
       message: '删除评价失败',
@@ -325,7 +329,7 @@ export const createReviewReply = async (req, res) => {
       data: newReply
     })
   } catch (error) {
-    console.error('创建回复错误:', error)
+    logger.error('创建回复错误:', error)
     return res.status(500).json({
       success: false,
       message: '创建回复失败',
@@ -367,7 +371,7 @@ export const deleteReviewReply = async (req, res) => {
       message: '回复删除成功'
     })
   } catch (error) {
-    console.error('删除回复错误:', error)
+    logger.error('删除回复错误:', error)
     return res.status(500).json({
       success: false,
       message: '删除回复失败',
@@ -415,7 +419,7 @@ export const getUserReviews = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('获取用户评价历史错误:', error)
+    logger.error('获取用户评价历史错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取用户评价历史失败',
@@ -449,7 +453,7 @@ const updateGameRating = async (gameId) => {
       }
     )
   } catch (error) {
-    console.error('更新游戏评分错误:', error)
+    logger.error('更新游戏评分错误:', error)
     throw error
   }
 }

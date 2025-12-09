@@ -22,7 +22,11 @@ const GameCategory = sequelize.define('GameCategory', {
 }, {
   // 模型配置
   tableName: 'game_categories',
-  timestamps: false // 分类表不需要时间戳
+  timestamps: false, // 分类表不需要时间戳
+  indexes: [
+    // 名称索引，用于搜索
+    { fields: ['name'], name: 'idx_game_categories_name' }
+  ]
 })
 
 // 定义模型之间的关联

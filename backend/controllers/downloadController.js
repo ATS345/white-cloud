@@ -69,7 +69,7 @@ export const generateDownloadLink = async (req, res) => {
       data: downloadLink
     })
   } catch (error) {
-    console.error('生成下载链接错误:', error)
+    logger.error('生成下载链接错误:', error)
     return res.status(500).json({
       success: false,
       message: '生成下载链接失败',
@@ -141,7 +141,7 @@ export const getVersionDownloadLink = async (req, res) => {
       data: downloadLink
     })
   } catch (error) {
-    console.error('生成特定版本下载链接错误:', error)
+    logger.error('生成特定版本下载链接错误:', error)
     return res.status(500).json({
       success: false,
       message: '生成下载链接失败',
@@ -198,7 +198,7 @@ export const getGameVersions = async (req, res) => {
       data: versions
     })
   } catch (error) {
-    console.error('获取游戏版本列表错误:', error)
+    logger.error('获取游戏版本列表错误:', error)
     return res.status(500).json({
       success: false,
       message: '获取游戏版本列表失败',
@@ -259,7 +259,7 @@ export const updatePlaytime = async (req, res) => {
       data: gameLibrary
     })
   } catch (error) {
-    console.error('更新游玩时间错误:', error)
+    logger.error('更新游玩时间错误:', error)
     return res.status(500).json({
       success: false,
       message: '更新游玩时间失败',
@@ -330,7 +330,7 @@ export const checkGameUpdate = async (req, res) => {
       }
     })
   } catch (error) {
-    console.error('检查游戏更新错误:', error)
+    logger.error('检查游戏更新错误:', error)
     return res.status(500).json({
       success: false,
       message: '检查更新失败',

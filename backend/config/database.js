@@ -1,11 +1,16 @@
 import { Sequelize } from 'sequelize'
-import dotenv from 'dotenv'
 import fs from 'fs'
 import path from 'path'
 import logger from './logger.js'
-
-// 加载环境变量
-dotenv.config()
+import { 
+  DB_DIALECT, 
+  DB_NAME, 
+  DB_HOST, 
+  DB_PORT, 
+  DB_USER, 
+  DB_PASSWORD, 
+  NODE_ENV 
+} from './envConfig.js'
 
 // 确保database目录存在
 const dbDirectory = path.join(process.cwd(), 'database')
@@ -17,10 +22,9 @@ if (!fs.existsSync(dbDirectory)) {
 let sequelize;
 
 try {
-  const dialect = process.env.DB_DIALECT || 'sqlite';
   const sequelizeConfig = {
-    dialect: dialect,
-    logging: process.env.NODE_ENV === 'development' ? console.log : false,
+    dialect: DB_DIALECT,
+    logging: NODE_ENV === 'development' ? console.log : false,
     pool: {
       max: 5,
       min: 0,
@@ -30,7 +34,7 @@ try {
   };
 
   // SQLite配置
-  if (dialect === 'sqlite') {
+  if (DB_DIALECT === 'sqlite') {
     // 使用内存数据库，避免文件系统和构建工具问题
     sequelizeConfig.dialectOptions = {
       filename: ':memory:'
@@ -38,11 +42,11 @@ try {
   } else {
     // 非SQLite数据库配置
     sequelizeConfig.timezone = '+08:00';
-    sequelizeConfig.host = process.env.DB_HOST;
-    sequelizeConfig.port = process.env.DB_PORT;
-    sequelizeConfig.database = process.env.DB_NAME;
-    sequelizeConfig.username = process.env.DB_USER;
-    sequelizeConfig.password = process.env.DB_PASSWORD;
+    sequelizeConfig.host = DB_HOST;
+    sequelizeConfig.port = DB_PORT;
+    sequelizeConfig.database = DB_NAME;
+    sequelizeConfig.username = DB_USER;
+    sequelizeConfig.password = DB_PASSWORD;
   }
 
   sequelize = new Sequelize(sequelizeConfig);
