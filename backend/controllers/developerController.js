@@ -131,7 +131,36 @@ export const registerDeveloper = async (req, res) => {
   }
 };
 
-// 获取开发者信息
+/**
+ * @swagger
+ * /api/v1/developers/me:
+ *   get:
+ *     summary: 获取开发者信息
+ *     description: 获取当前登录开发者的详细信息
+ *     tags: [Developer]
+ *     security:
+ *       - jwt: []
+ *     responses:
+ *       200:
+ *         description: 成功获取开发者信息
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: 获取开发者信息成功
+ *                 data:
+ *                   $ref: '#/components/schemas/Developer'
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 export const getDeveloperInfo = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -163,7 +192,56 @@ export const getDeveloperInfo = async (req, res) => {
   }
 };
 
-// 更新开发者信息
+/**
+ * @swagger
+ * /api/v1/developers/me:
+ *   put:
+ *     summary: 更新开发者信息
+ *     description: 更新当前登录开发者的个人信息
+ *     tags: [Developer]
+ *     security:
+ *       - jwt: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               company_name:
+ *                 type: string
+ *                 description: 公司名称
+ *               contact_email:
+ *                 type: string
+ *                 format: email
+ *                 description: 联系邮箱
+ *               website:
+ *                 type: string
+ *                 description: 公司网站
+ *               bio:
+ *                 type: string
+ *                 description: 公司简介
+ *     responses:
+ *       200:
+ *         description: 开发者信息更新成功
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: 开发者信息更新成功
+ *                 data:
+ *                   $ref: '#/components/schemas/Developer'
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 export const updateDeveloperInfo = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -209,7 +287,70 @@ export const updateDeveloperInfo = async (req, res) => {
   }
 };
 
-// 获取开发者游戏列表
+/**
+ * @swagger
+ * /api/v1/developers/games:
+ *   get:
+ *     summary: 获取开发者游戏列表
+ *     description: 获取当前开发者发布的所有游戏
+ *     tags: [Developer]
+ *     security:
+ *       - jwt: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: 页码
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: 每页数量
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *         description: 游戏状态（可选）
+ *     responses:
+ *       200:
+ *         description: 成功获取开发者游戏列表
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: 获取开发者游戏列表成功
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     games:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/Game'
+ *                     pagination:
+ *                       type: object
+ *                       properties:
+ *                         currentPage:
+ *                           type: integer
+ *                         pageSize:
+ *                           type: integer
+ *                         totalItems:
+ *                           type: integer
+ *                         totalPages:
+ *                           type: integer
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 export const getDeveloperGames = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -280,7 +421,78 @@ export const getDeveloperGames = async (req, res) => {
   }
 };
 
-// 获取游戏销售数据统计
+/**
+ * @swagger
+ * /api/v1/developers/games/sales-stats:
+ *   get:
+ *     summary: 获取游戏销售数据统计
+ *     description: 获取当前开发者游戏的销售数据统计
+ *     tags: [Developer]
+ *     security:
+ *       - jwt: []
+ *     parameters:
+ *       - in: query
+ *         name: gameId
+ *         schema:
+ *           type: integer
+ *         description: 游戏ID（可选，用于获取单个游戏的销售数据）
+ *       - in: query
+ *         name: startDate
+ *         schema:
+ *           type: string
+ *           format: date-time
+ *         description: 开始日期（可选）
+ *       - in: query
+ *         name: endDate
+ *         schema:
+ *           type: string
+ *           format: date-time
+ *         description: 结束日期（可选）
+ *     responses:
+ *       200:
+ *         description: 成功获取游戏销售数据统计
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: 获取游戏销售数据统计成功
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     daily_stats:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           total_sales:
+ *                             type: integer
+ *                             description: 总销量
+ *                           total_revenue:
+ *                             type: number
+ *                             description: 总销售额
+ *                           date:
+ *                             type: string
+ *                             description: 日期
+ *                     total_stats:
+ *                       type: object
+ *                       properties:
+ *                         total_sales:
+ *                           type: integer
+ *                           description: 总销量
+ *                         total_revenue:
+ *                           type: number
+ *                           description: 总销售额
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 export const getGameSalesStats = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -367,7 +579,70 @@ export const getGameSalesStats = async (req, res) => {
   }
 };
 
-// 获取开发者收益分析
+/**
+ * @swagger
+ * /api/v1/developers/earnings:
+ *   get:
+ *     summary: 获取开发者收益分析
+ *     description: 获取当前开发者的收益分析数据
+ *     tags: [Developer]
+ *     security:
+ *       - jwt: []
+ *     parameters:
+ *       - in: query
+ *         name: period
+ *         schema:
+ *           type: string
+ *           default: monthly
+ *         description: 收益周期（daily, weekly, monthly等）
+ *     responses:
+ *       200:
+ *         description: 成功获取开发者收益分析
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: 获取开发者收益分析成功
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     earnings:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: integer
+ *                           developer_id:
+ *                             type: integer
+ *                           period_start:
+ *                             type: string
+ *                             format: date-time
+ *                           period_end:
+ *                             type: string
+ *                             format: date-time
+ *                           total_revenue:
+ *                             type: number
+ *                           platform_fee:
+ *                             type: number
+ *                           developer_earnings:
+ *                             type: number
+ *                           status:
+ *                             type: string
+ *                     current_balance:
+ *                       type: number
+ *                       description: 当前可用余额
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 export const getDeveloperEarnings = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -420,7 +695,74 @@ export const getDeveloperEarnings = async (req, res) => {
   }
 };
 
-// 创建提现请求
+/**
+ * @swagger
+ * /api/v1/developers/withdrawals:
+ *   post:
+ *     summary: 创建提现请求
+ *     description: 创建开发者提现请求，需要有足够的可用余额
+ *     tags: [Developer]
+ *     security:
+ *       - jwt: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               amount:
+ *                 type: number
+ *                 description: 提现金额
+ *               payment_method:
+ *                 type: string
+ *                 description: 支付方式
+ *               payment_account:
+ *                 type: string
+ *                 description: 支付账户
+ *             required:
+ *               - amount
+ *               - payment_method
+ *               - payment_account
+ *     responses:
+ *       201:
+ *         description: 提现请求创建成功
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: 提现请求创建成功
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     developer_id:
+ *                       type: integer
+ *                     amount:
+ *                       type: number
+ *                     payment_method:
+ *                       type: string
+ *                     payment_account:
+ *                       type: string
+ *                     status:
+ *                       type: string
+ *                     created_at:
+ *                       type: string
+ *                       format: date-time
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 export const createWithdrawalRequest = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -488,7 +830,89 @@ export const createWithdrawalRequest = async (req, res) => {
   }
 };
 
-// 获取提现请求列表
+/**
+ * @swagger
+ * /api/v1/developers/withdrawals:
+ *   get:
+ *     summary: 获取提现请求列表
+ *     description: 获取开发者的提现请求列表
+ *     tags: [Developer]
+ *     security:
+ *       - jwt: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: 页码
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: 每页数量
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *         description: 提现请求状态（可选）
+ *     responses:
+ *       200:
+ *         description: 成功获取提现请求列表
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: 获取提现请求列表成功
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     requests:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: integer
+ *                           developer_id:
+ *                             type: integer
+ *                           amount:
+ *                             type: number
+ *                           payment_method:
+ *                             type: string
+ *                           payment_account:
+ *                             type: string
+ *                           status:
+ *                             type: string
+ *                           created_at:
+ *                             type: string
+ *                             format: date-time
+ *                           updated_at:
+ *                             type: string
+ *                             format: date-time
+ *                     pagination:
+ *                       type: object
+ *                       properties:
+ *                         currentPage:
+ *                           type: integer
+ *                         pageSize:
+ *                           type: integer
+ *                         totalItems:
+ *                           type: integer
+ *                         totalPages:
+ *                           type: integer
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 export const getWithdrawalRequests = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -546,7 +970,75 @@ export const getWithdrawalRequests = async (req, res) => {
   }
 };
 
-// 获取游戏数据分析
+/**
+ * @swagger
+ * /api/v1/developers/games/analytics:
+ *   get:
+ *     summary: 获取游戏数据分析
+ *     description: 获取游戏数据分析，支持不同指标类型
+ *     tags: [Developer]
+ *     security:
+ *       - jwt: []
+ *     parameters:
+ *       - in: query
+ *         name: gameId
+ *         schema:
+ *           type: integer
+ *         description: 游戏ID（可选）
+ *       - in: query
+ *         name: startDate
+ *         schema:
+ *           type: string
+ *           format: date-time
+ *         description: 开始日期（可选）
+ *       - in: query
+ *         name: endDate
+ *         schema:
+ *           type: string
+ *           format: date-time
+ *         description: 结束日期（可选）
+ *       - in: query
+ *         name: metric
+ *         schema:
+ *           type: string
+ *           description: 指标类型（sales, revenue, downloads, active_users, rating）
+ *           default: sales
+ *     responses:
+ *       200:
+ *         description: 成功获取游戏数据分析
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: 获取游戏数据分析成功
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     metric:
+ *                       type: string
+ *                       description: 指标类型
+ *                     data:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           date:
+ *                             type: string
+ *                             description: 日期
+ *                           value:
+ *                             type: number
+ *                             description: 指标值
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 export const getGameAnalytics = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -667,7 +1159,75 @@ export const getGameAnalytics = async (req, res) => {
   }
 };
 
-// 获取游戏对比分析
+/**
+ * @swagger
+ * /api/v1/developers/games/comparison:
+ *   get:
+ *     summary: 获取游戏对比分析
+ *     description: 获取多个游戏之间的对比分析数据
+ *     tags: [Developer]
+ *     security:
+ *       - jwt: []
+ *     parameters:
+ *       - in: query
+ *         name: gameIds
+ *         schema:
+ *           type: array
+ *           items:
+ *             type: integer
+ *         description: 游戏ID列表（可选）
+ *       - in: query
+ *         name: startDate
+ *         schema:
+ *           type: string
+ *           format: date-time
+ *         description: 开始日期（可选）
+ *       - in: query
+ *         name: endDate
+ *         schema:
+ *           type: string
+ *           format: date-time
+ *         description: 结束日期（可选）
+ *     responses:
+ *       200:
+ *         description: 成功获取游戏对比分析
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: 获取游戏对比分析成功
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     comparison:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           game_id:
+ *                             type: integer
+ *                           game_title:
+ *                             type: string
+ *                           total_sales:
+ *                             type: integer
+ *                             description: 总销量
+ *                           total_revenue:
+ *                             type: number
+ *                             description: 总销售额
+ *                           avg_price:
+ *                             type: number
+ *                             description: 平均价格
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 export const getGameComparison = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -745,7 +1305,67 @@ export const getGameComparison = async (req, res) => {
   }
 };
 
-// 获取用户行为分析
+/**
+ * @swagger
+ * /api/v1/developers/games/user-behavior:
+ *   get:
+ *     summary: 获取用户行为分析
+ *     description: 获取游戏的用户行为分析数据
+ *     tags: [Developer]
+ *     security:
+ *       - jwt: []
+ *     parameters:
+ *       - in: query
+ *         name: gameId
+ *         schema:
+ *           type: integer
+ *         description: 游戏ID（可选）
+ *       - in: query
+ *         name: startDate
+ *         schema:
+ *           type: string
+ *           format: date-time
+ *         description: 开始日期（可选）
+ *       - in: query
+ *         name: endDate
+ *         schema:
+ *           type: string
+ *           format: date-time
+ *         description: 结束日期（可选）
+ *     responses:
+ *       200:
+ *         description: 成功获取用户行为分析
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: 获取用户行为分析成功
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     daily_active_users:
+ *                       type: array
+ *                       description: 日活跃用户数据
+ *                     monthly_active_users:
+ *                       type: array
+ *                       description: 月活跃用户数据
+ *                     user_retention:
+ *                       type: array
+ *                       description: 用户留存数据
+ *                     user_acquisition:
+ *                       type: array
+ *                       description: 用户获取数据
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 export const getUserBehaviorAnalytics = async (req, res) => {
   try {
     const userId = req.user.id;

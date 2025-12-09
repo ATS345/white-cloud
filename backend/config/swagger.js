@@ -126,6 +126,80 @@ const swaggerOptions = {
           },
           required: ['name'],
         },
+        GameSystemRequirement: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer',
+              description: '系统需求ID',
+            },
+            game_id: {
+              type: 'integer',
+              description: '游戏ID',
+            },
+            os: {
+              type: 'string',
+              description: '操作系统',
+            },
+            processor: {
+              type: 'string',
+              description: '处理器',
+            },
+            memory: {
+              type: 'string',
+              description: '内存',
+            },
+            graphics: {
+              type: 'string',
+              description: '显卡',
+            },
+            storage: {
+              type: 'string',
+              description: '存储',
+            },
+            type: {
+              type: 'string',
+              description: '需求类型（minimum或recommended）',
+            },
+          },
+          required: ['game_id', 'os', 'processor', 'memory', 'graphics', 'storage', 'type'],
+        },
+        Developer: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer',
+              description: '开发者ID',
+            },
+            user_id: {
+              type: 'integer',
+              description: '用户ID',
+            },
+            company_name: {
+              type: 'string',
+              description: '公司名称',
+            },
+            contact_email: {
+              type: 'string',
+              format: 'email',
+              description: '联系邮箱',
+            },
+            website: {
+              type: 'string',
+              description: '公司网站',
+            },
+            bio: {
+              type: 'string',
+              description: '公司简介',
+            },
+            created_at: {
+              type: 'string',
+              format: 'date-time',
+              description: '创建时间',
+            },
+          },
+          required: ['user_id', 'company_name', 'contact_email'],
+        },
         User: {
           type: 'object',
           properties: {

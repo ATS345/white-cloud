@@ -1,0 +1,80 @@
+{"level":"info","message":"[REDIS] 开始初始化Redis连接...","timestamp":"2025-12-10 00:19:05"}
+{"level":"info","message":"[REDIS] 连接配置：\n  - 连接地址: redis://localhost:6379\n  - 连接超时: 10000ms\n  - 最大重试次数: 10\n  - 初始重试延迟: 1000ms\n  - 心跳检查: 30秒\n  - 缓存清理: 10分钟","timestamp":"2025-12-10 00:19:05"}
+{"level":"info","message":"[REDIS] 尝试重连 (0/10)，延迟 1631ms","timestamp":"2025-12-10 00:19:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:19:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:19:05"}
+{"level":"info","message":"数据库连接成功","timestamp":"2025-12-10 00:19:06"}
+{"level":"info","message":"[REDIS] 尝试重连 (1/10)，延迟 NaNms","timestamp":"2025-12-10 00:19:07"}
+{"level":"info","message":"[REDIS] 尝试重连 (1/10)，延迟 3837ms","timestamp":"2025-12-10 00:19:07"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:19:07"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:19:07"}
+{"level":"info","message":"[REDIS] 尝试重连 (2/10)，延迟 NaNms","timestamp":"2025-12-10 00:19:11"}
+{"level":"info","message":"[REDIS] 尝试重连 (2/10)，延迟 4200ms","timestamp":"2025-12-10 00:19:11"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:19:11"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:19:11"}
+{"level":"info","message":"[REDIS] 开始初始化Redis连接...","timestamp":"2025-12-10 00:19:12"}
+{"level":"info","message":"[REDIS] 连接配置：\n  - 连接地址: redis://localhost:6379\n  - 连接超时: 10000ms\n  - 最大重试次数: 10\n  - 初始重试延迟: 1000ms\n  - 心跳检查: 30秒\n  - 缓存清理: 10分钟","timestamp":"2025-12-10 00:19:12"}
+{"level":"info","message":"[REDIS] 尝试重连 (0/10)，延迟 2332ms","timestamp":"2025-12-10 00:19:13"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:19:13"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:19:13"}
+{"level":"info","message":"数据库连接成功","timestamp":"2025-12-10 00:19:13"}
+{"level":"info","message":"[REDIS] 尝试重连 (1/10)，延迟 NaNms","timestamp":"2025-12-10 00:19:15"}
+{"level":"info","message":"[REDIS] 尝试重连 (1/10)，延迟 2908ms","timestamp":"2025-12-10 00:19:15"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:19:15"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:19:15"}
+{"level":"info","message":"[REDIS] 尝试重连 (2/10)，延迟 NaNms","timestamp":"2025-12-10 00:19:18"}
+{"level":"info","message":"[REDIS] 尝试重连 (2/10)，延迟 4363ms","timestamp":"2025-12-10 00:19:18"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:19:18"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:19:18"}
+{"level":"info","message":"[REDIS] 尝试重连 (3/10)，延迟 NaNms","timestamp":"2025-12-10 00:19:22"}
+{"level":"info","message":"[REDIS] 尝试重连 (3/10)，延迟 9609ms","timestamp":"2025-12-10 00:19:22"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:19:22"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:19:22"}
+{"level":"info","message":"[REDIS] 尝试重连 (4/10)，延迟 NaNms","timestamp":"2025-12-10 00:19:32"}
+{"level":"info","message":"[REDIS] 尝试重连 (4/10)，延迟 17049ms","timestamp":"2025-12-10 00:19:32"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:19:32"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:19:32"}
+{"level":"info","message":"[REDIS] 尝试重连 (5/10)，延迟 NaNms","timestamp":"2025-12-10 00:19:49"}
+{"level":"info","message":"[REDIS] 尝试重连 (5/10)，延迟 32270ms","timestamp":"2025-12-10 00:19:49"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:19:49"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:19:49"}
+{"level":"info","message":"[REDIS] 开始初始化Redis连接...","timestamp":"2025-12-10 00:20:18"}
+{"level":"info","message":"[REDIS] 连接配置：\n  - 连接地址: redis://localhost:6379\n  - 连接超时: 10000ms\n  - 最大重试次数: 10\n  - 初始重试延迟: 1000ms\n  - 心跳检查: 30秒\n  - 缓存清理: 10分钟","timestamp":"2025-12-10 00:20:18"}
+{"level":"info","message":"[REDIS] 尝试重连 (0/10)，延迟 2137ms","timestamp":"2025-12-10 00:20:19"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:20:19"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:20:19"}
+{"level":"info","message":"数据库连接成功","timestamp":"2025-12-10 00:20:19"}
+{"level":"info","message":"[REDIS] 尝试重连 (1/10)，延迟 NaNms","timestamp":"2025-12-10 00:20:21"}
+{"level":"info","message":"[REDIS] 尝试重连 (1/10)，延迟 2193ms","timestamp":"2025-12-10 00:20:21"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:20:21"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:20:21"}
+{"level":"info","message":"[REDIS] 尝试重连 (2/10)，延迟 NaNms","timestamp":"2025-12-10 00:20:23"}
+{"level":"info","message":"[REDIS] 尝试重连 (2/10)，延迟 5120ms","timestamp":"2025-12-10 00:20:23"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:20:23"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:20:23"}
+{"level":"info","message":"[REDIS] 开始初始化Redis连接...","timestamp":"2025-12-10 00:20:29"}
+{"level":"info","message":"[REDIS] 连接配置：\n  - 连接地址: redis://localhost:6379\n  - 连接超时: 10000ms\n  - 最大重试次数: 10\n  - 初始重试延迟: 1000ms\n  - 心跳检查: 30秒\n  - 缓存清理: 10分钟","timestamp":"2025-12-10 00:20:29"}
+{"level":"info","message":"[REDIS] 尝试重连 (0/10)，延迟 1720ms","timestamp":"2025-12-10 00:20:29"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:20:29"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:20:29"}
+{"level":"info","message":"数据库连接成功","timestamp":"2025-12-10 00:20:30"}
+{"level":"info","message":"[REDIS] 尝试重连 (1/10)，延迟 NaNms","timestamp":"2025-12-10 00:20:31"}
+{"level":"info","message":"[REDIS] 尝试重连 (1/10)，延迟 3157ms","timestamp":"2025-12-10 00:20:31"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:20:31"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:20:31"}
+{"level":"info","message":"[REDIS] 尝试重连 (2/10)，延迟 NaNms","timestamp":"2025-12-10 00:20:34"}
+{"level":"info","message":"[REDIS] 尝试重连 (2/10)，延迟 4411ms","timestamp":"2025-12-10 00:20:34"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:20:34"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:20:34"}
+{"level":"info","message":"[REDIS] 尝试重连 (3/10)，延迟 NaNms","timestamp":"2025-12-10 00:20:39"}
+{"level":"info","message":"[REDIS] 尝试重连 (3/10)，延迟 9492ms","timestamp":"2025-12-10 00:20:39"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:20:39"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:20:39"}
+{"level":"info","message":"[REDIS] 尝试重连 (4/10)，延迟 NaNms","timestamp":"2025-12-10 00:20:48"}
+{"level":"info","message":"[REDIS] 尝试重连 (4/10)，延迟 17089ms","timestamp":"2025-12-10 00:20:48"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:20:48"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:20:48"}
+{"level":"info","message":"[REDIS] 尝试重连 (5/10)，延迟 NaNms","timestamp":"2025-12-10 00:21:05"}
+{"level":"info","message":"[REDIS] 尝试重连 (5/10)，延迟 32223ms","timestamp":"2025-12-10 00:21:05"}
+{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-10 00:21:05"}
+{"level":"error","message":"[REDIS] Redis服务器拒绝连接，详细信息：\n  - 连接地址: redis://localhost:6379\n  - 错误代码: ECONNREFUSED\n  - 错误信息: \n  - 建议: 请检查Redis服务是否正在运行，Redis配置是否正确，网络连接是否正常","timestamp":"2025-12-10 00:21:05"}
