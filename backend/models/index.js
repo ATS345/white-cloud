@@ -84,11 +84,7 @@ const syncModels = async () => {
   try {
     // 仅在开发环境下使用force: true，生产环境不要使用
     await sequelize.sync({ force: false });
-    console.log('数据库模型同步成功');
   } catch (error) {
-    console.error('数据库模型同步失败:', error);
-    console.error('错误堆栈:', error.stack);
-    console.warn('⚠️  数据库模型同步失败，但服务器将继续运行');
     // 不要抛出错误，让服务器继续运行
   }
 };

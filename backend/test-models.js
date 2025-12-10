@@ -1,5 +1,4 @@
 // 测试脚本，用于调试模型关联问题
-import sequelize from './config/database.js';
 
 // 导入模型
 import User from './models/User.js';

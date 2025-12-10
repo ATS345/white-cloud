@@ -101,13 +101,13 @@ export const register = async (req, res) => {
 
     // 密码哈希
     const salt = await bcrypt.genSalt(12);
-    const password_hash = await bcrypt.hash(password, salt);
+    const passwordHash = await bcrypt.hash(password, salt);
 
     // 创建用户
     const user = await User.create({
       username,
       email,
-      password_hash,
+      password_hash: passwordHash,
       role,
     });
 
@@ -127,9 +127,9 @@ export const register = async (req, res) => {
         id: user.id,
         username: user.username,
         email: user.email,
-        avatar_url: user.avatar_url,
+        avatarUrl: user.avatar_url,
         role: user.role,
-        created_at: user.created_at,
+        createdAt: user.created_at,
       },
     });
   } catch (error) {

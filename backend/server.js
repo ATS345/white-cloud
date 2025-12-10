@@ -2,17 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import swaggerUi from 'swagger-ui-express';
 import net from 'net';
 import { execSync } from 'child_process';
-import sequelize from './config/database.js';
-import logger from './config/logger.js';
-import redisClient from './config/redis.js';
-import { PORT, CORS_ORIGIN, NODE_ENV } from './config/envConfig.js';
+import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger.js';
-
-// 导入模型和同步函数
-import { syncModels } from './models/index.js';
+import { PORT, CORS_ORIGIN, NODE_ENV } from './config/envConfig.js';
 
 // 导入路由
 import authRoutes from './routes/authRoutes.js';
@@ -116,7 +110,7 @@ const checkPortInUse = (port) => new Promise((resolve) => {
 });
 
 // 启动服务器，实现端口冲突检测与处理
-const startServer = async () => {
+export const startServer = async () => {
   try {
     // 检测端口是否被占用
     const portStatus = await checkPortInUse(PORT);
@@ -160,6 +154,5 @@ const startServer = async () => {
   }
 };
 
-// 导出app对象，用于测试
+// app对象已在定义时导出，用于测试
 // 启动服务器的逻辑将移到一个单独的入口文件中
-export { app };

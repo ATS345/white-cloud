@@ -83,11 +83,13 @@ let redisClient = {
   },
 };
 
-let isConnected = false;
-let retryAttempts = 0;
-let connectionError = null;
-let lastHeartbeat = null;
-let heartbeatInterval = null;
+const redisState = {
+  isConnected: false,
+  retryAttempts: 0,
+  connectionError: null,
+  lastHeartbeat: null,
+  heartbeatInterval: null,
+};
 
 // 配置常量
 const MAX_RETRY_ATTEMPTS = 10; // 增加最大重试次数
@@ -121,7 +123,7 @@ const redisConfig = {
 
 // 内存缓存清理函数 - 定期清理过期数据
 const cleanupExpiredCache = () => {
-  if (redisClient && !isConnected && redisClient._cache) {
+  if (redisClient && !redisState.isConnected && redisClient._cache) {
     const now = Date.now();
     let deletedCount = 0;
 
@@ -141,7 +143,7 @@ const cleanupExpiredCache = () => {
 
 // 心跳检查函数
 const heartbeatCheck = async () => {
-  if (!redisClient || !isConnected) {
+  if (!redisClient || !redisState.isConnected) {
     return;
   }
 
@@ -149,7 +151,7 @@ const heartbeatCheck = async () => {
     const startTime = Date.now();
     await redisClient.ping();
     const latency = Date.now() - startTime;
-    lastHeartbeat = Date.now();
+    redisState.lastHeartbeat = Date.now();
 
     logger.debug(`[REDIS HEARTBEAT] 心跳检查成功，延迟: ${latency}ms`);
 
@@ -169,19 +171,19 @@ const heartbeatCheck = async () => {
 
 // 启动心跳检查
 const startHeartbeatCheck = () => {
-  if (heartbeatInterval) {
-    clearInterval(heartbeatInterval);
+  if (redisState.heartbeatInterval) {
+    clearInterval(redisState.heartbeatInterval);
   }
 
-  heartbeatInterval = setInterval(heartbeatCheck, HEARTBEAT_INTERVAL);
+  redisState.heartbeatInterval = setInterval(heartbeatCheck, HEARTBEAT_INTERVAL);
   logger.info(`[REDIS] 启动心跳检查，间隔 ${HEARTBEAT_INTERVAL / 1000} 秒`);
 };
 
 // 停止心跳检查
 const stopHeartbeatCheck = () => {
-  if (heartbeatInterval) {
-    clearInterval(heartbeatInterval);
-    heartbeatInterval = null;
+  if (redisState.heartbeatInterval) {
+    clearInterval(redisState.heartbeatInterval);
+    redisState.heartbeatInterval = null;
     logger.info('[REDIS] 停止心跳检查');
   }
 };
@@ -418,8 +420,8 @@ const fallbackToMemoryCache = () => {
   };
 
   // 启动内存缓存清理定时器
-  if (!heartbeatInterval) {
-    heartbeatInterval = setInterval(cleanupExpiredCache, CACHE_CLEANUP_INTERVAL);
+  if (!redisState.heartbeatInterval) {
+    redisState.heartbeatInterval = setInterval(cleanupExpiredCache, CACHE_CLEANUP_INTERVAL);
     logger.info(`[REDIS CACHE] 启动内存缓存清理定时器，每 ${CACHE_CLEANUP_INTERVAL / 1000 / 60} 分钟清理一次过期数据`);
   }
 };
@@ -435,7 +437,7 @@ const initRedis = async () => {
   - 初始重试延迟: ${RETRY_DELAY_BASE}ms
   - 心跳检查: ${HEARTBEAT_INTERVAL / 1000}秒
   - 缓存清理: ${CACHE_CLEANUP_INTERVAL / 1000 / 60}分钟`);
-    connectionError = null;
+    redisState.connectionError = null;
 
     // 创建新的Redis客户端
     redisClient = redis.createClient(redisConfig);
@@ -443,21 +445,21 @@ const initRedis = async () => {
     // 连接事件处理
     redisClient.on('connect', () => {
       logger.info('[REDIS] 成功连接到Redis服务器');
-      connectionError = null;
+      redisState.connectionError = null;
     });
 
     // 准备就绪事件处理
     redisClient.on('ready', () => {
       logger.info('[REDIS] Redis客户端准备就绪');
-      isConnected = true;
-      retryAttempts = 0;
-      connectionError = null;
-      lastHeartbeat = Date.now();
+      redisState.isConnected = true;
+      redisState.retryAttempts = 0;
+      redisState.connectionError = null;
+      redisState.lastHeartbeat = Date.now();
 
       // 停止内存缓存清理定时器
-      if (heartbeatInterval) {
-        clearInterval(heartbeatInterval);
-        heartbeatInterval = null;
+      if (redisState.heartbeatInterval) {
+        clearInterval(redisState.heartbeatInterval);
+        redisState.heartbeatInterval = null;
         logger.info('[REDIS] 停止内存缓存清理定时器，Redis已连接');
       }
 
@@ -472,8 +474,8 @@ const initRedis = async () => {
 
     // 错误事件处理
     redisClient.on('error', (err) => {
-      connectionError = err;
-      isConnected = false;
+      redisState.connectionError = err;
+      redisState.isConnected = false;
 
       // 根据错误类型记录不同级别的日志，提供更详细的错误信息
       if (err.code === 'ECONNREFUSED') {
@@ -509,7 +511,7 @@ const initRedis = async () => {
     // 断开连接事件处理
     redisClient.on('end', () => {
       logger.warn('[REDIS] 与Redis服务器的连接已断开');
-      isConnected = false;
+      redisState.isConnected = false;
       stopHeartbeatCheck();
 
       // 回退到内存缓存
@@ -519,14 +521,14 @@ const initRedis = async () => {
 
     // 重连事件处理
     redisClient.on('reconnecting', (delay, attempt) => {
-      retryAttempts++;
-      logger.info(`[REDIS] 尝试重连 (${retryAttempts}/${MAX_RETRY_ATTEMPTS})，延迟 ${Math.round(delay)}ms`);
+      redisState.retryAttempts++;
+      logger.info(`[REDIS] 尝试重连 (${redisState.retryAttempts}/${MAX_RETRY_ATTEMPTS})，延迟 ${Math.round(delay)}ms`);
     });
 
     // 连接中断事件处理
     redisClient.on('destroyed', () => {
       logger.warn('[REDIS] Redis连接已销毁');
-      isConnected = false;
+      redisState.isConnected = false;
       stopHeartbeatCheck();
 
       // 回退到内存缓存
@@ -541,7 +543,7 @@ const initRedis = async () => {
     // 测试连接
     await redisClient.ping();
     logger.info('[REDIS] 连接测试成功');
-    lastHeartbeat = Date.now();
+    redisState.lastHeartbeat = Date.now();
   } catch (error) {
     logger.error(`[REDIS INIT ERROR] ${error.message}`);
     logger.error(`[REDIS] Redis连接失败，详细信息：
@@ -550,8 +552,8 @@ const initRedis = async () => {
   - 堆栈跟踪: ${error.stack}
   - 回退策略: 切换到内存缓存模式`);
     logger.warn('[REDIS] Redis连接失败，回退到内存缓存模式');
-    isConnected = false;
-    connectionError = error;
+    redisState.isConnected = false;
+    redisState.connectionError = error;
 
     // 如果Redis连接失败，回退到内存缓存
     fallbackToMemoryCache();
@@ -560,10 +562,10 @@ const initRedis = async () => {
 
 // 获取Redis连接状态
 export const getRedisStatus = () => ({
-  isConnected,
-  retryAttempts,
-  lastHeartbeat,
-  connectionError: connectionError ? connectionError.message : null,
+  isConnected: redisState.isConnected,
+  retryAttempts: redisState.retryAttempts,
+  lastHeartbeat: redisState.lastHeartbeat,
+  connectionError: redisState.connectionError ? redisState.connectionError.message : null,
   clientType: redisClient?._name || 'RedisClient',
 });
 
@@ -574,9 +576,9 @@ export const testConnection = async () => {
       return { success: false, message: 'Redis客户端未初始化' };
     }
 
-    if (isConnected) {
+    if (redisState.isConnected) {
       await redisClient.ping();
-      lastHeartbeat = Date.now();
+      redisState.lastHeartbeat = Date.now();
       return { success: true, message: 'Redis连接正常' };
     }
     return { success: false, message: 'Redis连接已断开' };
@@ -593,4 +595,3 @@ initRedis().catch((error) => {
 
 // 导出Redis客户端和相关函数
 export default redisClient;
-export { isConnected };

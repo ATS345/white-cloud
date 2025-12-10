@@ -1,5 +1,5 @@
 // 导入依赖和控制器
-import { Op, fn, col } from 'sequelize';
+import { Op } from 'sequelize';
 import {
   registerDeveloper,
   getDeveloperInfo,
@@ -15,9 +15,6 @@ import {
 } from '../../controllers/developerController.js';
 import Developer from '../../models/Developer.js';
 import Game from '../../models/Game.js';
-import GameCategory from '../../models/GameCategory.js';
-import GameTag from '../../models/GameTag.js';
-import Order from '../../models/Order.js';
 import OrderItem from '../../models/OrderItem.js';
 import DeveloperFinance from '../../models/DeveloperFinance.js';
 import WithdrawalRequest from '../../models/WithdrawalRequest.js';

@@ -66,7 +66,7 @@ const User = sequelize.define('User', {
   updatedAt: 'updated_at',
   hooks: {
     // 在创建用户前进行的操作
-    beforeCreate: (user) => {
+    beforeCreate: () => {
       // 可以在这里添加额外的逻辑，比如生成默认头像等
     },
   },
