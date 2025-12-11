@@ -1,6 +1,6 @@
 // 支付控制器 - 处理支付相关的业务逻辑
 import Order from '../models/Order.js';
-import { BadRequestError, NotFoundError, PaymentError } from '../utils/errors.js';
+import { BadRequestError, NotFoundError } from '../utils/errors.js';
 import logger from '../config/logger.js';
 
 /**

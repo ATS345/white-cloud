@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { app as mainApp } from '../../server.js';
-import paymentApp from '../../microservices/payment-service/server.js';
-import notificationApp from '../../microservices/notification-service/server.js';
+import { app as paymentApp } from '../../microservices/payment-service/server.js';
+import { app as notificationApp } from '../../microservices/notification-service/server.js';
 
 // 跨服务集成测试
 describe('跨服务集成测试', () => {

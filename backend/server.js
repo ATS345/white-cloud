@@ -22,6 +22,9 @@ import cartRoutes from './routes/cartRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 import { NotFoundError } from './utils/errors.js';
 
+// 导入Prometheus中间件
+import expressPrometheusMiddleware from 'express-prometheus-middleware';
+
 // 初始化Express应用
 export const app = express();
 
@@ -43,6 +46,20 @@ app.use(morgan(NODE_ENV === 'development' ? 'dev' : 'combined'));
 // 解析请求体
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Prometheus中间件配置
+app.use(expressPrometheusMiddleware({
+  metricsPath: '/metrics',
+  collectDefaultMetrics: true,
+  requestDurationBuckets: [0.1, 0.5, 1, 2, 5, 10],
+  requestLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+  responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+  authenticate: async (req, res) => {
+    // 可以在这里添加认证逻辑，例如检查API密钥
+    // return req.header('x-prometheus-token') === process.env.PROMETHEUS_TOKEN;
+    return true; // 暂时允许所有请求访问metrics
+  },
+}));
 
 // 健康检查路由
 app.get('/api/v1/health', (req, res) => {

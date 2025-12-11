@@ -30,6 +30,21 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+// 导入Prometheus中间件
+import expressPrometheusMiddleware from 'express-prometheus-middleware';
+
+// Prometheus中间件配置
+app.use(expressPrometheusMiddleware({
+  metricsPath: '/metrics',
+  collectDefaultMetrics: true,
+  requestDurationBuckets: [0.1, 0.5, 1, 2, 5, 10],
+  requestLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+  responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+  authenticate: async (req, res) => {
+    return true; // 暂时允许所有请求访问metrics
+  },
+}));
+
 // 健康检查路由
 app.get('/health', (req, res) => {
   res.status(200).json({
@@ -128,3 +143,6 @@ process.on('unhandledRejection', (reason, promise) => {
   logger.debug('[PAYMENT-SERVICE] Promise:', promise);
   process.exit(1);
 });
+
+// 导出app对象，用于测试
+export { app };

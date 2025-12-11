@@ -1,6 +1,6 @@
 // 退款控制器 - 处理退款相关的业务逻辑
 import Order from '../models/Order.js';
-import { BadRequestError, NotFoundError, RefundError } from '../utils/errors.js';
+import { BadRequestError, NotFoundError } from '../utils/errors.js';
 import logger from '../config/logger.js';
 
 /**

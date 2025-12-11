@@ -45,3 +45,5 @@ router.get('/user/:userId/unread-count', authenticate, getUnreadCount);
 
 // 清除所有已读通知 - 需要认证
 router.delete('/user/:userId/clear-read', authenticate, clearReadNotifications);
+
+export default router;
