@@ -158,18 +158,6 @@ export const getGames = async (req, res) => {
         status: status === 'all' ? { [Op.in]: ['pending', 'approved', 'rejected'] } : status,
       };
 
-      // 搜索条件
-      if (search) {
-        whereConditions.title = {
-          [Op.iLike]: `%${search}%`,
-        };
-      }
-
-      // 价格范围
-      whereConditions.price = {
-        [Op.between]: [minPrice, maxPrice],
-      };
-
       // 构建包含关联模型的查询
       const include = [
         {
@@ -185,6 +173,29 @@ export const getGames = async (req, res) => {
           attributes: ['id', 'name'],
         },
       ];
+
+      // 搜索条件
+      if (search) {
+        whereConditions[Op.or] = [
+          { title: { [Op.iLike]: `%${search}%` } },
+          { description: { [Op.iLike]: `%${search}%` } },
+          {
+            [Op.and]: [
+              { '$developer.name$': { [Op.iLike]: `%${search}%` } },
+            ],
+          },
+        ];
+        include.push({
+          model: Developer,
+          attributes: ['name'],
+          required: false,
+        });
+      }
+
+      // 价格范围
+      whereConditions.price = {
+        [Op.between]: [minPrice, maxPrice],
+      };
 
       // 构建筛选条件 - 分类（支持多选）
       if (categoryArray.length > 0) {

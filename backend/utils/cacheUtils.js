@@ -11,6 +11,7 @@ const CACHE_PREFIXES = {
   GAME_BY_CATEGORY: 'game:by_category:',
   GAME_BY_TAG: 'game:by_tag:',
   SYSTEM_REQUIREMENTS: 'system_requirements:',
+  GAME_RECOMMENDATIONS: 'game:recommendations:',
 };
 
 // 缓存过期时间（秒）
@@ -85,11 +86,14 @@ export const clearCacheByPattern = async (pattern) => {
       }
     } else if (redisClient._cache) {
       // 如果是内存缓存，遍历所有键并删除匹配的
+
       const regex = new RegExp(pattern.replace(/\*/g, '.*'));
       let deletedCount = 0;
       // 使用Array.from转换Map的键为数组，然后使用forEach迭代
+      // eslint-disable-next-line no-underscore-dangle
       Array.from(redisClient._cache.keys()).forEach((key) => {
         if (regex.test(key)) {
+          // eslint-disable-next-line no-underscore-dangle
           redisClient._cache.delete(key);
           deletedCount += 1;
         }
@@ -102,18 +106,22 @@ export const clearCacheByPattern = async (pattern) => {
 };
 
 // 生成游戏列表缓存键
-export const generateGameListCacheKey = (options) => generateCacheKey(CACHE_PREFIXES.GAME_LIST, 'all', {
-  page: options.page || 1,
-  limit: options.limit || 20,
-  search: options.search || '',
-  categories: options.categories?.join(',') || '',
-  tags: options.tags?.join(',') || '',
-  minPrice: options.minPrice || 0,
-  maxPrice: options.maxPrice || 1000,
-  sortBy: options.sortBy || 'release_date',
-  sortOrder: options.sortOrder || 'desc',
-  status: options.status || 'approved',
-});
+export const generateGameListCacheKey = (options) => generateCacheKey(
+  CACHE_PREFIXES.GAME_LIST,
+  'all',
+  {
+    page: options.page || 1,
+    limit: options.limit || 20,
+    search: options.search || '',
+    categories: options.categories?.join(',') || '',
+    tags: options.tags?.join(',') || '',
+    minPrice: options.minPrice || 0,
+    maxPrice: options.maxPrice || 1000,
+    sortBy: options.sortBy || 'release_date',
+    sortOrder: options.sortOrder || 'desc',
+    status: options.status || 'approved',
+  },
+);
 
 // 生成游戏详情缓存键
 export const generateGameDetailCacheKey = (gameId) => generateCacheKey(CACHE_PREFIXES.GAME_DETAIL, gameId);
@@ -146,6 +154,17 @@ export const generateGamesByTagCacheKey = (tagName, options) => generateCacheKey
 
 // 生成系统需求缓存键
 export const generateSystemRequirementsCacheKey = (gameId) => generateCacheKey(CACHE_PREFIXES.SYSTEM_REQUIREMENTS, gameId);
+
+// 生成游戏推荐缓存键
+export const generateRecommendationCacheKey = (options) => generateCacheKey(
+  CACHE_PREFIXES.GAME_RECOMMENDATIONS,
+  options.userId || 'anonymous',
+  {
+    type: options.type || 'personalized',
+    gameId: options.gameId || '',
+    limit: options.limit || 10,
+  },
+);
 
 // 清除游戏相关的所有缓存
 export const clearGameCache = async (gameId) => {

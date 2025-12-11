@@ -126,7 +126,7 @@ describe('gameListController', () => {
               totalPages: 1,
             }),
           }),
-        })
+        }),
       );
     });
 
@@ -152,7 +152,7 @@ describe('gameListController', () => {
           success: false,
           message: '获取游戏列表失败',
           error: 'Database error',
-        })
+        }),
       );
     });
   });
@@ -210,7 +210,7 @@ describe('gameListController', () => {
           success: true,
           message: '游戏详情获取成功',
           data: mockGame,
-        })
+        }),
       );
     });
 
@@ -232,7 +232,7 @@ describe('gameListController', () => {
         expect.objectContaining({
           success: false,
           message: '游戏不存在',
-        })
+        }),
       );
     });
   });

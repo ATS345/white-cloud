@@ -6,7 +6,7 @@ const { GameLibrary, GameData } = models;
 
 /**
  * @swagger
- * /api/v1/games/{gameId}/data: 
+ * /api/v1/games/{gameId}/data:
  *   post:
  *     summary: 同步游戏数据
  *     description: 同步游戏数据到服务器，需要用户拥有该游戏

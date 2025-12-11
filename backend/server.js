@@ -16,6 +16,7 @@ import downloadRoutes from './routes/downloadRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 import gameLibraryRoutes from './routes/gameLibraryRoutes.js';
 import developerRoutes from './routes/developerRoutes.js';
+import cartRoutes from './routes/cartRoutes.js';
 
 // 导入错误处理中间件
 import errorHandler from './middleware/errorHandler.js';
@@ -69,6 +70,7 @@ app.use('/api/v1/download', downloadRoutes);
 app.use('/api/v1/reviews', reviewRoutes);
 app.use('/api/v1/library', gameLibraryRoutes);
 app.use('/api/v1/developer', developerRoutes);
+app.use('/api/v1/cart', cartRoutes);
 
 // 处理404错误 - 抛出NotFoundError，由全局错误处理中间件处理
 app.use((req, res, next) => {
@@ -136,9 +138,10 @@ export const startServer = async () => {
     }
 
     // 端口可用，启动服务器
-    const server = app.listen(PORT, () => {
+    const server = app.listen(PORT, '0.0.0.0', () => {
       console.log('\n🚀 服务器启动成功！');
-      console.log(`📡 服务器地址: http://localhost:${PORT}`);
+      console.log(`📡 服务器地址: http://0.0.0.0:${PORT}`);
+      console.log(`📡 本地访问地址: http://localhost:${PORT}`);
       console.log(`📝 API文档地址: http://localhost:${PORT}/api/v1/docs`);
       console.log(`🔧 环境: ${NODE_ENV}`);
       console.log(`✅ 端口: ${PORT} (已验证可用)`);

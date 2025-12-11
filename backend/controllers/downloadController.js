@@ -381,7 +381,25 @@ export const downloadFile = async (req, res) => {
 
     // 构建实际文件路径
     const basePath = process.env.DOWNLOAD_PATH || path.join(process.cwd(), 'downloads');
-    const filePath = path.join(basePath, `${version.game_id}_${platform}_v${version.version_number}.${platform === 'windows' ? 'exe' : platform === 'mac' ? 'dmg' : platform === 'linux' ? 'deb' : 'apk'}`);
+    
+    // 确定文件扩展名
+    let fileExt;
+    switch (platform) {
+      case 'windows':
+        fileExt = 'exe';
+        break;
+      case 'mac':
+        fileExt = 'dmg';
+        break;
+      case 'linux':
+        fileExt = 'deb';
+        break;
+      default:
+        fileExt = 'apk';
+        break;
+    }
+    
+    const filePath = path.join(basePath, `${version.game_id}_${platform}_v${version.version_number}.${fileExt}`);
 
     // 检查文件是否存在
     if (!fs.existsSync(filePath)) {
@@ -415,7 +433,7 @@ export const downloadFile = async (req, res) => {
         'Accept-Ranges': 'bytes',
         'Content-Length': chunkSize,
         'Content-Type': 'application/octet-stream',
-        'Content-Disposition': `attachment; filename="${version.game.title}_v${version.version_number}_${platform}.${platform === 'windows' ? 'exe' : platform === 'mac' ? 'dmg' : platform === 'linux' ? 'deb' : 'apk'}"`,
+        'Content-Disposition': `attachment; filename="${version.game.title}_v${version.version_number}_${platform}.${fileExt}"`,
         'X-Download-Id': downloadId,
         'X-Game-Id': version.game_id,
         'X-Version': version.version_number,
@@ -436,10 +454,26 @@ export const downloadFile = async (req, res) => {
       });
     } else {
       // 完整文件下载
+      // 确定文件扩展名
+      let fileExt;
+      switch (platform) {
+        case 'windows':
+          fileExt = 'exe';
+          break;
+        case 'mac':
+          fileExt = 'dmg';
+          break;
+        case 'linux':
+          fileExt = 'deb';
+          break;
+        default:
+          fileExt = 'apk';
+      }
+      
       res.writeHead(200, {
         'Content-Length': fileSize,
         'Content-Type': 'application/octet-stream',
-        'Content-Disposition': `attachment; filename="${version.game.title}_v${version.version_number}_${platform}.${platform === 'windows' ? 'exe' : platform === 'mac' ? 'dmg' : platform === 'linux' ? 'deb' : 'apk'}"`,
+        'Content-Disposition': `attachment; filename="${version.game.title}_v${version.version_number}_${platform}.${fileExt}"`,
         'Accept-Ranges': 'bytes',
         'X-Download-Id': downloadId,
         'X-Game-Id': version.game_id,
@@ -553,7 +587,25 @@ export const downloadClient = async (req, res) => {
 
     // 构建客户端文件路径
     const basePath = process.env.CLIENT_DOWNLOAD_PATH || path.join(process.cwd(), 'client-downloads');
-    const filePath = path.join(basePath, `GameStore_Client_${platform === 'windows' ? 'Windows.exe' : platform === 'mac' ? 'Mac.dmg' : platform === 'linux' ? 'Linux.deb' : 'Android.apk'}`);
+    
+    // 确定客户端文件名
+    let clientFileName;
+    switch (platform) {
+      case 'windows':
+        clientFileName = 'Windows.exe';
+        break;
+      case 'mac':
+        clientFileName = 'Mac.dmg';
+        break;
+      case 'linux':
+        clientFileName = 'Linux.deb';
+        break;
+      default:
+        clientFileName = 'Android.apk';
+        break;
+    }
+    
+    const filePath = path.join(basePath, `GameStore_Client_${clientFileName}`);
 
     // 检查文件是否存在
     if (!fs.existsSync(filePath)) {
@@ -585,7 +637,7 @@ export const downloadClient = async (req, res) => {
         'Accept-Ranges': 'bytes',
         'Content-Length': chunkSize,
         'Content-Type': 'application/octet-stream',
-        'Content-Disposition': `attachment; filename="GameStore_Client_${platform === 'windows' ? 'Windows.exe' : platform === 'mac' ? 'Mac.dmg' : platform === 'linux' ? 'Linux.deb' : 'Android.apk'}"`,
+        'Content-Disposition': `attachment; filename="GameStore_Client_${clientFileName}"`,
         'X-Download-Id': downloadId,
         'X-Platform': platform,
       });
@@ -606,7 +658,7 @@ export const downloadClient = async (req, res) => {
       res.writeHead(200, {
         'Content-Length': fileSize,
         'Content-Type': 'application/octet-stream',
-        'Content-Disposition': `attachment; filename="GameStore_Client_${platform === 'windows' ? 'Windows.exe' : platform === 'mac' ? 'Mac.dmg' : platform === 'linux' ? 'Linux.deb' : 'Android.apk'}"`,
+        'Content-Disposition': `attachment; filename="GameStore_Client_${clientFileName}"`,
         'Accept-Ranges': 'bytes',
         'X-Download-Id': downloadId,
         'X-Platform': platform,

@@ -16,6 +16,11 @@ import {
   createGameVersion,
   createGameSystemRequirement,
 } from './game/gameManagementController.js';
+import {
+  getRecommendedGames,
+  getTrendingGamesController,
+  getSimilarGamesController,
+} from './game/gameRecommendationController.js';
 
 // 导出所有控制器函数
 export {
@@ -47,4 +52,9 @@ export {
   submitGameForReview,
   createGameVersion,
   createGameSystemRequirement,
+
+  // 游戏推荐相关
+  getRecommendedGames,
+  getTrendingGamesController,
+  getSimilarGamesController,
 };

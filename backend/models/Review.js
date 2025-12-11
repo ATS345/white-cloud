@@ -82,6 +82,13 @@ Review.associate = (models) => {
     as: 'replies',
     onDelete: 'CASCADE',
   });
+
+  // 评价与媒体附件的一对多关联
+  Review.hasMany(models.ReviewMedia, {
+    foreignKey: 'review_id',
+    as: 'media',
+    onDelete: 'CASCADE',
+  });
 };
 
 export default Review;

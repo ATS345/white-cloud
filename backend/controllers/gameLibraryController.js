@@ -61,7 +61,7 @@ export const updateGameLibrary = async (req, res) => {
   try {
     const userId = req.user.id;
     const { gameId } = req.params;
-    const { playtime, last_played_at } = req.body;
+    const { playtime, lastPlayedAt } = req.body;
 
     // 查找游戏库记录
     const gameLibrary = await GameLibrary.findOne({
@@ -83,8 +83,8 @@ export const updateGameLibrary = async (req, res) => {
     if (playtime !== undefined) {
       updates.playtime = playtime;
     }
-    if (last_played_at !== undefined) {
-      updates.last_played_at = last_played_at;
+    if (lastPlayedAt !== undefined) {
+      updates.last_played_at = lastPlayedAt;
     }
 
     await gameLibrary.update(updates);

@@ -1,8 +1,6 @@
 import { Op, fn, col } from 'sequelize';
 import Developer from '../models/Developer.js';
 import Game from '../models/Game.js';
-import GameVersion from '../models/GameVersion.js';
-import GameSystemRequirement from '../models/GameSystemRequirement.js';
 import GameCategory from '../models/GameCategory.js';
 import GameTag from '../models/GameTag.js';
 import Order from '../models/Order.js';
@@ -81,14 +79,14 @@ export const registerDeveloper = async (req, res) => {
   try {
     const userId = req.user.id;
     const {
-      company_name,
-      contact_email,
+      companyName,
+      contactEmail,
       website,
       bio,
     } = req.body;
 
     // 验证必填字段
-    if (!company_name || !contact_email) {
+    if (!companyName || !contactEmail) {
       return res.status(400).json({
         success: false,
         message: '公司名称和联系邮箱是必填项',
@@ -110,8 +108,8 @@ export const registerDeveloper = async (req, res) => {
     // 创建开发者账户
     const developer = await Developer.create({
       user_id: userId,
-      company_name,
-      contact_email,
+      company_name: companyName,
+      contact_email: contactEmail,
       website,
       bio,
     });
@@ -246,8 +244,8 @@ export const updateDeveloperInfo = async (req, res) => {
   try {
     const userId = req.user.id;
     const {
-      company_name,
-      contact_email,
+      companyName,
+      contactEmail,
       website,
       bio,
     } = req.body;
@@ -266,8 +264,8 @@ export const updateDeveloperInfo = async (req, res) => {
 
     // 更新开发者信息
     await developer.update({
-      company_name: company_name || developer.company_name,
-      contact_email: contact_email || developer.contact_email,
+      company_name: companyName || developer.company_name,
+      contact_email: contactEmail || developer.contact_email,
       website: website || developer.website,
       bio: bio || developer.bio,
     });
@@ -393,8 +391,8 @@ export const getDeveloperGames = async (req, res) => {
         },
       ],
       order: [['created_at', 'desc']],
-      limit: parseInt(limit),
-      offset: parseInt(offset),
+      limit: parseInt(limit, 10),
+      offset: parseInt(offset, 10),
       distinct: true,
     });
 
@@ -404,8 +402,8 @@ export const getDeveloperGames = async (req, res) => {
       data: {
         games: games.rows,
         pagination: {
-          currentPage: parseInt(page),
-          pageSize: parseInt(limit),
+          currentPage: parseInt(page, 10),
+          pageSize: parseInt(limit, 10),
           totalItems: games.count,
           totalPages: Math.ceil(games.count / limit),
         },
@@ -564,7 +562,7 @@ export const getGameSalesStats = async (req, res) => {
       data: {
         daily_stats: salesStats,
         total_stats: {
-          total_sales: parseInt(totalStats?.dataValues.total_sales) || 0,
+          total_sales: parseInt(totalStats?.dataValues.total_sales, 10) || 0,
           total_revenue: parseFloat(totalStats?.dataValues.total_revenue) || 0,
         },
       },
@@ -943,8 +941,8 @@ export const getWithdrawalRequests = async (req, res) => {
     const withdrawalRequests = await WithdrawalRequest.findAndCountAll({
       where: whereClause,
       order: [['created_at', 'desc']],
-      limit: parseInt(limit),
-      offset: parseInt(offset),
+      limit: parseInt(limit, 10),
+      offset: parseInt(offset, 10),
     });
 
     return res.status(200).json({
@@ -953,8 +951,8 @@ export const getWithdrawalRequests = async (req, res) => {
       data: {
         requests: withdrawalRequests.rows,
         pagination: {
-          currentPage: parseInt(page),
-          pageSize: parseInt(limit),
+          currentPage: parseInt(page, 10),
+          pageSize: parseInt(limit, 10),
           totalItems: withdrawalRequests.count,
           totalPages: Math.ceil(withdrawalRequests.count / limit),
         },

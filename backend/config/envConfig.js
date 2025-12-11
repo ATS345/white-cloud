@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import logger from './logger.js';
 
 // 只加载一次环境变量
 dotenv.config();
@@ -110,27 +109,27 @@ class EnvConfig {
     }
 
     if (missingEnvVars.length > 0) {
-      logger.warn(`缺少必需的环境变量: ${missingEnvVars.join(', ')}，将使用默认值`);
+      console.warn(`缺少必需的环境变量: ${missingEnvVars.join(', ')}，将使用默认值`);
     }
 
     // 验证NODE_ENV
     const validEnvs = ['development', 'production', 'test'];
     if (!validEnvs.includes(this.environment.NODE_ENV)) {
-      logger.warn(`无效的NODE_ENV值: ${this.environment.NODE_ENV}，将使用默认值: development`);
+      console.warn(`无效的NODE_ENV值: ${this.environment.NODE_ENV}，将使用默认值: development`);
       this.environment.NODE_ENV = 'development';
     }
 
     // 验证日志级别
     const validLogLevels = ['error', 'warn', 'info', 'verbose', 'debug', 'silly'];
     if (!validLogLevels.includes(this.environment.LOG_LEVEL)) {
-      logger.warn(`无效的LOG_LEVEL值: ${this.environment.LOG_LEVEL}，将使用默认值: info`);
+      console.warn(`无效的LOG_LEVEL值: ${this.environment.LOG_LEVEL}，将使用默认值: info`);
       this.environment.LOG_LEVEL = 'info';
     }
 
     // 验证数据库方言
     const validDBDialects = ['sqlite', 'postgres', 'mysql', 'mssql'];
     if (!validDBDialects.includes(this.environment.DB_DIALECT)) {
-      logger.warn(`无效的DB_DIALECT值: ${this.environment.DB_DIALECT}，将使用默认值: sqlite`);
+      console.warn(`无效的DB_DIALECT值: ${this.environment.DB_DIALECT}，将使用默认值: sqlite`);
       this.environment.DB_DIALECT = 'sqlite';
     }
   }

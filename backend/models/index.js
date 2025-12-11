@@ -9,12 +9,14 @@ import GameVersion from './GameVersion.js';
 import GameSystemRequirement from './GameSystemRequirement.js';
 import Review from './Review.js';
 import ReviewReply from './ReviewReply.js';
+import ReviewMedia from './ReviewMedia.js';
 import Order from './Order.js';
 import OrderItem from './OrderItem.js';
 import Developer from './Developer.js';
 import DeveloperFinance from './DeveloperFinance.js';
 import WithdrawalRequest from './WithdrawalRequest.js';
 import GameLibrary from './GameLibrary.js';
+import Cart from './Cart.js';
 
 // 模型集合
 const models = {
@@ -26,12 +28,14 @@ const models = {
   GameSystemRequirement,
   Review,
   ReviewReply,
+  ReviewMedia,
   Order,
   OrderItem,
   Developer,
   DeveloperFinance,
   WithdrawalRequest,
   GameLibrary,
+  Cart,
 };
 
 // 初始化所有模型的关联关系
@@ -77,6 +81,12 @@ if (models.WithdrawalRequest.associate) {
 }
 if (models.GameLibrary.associate) {
   models.GameLibrary.associate(models);
+}
+if (models.Cart.associate) {
+  models.Cart.associate(models);
+}
+if (models.ReviewMedia.associate) {
+  models.ReviewMedia.associate(models);
 }
 
 // 同步模型到数据库

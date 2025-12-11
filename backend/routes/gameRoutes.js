@@ -19,6 +19,9 @@ import {
   submitGameForReview,
   createGameVersion,
   createGameSystemRequirement,
+  getRecommendedGames,
+  getTrendingGamesController,
+  getSimilarGamesController,
 } from '../controllers/gameController.js';
 import { authenticate, isDeveloper } from '../middleware/auth.js';
 import {
@@ -54,6 +57,15 @@ router.get('/categories/:categoryName', getGamesByCategory);
 
 // 按标签获取游戏路由
 router.get('/tags/:tagName', getGamesByTag);
+
+// 游戏推荐路由 - 支持个性化推荐、热门游戏和相似游戏
+router.get('/recommendations', getRecommendedGames);
+
+// 热门游戏推荐路由
+router.get('/recommendations/trending', getTrendingGamesController);
+
+// 相似游戏推荐路由
+router.get('/recommendations/similar/:gameId', getSimilarGamesController);
 
 // 游戏启动路由
 router.post('/:gameId/launch', authenticate, launchGame);

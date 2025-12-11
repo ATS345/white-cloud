@@ -351,7 +351,7 @@ export const updateUserProfile = async (req, res) => {
     const {
       username,
       email,
-      avatar_url,
+      avatarUrl,
     } = req.body;
 
     // 查找用户
@@ -399,8 +399,8 @@ export const updateUserProfile = async (req, res) => {
     }
 
     // 更新头像URL（如果提供）
-    if (avatar_url) {
-      user.avatar_url = avatar_url;
+    if (avatarUrl) {
+      user.avatar_url = avatarUrl;
     }
 
     // 保存更新
@@ -414,10 +414,10 @@ export const updateUserProfile = async (req, res) => {
         id: user.id,
         username: user.username,
         email: user.email,
-        avatar_url: user.avatar_url,
+        avatarUrl: user.avatar_url,
         role: user.role,
-        created_at: user.created_at,
-        updated_at: user.updated_at,
+        createdAt: user.created_at,
+        updatedAt: user.updated_at,
       },
     });
   } catch (error) {
@@ -514,10 +514,10 @@ export const changePassword = async (req, res) => {
 
     // 密码哈希
     const salt = await bcrypt.genSalt(12);
-    const password_hash = await bcrypt.hash(newPassword, salt);
+    const passwordHash = await bcrypt.hash(newPassword, salt);
 
     // 更新密码
-    user.password_hash = password_hash;
+    user.password_hash = passwordHash;
     await user.save();
 
     // 返回响应

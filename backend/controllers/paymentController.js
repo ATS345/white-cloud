@@ -222,8 +222,8 @@ export const getOrderHistory = async (req, res) => {
         },
       ],
       order: [['created_at', 'desc']],
-      limit: parseInt(limit),
-      offset: parseInt(offset),
+      limit: parseInt(limit, 10),
+      offset: parseInt(offset, 10),
       distinct: true,
     });
 
@@ -233,8 +233,8 @@ export const getOrderHistory = async (req, res) => {
       data: {
         orders: orders.rows,
         pagination: {
-          currentPage: parseInt(page),
-          pageSize: parseInt(limit),
+          currentPage: parseInt(page, 10),
+          pageSize: parseInt(limit, 10),
           totalItems: orders.count,
           totalPages: Math.ceil(orders.count / limit),
         },

@@ -1,6 +1,6 @@
-import { Op } from 'sequelize';
 import Review from '../models/Review.js';
 import ReviewReply from '../models/ReviewReply.js';
+import ReviewMedia from '../models/ReviewMedia.js';
 import Game from '../models/Game.js';
 import GameLibrary from '../models/GameLibrary.js';
 import models from '../models/index.js';
@@ -8,11 +8,41 @@ import logger from '../config/logger.js';
 
 const { sequelize } = models;
 
+// 更新游戏的平均评分和评论数量（辅助函数）
+const updateGameRating = async (gameId) => {
+  try {
+    // 计算平均评分和评论数量
+    const ratingStats = await Review.findAll({
+      where: { game_id: gameId },
+      attributes: [
+        [sequelize.fn('AVG', sequelize.col('rating')), 'average_rating'],
+        [sequelize.fn('COUNT', sequelize.col('id')), 'review_count'],
+      ],
+    });
+
+    const stats = ratingStats[0].dataValues;
+
+    // 更新游戏信息
+    await Game.update(
+      {
+        rating: parseFloat(stats.average_rating) || 0,
+        review_count: parseInt(stats.review_count, 10) || 0,
+      },
+      {
+        where: { id: gameId },
+      },
+    );
+  } catch (error) {
+    logger.error('更新游戏评分错误:', error);
+    throw error;
+  }
+};
+
 // 创建评价
 export const createReview = async (req, res) => {
   try {
     const { gameId } = req.params;
-    const { rating, content } = req.body;
+    const { rating, content, media } = req.body;
     const userId = req.user.id;
 
     // 验证游戏是否存在
@@ -67,16 +97,31 @@ export const createReview = async (req, res) => {
       content,
     });
 
+    // 处理媒体文件
+    if (media && Array.isArray(media) && media.length > 0) {
+      const mediaItems = media.map((item) => ({
+        ...item,
+        review_id: review.id,
+        user_id: userId,
+      }));
+      await ReviewMedia.bulkCreate(mediaItems);
+    }
+
     // 更新游戏的平均评分和评论数量
     await updateGameRating(gameId);
 
-    // 返回创建的评价
+    // 返回创建的评价，包含媒体附件
     const newReview = await Review.findByPk(review.id, {
       include: [
         {
           model: req.app.get('models').User,
           as: 'user',
           attributes: ['id', 'username', 'avatar_url'],
+        },
+        {
+          model: ReviewMedia,
+          as: 'media',
+          attributes: ['id', 'media_type', 'media_url', 'thumbnail_url', 'file_name', 'file_size', 'file_mime_type'],
         },
       ],
       attributes: ['id', 'rating', 'content', 'created_at', 'updated_at'],
@@ -122,7 +167,7 @@ export const getGameReviews = async (req, res) => {
     // 计算偏移量
     const offset = (page - 1) * limit;
 
-    // 获取评价列表
+    // 获取评价列表，包含媒体附件
     const reviews = await Review.findAndCountAll({
       where: { game_id: gameId },
       include: [
@@ -130,6 +175,11 @@ export const getGameReviews = async (req, res) => {
           model: req.app.get('models').User,
           as: 'user',
           attributes: ['id', 'username', 'avatar_url'],
+        },
+        {
+          model: ReviewMedia,
+          as: 'media',
+          attributes: ['id', 'media_type', 'media_url', 'thumbnail_url', 'file_name', 'file_size', 'file_mime_type'],
         },
         {
           model: ReviewReply,
@@ -140,13 +190,18 @@ export const getGameReviews = async (req, res) => {
               as: 'user',
               attributes: ['id', 'username', 'avatar_url'],
             },
+            {
+              model: ReviewMedia,
+              as: 'media',
+              attributes: ['id', 'media_type', 'media_url', 'thumbnail_url', 'file_name', 'file_size', 'file_mime_type'],
+            },
           ],
           attributes: ['id', 'content', 'created_at', 'user_id'],
         },
       ],
       order: [[sortBy, sortOrder]],
-      limit: parseInt(limit),
-      offset: parseInt(offset),
+      limit: parseInt(limit, 10),
+      offset: parseInt(offset, 10),
       distinct: true,
     });
 
@@ -162,8 +217,8 @@ export const getGameReviews = async (req, res) => {
       data: {
         reviews: reviews.rows,
         pagination: {
-          currentPage: parseInt(page),
-          pageSize: parseInt(limit),
+          currentPage: parseInt(page, 10),
+          pageSize: parseInt(limit, 10),
           totalItems: reviews.count,
           totalPages: Math.ceil(reviews.count / limit),
         },
@@ -184,7 +239,7 @@ export const getGameReviews = async (req, res) => {
 export const updateReview = async (req, res) => {
   try {
     const { reviewId } = req.params;
-    const { rating, content } = req.body;
+    const { rating, content, media } = req.body;
     const userId = req.user.id;
 
     // 查找评价
@@ -211,16 +266,39 @@ export const updateReview = async (req, res) => {
       content,
     });
 
+    // 处理媒体文件更新
+    if (media) {
+      // 删除现有的媒体文件
+      await ReviewMedia.destroy({
+        where: { review_id: reviewId },
+      });
+
+      // 添加新的媒体文件
+      if (Array.isArray(media) && media.length > 0) {
+        const mediaItems = media.map((item) => ({
+          ...item,
+          review_id: review.id,
+          user_id: userId,
+        }));
+        await ReviewMedia.bulkCreate(mediaItems);
+      }
+    }
+
     // 更新游戏的平均评分
     await updateGameRating(review.game_id);
 
-    // 返回更新后的评价
+    // 返回更新后的评价，包含媒体附件
     const updatedReview = await Review.findByPk(review.id, {
       include: [
         {
           model: req.app.get('models').User,
           as: 'user',
           attributes: ['id', 'username', 'avatar_url'],
+        },
+        {
+          model: ReviewMedia,
+          as: 'media',
+          attributes: ['id', 'media_type', 'media_url', 'thumbnail_url', 'file_name', 'file_size', 'file_mime_type'],
         },
       ],
       attributes: ['id', 'rating', 'content', 'created_at', 'updated_at'],
@@ -289,11 +367,11 @@ export const deleteReview = async (req, res) => {
   }
 };
 
-// 创建评价回复
+// 创建评价回复，支持媒体附件
 export const createReviewReply = async (req, res) => {
   try {
     const { reviewId } = req.params;
-    const { content } = req.body;
+    const { content, media } = req.body;
     const userId = req.user.id;
 
     // 查找评价
@@ -313,13 +391,28 @@ export const createReviewReply = async (req, res) => {
       content,
     });
 
-    // 返回创建的回复
+    // 处理媒体文件
+    if (media && Array.isArray(media) && media.length > 0) {
+      const mediaItems = media.map((item) => ({
+        ...item,
+        reply_id: reply.id,
+        user_id: userId,
+      }));
+      await ReviewMedia.bulkCreate(mediaItems);
+    }
+
+    // 返回创建的回复，包含媒体附件
     const newReply = await ReviewReply.findByPk(reply.id, {
       include: [
         {
           model: req.app.get('models').User,
           as: 'user',
           attributes: ['id', 'username', 'avatar_url'],
+        },
+        {
+          model: ReviewMedia,
+          as: 'media',
+          attributes: ['id', 'media_type', 'media_url', 'thumbnail_url', 'file_name', 'file_size', 'file_mime_type'],
         },
       ],
       attributes: ['id', 'content', 'created_at', 'review_id', 'user_id'],
@@ -402,8 +495,8 @@ export const getUserReviews = async (req, res) => {
         },
       ],
       order: [['created_at', 'desc']],
-      limit: parseInt(limit),
-      offset: parseInt(offset),
+      limit: parseInt(limit, 10),
+      offset: parseInt(offset, 10),
       distinct: true,
     });
 
@@ -413,8 +506,8 @@ export const getUserReviews = async (req, res) => {
       data: {
         reviews: reviews.rows,
         pagination: {
-          currentPage: parseInt(page),
-          pageSize: parseInt(limit),
+          currentPage: parseInt(page, 10),
+          pageSize: parseInt(limit, 10),
           totalItems: reviews.count,
           totalPages: Math.ceil(reviews.count / limit),
         },
@@ -427,35 +520,5 @@ export const getUserReviews = async (req, res) => {
       message: '获取用户评价历史失败',
       error: error.message,
     });
-  }
-};
-
-// 更新游戏的平均评分和评论数量（辅助函数）
-const updateGameRating = async (gameId) => {
-  try {
-    // 计算平均评分和评论数量
-    const ratingStats = await Review.findAll({
-      where: { game_id: gameId },
-      attributes: [
-        [sequelize.fn('AVG', sequelize.col('rating')), 'average_rating'],
-        [sequelize.fn('COUNT', sequelize.col('id')), 'review_count'],
-      ],
-    });
-
-    const stats = ratingStats[0].dataValues;
-
-    // 更新游戏信息
-    await Game.update(
-      {
-        rating: parseFloat(stats.average_rating) || 0,
-        review_count: parseInt(stats.review_count) || 0,
-      },
-      {
-        where: { id: gameId },
-      },
-    );
-  } catch (error) {
-    logger.error('更新游戏评分错误:', error);
-    throw error;
   }
 };

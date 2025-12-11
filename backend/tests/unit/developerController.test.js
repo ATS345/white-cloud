@@ -37,7 +37,7 @@ jest.mock('../../models/WithdrawalRequest.js');
 global.sequelize = {
   fn: jest.fn().mockImplementation((name, value) => `${name}(${value})`),
   col: jest.fn().mockImplementation((value) => value),
-  Op: Op,
+  Op,
 };
 
 // 模拟请求和响应对象
@@ -64,8 +64,8 @@ describe('developerController', () => {
     it('should register a new developer successfully', async () => {
       // 模拟请求和响应
       const req = mockReq({
-        company_name: 'Test Company',
-        contact_email: 'contact@test.com',
+        companyName: 'Test Company',
+        contactEmail: 'contact@test.com',
         website: 'https://test.com',
         bio: 'Test bio',
       });
@@ -117,8 +117,8 @@ describe('developerController', () => {
     it('should return error if developer account already exists', async () => {
       // 模拟请求和响应
       const req = mockReq({
-        company_name: 'Test Company',
-        contact_email: 'contact@test.com',
+        companyName: 'Test Company',
+        contactEmail: 'contact@test.com',
       });
       const res = mockRes();
 
@@ -193,8 +193,8 @@ describe('developerController', () => {
     it('should update developer info successfully', async () => {
       // 模拟请求和响应
       const req = mockReq({
-        company_name: 'Updated Company',
-        contact_email: 'updated@test.com',
+        companyName: 'Updated Company',
+        contactEmail: 'updated@test.com',
         website: 'https://updated.com',
         bio: 'Updated bio',
       });
