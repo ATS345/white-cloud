@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node start.js",
     "dev": "nodemon start.js",
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "migrate": "sequelize-cli db:migrate",
     "seed": "sequelize-cli db:seed:all",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
