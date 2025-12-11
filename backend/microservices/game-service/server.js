@@ -4,6 +4,11 @@ import cors from 'cors';
 import helmet from 'helmet';
 import logger from './config/logger.js';
 import redisService from './config/redis.js';
+import setupSwagger from './config/swagger.js';
+
+// 中间件
+import { authenticateJWT, ROLES } from './middleware/auth.js';
+import { rateLimit } from './middleware/rateLimit.js';
 
 // 游戏列表路由
 import {
@@ -25,6 +30,9 @@ import {
   getDeveloperGames,
 } from './controllers/gameManagementController.js';
 
+// 错误处理中间件
+import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
+
 // 初始化 Express 应用
 const app = express();
 
@@ -33,6 +41,9 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// 设置 Swagger API 文档
+setupSwagger(app);
 
 // 健康检查端点
 app.get('/health', async (req, res) => {
@@ -62,46 +73,42 @@ app.get('/health', async (req, res) => {
   }
 });
 
-// 公共游戏路由
-app.get('/games', getGameList);
-app.get('/games/:id', getGameDetail);
-app.get('/categories', getCategories);
-app.get('/tags', getTags);
-app.get('/games/popular', getPopularGames);
-app.get('/games/new', getNewGames);
+// 公共游戏路由 - 不需要认证，应用基础速率限制
+const publicRateLimit = rateLimit({ windowMs: 60000, max: 100 });
+app.get('/games', publicRateLimit, getGameList);
+app.get('/games/:id', publicRateLimit, getGameDetail);
+app.get('/categories', publicRateLimit, getCategories);
+app.get('/tags', publicRateLimit, getTags);
+app.get('/games/popular', publicRateLimit, getPopularGames);
+app.get('/games/new', publicRateLimit, getNewGames);
 
-// 游戏管理路由
-app.post('/games', createGame);
-app.put('/games/:id', updateGame);
-app.delete('/games/:id', deleteGame);
-app.delete('/games/batch', batchDeleteGames);
-app.patch('/games/:id/status', updateGameStatus);
-app.get('/developers/:developerId/games', getDeveloperGames);
+// 游戏管理路由 - 需要认证和权限控制
+const adminRateLimit = rateLimit({ windowMs: 60000, max: 50 });
+const developerRateLimit = rateLimit({ windowMs: 60000, max: 30 });
 
-// 错误处理中间件
-app.use((err, req, res) => {
-  logger.error(`[GameService] 未捕获的错误: ${err.message}`, { stack: err.stack });
-  return res.status(500).json({
-    success: false,
-    error: {
-      code: 'INTERNAL_SERVER_ERROR',
-      message: '服务器内部错误',
-      details: process.env.NODE_ENV === 'production' ? undefined : err.message,
-    },
-  });
-});
+// 开发者和管理员都可以创建游戏
+app.post('/games', developerRateLimit, authenticateJWT([ROLES.DEVELOPER, ROLES.ADMIN]), createGame);
+
+// 开发者和管理员都可以更新游戏
+app.put('/games/:id', developerRateLimit, authenticateJWT([ROLES.DEVELOPER, ROLES.ADMIN]), updateGame);
+
+// 开发者和管理员都可以删除游戏
+app.delete('/games/:id', developerRateLimit, authenticateJWT([ROLES.DEVELOPER, ROLES.ADMIN]), deleteGame);
+
+// 只有管理员可以批量删除游戏
+app.delete('/games/batch', adminRateLimit, authenticateJWT([ROLES.ADMIN]), batchDeleteGames);
+
+// 只有管理员可以更新游戏状态
+app.patch('/games/:id/status', adminRateLimit, authenticateJWT([ROLES.ADMIN]), updateGameStatus);
+
+// 开发者和管理员都可以获取开发者游戏列表
+app.get('/developers/:developerId/games', developerRateLimit, authenticateJWT([ROLES.DEVELOPER, ROLES.ADMIN]), getDeveloperGames);
 
 // 404 处理
-app.use('*', (req, res) => {
-  logger.warn(`[GameService] 404 - 请求路径: ${req.originalUrl}`);
-  return res.status(404).json({
-    success: false,
-    error: {
-      code: 'NOT_FOUND',
-      message: '请求的资源不存在',
-    },
-  });
-});
+app.use('*', notFoundHandler);
+
+// 全局错误处理
+app.use(errorHandler);
 
 // 启动服务器
 const PORT = process.env.PORT || 3002;

@@ -1,7 +1,8 @@
 // 游戏服务 - 游戏系统需求模型
 import { DataTypes, Model } from 'sequelize';
 import sequelizeInstance from '../config/database.js';
-const sequelize = sequelizeInstance.sequelize;
+
+const { sequelize } = sequelizeInstance;
 
 class GameSystemRequirement extends Model {
   // 关联关系

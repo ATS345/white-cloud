@@ -1,4 +1,5 @@
 // 用户服务 - 错误处理工具
+/* eslint max-classes-per-file: 0 */
 
 /**
  * 自定义错误基类
@@ -132,6 +133,4 @@ export const createError = (type, message, details = null) => {
 /**
  * 验证错误是否为自定义错误
  */
-export const isCustomError = (error) => {
-  return error && error.isCustomError === true;
-};
+export const isCustomError = (error) => error && error.isCustomError === true;

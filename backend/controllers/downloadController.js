@@ -381,24 +381,24 @@ export const downloadFile = async (req, res) => {
 
     // 构建实际文件路径
     const basePath = process.env.DOWNLOAD_PATH || path.join(process.cwd(), 'downloads');
-    
+
     // 确定文件扩展名
     let fileExt;
     switch (platform) {
-      case 'windows':
-        fileExt = 'exe';
-        break;
-      case 'mac':
-        fileExt = 'dmg';
-        break;
-      case 'linux':
-        fileExt = 'deb';
-        break;
-      default:
-        fileExt = 'apk';
-        break;
+    case 'windows':
+      fileExt = 'exe';
+      break;
+    case 'mac':
+      fileExt = 'dmg';
+      break;
+    case 'linux':
+      fileExt = 'deb';
+      break;
+    default:
+      fileExt = 'apk';
+      break;
     }
-    
+
     const filePath = path.join(basePath, `${version.game_id}_${platform}_v${version.version_number}.${fileExt}`);
 
     // 检查文件是否存在
@@ -457,19 +457,19 @@ export const downloadFile = async (req, res) => {
       // 确定文件扩展名
       let fileExt;
       switch (platform) {
-        case 'windows':
-          fileExt = 'exe';
-          break;
-        case 'mac':
-          fileExt = 'dmg';
-          break;
-        case 'linux':
-          fileExt = 'deb';
-          break;
-        default:
-          fileExt = 'apk';
+      case 'windows':
+        fileExt = 'exe';
+        break;
+      case 'mac':
+        fileExt = 'dmg';
+        break;
+      case 'linux':
+        fileExt = 'deb';
+        break;
+      default:
+        fileExt = 'apk';
       }
-      
+
       res.writeHead(200, {
         'Content-Length': fileSize,
         'Content-Type': 'application/octet-stream',
@@ -587,24 +587,24 @@ export const downloadClient = async (req, res) => {
 
     // 构建客户端文件路径
     const basePath = process.env.CLIENT_DOWNLOAD_PATH || path.join(process.cwd(), 'client-downloads');
-    
+
     // 确定客户端文件名
     let clientFileName;
     switch (platform) {
-      case 'windows':
-        clientFileName = 'Windows.exe';
-        break;
-      case 'mac':
-        clientFileName = 'Mac.dmg';
-        break;
-      case 'linux':
-        clientFileName = 'Linux.deb';
-        break;
-      default:
-        clientFileName = 'Android.apk';
-        break;
+    case 'windows':
+      clientFileName = 'Windows.exe';
+      break;
+    case 'mac':
+      clientFileName = 'Mac.dmg';
+      break;
+    case 'linux':
+      clientFileName = 'Linux.deb';
+      break;
+    default:
+      clientFileName = 'Android.apk';
+      break;
     }
-    
+
     const filePath = path.join(basePath, `GameStore_Client_${clientFileName}`);
 
     // 检查文件是否存在

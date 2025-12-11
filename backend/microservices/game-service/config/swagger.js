@@ -280,7 +280,7 @@ const setupSwagger = (app) => {
       filter: true,
       docExpansion: 'none',
     },
-    customCss: `.swagger-ui .topbar { display: none }`,
+    customCss: '.swagger-ui .topbar { display: none }',
     customSiteTitle: '游戏服务 API 文档',
   }));
 

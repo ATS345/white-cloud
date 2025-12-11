@@ -12,10 +12,10 @@ const CACHE_PREFIX = 'game-service';
 const getGameList = async (req, res) => {
   try {
     logger.info(`[GameListController] 获取游戏列表请求，查询参数: ${JSON.stringify(req.query)}`);
-    
+
     // 构建缓存键
     const cacheKey = `${CACHE_PREFIX}:games:list:${JSON.stringify(req.query)}`;
-    
+
     // 尝试从缓存获取
     const cachedGames = await redisService.get(cacheKey);
     if (cachedGames) {
@@ -26,11 +26,13 @@ const getGameList = async (req, res) => {
         message: '获取游戏列表成功',
       });
     }
-    
+
     // 构建查询条件
-    const { category, tag, search, page = 1, limit = 10 } = req.query;
+    const {
+      category, tag, search, page = 1, limit = 10,
+    } = req.query;
     const offset = (parseInt(page, 10) - 1) * parseInt(limit, 10);
-    
+
     // 基础查询
     const query = {
       where: { status: 'approved' },
@@ -45,7 +47,7 @@ const getGameList = async (req, res) => {
       limit: parseInt(limit, 10),
       offset,
     };
-    
+
     // 分类过滤
     if (category) {
       query.include.push({
@@ -55,7 +57,7 @@ const getGameList = async (req, res) => {
         attributes: ['id', 'name'],
       });
     }
-    
+
     // 标签过滤
     if (tag) {
       query.include.push({
@@ -65,7 +67,7 @@ const getGameList = async (req, res) => {
         attributes: ['id', 'name'],
       });
     }
-    
+
     // 搜索过滤
     if (search) {
       query.where[Game.sequelize.Op.or] = [
@@ -73,10 +75,10 @@ const getGameList = async (req, res) => {
         { description: { [Game.sequelize.Op.like]: `%${search}%` } },
       ];
     }
-    
+
     // 执行查询
     const { count, rows } = await Game.findAndCountAll(query);
-    
+
     // 构建响应数据
     const responseData = {
       games: rows,
@@ -87,11 +89,11 @@ const getGameList = async (req, res) => {
         totalPages: Math.ceil(count / parseInt(limit, 10)),
       },
     };
-    
+
     // 缓存结果
     await redisService.set(cacheKey, responseData, 3600); // 缓存1小时
     logger.debug(`[GameListController] 缓存游戏列表，键: ${cacheKey}`);
-    
+
     logger.info(`[GameListController] 获取游戏列表成功，总数量: ${count}`);
     return res.status(200).json({
       success: true,
@@ -116,10 +118,10 @@ const getGameDetail = async (req, res) => {
   try {
     const { id } = req.params;
     logger.info(`[GameListController] 获取游戏详情请求，游戏ID: ${id}`);
-    
+
     // 构建缓存键
     const cacheKey = `${CACHE_PREFIX}:games:detail:${id}`;
-    
+
     // 尝试从缓存获取
     const cachedGame = await redisService.get(cacheKey);
     if (cachedGame) {
@@ -130,7 +132,7 @@ const getGameDetail = async (req, res) => {
         message: '获取游戏详情成功',
       });
     }
-    
+
     // 执行查询
     const game = await Game.findByPk(id, {
       include: [
@@ -141,7 +143,7 @@ const getGameDetail = async (req, res) => {
         exclude: ['created_at', 'updated_at'],
       },
     });
-    
+
     if (!game) {
       logger.warn(`[GameListController] 游戏不存在，ID: ${id}`);
       return res.status(404).json({
@@ -152,11 +154,11 @@ const getGameDetail = async (req, res) => {
         },
       });
     }
-    
+
     // 缓存结果
     await redisService.set(cacheKey, game, 3600); // 缓存1小时
     logger.debug(`[GameListController] 缓存游戏详情，键: ${cacheKey}`);
-    
+
     logger.info(`[GameListController] 获取游戏详情成功，游戏ID: ${id}`);
     return res.status(200).json({
       success: true,
@@ -180,10 +182,10 @@ const getGameDetail = async (req, res) => {
 const getCategories = async (req, res) => {
   try {
     logger.info('[GameListController] 获取游戏分类列表请求');
-    
+
     // 构建缓存键
     const cacheKey = `${CACHE_PREFIX}:categories:list`;
-    
+
     // 尝试从缓存获取
     const cachedCategories = await redisService.get(cacheKey);
     if (cachedCategories) {
@@ -194,17 +196,17 @@ const getCategories = async (req, res) => {
         message: '获取游戏分类列表成功',
       });
     }
-    
+
     // 执行查询
     const categories = await GameCategory.findAll({
       attributes: ['id', 'name', 'description'],
       order: [['name', 'ASC']],
     });
-    
+
     // 缓存结果
     await redisService.set(cacheKey, categories, 3600 * 24); // 缓存24小时
     logger.debug(`[GameListController] 缓存游戏分类列表，键: ${cacheKey}`);
-    
+
     logger.info(`[GameListController] 获取游戏分类列表成功，总数量: ${categories.length}`);
     return res.status(200).json({
       success: true,
@@ -228,10 +230,10 @@ const getCategories = async (req, res) => {
 const getTags = async (req, res) => {
   try {
     logger.info('[GameListController] 获取游戏标签列表请求');
-    
+
     // 构建缓存键
     const cacheKey = `${CACHE_PREFIX}:tags:list`;
-    
+
     // 尝试从缓存获取
     const cachedTags = await redisService.get(cacheKey);
     if (cachedTags) {
@@ -242,17 +244,17 @@ const getTags = async (req, res) => {
         message: '获取游戏标签列表成功',
       });
     }
-    
+
     // 执行查询
     const tags = await GameTag.findAll({
       attributes: ['id', 'name'],
       order: [['name', 'ASC']],
     });
-    
+
     // 缓存结果
     await redisService.set(cacheKey, tags, 3600 * 24); // 缓存24小时
     logger.debug(`[GameListController] 缓存游戏标签列表，键: ${cacheKey}`);
-    
+
     logger.info(`[GameListController] 获取游戏标签列表成功，总数量: ${tags.length}`);
     return res.status(200).json({
       success: true,
@@ -276,10 +278,10 @@ const getTags = async (req, res) => {
 const getPopularGames = async (req, res) => {
   try {
     logger.info('[GameListController] 获取热门游戏列表请求');
-    
+
     // 构建缓存键
     const cacheKey = `${CACHE_PREFIX}:games:popular`;
-    
+
     // 尝试从缓存获取
     const cachedGames = await redisService.get(cacheKey);
     if (cachedGames) {
@@ -290,7 +292,7 @@ const getPopularGames = async (req, res) => {
         message: '获取热门游戏列表成功',
       });
     }
-    
+
     // 执行查询，按评分和评论数量排序
     const games = await Game.findAll({
       where: { status: 'approved' },
@@ -303,11 +305,11 @@ const getPopularGames = async (req, res) => {
       ],
       limit: 10,
     });
-    
+
     // 缓存结果
     await redisService.set(cacheKey, games, 3600); // 缓存1小时
     logger.debug(`[GameListController] 缓存热门游戏列表，键: ${cacheKey}`);
-    
+
     logger.info(`[GameListController] 获取热门游戏列表成功，数量: ${games.length}`);
     return res.status(200).json({
       success: true,
@@ -331,10 +333,10 @@ const getPopularGames = async (req, res) => {
 const getNewGames = async (req, res) => {
   try {
     logger.info('[GameListController] 获取新游戏列表请求');
-    
+
     // 构建缓存键
     const cacheKey = `${CACHE_PREFIX}:games:new`;
-    
+
     // 尝试从缓存获取
     const cachedGames = await redisService.get(cacheKey);
     if (cachedGames) {
@@ -345,7 +347,7 @@ const getNewGames = async (req, res) => {
         message: '获取新游戏列表成功',
       });
     }
-    
+
     // 执行查询，按发布日期排序
     const games = await Game.findAll({
       where: { status: 'approved' },
@@ -355,11 +357,11 @@ const getNewGames = async (req, res) => {
       order: [['release_date', 'DESC']],
       limit: 10,
     });
-    
+
     // 缓存结果
     await redisService.set(cacheKey, games, 3600); // 缓存1小时
     logger.debug(`[GameListController] 缓存新游戏列表，键: ${cacheKey}`);
-    
+
     logger.info(`[GameListController] 获取新游戏列表成功，数量: ${games.length}`);
     return res.status(200).json({
       success: true,

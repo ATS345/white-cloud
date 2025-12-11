@@ -4,7 +4,6 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import { Sequelize } from 'sequelize';
 import logger from './config/logger.js';
 import redisClient from './config/redis.js';
 import authRoutes from './routes/authRoutes.js';
@@ -61,14 +60,14 @@ app.listen(PORT, () => {
 // 监听进程终止信号
 process.on('SIGINT', async () => {
   logger.info('[USER-SERVICE] 正在关闭服务器...');
-  
+
   try {
     // 关闭Redis连接
     if (redisClient && redisClient.disconnect) {
       await redisClient.disconnect();
       logger.info('[USER-SERVICE] Redis连接已关闭');
     }
-    
+
     process.exit(0);
   } catch (error) {
     logger.error('[USER-SERVICE] 关闭服务器时发生错误:', error);
@@ -78,14 +77,14 @@ process.on('SIGINT', async () => {
 
 process.on('SIGTERM', async () => {
   logger.info('[USER-SERVICE] 收到终止信号，正在关闭服务器...');
-  
+
   try {
     // 关闭Redis连接
     if (redisClient && redisClient.disconnect) {
       await redisClient.disconnect();
       logger.info('[USER-SERVICE] Redis连接已关闭');
     }
-    
+
     process.exit(0);
   } catch (error) {
     logger.error('[USER-SERVICE] 关闭服务器时发生错误:', error);

@@ -1,7 +1,8 @@
 // 游戏服务 - 开发者模型
 import { DataTypes, Model } from 'sequelize';
 import sequelizeInstance from '../config/database.js';
-const sequelize = sequelizeInstance.sequelize;
+
+const { sequelize } = sequelizeInstance;
 
 class Developer extends Model {
   // 关联关系

@@ -13,7 +13,7 @@ const logFormat = winston.format.combine(
     format: 'YYYY-MM-DD HH:mm:ss',
   }),
   winston.format.json(),
-  winston.format.prettyPrint()
+  winston.format.prettyPrint(),
 );
 
 // 日志传输
@@ -25,9 +25,7 @@ const transports = [
       winston.format.timestamp({
         format: 'YYYY-MM-DD HH:mm:ss',
       }),
-      winston.format.printf((info) => {
-        return `${info.timestamp} [${info.level}] ${info.message}`;
-      })
+      winston.format.printf((info) => `${info.timestamp} [${info.level}] ${info.message}`),
     ),
   }),
 ];
@@ -43,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
     new winston.transports.File({
       filename: 'logs/combined.log',
       format: logFormat,
-    })
+    }),
   );
 }
 
@@ -59,9 +57,7 @@ const logger = winston.createLogger({
         winston.format.timestamp({
           format: 'YYYY-MM-DD HH:mm:ss',
         }),
-        winston.format.printf((info) => {
-          return `${info.timestamp} [${info.level}] ${info.message}`;
-        })
+        winston.format.printf((info) => `${info.timestamp} [${info.level}] ${info.message}`),
       ),
     }),
     new winston.transports.File({
@@ -76,9 +72,7 @@ const logger = winston.createLogger({
         winston.format.timestamp({
           format: 'YYYY-MM-DD HH:mm:ss',
         }),
-        winston.format.printf((info) => {
-          return `${info.timestamp} [${info.level}] ${info.message}`;
-        })
+        winston.format.printf((info) => `${info.timestamp} [${info.level}] ${info.message}`),
       ),
     }),
     new winston.transports.File({

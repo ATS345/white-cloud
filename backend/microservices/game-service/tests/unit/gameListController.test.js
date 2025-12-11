@@ -1,15 +1,29 @@
 // 游戏服务 - 游戏列表控制器单元测试
-import { 
-  getGameList, 
-  getGameDetail, 
-  getCategories, 
-  getTags, 
-  getPopularGames, 
-  getNewGames 
+import {
+  getGameList,
+  getGameDetail,
+  getCategories,
+  getTags,
+  getPopularGames,
+  getNewGames,
 } from '../../controllers/gameListController.js';
+
+// 导入模拟的模型
+import Game from '../../models/Game.js';
+import GameCategory from '../../models/GameCategory.js';
+import GameTag from '../../models/GameTag.js';
 
 // 模拟依赖
 jest.mock('../../config/redis.js', () => ({
+  get: jest.fn().mockResolvedValue(null),
+  set: jest.fn().mockResolvedValue('OK'),
+  del: jest.fn().mockResolvedValue(1),
+  disconnect: jest.fn().mockResolvedValue(),
+}));
+
+// 修复ES模块默认导出的模拟
+jest.mock('../../config/redis.js', () => ({
+  __esModule: true,
   default: {
     get: jest.fn().mockResolvedValue(null),
     set: jest.fn().mockResolvedValue('OK'),
@@ -26,36 +40,25 @@ jest.mock('../../config/logger.js', () => ({
 }));
 
 // 直接在 mock 中定义模型，避免 hoisting 问题
-jest.mock('../../models/Game.js', () => {
-  return {
-    findAndCountAll: jest.fn(),
-    findAll: jest.fn(),
-    findByPk: jest.fn(),
-    sequelize: {
-      Op: {
-        or: Symbol('or'),
-        like: Symbol('like'),
-      },
+jest.mock('../../models/Game.js', () => ({
+  findAndCountAll: jest.fn(),
+  findAll: jest.fn(),
+  findByPk: jest.fn(),
+  sequelize: {
+    Op: {
+      or: Symbol('or'),
+      like: Symbol('like'),
     },
-  };
-});
+  },
+}));
 
-jest.mock('../../models/GameCategory.js', () => {
-  return {
-    findAll: jest.fn(),
-  };
-});
+jest.mock('../../models/GameCategory.js', () => ({
+  findAll: jest.fn(),
+}));
 
-jest.mock('../../models/GameTag.js', () => {
-  return {
-    findAll: jest.fn(),
-  };
-});
-
-// 导入模拟的模型
-import Game from '../../models/Game.js';
-import GameCategory from '../../models/GameCategory.js';
-import GameTag from '../../models/GameTag.js';
+jest.mock('../../models/GameTag.js', () => ({
+  findAll: jest.fn(),
+}));
 
 // 模拟请求和响应对象
 const mockReq = (params = {}, query = {}) => ({
@@ -297,8 +300,12 @@ describe('GameListController', () => {
 
       // 模拟热门游戏查询结果
       const mockGames = [
-        { id: 1, title: 'Game 1', rating: 4.8, review_count: 200 },
-        { id: 2, title: 'Game 2', rating: 4.7, review_count: 150 },
+        {
+          id: 1, title: 'Game 1', rating: 4.8, review_count: 200,
+        },
+        {
+          id: 2, title: 'Game 2', rating: 4.7, review_count: 150,
+        },
       ];
 
       // 设置模拟函数

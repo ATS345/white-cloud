@@ -109,7 +109,7 @@ const redisService = {
         if (cached && cached.expiry > Date.now()) {
           logger.debug(`[MemoryCache] 获取缓存成功，键: ${key}`);
           return cached.value;
-        } else if (cached) {
+        } if (cached) {
           // 缓存已过期，删除
           memoryCache.delete(key);
           logger.debug(`[MemoryCache] 缓存已过期，删除键: ${key}`);
@@ -184,14 +184,15 @@ const redisService = {
 setInterval(() => {
   const now = Date.now();
   let deletedCount = 0;
-  
-  for (const [key, cached] of memoryCache.entries()) {
+
+  // 使用Array方法替代for...of循环
+  Array.from(memoryCache.entries()).forEach(([key, cached]) => {
     if (cached.expiry < now) {
       memoryCache.delete(key);
-      deletedCount++;
+      deletedCount += 1;
     }
-  }
-  
+  });
+
   if (deletedCount > 0) {
     logger.debug(`[MemoryCache] 清理了${deletedCount}个过期缓存项`);
   }

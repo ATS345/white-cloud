@@ -1,7 +1,16 @@
 // 用户服务 - 用户路由
 import express from 'express';
 import { authenticate, authorize } from '../middleware/auth.js';
-import { getCurrentUser, updateCurrentUser, getUser, getUsers, updateUser, deleteUser, updateUserRole, getUserStatistics } from '../controllers/userController.js';
+import {
+  getCurrentUser,
+  updateCurrentUser,
+  getUser,
+  getUsers,
+  updateUser,
+  deleteUser,
+  updateUserRole,
+  getUserStatistics,
+} from '../controllers/userController.js';
 
 const router = express.Router();
 

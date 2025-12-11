@@ -1,7 +1,16 @@
 // 用户服务 - 认证路由
 import express from 'express';
 import { authenticate, refreshToken } from '../middleware/auth.js';
-import { login, register, refreshAccessToken, logout, verifyEmail, forgotPassword, resetPassword, changePassword } from '../controllers/authController.js';
+import {
+  login,
+  register,
+  refreshAccessToken,
+  logout,
+  verifyEmail,
+  forgotPassword,
+  resetPassword,
+  changePassword,
+} from '../controllers/authController.js';
 
 const router = express.Router();
 

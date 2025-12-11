@@ -29,13 +29,13 @@ const registerService = async () => {
   try {
     await consulClient.agent.service.register(serviceConfig);
     logger.info('[Consul] 服务注册成功');
-    
+
     // 监听服务停止事件，注销服务
     process.on('SIGINT', async () => {
       await deregisterService();
       process.exit(0);
     });
-    
+
     process.on('SIGTERM', async () => {
       await deregisterService();
       process.exit(0);
@@ -61,7 +61,7 @@ const getServiceInstances = async (serviceName) => {
   try {
     const services = await consulClient.agent.service.list();
     const instances = [];
-    
+
     for (const serviceId in services) {
       if (services[serviceId].Service === serviceName) {
         instances.push({
@@ -73,7 +73,7 @@ const getServiceInstances = async (serviceName) => {
         });
       }
     }
-    
+
     return instances;
   } catch (error) {
     logger.error(`[Consul] 获取服务${serviceName}实例失败:`, error);
@@ -87,15 +87,15 @@ const getHealthyServiceInstances = async (serviceName) => {
     const healthChecks = await consulClient.health.service(serviceName, {
       passing: true,
     });
-    
-    const instances = healthChecks.map(check => ({
+
+    const instances = healthChecks.map((check) => ({
       id: check.Service.ID,
       name: check.Service.Service,
       address: check.Service.Address,
       port: check.Service.Port,
       tags: check.Service.Tags,
     }));
-    
+
     return instances;
   } catch (error) {
     logger.error(`[Consul] 获取健康服务${serviceName}实例失败:`, error);
@@ -104,20 +104,20 @@ const getHealthyServiceInstances = async (serviceName) => {
 };
 
 // 负载均衡策略：轮询
-let serviceIndex = {};
+const serviceIndex = {};
 
 const getNextServiceInstance = (serviceName, instances) => {
   if (!instances || instances.length === 0) {
     return null;
   }
-  
+
   if (!serviceIndex[serviceName]) {
     serviceIndex[serviceName] = 0;
   }
-  
+
   const instance = instances[serviceIndex[serviceName]];
   serviceIndex[serviceName] = (serviceIndex[serviceName] + 1) % instances.length;
-  
+
   return instance;
 };
 

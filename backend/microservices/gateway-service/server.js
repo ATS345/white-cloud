@@ -55,7 +55,7 @@ app.use(limiter);
 
 // JWT认证中间件
 const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
+  const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
@@ -126,7 +126,7 @@ app.get('/docs', (req, res) => {
   res.json({
     success: true,
     message: 'API网关文档',
-    services: Object.keys(serviceMap).map(path => ({
+    services: Object.keys(serviceMap).map((path) => ({
       path,
       service: serviceMap[path],
     })),
@@ -137,12 +137,12 @@ app.get('/docs', (req, res) => {
 app.use('*', async (req, res) => {
   try {
     logger.info(`[Gateway] 收到请求: ${req.method} ${req.originalUrl}`);
-    
+
     // 获取请求路径
     const url = req.originalUrl;
-    
+
     // 检查是否需要认证
-    const isProtected = protectedRoutes.some(route => url.startsWith(route));
+    const isProtected = protectedRoutes.some((route) => url.startsWith(route));
     if (isProtected && !req.headers.authorization) {
       return res.status(401).json({
         success: false,
@@ -152,7 +152,7 @@ app.use('*', async (req, res) => {
         },
       });
     }
-    
+
     // 认证处理（如果需要）
     if (isProtected) {
       authenticateToken(req, res, () => {});
@@ -160,11 +160,11 @@ app.use('*', async (req, res) => {
         return;
       }
     }
-    
+
     // 查找对应的服务
     let targetService = null;
     let servicePath = '';
-    
+
     for (const [path, service] of Object.entries(serviceMap)) {
       if (url.startsWith(path)) {
         targetService = service;
@@ -172,7 +172,7 @@ app.use('*', async (req, res) => {
         break;
       }
     }
-    
+
     if (!targetService) {
       logger.error(`[Gateway] 未找到对应的服务: ${url}`);
       return res.status(404).json({
@@ -183,7 +183,7 @@ app.use('*', async (req, res) => {
         },
       });
     }
-    
+
     // 从Consul获取健康的服务实例
     const instances = await getHealthyServiceInstances(targetService);
     if (instances.length === 0) {
@@ -196,7 +196,7 @@ app.use('*', async (req, res) => {
         },
       });
     }
-    
+
     // 使用负载均衡策略选择服务实例
     const instance = getNextServiceInstance(targetService, instances);
     if (!instance) {
@@ -209,11 +209,11 @@ app.use('*', async (req, res) => {
         },
       });
     }
-    
+
     // 构建目标URL
     const targetUrl = `http://${instance.address}:${instance.port}${servicePath}`;
     logger.info(`[Gateway] 转发请求到: ${targetUrl}`);
-    
+
     // 转发请求
     const response = await axios({
       method: req.method,
@@ -229,13 +229,13 @@ app.use('*', async (req, res) => {
       params: req.query,
       timeout: 5000,
     });
-    
+
     // 转发响应
     res.status(response.status).json(response.data);
     logger.info(`[Gateway] 请求处理成功: ${req.method} ${req.originalUrl} -> ${response.status}`);
   } catch (error) {
     logger.error(`[Gateway] 请求处理失败: ${error.message}`);
-    
+
     // 处理不同类型的错误
     if (error.code === 'ECONNABORTED') {
       return res.status(504).json({
@@ -246,12 +246,12 @@ app.use('*', async (req, res) => {
         },
       });
     }
-    
+
     if (error.response) {
       // 服务返回了错误响应
       return res.status(error.response.status).json(error.response.data);
     }
-    
+
     // 其他错误
     return res.status(500).json({
       success: false,
@@ -292,7 +292,7 @@ const startServer = async () => {
   try {
     // 注册服务到Consul
     await registerService();
-    
+
     // 启动Express服务器
     app.listen(PORT, '0.0.0.0', () => {
       logger.info(`[Gateway] 服务器已启动，端口: ${PORT}`);

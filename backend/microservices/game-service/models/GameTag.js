@@ -1,7 +1,8 @@
 // 游戏服务 - 游戏标签模型
 import { DataTypes, Model } from 'sequelize';
 import sequelizeInstance from '../config/database.js';
-const sequelize = sequelizeInstance.sequelize;
+
+const { sequelize } = sequelizeInstance;
 
 class GameTag extends Model {
   // 关联关系

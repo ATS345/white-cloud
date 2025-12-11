@@ -39,15 +39,15 @@ const initDatabase = async () => {
   try {
     logger.info('[DATABASE] 开始初始化数据库连接...');
     logger.info('[DATABASE] 主数据库配置：', dbConfig);
-    
+
     // 创建主数据库连接
     const connection = new Sequelize(dbConfig);
     sequelize = connection;
-    
+
     // 测试连接
     await connection.authenticate();
     logger.info('[DATABASE] 主数据库连接成功');
-    
+
     // 如果配置了只读副本，则添加只读副本
     if (process.env.DB_REPLICA_HOST) {
       logger.info('[DATABASE] 只读副本配置：', readReplicaConfig);
@@ -56,16 +56,16 @@ const initDatabase = async () => {
         newOptions.replica = true;
         return newOptions;
       });
-      
+
       // 添加只读副本
       connection.options.replication = {
         write: dbConfig,
         read: [readReplicaConfig],
       };
-      
+
       logger.info('[DATABASE] 只读副本配置成功');
     }
-    
+
     return connection;
   } catch (error) {
     logger.error('[DATABASE] 数据库连接失败：', error);

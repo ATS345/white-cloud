@@ -1,7 +1,6 @@
 // 用户服务 - 用户控制器
-import logger from '../config/logger.js';
 import { Op } from 'sequelize';
-import User from '../models/User.js';
+import { User } from '../models/User.js';
 import { BadRequestError, ForbiddenError, NotFoundError } from '../utils/errors.js';
 
 /**
@@ -9,8 +8,8 @@ import { BadRequestError, ForbiddenError, NotFoundError } from '../utils/errors.
  */
 export const getCurrentUser = async (req, res, next) => {
   try {
-    const user = req.user;
-    
+    const { user } = req;
+
     res.status(200).json({
       success: true,
       message: '获取用户信息成功',
@@ -40,9 +39,11 @@ export const getCurrentUser = async (req, res, next) => {
  */
 export const updateCurrentUser = async (req, res, next) => {
   try {
-    const user = req.user;
-    const { nickname, avatarUrl, gender, birthday, location, bio, website } = req.body;
-    
+    const { user } = req;
+    const {
+      nickname, avatarUrl, gender, birthday, location, bio, website,
+    } = req.body;
+
     // 构建更新对象
     const updateData = {};
     if (nickname !== undefined) updateData.nickname = nickname;
@@ -52,10 +53,10 @@ export const updateCurrentUser = async (req, res, next) => {
     if (location !== undefined) updateData.location = location;
     if (bio !== undefined) updateData.bio = bio;
     if (website !== undefined) updateData.website = website;
-    
+
     // 更新用户信息
     const updatedUser = await user.update(updateData);
-    
+
     res.status(200).json({
       success: true,
       message: '更新用户信息成功',
@@ -82,8 +83,10 @@ export const updateCurrentUser = async (req, res, next) => {
  */
 export const getUsers = async (req, res, next) => {
   try {
-    const { page = 1, limit = 10, search = '', role, status } = req.query;
-    
+    const {
+      page = 1, limit = 10, search = '', role, status,
+    } = req.query;
+
     // 构建查询条件
     const where = {};
     if (search) {
@@ -94,7 +97,7 @@ export const getUsers = async (req, res, next) => {
     }
     if (role) where.role = role;
     if (status) where.status = status;
-    
+
     // 分页查询
     const offset = (page - 1) * limit;
     const { count, rows: users } = await User.findAndCountAll({
@@ -113,7 +116,7 @@ export const getUsers = async (req, res, next) => {
         'lastLoginAt',
       ],
     });
-    
+
     res.status(200).json({
       success: true,
       message: '获取用户列表成功',
@@ -138,7 +141,7 @@ export const getUsers = async (req, res, next) => {
 export const getUser = async (req, res, next) => {
   try {
     const { userId } = req.params;
-    
+
     const user = await User.findByPk(userId, {
       attributes: [
         'id',
@@ -160,11 +163,11 @@ export const getUser = async (req, res, next) => {
         'isVerified',
       ],
     });
-    
+
     if (!user) {
       throw new NotFoundError('用户不存在', 'USER_NOT_FOUND');
     }
-    
+
     res.status(200).json({
       success: true,
       message: '获取用户信息成功',
@@ -181,14 +184,16 @@ export const getUser = async (req, res, next) => {
 export const updateUser = async (req, res, next) => {
   try {
     const { userId } = req.params;
-    const { email, nickname, avatarUrl, gender, birthday, location, bio, website, status } = req.body;
-    
+    const {
+      email, nickname, avatarUrl, gender, birthday, location, bio, website, status,
+    } = req.body;
+
     // 查找用户
     const user = await User.findByPk(userId);
     if (!user) {
       throw new NotFoundError('用户不存在', 'USER_NOT_FOUND');
     }
-    
+
     // 构建更新对象
     const updateData = {};
     if (email !== undefined) updateData.email = email;
@@ -200,10 +205,10 @@ export const updateUser = async (req, res, next) => {
     if (bio !== undefined) updateData.bio = bio;
     if (website !== undefined) updateData.website = website;
     if (status !== undefined) updateData.status = status;
-    
+
     // 更新用户信息
     const updatedUser = await user.update(updateData);
-    
+
     res.status(200).json({
       success: true,
       message: '更新用户信息成功',
@@ -234,26 +239,26 @@ export const updateUserRole = async (req, res, next) => {
   try {
     const { userId } = req.params;
     const { role } = req.body;
-    
+
     // 验证角色
     if (!role || !['user', 'developer', 'admin'].includes(role)) {
       throw new BadRequestError('无效的角色', 'INVALID_ROLE');
     }
-    
+
     // 查找用户
     const user = await User.findByPk(userId);
     if (!user) {
       throw new NotFoundError('用户不存在', 'USER_NOT_FOUND');
     }
-    
+
     // 不允许修改自己的角色为非管理员
     if (user.id === req.user.id && role !== 'admin') {
       throw new ForbiddenError('不允许修改自己的角色为非管理员', 'CANNOT_REVOKE_OWN_ADMIN');
     }
-    
+
     // 更新角色
     const updatedUser = await user.update({ role });
-    
+
     res.status(200).json({
       success: true,
       message: '更新用户角色成功',
@@ -274,21 +279,21 @@ export const updateUserRole = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
   try {
     const { userId } = req.params;
-    
+
     // 查找用户
     const user = await User.findByPk(userId);
     if (!user) {
       throw new NotFoundError('用户不存在', 'USER_NOT_FOUND');
     }
-    
+
     // 不允许删除自己
     if (user.id === req.user.id) {
       throw new ForbiddenError('不允许删除自己', 'CANNOT_DELETE_SELF');
     }
-    
+
     // 删除用户
     await user.destroy();
-    
+
     res.status(200).json({
       success: true,
       message: '删除用户成功',
@@ -303,12 +308,12 @@ export const deleteUser = async (req, res, next) => {
  */
 export const getUserStatistics = async (req, res, next) => {
   try {
-    const user = req.user;
-    
+    const { user } = req;
+
     // 这里简化处理，实际应该从其他服务获取统计信息
     // 例如：从游戏库服务获取购买游戏数量和游玩时长
     // 从评价服务获取评价数量
-    
+
     res.status(200).json({
       success: true,
       message: '获取用户统计信息成功',

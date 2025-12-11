@@ -4,11 +4,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // 获取当前文件的目录
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const currentFilename = fileURLToPath(import.meta.url);
+const currentDirname = path.dirname(currentFilename);
 
 // 创建日志目录路径
-const logDir = path.join(__dirname, '..', 'logs');
+const logDir = path.join(currentDirname, '..', 'logs');
 
 // 日志级别：debug, info, warn, error
 const logger = winston.createLogger({
