@@ -2411,3 +2411,7 @@
 {"level":"error","message":"[Redis] 连接错误:","service":"game-service","timestamp":"2025-12-11 23:49:32"}
 {"level":"error","message":"[Redis] 连接错误:","service":"game-service","timestamp":"2025-12-11 23:49:37"}
 {"level":"error","message":"[Redis] 连接错误:","service":"game-service","timestamp":"2025-12-11 23:49:42"}
+{"level":"error","message":"[Redis] 连接错误:","service":"game-service","timestamp":"2025-12-11 23:49:47"}
+{"level":"error","message":"[Redis] 连接错误:","service":"game-service","timestamp":"2025-12-11 23:49:52"}
+{"level":"error","message":"[Redis] 连接错误:","service":"game-service","timestamp":"2025-12-11 23:49:57"}
+{"level":"error","message":"[Redis] 连接错误:","service":"game-service","timestamp":"2025-12-11 23:50:02"}
