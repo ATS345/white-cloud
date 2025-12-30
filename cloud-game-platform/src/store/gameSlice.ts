@@ -34,46 +34,46 @@ const initialState: GameState = {
 };
 
 // 异步获取游戏列表
-export const fetchGames = createAsyncThunk(
-  'game/fetchGames',
-  async (params: {
-    page?: number;
-    pageSize?: number;
-    search?: string;
-    type?: string;
-    sortBy?: string;
-  } | undefined, thunkAPI) => {
-    const state = thunkAPI.getState() as { game: GameState };
-    const {
-      page = state.game.page,
-      pageSize = state.game.pageSize,
-      search = state.game.searchTerm,
-      type = state.game.selectedCategory,
-      sortBy = state.game.sortBy,
-    } = params || {};
-    
-    const response = await getGames({ page, pageSize, search, type, sortBy });
-    return response.data;
-  }
-);
+  export const fetchGames = createAsyncThunk(
+    'game/fetchGames',
+    async (params: {
+      page?: number;
+      pageSize?: number;
+      search?: string;
+      type?: string;
+      sortBy?: string;
+    } | undefined, thunkAPI) => {
+      const state = thunkAPI.getState() as { game: GameState };
+      const {
+        page = state.game.page,
+        pageSize = state.game.pageSize,
+        search = state.game.searchTerm,
+        type = state.game.selectedCategory,
+        sortBy = state.game.sortBy,
+      } = params || {};
+      
+      const response = await getGames({ page, pageSize, search, type, sortBy });
+      return response;
+    }
+  );
 
-// 异步获取游戏详情
-export const fetchGameDetail = createAsyncThunk(
-  'game/fetchGameDetail',
-  async (id: number) => {
-    const response = await getGameDetail(id);
-    return response.data;
-  }
-);
+  // 异步获取游戏详情
+  export const fetchGameDetail = createAsyncThunk(
+    'game/fetchGameDetail',
+    async (id: number) => {
+      const response = await getGameDetail(id);
+      return response;
+    }
+  );
 
-// 异步获取游戏库
-export const fetchGameLibrary = createAsyncThunk(
-  'game/fetchGameLibrary',
-  async () => {
-    const response = await getGameLibrary();
-    return response.data;
-  }
-);
+  // 异步获取游戏库
+  export const fetchGameLibrary = createAsyncThunk(
+    'game/fetchGameLibrary',
+    async () => {
+      const response = await getGameLibrary();
+      return response;
+    }
+  );
 
 // 创建游戏slice
 const gameSlice = createSlice({

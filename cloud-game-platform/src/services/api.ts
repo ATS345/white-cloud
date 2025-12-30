@@ -1,4 +1,5 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { generateCsrfToken, getCsrfToken } from '../utils/security';
 
 // 请求缓存接口
@@ -24,9 +25,6 @@ class ApiService {
   private api: AxiosInstance;
   private cache: RequestCache = {};
   private requestQueue: RequestQueue = {};
-  private readonly DEFAULT_RETRY = 2;
-  private readonly DEFAULT_RETRY_DELAY = 1000;
-  private readonly DEFAULT_CACHE_TIME = 30000; // 30秒
   private readonly DEFAULT_TIMEOUT = 8000;
 
   constructor() {
@@ -64,12 +62,7 @@ class ApiService {
   }
 
   // 请求处理
-  private handleRequest(config: ApiConfig): ApiConfig {
-    // 设置默认重试次数
-    config.retry = config.retry || this.DEFAULT_RETRY;
-    config.retryDelay = config.retryDelay || this.DEFAULT_RETRY_DELAY;
-    config.cacheTime = config.cacheTime || this.DEFAULT_CACHE_TIME;
-
+  private handleRequest(config: any): any {
     // 从本地存储获取token
     const token = localStorage.getItem('token');
     if (token) {
@@ -93,20 +86,11 @@ class ApiService {
     config.signal = controller.signal;
 
     // 将请求控制器添加到队列
-    const requestKey = this.generateRequestKey(config);
+    const requestKey = this.generateRequestKey(config as ApiConfig);
     if (!this.requestQueue[requestKey]) {
       this.requestQueue[requestKey] = [];
     }
     this.requestQueue[requestKey].push(controller);
-
-    // 检查缓存
-    if (!config.skipCache) {
-      const cacheKey = this.generateRequestKey(config);
-      if (this.cache[cacheKey] && Date.now() - this.cache[cacheKey].timestamp < config.cacheTime!) {
-        // 返回缓存数据
-        return Promise.resolve(this.cache[cacheKey].data) as any;
-      }
-    }
 
     return config;
   }
@@ -255,7 +239,6 @@ class ApiService {
     return this.api.get(url, {
       ...config,
       responseType: 'blob',
-      skipCache: true,
     });
   }
 }

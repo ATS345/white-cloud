@@ -68,9 +68,8 @@ export const sanitizeHtml = (html: string): string => {
     return '';
   }
   
-  // 1. 使用DOMPurify的核心思想，定义安全标签和属性
+  // 1. 使用DOMPurify的核心思想，定义安全标签
   const safeTags = ['b', 'i', 'u', 'em', 'strong', 'p', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'a', 'img'];
-  const safeAttributes = ['href', 'src', 'alt', 'title', 'target'];
   
   // 2. 替换危险字符
   let sanitized = html
@@ -101,15 +100,24 @@ export const sanitizeHtml = (html: string): string => {
 export const hashPassword = async (password: string, salt?: string): Promise<string> => {
   try {
     // 生成盐值
-    const generatedSalt = salt || crypto.getRandomValues(new Uint8Array(16)).toString('hex');
+    let generatedSalt: string;
+    if (salt) {
+      generatedSalt = salt;
+    } else {
+      const saltBuffer = crypto.getRandomValues(new Uint8Array(16));
+      generatedSalt = Array.from(saltBuffer)
+        .map((b: number) => b.toString(16).padStart(2, '0'))
+        .join('');
+    }
     
     // 将密码和盐值组合
     const passwordData = new TextEncoder().encode(password + generatedSalt);
     
     // 使用SHA-256哈希
     const hashBuffer = await crypto.subtle.digest('SHA-256', passwordData);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    const hashHex = Array.from(new Uint8Array(hashBuffer))
+      .map((b: number) => b.toString(16).padStart(2, '0'))
+      .join('');
     
     // 返回盐值和哈希的组合
     return `${generatedSalt}:${hashHex}`;
@@ -125,7 +133,7 @@ export const hashPassword = async (password: string, salt?: string): Promise<str
 // 密码验证
 export const verifyPassword = async (password: string, storedHash: string): Promise<boolean> => {
   try {
-    const [salt, hash] = storedHash.split(':');
+    const [salt] = storedHash.split(':');
     const newHash = await hashPassword(password, salt);
     return newHash === storedHash;
   } catch (error) {
@@ -135,7 +143,7 @@ export const verifyPassword = async (password: string, storedHash: string): Prom
 };
 
 // JWT令牌验证
-export const verifyJwtToken = (token: string, secret?: string): boolean => {
+export const verifyJwtToken = (token: string): boolean => {
   try {
     // 简单的JWT验证，检查格式和过期时间
     const [header, payload, signature] = token.split('.');

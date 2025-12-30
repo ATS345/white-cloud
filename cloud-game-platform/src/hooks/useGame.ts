@@ -26,6 +26,15 @@ import {
   getDownloadProgress
 } from '../services/games';
 
+// 获取下载进度的自定义Hook
+export const useDownloadProgress = (downloadId: number) => {
+  return useQuery({
+    queryKey: ['downloadProgress', downloadId],
+    queryFn: () => getDownloadProgress(downloadId),
+    enabled: !!downloadId,
+  });
+};
+
 // 游戏相关自定义钩子
 export const useGame = () => {
   const dispatch = useAppDispatch();
@@ -129,12 +138,7 @@ export const useGame = () => {
     },
   });
 
-  // 获取下载进度的函数
-  const getDownloadProgressQuery = (downloadId: number) => useQuery({
-    queryKey: ['downloadProgress', downloadId],
-    queryFn: () => getDownloadProgress(downloadId),
-    enabled: !!downloadId,
-  });
+
 
   // 加载游戏列表
   const loadGames = useCallback((params?: {
@@ -251,7 +255,6 @@ export const useGame = () => {
     handlePauseDownload,
     handleResumeDownload,
     handleDeleteDownload,
-    getDownloadProgressQuery,
     
     // 下载相关状态
     isDownloading: downloadGameMutation.isPending,

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Card, Tabs, Button, Row, Col, Image, Descriptions, Tag, Rate, List, Divider, Avatar } from 'antd';
-import { DownloadOutlined, ShareAltOutlined, HeartOutlined, HeartFilled, StarOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { Card, Tabs, Button, Row, Col, Image, Descriptions, Tag, Rate, List, Divider, Avatar, Form, Input, Progress, Statistic } from 'antd';
+import { DownloadOutlined, ShareAltOutlined, HeartOutlined, HeartFilled, StarOutlined, ShoppingCartOutlined, StarFilled } from '@ant-design/icons';
 import './index.css';
 
 const { TabPane } = Tabs;
@@ -8,12 +8,21 @@ const { TabPane } = Tabs;
 const GameDetail: React.FC = () => {
   const [liked, setLiked] = useState(false);
   const [commentVisible, setCommentVisible] = useState(false);
+  const [form] = Form.useForm();
 
   const game = {
     id: 1,
     name: '原神',
     type: '开放世界',
     rating: 4.8,
+    ratingCount: 12345,
+    ratingDistribution: [
+      { star: 5, count: 8500 },
+      { star: 4, count: 2500 },
+      { star: 3, count: 1000 },
+      { star: 2, count: 200 },
+      { star: 1, count: 145 },
+    ],
     price: 0,
     developer: '米哈游',
     publisher: '米哈游',
@@ -61,7 +70,21 @@ const GameDetail: React.FC = () => {
         rating: 4,
         time: '2024-01-02 14:30:00',
       },
+      {
+        id: 3,
+        user: '王五',
+        avatar: 'https://picsum.photos/seed/user3/40/40',
+        content: '音乐和剧情都很棒，就是更新有点慢，期待更多内容。',
+        rating: 4,
+        time: '2024-01-03 09:15:00',
+      },
     ],
+  };
+
+  const handleCommentSubmit = (values: any) => {
+    console.log('评论提交:', values);
+    form.resetFields();
+    setCommentVisible(false);
   };
 
   return (
@@ -184,10 +207,118 @@ const GameDetail: React.FC = () => {
         </TabPane>
         <TabPane tab="玩家评论" key="5">
           <div className="comments-section">
+            {/* 评分统计 */}
+            <Card className="rating-stats-card">
+              <Row gutter={[24, 16]}>
+                <Col xs={24} md={8}>
+                  <div className="overall-rating">
+                    <Statistic
+                      title="综合评分"
+                      value={game.rating}
+                      suffix={
+                        <div className="rating-stars">
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            index < Math.floor(game.rating) ? (
+                              <StarFilled key={index} style={{ color: '#faad14', marginLeft: 4 }} />
+                            ) : index < game.rating ? (
+                              <StarOutlined key={index} style={{ color: '#faad14', marginLeft: 4 }} />
+                            ) : (
+                              <StarOutlined key={index} style={{ color: '#d9d9d9', marginLeft: 4 }} />
+                            )
+                          ))}
+                        </div>
+                      }
+                      precision={1}
+                      valueStyle={{ fontSize: '48px', color: '#faad14', fontWeight: 700 }}
+                    />
+                    <div className="rating-count">共 {game.ratingCount} 条评价</div>
+                  </div>
+                </Col>
+                <Col xs={24} md={16}>
+                  <div className="rating-distribution">
+                    <h3>评分分布</h3>
+                    {game.ratingDistribution.map((item) => {
+                      const percentage = (item.count / game.ratingCount) * 100;
+                      return (
+                        <div key={item.star} className="rating-bar">
+                          <div className="rating-bar-header">
+                            <span className="star-count">{item.star}星</span>
+                            <span className="count-number">{item.count}</span>
+                          </div>
+                          <Progress
+                            percent={percentage}
+                            strokeColor={{
+                              '0%': '#d9d9d9',
+                              '100%': '#faad14',
+                            }}
+                            showInfo={false}
+                            className="rating-progress"
+                          />
+                          <span className="percentage">{percentage.toFixed(1)}%</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </Col>
+              </Row>
+            </Card>
+            
+            {/* 评论表单 */}
+            {commentVisible && (
+              <Card className="comment-form-card">
+                <h3>写评论</h3>
+                <Form
+                  form={form}
+                  onFinish={handleCommentSubmit}
+                  layout="vertical"
+                >
+                  <Row gutter={[16, 16]}>
+                    <Col xs={24} sm={12}>
+                      <Form.Item
+                        name="rating"
+                        label="评分"
+                        rules={[{ required: true, message: '请选择评分' }]}
+                      >
+                        <Rate />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Form.Item
+                    name="title"
+                    label="标题"
+                    rules={[{ required: true, message: '请输入评论标题' }]}
+                  >
+                    <Input placeholder="请输入评论标题" />
+                  </Form.Item>
+                  <Form.Item
+                    name="content"
+                    label="评论内容"
+                    rules={[{ required: true, message: '请输入评论内容' }]}
+                  >
+                    <Input.TextArea
+                      rows={4}
+                      placeholder="请输入您的游戏体验和评价"
+                    />
+                  </Form.Item>
+                  <Form.Item>
+                    <div className="comment-form-actions">
+                      <Button type="primary" htmlType="submit">
+                        提交评论
+                      </Button>
+                      <Button onClick={() => setCommentVisible(false)}>
+                        取消
+                      </Button>
+                    </div>
+                  </Form.Item>
+                </Form>
+              </Card>
+            )}
+            
+            {/* 评论列表 */}
             <div className="comments-header">
-              <h2>玩家评论</h2>
+              <h3>玩家评论</h3>
               <Button type="primary" onClick={() => setCommentVisible(!commentVisible)}>
-                写评论
+                {commentVisible ? '取消写评论' : '写评论'}
               </Button>
             </div>
             <Divider />
@@ -208,6 +339,11 @@ const GameDetail: React.FC = () => {
                   />
                 </List.Item>
               )}
+              pagination={{
+                pageSize: 5,
+                total: game.comments.length,
+                showSizeChanger: false,
+              }}
             />
           </div>
         </TabPane>

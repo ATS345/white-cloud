@@ -100,6 +100,45 @@
   --sidebar-bg: #001529;
   --hover-bg: var(--gray-50);
   --active-bg: var(--primary-bg);
+  --header-height: 64px;
+  --sidebar-width: 200px;
+}
+
+/* 响应式断点 */
+@media (min-width: 0px) {
+  :root {
+    --breakpoint-xs: 0px;
+  }
+}
+
+@media (min-width: 480px) {
+  :root {
+    --breakpoint-sm: 480px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --breakpoint-md: 768px;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --breakpoint-lg: 992px;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --breakpoint-xl: 1200px;
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --breakpoint-xxl: 1600px;
+  }
 }
 
 /* 深色主题 */

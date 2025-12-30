@@ -1,0 +1,215 @@
+/* Logo组件样式 */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo-container:hover {
+  transform: translateY(-2px);
+}
+
+/* Logo尺寸变体 */
+.logo-container.small {
+  gap: 8px;
+}
+
+.logo-container.medium {
+  gap: 12px;
+}
+
+.logo-container.large {
+  gap: 16px;
+}
+
+/* SVG样式 */
+.cloud-logo {
+  transition: all var(--transition-normal);
+}
+
+.logo-container:hover .cloud-logo {
+  transform: scale(1.05) rotate(5deg);
+}
+
+.logo-container.small .cloud-logo {
+  width: 32px;
+  height: 32px;
+}
+
+.logo-container.medium .cloud-logo {
+  width: 48px;
+  height: 48px;
+}
+
+.logo-container.large .cloud-logo {
+  width: 64px;
+  height: 64px;
+}
+
+/* 星星动画 */
+.logo-stars path {
+  animation: twinkle 2s ease-in-out infinite alternate;
+}
+
+.logo-stars path:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.logo-stars path:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.logo-stars path:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.6;
+    transform: scale(0.8) rotate(0deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(10deg);
+  }
+}
+
+/* 文字样式 */
+.logo-text {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all var(--transition-normal);
+  letter-spacing: 0.5px;
+}
+
+.logo-container:hover .logo-text {
+  transform: translateX(4px);
+}
+
+.logo-container.small .logo-text {
+  font-size: var(--font-size-md);
+  letter-spacing: 0.3px;
+}
+
+.logo-container.medium .logo-text {
+  font-size: var(--font-size-lg);
+  letter-spacing: 0.5px;
+}
+
+.logo-container.large .logo-text {
+  font-size: var(--font-size-xxl);
+  letter-spacing: 1px;
+}
+
+/* 深色主题适配 */
+[data-theme="dark"] .cloud-logo {
+  filter: drop-shadow(0 4px 8px rgba(138, 152, 232, 0.4));
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .logo-container.large {
+    gap: 12px;
+  }
+  
+  .logo-container.large .cloud-logo {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .logo-container.large .logo-text {
+    font-size: var(--font-size-xl);
+  }
+}
+
+@media (max-width: 576px) {
+  .logo-container {
+    gap: 8px;
+  }
+  
+  .logo-container .cloud-logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .logo-container .logo-text {
+    font-size: var(--font-size-md);
+  }
+  
+  /* 在移动端可以隐藏文字以节省空间 */
+  .logo-container.mobile-hidden-text .logo-text {
+    display: none;
+  }
+}
+
+/* 加载动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* 悬停时的云朵变形效果 */
+@keyframes cloudFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(2deg);
+  }
+}
+
+.logo-container:hover .cloud-logo {
+  animation: cloudFloat 1s ease-in-out infinite;
+}
+
+/* 文字渐变动画 */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.logo-text {
+  background-size: 200% auto;
+  animation: gradientShift 3s ease infinite;
+}
+
+/* 打印样式 */
+@media print {
+  .logo-container {
+    filter: none;
+  }
+  
+  .cloud-logo {
+    filter: grayscale(100%);
+  }
+  
+  .logo-text {
+    background: none;
+    color: var(--text-color);
+    -webkit-text-fill-color: var(--text-color);
+  }
+}

@@ -1,0 +1,419 @@
+/* 游戏卡片样式 */
+.game-link {
+  text-decoration: none;
+  display: block;
+  transition: all var(--transition-normal);
+}
+
+.game-card {
+  border: none !important;
+  border-radius: var(--border-radius-lg) !important;
+  overflow: hidden;
+  transition: all var(--transition-normal) !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  position: relative;
+}
+
+.game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-gradient);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.game-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: var(--shadow-xl) !important;
+}
+
+.game-card:hover::before {
+  opacity: 1;
+}
+
+/* 游戏卡片封面 */
+.game-card-cover {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+}
+
+.game-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all var(--transition-normal);
+}
+
+.game-card:hover .game-card-image {
+  transform: scale(1.05);
+}
+
+/* 游戏徽章 */
+.game-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--white);
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+  animation: badgePulse 2s ease-in-out infinite alternate;
+}
+
+.game-badge.new {
+  background: linear-gradient(135deg, var(--success-color) 0%, #389e0d 100%);
+}
+
+.game-badge.hot {
+  background: linear-gradient(135deg, var(--warning-color) 0%, #d48806 100%);
+}
+
+.game-badge.discount {
+  background: linear-gradient(135deg, var(--error-color) 0%, #cf1322 100%);
+}
+
+@keyframes badgePulse {
+  from {
+    transform: scale(1);
+    box-shadow: var(--shadow-md);
+  }
+  to {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* 悬停覆盖层 */
+.game-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(2px);
+}
+
+.game-card:hover .game-card-overlay {
+  opacity: 1;
+}
+
+/* 游戏卡片按钮 */
+.game-card-button {
+  border-radius: var(--border-radius-full) !important;
+  padding: 8px 32px !important;
+  font-size: var(--font-size-md) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  background: var(--primary-gradient) !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  transition: all var(--transition-normal) !important;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.game-card:hover .game-card-button {
+  transform: translateY(0) !important;
+  opacity: 1;
+  animation: buttonSlideUp 0.3s ease forwards;
+}
+
+.game-card-button:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5) !important;
+}
+
+@keyframes buttonSlideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 游戏卡片内容 */
+.game-card .ant-card-body {
+  padding: var(--spacing-4) !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 游戏标题 */
+.game-card-title {
+  font-size: var(--font-size-md) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  margin-bottom: var(--spacing-3) !important;
+  color: var(--text-color) !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color var(--transition-normal) !important;
+}
+
+.game-card:hover .game-card-title {
+  color: var(--primary-color) !important;
+}
+
+/* 游戏元信息 */
+.game-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-3);
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.game-type-tag {
+  font-size: var(--font-size-xs) !important;
+  padding: 2px 8px !important;
+  border-radius: 12px !important;
+  background: var(--primary-bg) !important;
+  color: var(--primary-color) !important;
+  border: none !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+.game-rating {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: var(--font-size-xs);
+  color: var(--warning-color);
+  font-weight: var(--font-weight-medium);
+}
+
+.rating-icon {
+  font-size: var(--font-size-xs);
+}
+
+/* 价格信息 */
+.game-price-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+}
+
+.price-free {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--success-color);
+}
+
+.price-normal {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--error-color);
+}
+
+.price-discounted {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--error-color);
+}
+
+.price-original {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  text-decoration: line-through;
+}
+
+/* 游戏标签 */
+.game-tags-container {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.game-tag {
+  font-size: var(--font-size-xs) !important;
+  padding: 2px 8px !important;
+  border-radius: 12px !important;
+  background: var(--bg-color-light) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.game-tag.more {
+  background: var(--primary-bg) !important;
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.game-card:hover .game-tag {
+  background: var(--active-bg) !important;
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* 深色主题适配 */
+[data-theme="dark"] .game-card {
+  background: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .game-type-tag {
+  background: var(--primary-bg) !important;
+  color: var(--primary-color) !important;
+}
+
+[data-theme="dark"] .game-tag {
+  background: var(--bg-color-light) !important;
+  color: var(--text-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .game-card:hover .game-tag {
+  background: var(--active-bg) !important;
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .game-card-cover {
+    height: 180px;
+  }
+  
+  .game-card-button {
+    padding: 6px 24px !important;
+    font-size: var(--font-size-sm) !important;
+  }
+  
+  .game-card-title {
+    font-size: var(--font-size-md) !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .game-card-cover {
+    height: 160px;
+  }
+  
+  .game-card .ant-card-body {
+    padding: var(--spacing-3) !important;
+  }
+  
+  .game-card-title {
+    font-size: var(--font-size-sm) !important;
+    margin-bottom: var(--spacing-2) !important;
+  }
+  
+  .game-card-meta {
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .game-price-container {
+    margin-bottom: var(--spacing-2);
+  }
+}
+
+/* 加载动画 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.game-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* 交错动画延迟 */
+.game-card:nth-child(2n) {
+  animation-delay: 0.1s;
+}
+
+.game-card:nth-child(3n) {
+  animation-delay: 0.2s;
+}
+
+.game-card:nth-child(4n) {
+  animation-delay: 0.3s;
+}
+
+.game-card:nth-child(5n) {
+  animation-delay: 0.4s;
+}
+
+.game-card:nth-child(6n) {
+  animation-delay: 0.5s;
+}
+
+/* 骨架屏样式 */
+.game-card-skeleton {
+  background: var(--card-bg) !important;
+  border-radius: var(--border-radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  overflow: hidden;
+}
+
+.game-card-skeleton .ant-skeleton-image {
+  height: 200px !important;
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0 !important;
+}
+
+.game-card-skeleton .ant-skeleton-content {
+  padding: var(--spacing-4) !important;
+}
+
+/* 无障碍设计 */
+.game-card:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: var(--border-radius-lg);
+}
+
+.game-card-button:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+/* 打印样式 */
+@media print {
+  .game-card {
+    box-shadow: none !important;
+    border: 1px solid var(--border-color) !important;
+  }
+  
+  .game-card:hover {
+    transform: none !important;
+  }
+  
+  .game-card-overlay,
+  .game-card-button,
+  .game-badge {
+    display: none !important;
+  }
+}

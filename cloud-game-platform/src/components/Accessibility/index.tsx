@@ -11,25 +11,21 @@ import {
 import './index.css';
 
 const Accessibility: React.FC = () => {
-  const [highContrast, setHighContrast] = useState(false);
-  const [largeText, setLargeText] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
-  const [fullscreen, setFullscreen] = useState(false);
-
-  // 初始化状态
-  useEffect(() => {
-    // 检查本地存储中的无障碍设置
+  // 初始化状态 - 从localStorage加载设置
+  const initializeSettings = () => {
     const savedHighContrast = localStorage.getItem('highContrast') === 'true';
     const savedLargeText = localStorage.getItem('largeText') === 'true';
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-    
-    setHighContrast(savedHighContrast);
-    setLargeText(savedLargeText);
-    setDarkMode(savedDarkMode);
-    
-    // 应用设置
-    applySettings(savedHighContrast, savedLargeText, savedDarkMode);
-  }, []);
+    return { savedHighContrast, savedLargeText, savedDarkMode };
+  };
+
+  // 初始化状态
+  const { savedHighContrast, savedLargeText, savedDarkMode } = initializeSettings();
+  
+  const [highContrast, setHighContrast] = useState(savedHighContrast);
+  const [largeText, setLargeText] = useState(savedLargeText);
+  const [darkMode, setDarkMode] = useState(savedDarkMode);
+  const [fullscreen, setFullscreen] = useState(false);
 
   // 应用无障碍设置
   const applySettings = (highContrast: boolean, largeText: boolean, darkMode: boolean) => {
@@ -61,6 +57,11 @@ const Accessibility: React.FC = () => {
     localStorage.setItem('largeText', largeText.toString());
     localStorage.setItem('darkMode', darkMode.toString());
   };
+
+  // 初始化应用设置
+  useEffect(() => {
+    applySettings(highContrast, largeText, darkMode);
+  }, []);
 
   // 切换高对比度模式
   const toggleHighContrast = () => {

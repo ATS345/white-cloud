@@ -46,17 +46,25 @@
   left: 100%;
 }
 
-.logo h1 {
-  margin: 0;
-  font-size: 20px;
-  transition: all 0.3s ease;
+.app-logo {
   position: relative;
   z-index: 1;
-  letter-spacing: 1px;
+  transition: all 0.3s ease;
 }
 
-.logo h1.collapsed {
-  font-size: 0;
+/* 侧边栏折叠时调整Logo大小 */
+.ant-layout-sider-collapsed .app-logo {
+  transform: scale(0.9);
+}
+
+/* 确保Logo在暗色主题下的星星动画正常显示 */
+.app-sider [data-theme="dark"] .logo-stars path {
+  fill: white;
+}
+
+/* 确保Logo文字在暗色主题下正确显示 */
+.app-sider [data-theme="dark"] .logo-text {
+  color: white;
 }
 
 .app-menu {
@@ -209,6 +217,82 @@
   color: #666;
 }
 
+/* 搜索建议样式 */
+.search-box {
+  position: relative;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  margin-top: 4px;
+  border: 1px solid #f0f0f0;
+  border-top: none;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #666;
+  font-size: 14px;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f2f5;
+  color: #1890ff;
+}
+
+.suggestion-item span {
+  margin-left: 8px;
+}
+
+/* 移动端底部导航 */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  height: 56px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mobile-bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  height: 100%;
+  font-size: 12px;
+}
+
+.mobile-bottom-nav .nav-item:hover,
+.mobile-bottom-nav .nav-item.active {
+  color: #1890ff;
+}
+
+.mobile-bottom-nav .nav-item span {
+  margin-top: 4px;
+}
+
 /* 响应式设计 */
 @media (max-width: 1200px) {
   .search-box {
@@ -250,6 +334,7 @@
   .app-content {
     margin: 16px;
     padding: 16px;
+    padding-bottom: 72px; /* 为底部导航留出空间 */
     min-height: calc(100vh - 96px);
   }
   
@@ -259,6 +344,11 @@
   
   .menu-toggle {
     margin-right: 16px;
+  }
+  
+  /* 显示移动端底部导航 */
+  .mobile-bottom-nav {
+    display: flex;
   }
 }
 
@@ -284,5 +374,6 @@
   .app-content {
     margin: 8px;
     padding: 12px;
+    padding-bottom: 68px;
   }
 }

@@ -125,6 +125,92 @@
   padding: 24px;
 }
 
+.rating-stats-card {
+  margin-bottom: 24px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.overall-rating {
+  text-align: center;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.rating-count {
+  margin-top: 16px;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.rating-distribution h3 {
+  margin-bottom: 16px;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.rating-bar {
+  margin-bottom: 16px;
+}
+
+.rating-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.star-count {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.count-number {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.rating-progress {
+  flex: 1;
+  margin: 0 8px;
+}
+
+.percentage {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  min-width: 40px;
+  text-align: right;
+}
+
+.rating-bar {
+  display: flex;
+  align-items: center;
+}
+
+.comment-form-card {
+  margin-bottom: 24px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.comment-form-card h3 {
+  margin-bottom: 16px;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.comment-form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
 .comments-header {
   display: flex;
   justify-content: space-between;
@@ -132,8 +218,41 @@
   margin-bottom: 16px;
 }
 
-.comments-header h2 {
+.comments-header h3 {
   margin-bottom: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.comment-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.comment-item:last-child {
+  border-bottom: none;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.comment-header a {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.comment-rating {
+  margin: 0;
+}
+
+.comment-time {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-left: auto;
 }
 
 /* 响应式设计 */
