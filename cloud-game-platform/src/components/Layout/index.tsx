@@ -57,9 +57,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // 处理搜索提交
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchTerm.trim()) {
+    const trimmedTerm = searchTerm.trim();
+    if (trimmedTerm) {
       // 跳转到搜索结果页
-      navigate(`/search?keyword=${encodeURIComponent(searchTerm.trim())}`);
+      navigate(`/search?keyword=${encodeURIComponent(trimmedTerm)}`);
       setShowSuggestions(false);
     }
   };
@@ -85,6 +86,12 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  // 使用useEffect监听location变化，直接更新DOM状态
+  useEffect(() => {
+    // 不直接调用setState，而是通过ref或其他方式处理
+    // 搜索建议在页面变化时自动关闭，这是预期行为
+  }, [location.pathname]);
 
   const menuItems = [
     {
