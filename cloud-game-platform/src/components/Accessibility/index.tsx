@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Button, Switch, Dropdown, Menu, Tooltip } from 'antd';
+import { Button, Switch, Dropdown, Tooltip } from 'antd';
 import { 
   EyeOutlined, 
-  EyeInvisibleOutlined, 
   FontSizeOutlined, 
   BgColorsOutlined, 
   HighlightOutlined,
@@ -162,7 +161,7 @@ const Accessibility: React.FC = () => {
   return (
     <div className="accessibility-component">
       <Dropdown 
-        overlay={<Menu items={menuItems} />} 
+        menu={{ items: menuItems }} 
         placement="bottomRight"
         trigger={['click']}
       >

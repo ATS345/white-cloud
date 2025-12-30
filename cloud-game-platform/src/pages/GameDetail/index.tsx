@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, Tabs, Button, Row, Col, Image, Descriptions, Tag, Rate, Comment, List, Divider } from 'antd';
+import { Card, Tabs, Button, Row, Col, Image, Descriptions, Tag, Rate, List, Divider, Avatar } from 'antd';
 import { DownloadOutlined, ShareAltOutlined, HeartOutlined, HeartFilled, StarOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import './index.css';
 
@@ -194,13 +194,19 @@ const GameDetail: React.FC = () => {
             <List
               dataSource={game.comments}
               renderItem={(comment) => (
-                <Comment
-                  author={<a>{comment.user}</a>}
-                  avatar={<Avatar src={comment.avatar} />}
-                  content={<p>{comment.content}</p>}
-                  datetime={comment.time}
-                  rating={<Rate disabled defaultValue={comment.rating} />}
-                />
+                <List.Item className="comment-item">
+                  <List.Item.Meta
+                    avatar={<Avatar src={comment.avatar} />}
+                    title={
+                      <div className="comment-header">
+                        <a>{comment.user}</a>
+                        <Rate disabled defaultValue={comment.rating} className="comment-rating" />
+                        <span className="comment-time">{comment.time}</span>
+                      </div>
+                    }
+                    description={<p>{comment.content}</p>}
+                  />
+                </List.Item>
               )}
             />
           </div>

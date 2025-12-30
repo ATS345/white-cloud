@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { Layout as AntLayout, Menu, Button, Badge, Avatar } from 'antd';
 import { 
   HomeOutlined, 
-  GameOutlined, 
-  LibraryOutlined, 
+  AimOutlined, 
+  BookOutlined, 
   UserOutlined, 
   BellOutlined, 
   MenuOutlined,
   SearchOutlined,
   DownloadOutlined
 } from '@ant-design/icons';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Accessibility from '../Accessibility';
 import DownloadManager from '../DownloadManager';
 import './index.css';
@@ -21,6 +21,19 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [downloadModalVisible, setDownloadModalVisible] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // 处理搜索提交
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const input = e.target as HTMLFormElement;
+    const searchInput = input.querySelector('input') as HTMLInputElement;
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm) {
+      // 跳转到搜索结果页
+      navigate(`/search?keyword=${encodeURIComponent(searchTerm)}`);
+    }
+  };
 
   const menuItems = [
     {
@@ -30,12 +43,12 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     },
     {
       key: '/game',
-      icon: <GameOutlined />,
+      icon: <AimOutlined />,
       label: <Link to="/game/1">游戏详情</Link>,
     },
     {
       key: '/library',
-      icon: <LibraryOutlined />,
+      icon: <BookOutlined />,
       label: <Link to="/library">游戏库</Link>,
     },
     {
@@ -52,6 +65,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         collapsible 
         collapsed={collapsed} 
         className="app-sider"
+        breakpoint="lg"
+        theme="dark"
       >
         <div className="logo">
           <h1 className={collapsed ? 'collapsed' : ''}>云朵</h1>
@@ -62,9 +77,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           selectedKeys={[location.pathname.split('/')[1] || '/']}
           items={menuItems}
           className="app-menu"
+          style={{ height: '100%', borderRight: 0 }}
         />
       </Sider>
-      <AntLayout>
+      <div className={`app-main ${collapsed ? 'collapsed' : ''}`}>
         <Header className="app-header">
           <Button
             type="text"
@@ -72,22 +88,31 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             onClick={() => setCollapsed(!collapsed)}
             className="menu-toggle"
           />
-          <div className="search-box">
+          <form onSubmit={handleSearch} className="search-box">
             <SearchOutlined />
-            <input placeholder="搜索游戏..." />
-          </div>
+            <input placeholder="搜索游戏、开发者..." />
+          </form>
           <div className="header-right">
             <Badge count={3} className="notification">
               <Button 
                 type="text" 
                 icon={<DownloadOutlined />} 
                 onClick={() => setDownloadModalVisible(true)}
+                className="notification-button"
               />
             </Badge>
             <Badge count={5} className="notification">
-              <Button type="text" icon={<BellOutlined />} />
+              <Button 
+                type="text" 
+                icon={<BellOutlined />} 
+                className="notification-button"
+              />
             </Badge>
-            <Avatar icon={<UserOutlined />} className="avatar" />
+            <Avatar 
+              icon={<UserOutlined />} 
+              className="avatar"
+              onClick={() => navigate('/user')}
+            />
           </div>
         </Header>
         <Content className="app-content">
@@ -98,7 +123,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           visible={downloadModalVisible} 
           onClose={() => setDownloadModalVisible(false)} 
         />
-      </AntLayout>
+      </div>
     </AntLayout>
   );
 };

@@ -1,16 +1,17 @@
-/* 品牌配色方案 */
+/* 品牌配色方案 - 云朵游戏平台 */
 :root {
   /* 主色调 - 体现轻盈、梦幻特质 */
-  --primary-color: #1890ff;
-  --primary-light: #40a9ff;
-  --primary-dark: #096dd9;
-  --primary-bg: #e6f7ff;
+  --primary-color: #667eea; /* 梦幻紫蓝色 */
+  --primary-light: #764ba2; /* 淡紫色 */
+  --primary-dark: #5568d3; /* 深紫蓝色 */
+  --primary-bg: #f0f4ff; /* 浅蓝紫色背景 */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* 渐变主色 */
 
-  /* 辅助色 */
-  --secondary-purple: #722ed1;
-  --secondary-pink: #eb2f96;
-  --secondary-orange: #fa8c16;
-  --secondary-green: #52c41a;
+  /* 辅助色 - 梦幻云朵色系 */
+  --secondary-blue: #90caf9; /* 天空蓝 */
+  --secondary-pink: #f48fb1; /* 粉色云朵 */
+  --secondary-orange: #ffcc80; /* 橙色云朵 */
+  --secondary-green: #a5d6a7; /* 绿色云朵 */
 
   /* 中性色 */
   --white: #ffffff;
@@ -29,10 +30,10 @@
   --success-color: #52c41a;
   --warning-color: #faad14;
   --error-color: #ff4d4f;
-  --info-color: #1890ff;
+  --info-color: #667eea;
 
   /* 字体 */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-md: 16px;
@@ -40,6 +41,13 @@
   --font-size-xl: 20px;
   --font-size-xxl: 24px;
   --font-size-xxxl: 32px;
+
+  /* 字重 */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 
   /* 行高 */
   --line-height-xs: 1.2;
@@ -61,59 +69,88 @@
   --spacing-10: 64px;
 
   /* 圆角 */
-  --border-radius-sm: 2px;
-  --border-radius-md: 4px;
-  --border-radius-lg: 8px;
-  --border-radius-xl: 12px;
-  --border-radius-xxl: 16px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-xxl: 20px;
+  --border-radius-circle: 50%;
 
-  /* 阴影 */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
-  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.2);
+  /* 阴影 - 轻盈梦幻风格 */
+  --shadow-sm: 0 2px 8px rgba(102, 126, 234, 0.1);
+  --shadow-md: 0 4px 16px rgba(102, 126, 234, 0.15);
+  --shadow-lg: 0 8px 24px rgba(102, 126, 234, 0.2);
+  --shadow-xl: 0 16px 32px rgba(102, 126, 234, 0.25);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 
   /* 过渡动画 */
-  --transition-fast: 0.1s ease;
+  --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
+  --transition-transform: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* 其他 */
   --border-color: var(--gray-200);
   --text-color: var(--gray-800);
   --text-secondary: var(--gray-600);
   --text-light: var(--gray-400);
-  --bg-color: var(--gray-50);
+  --bg-color: #fafbff; /* 云朵背景色 */
   --card-bg: var(--white);
   --header-bg: var(--white);
-  --sidebar-bg: var(--gray-900);
-  --hover-bg: var(--gray-100);
+  --sidebar-bg: #001529;
+  --hover-bg: var(--gray-50);
+  --active-bg: var(--primary-bg);
 }
 
 /* 深色主题 */
 [data-theme="dark"] {
-  --primary-color: #40a9ff;
-  --primary-light: #69c0ff;
-  --primary-dark: #1890ff;
-  --primary-bg: #001529;
+  /* 主色调 - 深色模式下的梦幻效果 */
+  --primary-color: #8a98e8; /* 亮紫蓝色 */
+  --primary-light: #9d6fb6; /* 亮紫色 */
+  --primary-dark: #7a88d3; /* 深紫蓝色 */
+  --primary-bg: #1a1f3a; /* 深色背景 */
+  --primary-gradient: linear-gradient(135deg, #8a98e8 0%, #9d6fb6 100%); /* 渐变主色 */
 
-  --white: #1f1f1f;
-  --gray-50: #141414;
-  --gray-100: #1f1f1f;
-  --gray-200: #262626;
-  --gray-300: #434343;
-  --gray-400: #595959;
-  --gray-500: #8c8c8c;
-  --gray-600: #bfbfbf;
-  --gray-700: #d9d9d9;
-  --gray-800: #e8e8e8;
-  --gray-900: #fafafa;
+  /* 辅助色 - 深色模式下的云朵色系 */
+  --secondary-blue: #63b3ed; /* 天空蓝 */
+  --secondary-pink: #f06292; /* 粉色云朵 */
+  --secondary-orange: #f6ad55; /* 橙色云朵 */
+  --secondary-green: #66bb6a; /* 绿色云朵 */
 
-  --bg-color: #141414;
-  --card-bg: #1f1f1f;
-  --header-bg: #1f1f1f;
-  --sidebar-bg: #001529;
-  --hover-bg: #262626;
+  /* 中性色 - 深色模式 */
+  --white: #1f1f3a;
+  --gray-50: #14142a;
+  --gray-100: #1a1a2e;
+  --gray-200: #1f203a;
+  --gray-300: #2d2d44;
+  --gray-400: #4a4a6a;
+  --gray-500: #71718a;
+  --gray-600: #a0a0b8;
+  --gray-700: #c2c2d6;
+  --gray-800: #e0e0f0;
+  --gray-900: #fafaff;
+
+  /* 功能色 - 深色模式 */
+  --success-color: #66bb6a;
+  --warning-color: #f6ad55;
+  --error-color: #f56565;
+  --info-color: #8a98e8;
+
+  /* 阴影 - 深色模式 */
+  --shadow-sm: 0 2px 8px rgba(138, 152, 232, 0.15);
+  --shadow-md: 0 4px 16px rgba(138, 152, 232, 0.2);
+  --shadow-lg: 0 8px 24px rgba(138, 152, 232, 0.25);
+  --shadow-xl: 0 16px 32px rgba(138, 152, 232, 0.3);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  /* 其他 - 深色模式 */
+  --border-color: var(--gray-300);
+  --bg-color: #14142a;
+  --card-bg: var(--white);
+  --header-bg: var(--white);
+  --sidebar-bg: #1a1a2e;
+  --hover-bg: var(--gray-200);
+  --active-bg: var(--primary-bg);
 
   --text-color: var(--gray-800);
   --text-secondary: var(--gray-600);

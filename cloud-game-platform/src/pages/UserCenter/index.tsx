@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Card, Tabs, Button, Avatar, Descriptions, Row, Col, Input, Form, Upload, message } from 'antd';
-import { EditOutlined, UploadOutlined, UserOutlined, PhoneOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
+import { Card, Tabs, Button, Avatar, Descriptions, Row, Col, Input, Form, Upload } from 'antd';
+import { EditOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons';
 import './index.css';
 
 const { TabPane } = Tabs;

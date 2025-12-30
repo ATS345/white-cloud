@@ -8,7 +8,7 @@ const Register: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const onFinish = (values: any) => {
+  const onFinish = (_values: any) => {
     setLoading(true);
     // 模拟注册请求
     setTimeout(() => {

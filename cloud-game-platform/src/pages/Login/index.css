@@ -1,0 +1,81 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.login-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.login-form {
+  margin-top: 20px;
+}
+
+.login-form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.login-form-forgot:hover {
+  text-decoration: underline;
+}
+
+.login-form-button {
+  margin-top: 16px;
+}
+
+.login-other {
+  margin-top: 20px;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.login-other-title {
+  display: block;
+  margin-bottom: 16px;
+  color: #999;
+}
+
+.login-other-icons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.login-other-icon {
+  font-size: 24px;
+}
+
+.login-register {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.login-register-link {
+  margin-left: 8px;
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.login-register-link:hover {
+  text-decoration: underline;
+}

@@ -5,8 +5,7 @@ import {
   PauseCircleOutlined, 
   PlayCircleOutlined, 
   DeleteOutlined, 
-  CheckCircleOutlined, 
-  CloseCircleOutlined 
+  CheckCircleOutlined
 } from '@ant-design/icons';
 import './index.css';
 
@@ -70,9 +69,9 @@ const DownloadManager: React.FC<DownloadManagerProps> = ({ visible, onClose }) =
 
   // 模拟下载进度更新
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: number;
     if (visible) {
-      interval = setInterval(() => {
+      interval = window.setInterval(() => {
         setDownloads(prevDownloads =>
           prevDownloads.map(download => {
             if (download.status === 'downloading') {
@@ -97,7 +96,7 @@ const DownloadManager: React.FC<DownloadManagerProps> = ({ visible, onClose }) =
     }
     return () => {
       if (interval) {
-        clearInterval(interval);
+        window.clearInterval(interval);
       }
     };
   }, [visible]);

@@ -1,5 +1,7 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { Game, getGames, getGameDetail, getGameLibrary } from '../services/games';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { Game } from '../services/games';
+import { getGames, getGameDetail, getGameLibrary } from '../services/games';
 
 // 定义游戏状态接口
 interface GameState {
@@ -34,14 +36,14 @@ const initialState: GameState = {
 // 异步获取游戏列表
 export const fetchGames = createAsyncThunk(
   'game/fetchGames',
-  async (params?: {
+  async (params: {
     page?: number;
     pageSize?: number;
     search?: string;
     type?: string;
     sortBy?: string;
-  }, { getState }) => {
-    const state = getState() as { game: GameState };
+  } | undefined, thunkAPI) => {
+    const state = thunkAPI.getState() as { game: GameState };
     const {
       page = state.game.page,
       pageSize = state.game.pageSize,
@@ -50,7 +52,8 @@ export const fetchGames = createAsyncThunk(
       sortBy = state.game.sortBy,
     } = params || {};
     
-    return await getGames({ page, pageSize, search, type, sortBy });
+    const response = await getGames({ page, pageSize, search, type, sortBy });
+    return response.data;
   }
 );
 
@@ -58,7 +61,8 @@ export const fetchGames = createAsyncThunk(
 export const fetchGameDetail = createAsyncThunk(
   'game/fetchGameDetail',
   async (id: number) => {
-    return await getGameDetail(id);
+    const response = await getGameDetail(id);
+    return response.data;
   }
 );
 
@@ -66,7 +70,8 @@ export const fetchGameDetail = createAsyncThunk(
 export const fetchGameLibrary = createAsyncThunk(
   'game/fetchGameLibrary',
   async () => {
-    return await getGameLibrary();
+    const response = await getGameLibrary();
+    return response.data;
   }
 );
 

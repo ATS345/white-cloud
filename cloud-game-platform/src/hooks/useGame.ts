@@ -1,5 +1,6 @@
-import { useEffect, useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from './';
+import { useCallback } from 'react';
+import { useAppDispatch } from './useAppDispatch';
+import { useAppSelector } from './useAppSelector';
 import { 
   fetchGames, 
   fetchGameDetail, 
@@ -41,7 +42,7 @@ export const useGame = () => {
     page, 
     pageSize, 
     totalGames 
-  } = useAppSelector(state => state.game);
+  } = useAppSelector((state: ReturnType<typeof import('../store').store.getState>) => state.game);
 
   // 获取游戏列表
   const { 
@@ -49,8 +50,8 @@ export const useGame = () => {
     isLoading: isGamesLoading, 
     error: gamesError 
   } = useQuery({
-    queryKey: ['games', { page, pageSize, searchTerm, selectedCategory, sortBy }],
-    queryFn: () => apiGetGames({ page, pageSize, searchTerm, type: selectedCategory, sortBy }),
+    queryKey: ['games', { page, pageSize, search: searchTerm, selectedCategory, sortBy }],
+    queryFn: () => apiGetGames({ page, pageSize, search: searchTerm, type: selectedCategory, sortBy }),
   });
 
   // 获取游戏详情
@@ -128,11 +129,11 @@ export const useGame = () => {
     },
   });
 
-  // 获取下载进度
-  const getDownloadProgressQuery = useQuery({
-    queryKey: ['downloadProgress', (downloadId: number) => downloadId],
-    queryFn: (context) => getDownloadProgress(context.queryKey[1] as number),
-    enabled: false,
+  // 获取下载进度的函数
+  const getDownloadProgressQuery = (downloadId: number) => useQuery({
+    queryKey: ['downloadProgress', downloadId],
+    queryFn: () => getDownloadProgress(downloadId),
+    enabled: !!downloadId,
   });
 
   // 加载游戏列表
@@ -250,6 +251,7 @@ export const useGame = () => {
     handlePauseDownload,
     handleResumeDownload,
     handleDeleteDownload,
+    getDownloadProgressQuery,
     
     // 下载相关状态
     isDownloading: downloadGameMutation.isPending,
