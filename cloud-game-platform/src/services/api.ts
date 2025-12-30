@@ -185,10 +185,11 @@ class ApiService {
       case 500:
         console.error('Server Error:', data);
         return Promise.reject(new Error('服务器错误，请稍后再试'));
-      default:
+      default: {
         console.error(`Error ${status}:`, data);
         const errorMessage = typeof data === 'object' && data !== null && 'message' in data ? (data.message as string) : `请求失败，状态码：${status}`;
         return Promise.reject(new Error(errorMessage));
+      }
     }
 
     return Promise.reject(error);
