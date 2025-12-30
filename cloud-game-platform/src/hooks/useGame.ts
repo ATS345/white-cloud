@@ -72,7 +72,7 @@ export const useGame = () => {
     error: libraryError 
   } = useQuery({
     queryKey: ['libraryGames'],
-    queryFn: apiGetGameLibrary,
+    queryFn: () => apiGetGameLibrary(),
   });
 
   // 下载游戏

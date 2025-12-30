@@ -1,24 +1,53 @@
 // 安全相关工具函数
 
 // 密码强度验证
-export const validatePassword = (password: string): { isValid: boolean; message: string } => {
-  if (password.length < 6) {
-    return { isValid: false, message: '密码长度必须至少6个字符' };
+export const validatePassword = (password: string): { isValid: boolean; message: string; strength: 'weak' | 'medium' | 'strong' } => {
+  let strength: 'weak' | 'medium' | 'strong' = 'weak';
+  let strengthScore = 0;
+  
+  if (password.length < 8) {
+    return { isValid: false, message: '密码长度必须至少8个字符', strength };
   }
   if (password.length > 20) {
-    return { isValid: false, message: '密码长度不能超过20个字符' };
+    return { isValid: false, message: '密码长度不能超过20个字符', strength };
   }
-  if (!/[a-z]/.test(password)) {
-    return { isValid: false, message: '密码必须包含至少一个小写字母' };
+  
+  // 包含小写字母
+  if (/[a-z]/.test(password)) {
+    strengthScore++;
+  } else {
+    return { isValid: false, message: '密码必须包含至少一个小写字母', strength };
   }
-  if (!/[A-Z]/.test(password)) {
-    return { isValid: false, message: '密码必须包含至少一个大写字母' };
+  
+  // 包含大写字母
+  if (/[A-Z]/.test(password)) {
+    strengthScore++;
+  } else {
+    return { isValid: false, message: '密码必须包含至少一个大写字母', strength };
   }
-  if (!/\d/.test(password)) {
-    return { isValid: false, message: '密码必须包含至少一个数字' };
+  
+  // 包含数字
+  if (/\d/.test(password)) {
+    strengthScore++;
+  } else {
+    return { isValid: false, message: '密码必须包含至少一个数字', strength };
   }
-  // 可以添加更多验证规则，如特殊字符等
-  return { isValid: true, message: '密码强度符合要求' };
+  
+  // 包含特殊字符
+  if (/[^a-zA-Z0-9]/.test(password)) {
+    strengthScore++;
+  } else {
+    return { isValid: false, message: '密码必须包含至少一个特殊字符（如!@#$%^&*）', strength };
+  }
+  
+  // 计算密码强度
+  if (strengthScore >= 4 && password.length >= 10) {
+    strength = 'strong';
+  } else if (strengthScore >= 3 && password.length >= 8) {
+    strength = 'medium';
+  }
+  
+  return { isValid: true, message: '密码强度符合要求', strength };
 };
 
 // 邮箱验证
@@ -33,15 +62,189 @@ export const validatePhone = (phone: string): boolean => {
   return phoneRegex.test(phone);
 };
 
-// XSS防护：清理HTML
+// XSS防护：清理HTML，增强版
 export const sanitizeHtml = (html: string): string => {
-  // 创建一个临时DOM元素
-  const tempElement = document.createElement('div');
-  // 设置innerHTML会自动转义危险字符
-  tempElement.innerHTML = html;
-  // 获取转义后的文本
-  const sanitizedText = tempElement.textContent || tempElement.innerText || '';
-  return sanitizedText;
+  if (!html || typeof html !== 'string') {
+    return '';
+  }
+  
+  // 1. 使用DOMPurify的核心思想，定义安全标签和属性
+  const safeTags = ['b', 'i', 'u', 'em', 'strong', 'p', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'a', 'img'];
+  const safeAttributes = ['href', 'src', 'alt', 'title', 'target'];
+  
+  // 2. 替换危险字符
+  let sanitized = html
+    // 替换HTML实体
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+  
+  // 3. 允许特定的安全标签
+  safeTags.forEach(tag => {
+    const regex = new RegExp(`&lt;(${tag})([^&]*?)&gt;`, 'gi');
+    sanitized = sanitized.replace(regex, '<$1$2>');
+    sanitized = sanitized.replace(new RegExp(`&lt;/(${tag})&gt;`, 'gi'), '</$1>');
+  });
+  
+  // 4. 移除所有脚本
+  sanitized = sanitized.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, '');
+  sanitized = sanitized.replace(/on\w+\s*=\s*"[^"]*"/gi, '');
+  sanitized = sanitized.replace(/on\w+\s*=\s*'[^']*'/gi, '');
+  sanitized = sanitized.replace(/on\w+\s*=\s*[^\s>]+/gi, '');
+  
+  return sanitized;
+};
+
+// 密码哈希生成（使用Web Crypto API）
+export const hashPassword = async (password: string, salt?: string): Promise<string> => {
+  try {
+    // 生成盐值
+    const generatedSalt = salt || crypto.getRandomValues(new Uint8Array(16)).toString('hex');
+    
+    // 将密码和盐值组合
+    const passwordData = new TextEncoder().encode(password + generatedSalt);
+    
+    // 使用SHA-256哈希
+    const hashBuffer = await crypto.subtle.digest('SHA-256', passwordData);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    
+    // 返回盐值和哈希的组合
+    return `${generatedSalt}:${hashHex}`;
+  } catch (error) {
+    console.error('密码哈希生成失败:', error);
+    // 降级方案：使用简单哈希（仅用于开发环境，生产环境应使用Web Crypto API）
+    const generatedSalt = salt || Math.random().toString(36).substring(2) + Date.now().toString(36);
+    const simpleHash = btoa(password + generatedSalt);
+    return `${generatedSalt}:${simpleHash}`;
+  }
+};
+
+// 密码验证
+export const verifyPassword = async (password: string, storedHash: string): Promise<boolean> => {
+  try {
+    const [salt, hash] = storedHash.split(':');
+    const newHash = await hashPassword(password, salt);
+    return newHash === storedHash;
+  } catch (error) {
+    console.error('密码验证失败:', error);
+    return false;
+  }
+};
+
+// JWT令牌验证
+export const verifyJwtToken = (token: string, secret?: string): boolean => {
+  try {
+    // 简单的JWT验证，检查格式和过期时间
+    const [header, payload, signature] = token.split('.');
+    if (!header || !payload || !signature) {
+      return false;
+    }
+    
+    // 解码payload
+    const decodedPayload = JSON.parse(atob(payload));
+    
+    // 检查过期时间
+    if (decodedPayload.exp && Date.now() > decodedPayload.exp * 1000) {
+      return false;
+    }
+    
+    // 检查签发时间
+    if (decodedPayload.iat && Date.now() < decodedPayload.iat * 1000) {
+      return false;
+    }
+    
+    // 这里可以添加更多验证，如签名验证等
+    return true;
+  } catch (error) {
+    console.error('JWT验证失败:', error);
+    return false;
+  }
+};
+
+// 生成随机密码
+export const generateRandomPassword = (length: number = 12): string => {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
+};
+
+// 敏感数据加密
+export const encryptData = (data: string, key: string): string => {
+  try {
+    // 简单的加密算法，生产环境应使用更安全的加密方式
+    let result = '';
+    for (let i = 0; i < data.length; i++) {
+      result += String.fromCharCode(data.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return btoa(result);
+  } catch (error) {
+    console.error('数据加密失败:', error);
+    return '';
+  }
+};
+
+// 敏感数据解密
+export const decryptData = (encryptedData: string, key: string): string => {
+  try {
+    const data = atob(encryptedData);
+    let result = '';
+    for (let i = 0; i < data.length; i++) {
+      result += String.fromCharCode(data.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return result;
+  } catch (error) {
+    console.error('数据解密失败:', error);
+    return '';
+  }
+};
+
+// IP地址验证
+export const validateIpAddress = (ip: string): boolean => {
+  const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+  return ipRegex.test(ip);
+};
+
+// 检查是否为内部IP地址
+export const isInternalIp = (ip: string): boolean => {
+  const internalIpRegex = /^(10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.)/;
+  return internalIpRegex.test(ip);
+};
+
+// 增强的防止原型污染
+export const safeObject = <T extends object>(obj: any): T => {
+  if (obj === null || typeof obj !== 'object') {
+    return obj as T;
+  }
+  
+  // 检查是否为原型对象
+  if (obj === Object.prototype || obj === Array.prototype) {
+    return {} as T;
+  }
+  
+  // 检查是否包含危险属性
+  const dangerousProps = ['__proto__', 'constructor', 'prototype'];
+  for (const prop of dangerousProps) {
+    if (prop in obj) {
+      delete obj[prop];
+    }
+  }
+  
+  // 递归检查嵌套对象
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      if (typeof obj[key] === 'object' && obj[key] !== null) {
+        obj[key] = safeObject(obj[key]);
+      }
+    }
+  }
+  
+  return obj as T;
 };
 
 // 防止CSRF攻击：生成CSRF令牌

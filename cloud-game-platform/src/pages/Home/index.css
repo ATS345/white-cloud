@@ -1,124 +1,306 @@
 .home-page {
   width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  padding-bottom: var(--spacing-10);
 }
 
+/* 轮播图样式 */
 .banner-carousel {
-  margin-bottom: 24px;
-  border-radius: 8px;
+  margin-bottom: var(--spacing-6);
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  height: 400px;
 }
 
-.banner-carousel img {
-  width: 100%;
+.carousel-item {
+  position: relative;
   height: 400px;
+  overflow: hidden;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  transition: transform var(--transition-transform);
+}
+
+.carousel-item:hover img {
+  transform: scale(1.02);
+}
+
+.carousel-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  padding: var(--spacing-8) var(--spacing-6);
+  color: white;
+  text-align: center;
+}
+
+.carousel-overlay h2 {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-2);
+  color: white;
+}
+
+.carousel-overlay p {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0;
+}
+
+/* 搜索、筛选和排序样式 */
+.search-filter-container {
+  background-color: var(--card-bg);
+  padding: var(--spacing-5);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-6);
 }
 
 .search-filter {
   display: flex;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: var(--spacing-4);
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .search-input {
   flex: 1;
+  min-width: 200px;
   max-width: 500px;
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-3) var(--spacing-5);
 }
 
-.filter-select {
+.filter-select, .sort-select {
   width: 150px;
+  border-radius: var(--border-radius-xl);
 }
 
+/* 游戏标签页样式 */
 .game-tabs {
-  background: #fafafa;
-  border-radius: 8px;
-  padding: 16px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-5);
+  box-shadow: var(--shadow-sm);
 }
 
+/* 游戏链接样式 */
+.game-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform var(--transition-transform);
+}
+
+.game-link:hover {
+  transform: translateY(-4px);
+}
+
+/* 游戏卡片样式 */
 .game-card {
   height: 100%;
-  transition: all 0.3s ease;
-  border-radius: 8px;
+  transition: all var(--transition-normal);
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: none;
+  position: relative;
 }
 
 .game-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
 }
 
-.game-card .ant-card-cover {
-  height: 200px;
-  overflow: hidden;
-}
-
-.game-card .ant-card-cover img {
+.game-card-image {
   width: 100%;
-  height: 100%;
+  height: 220px;
   object-fit: cover;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
 }
 
-.game-card:hover .ant-card-cover img {
-  transform: scale(1.05);
+.game-card:hover .game-card-image {
+  transform: scale(1.08);
+}
+
+.game-card-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-3);
+  color: var(--text-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .game-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: var(--spacing-3);
+  font-size: var(--font-size-sm);
 }
 
 .game-type {
-  font-size: 12px;
-  color: #666;
-  background: #f0f2f5;
-  padding: 2px 8px;
-  border-radius: 4px;
+  color: var(--text-secondary);
+  background: var(--primary-bg);
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--border-radius-circle);
+  font-weight: var(--font-weight-medium);
 }
 
 .game-rating {
-  font-size: 12px;
   color: #faad14;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--spacing-1);
+  font-weight: var(--font-weight-medium);
 }
 
+/* 游戏价格样式 */
 .game-price {
-  font-size: 18px;
-  font-weight: bold;
-  color: #ff4d4f;
-  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
 }
 
+.game-price .free {
+  color: var(--success-color);
+}
+
+.original-price {
+  font-size: var(--font-size-sm);
+  color: var(--text-light);
+  text-decoration: line-through;
+  font-weight: normal;
+}
+
+.discounted-price {
+  color: var(--error-color);
+}
+
+/* 游戏标签样式 */
 .game-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  margin-bottom: 12px;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
 }
 
+.game-tag {
+  font-size: var(--font-size-xs);
+  border-radius: var(--border-radius-circle);
+  background-color: var(--primary-bg);
+  color: var(--primary-color);
+  border: none;
+}
+
+/* 下载按钮样式 */
 .download-btn {
-  margin-top: 12px;
+  margin-top: var(--spacing-4);
+  border-radius: var(--border-radius-lg);
+  height: 40px;
+  font-weight: var(--font-weight-semibold);
+  background: var(--primary-gradient);
+  border: none;
 }
 
-.empty-tab {
+.download-btn:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+  background: var(--primary-gradient) !important;
+}
+
+/* 徽章样式 */
+.new-badge, .discount-badge {
+  position: absolute;
+  top: var(--spacing-3);
+  right: var(--spacing-3);
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--border-radius-circle);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+
+.new-badge {
+  background-color: var(--secondary-pink);
+}
+
+.discount-badge {
+  background-color: var(--secondary-orange);
+}
+
+/* 空标签页样式 */
+.empty-tab, .error-message {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 300px;
-  color: #999;
-  font-size: 16px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-md);
+  text-align: center;
+  background-color: var(--gray-50);
+  border-radius: var(--border-radius-lg);
+  margin-top: var(--spacing-4);
+}
+
+.error-message {
+  color: var(--error-color);
+}
+
+/* 加载状态样式 */
+.ant-spin-container {
+  min-height: 300px;
 }
 
 /* 响应式设计 */
+@media (max-width: 1200px) {
+  .search-filter {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 992px) {
+  .banner-carousel {
+    height: 300px;
+  }
+  
+  .carousel-item {
+    height: 300px;
+  }
+}
+
 @media (max-width: 768px) {
-  .banner-carousel img {
-    height: 200px;
+  .banner-carousel {
+    height: 250px;
+  }
+  
+  .carousel-item {
+    height: 250px;
+  }
+  
+  .carousel-overlay h2 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .carousel-overlay p {
+    font-size: var(--font-size-md);
   }
   
   .search-filter {
@@ -130,21 +312,34 @@
     max-width: 100%;
   }
   
-  .filter-select {
+  .filter-select, .sort-select {
     width: 100%;
+  }
+  
+  .game-card-image {
+    height: 180px;
   }
 }
 
 @media (max-width: 576px) {
-  .banner-carousel img {
-    height: 150px;
+  .banner-carousel {
+    height: 200px;
   }
   
-  .game-card .ant-card-cover {
+  .carousel-item {
+    height: 200px;
+  }
+  
+  .game-card-image {
     height: 150px;
   }
   
   .game-price {
-    font-size: 16px;
+    font-size: var(--font-size-lg);
+  }
+  
+  .download-btn {
+    height: 36px;
+    font-size: var(--font-size-sm);
   }
 }
