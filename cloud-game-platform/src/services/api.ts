@@ -44,7 +44,7 @@ class ApiService {
 
     // 请求拦截器
     this.api.interceptors.request.use(
-      (config) => this.handleRequest(config as ApiConfig),
+      (config) => this.handleRequest(config as ApiConfig) as typeof config,
       (error) => this.handleRequestError(error)
     );
 
@@ -62,7 +62,7 @@ class ApiService {
   }
 
   // 请求处理
-  private handleRequest(config: ApiConfig): ApiConfig {
+  private handleRequest(config: ApiConfig) {
     // 从本地存储获取token
     const token = localStorage.getItem('token');
     if (token) {
@@ -102,7 +102,7 @@ class ApiService {
   }
 
   // 响应处理
-  private handleResponse(response: AxiosResponse): unknown {
+  private handleResponse(response: AxiosResponse) {
     // 缓存响应数据
     const config = response.config as ApiConfig;
     if (!config.skipCache && response.status === 200) {
@@ -119,7 +119,7 @@ class ApiService {
       delete this.requestQueue[requestKey];
     }
 
-    return response.data;
+    return response;
   }
 
   // 响应错误处理
@@ -187,7 +187,8 @@ class ApiService {
         return Promise.reject(new Error('服务器错误，请稍后再试'));
       default:
         console.error(`Error ${status}:`, data);
-        return Promise.reject(new Error(data.message || `请求失败，状态码：${status}`));
+        const errorMessage = typeof data === 'object' && data !== null && 'message' in data ? (data.message as string) : `请求失败，状态码：${status}`;
+        return Promise.reject(new Error(errorMessage));
     }
 
     return Promise.reject(error);

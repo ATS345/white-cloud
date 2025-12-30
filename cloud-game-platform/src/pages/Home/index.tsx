@@ -4,7 +4,7 @@ import { SearchOutlined, StarOutlined, FireOutlined, PlusOutlined, AppstoreOutli
 import { Link } from 'react-router-dom';
 import { useGame } from '../../hooks/useGame';
 import GameCard from '../../components/GameCard';
-import { Game } from '../../services/games';
+import type { Game } from '../../services/games';
 import './index.css';
 
 const { Title, Text } = Typography;

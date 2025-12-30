@@ -235,24 +235,28 @@ export const safeObject = <T extends object>(obj: unknown): T => {
     return {} as T;
   }
   
+  // 将obj断言为可以用字符串索引访问的对象
+  const safeObj = obj as Record<string, unknown>;
+  
   // 检查是否包含危险属性
   const dangerousProps = ['__proto__', 'constructor', 'prototype'];
   for (const prop of dangerousProps) {
-    if (prop in obj) {
-      delete obj[prop];
+    if (prop in safeObj) {
+      delete safeObj[prop];
     }
   }
   
   // 递归检查嵌套对象
-  for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      if (typeof obj[key] === 'object' && obj[key] !== null) {
-        obj[key] = safeObject(obj[key]);
+  for (const key in safeObj) {
+    if (Object.prototype.hasOwnProperty.call(safeObj, key)) {
+      const value = safeObj[key];
+      if (value !== null && typeof value === 'object') {
+        safeObj[key] = safeObject(value);
       }
     }
   }
   
-  return obj as T;
+  return safeObj as T;
 };
 
 // 防止CSRF攻击：生成CSRF令牌
