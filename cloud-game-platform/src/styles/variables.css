@@ -1,0 +1,121 @@
+/* 品牌配色方案 */
+:root {
+  /* 主色调 - 体现轻盈、梦幻特质 */
+  --primary-color: #1890ff;
+  --primary-light: #40a9ff;
+  --primary-dark: #096dd9;
+  --primary-bg: #e6f7ff;
+
+  /* 辅助色 */
+  --secondary-purple: #722ed1;
+  --secondary-pink: #eb2f96;
+  --secondary-orange: #fa8c16;
+  --secondary-green: #52c41a;
+
+  /* 中性色 */
+  --white: #ffffff;
+  --gray-50: #fafafa;
+  --gray-100: #f5f5f5;
+  --gray-200: #e8e8e8;
+  --gray-300: #d9d9d9;
+  --gray-400: #bfbfbf;
+  --gray-500: #8c8c8c;
+  --gray-600: #595959;
+  --gray-700: #434343;
+  --gray-800: #262626;
+  --gray-900: #1f1f1f;
+
+  /* 功能色 */
+  --success-color: #52c41a;
+  --warning-color: #faad14;
+  --error-color: #ff4d4f;
+  --info-color: #1890ff;
+
+  /* 字体 */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-xxl: 24px;
+  --font-size-xxxl: 32px;
+
+  /* 行高 */
+  --line-height-xs: 1.2;
+  --line-height-sm: 1.4;
+  --line-height-md: 1.5;
+  --line-height-lg: 1.6;
+  --line-height-xl: 1.8;
+
+  /* 间距 */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 32px;
+  --spacing-8: 40px;
+  --spacing-9: 48px;
+  --spacing-10: 64px;
+
+  /* 圆角 */
+  --border-radius-sm: 2px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+  --border-radius-xxl: 16px;
+
+  /* 阴影 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.2);
+
+  /* 过渡动画 */
+  --transition-fast: 0.1s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* 其他 */
+  --border-color: var(--gray-200);
+  --text-color: var(--gray-800);
+  --text-secondary: var(--gray-600);
+  --text-light: var(--gray-400);
+  --bg-color: var(--gray-50);
+  --card-bg: var(--white);
+  --header-bg: var(--white);
+  --sidebar-bg: var(--gray-900);
+  --hover-bg: var(--gray-100);
+}
+
+/* 深色主题 */
+[data-theme="dark"] {
+  --primary-color: #40a9ff;
+  --primary-light: #69c0ff;
+  --primary-dark: #1890ff;
+  --primary-bg: #001529;
+
+  --white: #1f1f1f;
+  --gray-50: #141414;
+  --gray-100: #1f1f1f;
+  --gray-200: #262626;
+  --gray-300: #434343;
+  --gray-400: #595959;
+  --gray-500: #8c8c8c;
+  --gray-600: #bfbfbf;
+  --gray-700: #d9d9d9;
+  --gray-800: #e8e8e8;
+  --gray-900: #fafafa;
+
+  --bg-color: #141414;
+  --card-bg: #1f1f1f;
+  --header-bg: #1f1f1f;
+  --sidebar-bg: #001529;
+  --hover-bg: #262626;
+
+  --text-color: var(--gray-800);
+  --text-secondary: var(--gray-600);
+  --text-light: var(--gray-400);
+}

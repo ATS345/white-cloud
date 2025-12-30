@@ -1,8 +1,0 @@
-{"level":"info","message":"[REDIS] 开始初始化Redis连接...","timestamp":"2025-12-08 22:46:35"}
-{"level":"info","message":"[REDIS] 尝试重连 (0/10)，延迟 2695ms","timestamp":"2025-12-08 22:46:35"}
-{"level":"error","message":"[REDIS ERROR] ","timestamp":"2025-12-08 22:46:35"}
-{"level":"error","message":"[REDIS] Redis服务器拒绝连接，请检查Redis服务是否正在运行","timestamp":"2025-12-08 22:46:35"}
-{"level":"info","message":"[REDIS] 开始初始化Redis连接...","timestamp":"2025-12-08 22:46:46"}
-{"level":"info","message":"[REDIS] 开始初始化Redis连接...","timestamp":"2025-12-08 22:47:07"}
-{"level":"info","message":"[REDIS] 开始初始化Redis连接...","timestamp":"2025-12-08 22:47:52"}
-{"level":"info","message":"[REDIS] 开始初始化Redis连接...","timestamp":"2025-12-08 22:50:03"}

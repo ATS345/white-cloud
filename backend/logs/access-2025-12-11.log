@@ -1,3 +1,0 @@
-{"level":"info","message":"[REDIS] 开始初始化Redis连接...","timestamp":"2025-12-11 23:36:56"}
-{"level":"info","message":"[REDIS] 连接配置：\n  - 连接地址: redis://localhost:6379\n  - 连接超时: 10000ms\n  - 最大重试次数: 10\n  - 初始重试延迟: 1000ms\n  - 心跳检查: 30秒\n  - 缓存清理: 10分钟","timestamp":"2025-12-11 23:36:56"}
-{"level":"info","message":"[REDIS] 尝试重连 (0/10)，延迟 1163ms","timestamp":"2025-12-11 23:36:56"}

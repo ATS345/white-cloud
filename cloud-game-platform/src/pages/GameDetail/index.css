@@ -1,0 +1,192 @@
+.game-detail-page {
+  width: 100%;
+}
+
+.game-header-card {
+  margin-bottom: 24px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+
+.game-cover {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 16px;
+  transition: transform var(--transition-normal);
+}
+
+.game-cover:hover {
+  transform: scale(1.02);
+}
+
+.game-info {
+  padding: 16px 0;
+}
+
+.game-title {
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+
+.game-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.game-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #faad14;
+  font-weight: 500;
+}
+
+.game-price {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--error-color);
+}
+
+.game-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.download-btn {
+  flex: 1;
+  min-width: 120px;
+}
+
+.buy-btn {
+  flex: 1;
+  min-width: 120px;
+}
+
+.like-btn {
+  min-width: 120px;
+}
+
+.share-btn {
+  min-width: 120px;
+}
+
+.game-descriptions {
+  margin-top: 24px;
+}
+
+.game-detail-tabs {
+  margin-top: 24px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.game-description {
+  padding: 24px;
+}
+
+.game-description h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+
+.game-description p {
+  line-height: var(--line-height-lg);
+  color: var(--text-secondary);
+}
+
+.requirements-card {
+  margin-bottom: 24px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.requirements-card .ant-card-body {
+  padding: 24px;
+}
+
+.security-descriptions {
+  margin-bottom: 24px;
+}
+
+.comments-section {
+  padding: 24px;
+}
+
+.comments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.comments-header h2 {
+  margin-bottom: 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .game-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .game-meta {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .game-actions {
+    flex-direction: column;
+  }
+  
+  .download-btn,
+  .buy-btn,
+  .like-btn,
+  .share-btn {
+    width: 100%;
+  }
+  
+  .game-descriptions {
+    column-count: 1;
+  }
+  
+  .comments-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .game-title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .game-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .game-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .game-detail-tabs .ant-tabs-tab {
+    padding: 8px 12px;
+    font-size: var(--font-size-sm);
+  }
+}

@@ -1,0 +1,182 @@
+.game-library-page {
+  width: 100%;
+}
+
+.library-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.library-header h1 {
+  margin-bottom: 0;
+  font-size: var(--font-size-xxl);
+  color: var(--text-color);
+}
+
+.library-header .search-filter {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.library-header .search-input {
+  width: 300px;
+  max-width: 100%;
+}
+
+.library-header .filter-select {
+  width: 150px;
+}
+
+.library-header .sort-select {
+  width: 150px;
+}
+
+.library-tabs {
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.library-game-card {
+  height: 100%;
+  transition: all var(--transition-normal);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+
+.library-game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.library-game-card .ant-card-cover {
+  height: 200px;
+  overflow: hidden;
+}
+
+.library-game-card .ant-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all var(--transition-normal);
+}
+
+.library-game-card:hover .ant-card-cover img {
+  transform: scale(1.05);
+}
+
+.game-progress {
+  margin: 12px 0;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: var(--gray-200);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  transition: width var(--transition-normal);
+}
+
+.game-stats {
+  margin: 12px 0;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.game-stats .play-time {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.game-stats .last-played {
+  display: block;
+}
+
+.game-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.play-btn {
+  flex: 1;
+  min-width: 100px;
+}
+
+.update-btn {
+  min-width: 80px;
+}
+
+.uninstall-btn {
+  min-width: 80px;
+}
+
+.empty-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: var(--text-light);
+  font-size: var(--font-size-lg);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .library-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .library-header .search-filter {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .library-header .search-input,
+  .library-header .filter-select,
+  .library-header .sort-select {
+    width: 100%;
+  }
+  
+  .library-game-card .ant-card-cover {
+    height: 150px;
+  }
+}
+
+@media (max-width: 576px) {
+  .library-header h1 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .game-actions {
+    flex-direction: column;
+  }
+  
+  .play-btn,
+  .update-btn,
+  .uninstall-btn {
+    width: 100%;
+  }
+}

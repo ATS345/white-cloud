@@ -1,0 +1,145 @@
+.app-layout {
+  height: 100vh;
+  background: #f0f2f5;
+}
+
+.app-sider {
+  background: #001529;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  background: #1890ff;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.logo h1.collapsed {
+  font-size: 0;
+}
+
+.app-menu {
+  border-right: none;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.menu-toggle {
+  margin-right: 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: #666;
+}
+
+.menu-toggle:hover {
+  color: #1890ff;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f0f2f5;
+  border-radius: 4px;
+  padding: 0 16px;
+  height: 40px;
+  width: 300px;
+  margin-right: auto;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 0 8px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.search-box .anticon {
+  color: #666;
+  font-size: 16px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.notification {
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.notification:hover {
+  color: #1890ff;
+}
+
+.avatar {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+}
+
+.app-content {
+  margin: 24px;
+  background: white;
+  padding: 24px;
+  min-height: 280px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .search-box {
+    width: 200px;
+  }
+  
+  .app-content {
+    margin: 16px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .search-box {
+    width: 150px;
+  }
+  
+  .header-right {
+    gap: 8px;
+  }
+  
+  .menu-toggle {
+    margin-right: 16px;
+  }
+}

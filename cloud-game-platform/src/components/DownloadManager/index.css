@@ -1,0 +1,113 @@
+.download-manager-modal .ant-modal-body {
+  padding: 24px;
+}
+
+.download-item {
+  padding: 16px;
+  transition: background-color var(--transition-normal);
+  border-radius: var(--border-radius-md);
+}
+
+.download-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.download-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--border-radius-md);
+}
+
+.download-item-progress {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 8px 0;
+}
+
+.download-item-progress .ant-progress {
+  flex: 1;
+  margin: 0;
+}
+
+.progress-text {
+  min-width: 40px;
+  text-align: right;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.download-item-info {
+  display: flex;
+  gap: 16px;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.download-status {
+  display: flex;
+  align-items: center;
+}
+
+.download-speed, .download-size, .download-eta {
+  display: flex;
+  align-items: center;
+}
+
+.empty-downloads {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: var(--success-color);
+}
+
+.empty-downloads p {
+  margin-bottom: 0;
+  font-size: var(--font-size-md);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .download-manager-modal {
+    width: 95% !important;
+    margin: 0 auto;
+  }
+  
+  .download-item-info {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .download-item-progress {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .progress-text {
+    text-align: left;
+  }
+}
+
+@media (max-width: 576px) {
+  .download-manager-modal {
+    width: 100% !important;
+    margin: 0;
+  }
+  
+  .download-item-actions {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+  }
+}
