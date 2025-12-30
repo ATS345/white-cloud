@@ -8,9 +8,11 @@ export const queryClient = new QueryClient({
       gcTime: 30 * 60 * 1000, // 30分钟后从缓存中移除未使用的数据
       
       // 重试机制优化
-      retry: (failureCount, error: any) => {
+      retry: (failureCount, error: unknown) => {
         // 只对网络错误和服务器错误进行重试
-        if (error.response?.status >= 500 || !error.response) {
+        const errorWithResponse = error as { response?: { status?: number } };
+        const status = errorWithResponse.response?.status;
+        if ((status !== undefined && status >= 500) || !errorWithResponse.response) {
           // 最多重试2次
           return failureCount < 2;
         }

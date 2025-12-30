@@ -4,7 +4,7 @@ import { generateCsrfToken, getCsrfToken } from '../utils/security';
 
 // 请求缓存接口
 interface RequestCache {
-  [key: string]: { data: any; timestamp: number };
+  [key: string]: { data: unknown; timestamp: number };
 }
 
 // 请求队列接口
@@ -62,7 +62,7 @@ class ApiService {
   }
 
   // 请求处理
-  private handleRequest(config: any): any {
+  private handleRequest(config: ApiConfig): ApiConfig {
     // 从本地存储获取token
     const token = localStorage.getItem('token');
     if (token) {
@@ -96,13 +96,13 @@ class ApiService {
   }
 
   // 请求错误处理
-  private handleRequestError(error: any): Promise<never> {
+  private handleRequestError(error: unknown): Promise<never> {
     console.error('Request Error:', error);
     return Promise.reject(error);
   }
 
   // 响应处理
-  private handleResponse(response: AxiosResponse): any {
+  private handleResponse(response: AxiosResponse): unknown {
     // 缓存响应数据
     const config = response.config as ApiConfig;
     if (!config.skipCache && response.status === 200) {
@@ -123,8 +123,16 @@ class ApiService {
   }
 
   // 响应错误处理
-  private handleResponseError(error: any): Promise<never> {
-    const config = error.config as ApiConfig;
+  private handleResponseError(error: unknown): Promise<never> {
+    const axiosError = error as {
+      config?: ApiConfig;
+      response?: {
+        status: number;
+        data: unknown;
+      };
+      message?: string;
+    };
+    const config = axiosError.config as ApiConfig;
 
     // 清除请求队列中的控制器
     if (config) {
@@ -136,12 +144,12 @@ class ApiService {
 
     // 处理取消请求错误
     if (axios.isCancel(error)) {
-      console.log('Request canceled:', error.message);
+      console.log('Request canceled:', axiosError.message);
       return Promise.reject(error);
     }
 
     // 处理网络错误或超时错误
-    if (!error.response) {
+    if (!axiosError.response) {
       // 重试逻辑
       if (config && config.retry! > 0) {
         config.retry!--;
@@ -151,13 +159,13 @@ class ApiService {
           }, config.retryDelay);
         });
       }
-      console.error('Network Error or Timeout:', error.message);
+      console.error('Network Error or Timeout:', axiosError.message);
       return Promise.reject(new Error('网络连接失败，请检查网络设置后重试'));
     }
 
     // 服务器返回错误状态码
-    const status = error.response.status;
-    const data = error.response.data;
+    const status = axiosError.response.status;
+    const data = axiosError.response.data;
 
     switch (status) {
       case 401:
@@ -210,32 +218,32 @@ class ApiService {
   }
 
   // GET请求
-  public get<T = any>(url: string, config?: ApiConfig): Promise<T> {
+  public get<T>(url: string, config?: ApiConfig): Promise<T> {
     return this.api.get(url, config);
   }
 
   // POST请求
-  public post<T = any>(url: string, data?: any, config?: ApiConfig): Promise<T> {
+  public post<T>(url: string, data?: unknown, config?: ApiConfig): Promise<T> {
     return this.api.post(url, data, config);
   }
 
   // PUT请求
-  public put<T = any>(url: string, data?: any, config?: ApiConfig): Promise<T> {
+  public put<T>(url: string, data?: unknown, config?: ApiConfig): Promise<T> {
     return this.api.put(url, data, config);
   }
 
   // PATCH请求
-  public patch<T = any>(url: string, data?: any, config?: ApiConfig): Promise<T> {
+  public patch<T>(url: string, data?: unknown, config?: ApiConfig): Promise<T> {
     return this.api.patch(url, data, config);
   }
 
   // DELETE请求
-  public delete<T = any>(url: string, config?: ApiConfig): Promise<T> {
+  public delete<T>(url: string, config?: ApiConfig): Promise<T> {
     return this.api.delete(url, config);
   }
 
   // 下载文件
-  public download<T = any>(url: string, config?: ApiConfig): Promise<T> {
+  public download<T>(url: string, config?: ApiConfig): Promise<T> {
     return this.api.get(url, {
       ...config,
       responseType: 'blob',

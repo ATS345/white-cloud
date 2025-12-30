@@ -61,6 +61,7 @@ const Accessibility: React.FC = () => {
   // 初始化应用设置
   useEffect(() => {
     applySettings(highContrast, largeText, darkMode);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 切换高对比度模式

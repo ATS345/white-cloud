@@ -5,6 +5,12 @@ import './index.css';
 
 const { TabPane } = Tabs;
 
+interface CommentValues {
+  rating: number;
+  title: string;
+  content: string;
+}
+
 const GameDetail: React.FC = () => {
   const [liked, setLiked] = useState(false);
   const [commentVisible, setCommentVisible] = useState(false);
@@ -81,7 +87,7 @@ const GameDetail: React.FC = () => {
     ],
   };
 
-  const handleCommentSubmit = (values: any) => {
+  const handleCommentSubmit = (values: CommentValues) => {
     console.log('评论提交:', values);
     form.resetFields();
     setCommentVisible(false);

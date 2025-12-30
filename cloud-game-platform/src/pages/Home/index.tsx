@@ -4,6 +4,7 @@ import { SearchOutlined, StarOutlined, FireOutlined, PlusOutlined, AppstoreOutli
 import { Link } from 'react-router-dom';
 import { useGame } from '../../hooks/useGame';
 import GameCard from '../../components/GameCard';
+import { Game } from '../../services/games';
 import './index.css';
 
 const { Title, Text } = Typography;
@@ -101,11 +102,11 @@ const SearchFilter: React.FC<{
 
 // 热门游戏模块
 const HotGames: React.FC<{
-  games: any[];
+  games: Game[];
   loading: boolean;
-  error: any;
+  error: unknown;
 }> = ({ games, loading, error }) => {
-  const hotGames = games.filter((game: any) => (game.rating || 0) >= 4.5);
+  const hotGames = games.filter((game: Game) => (game.rating || 0) >= 4.5);
 
   return (
     <div className="home-section">
@@ -122,7 +123,7 @@ const HotGames: React.FC<{
           <div className="error-message">加载失败，请重试</div>
         ) : (
           <Row gutter={[16, 24]}>
-            {hotGames.slice(0, 12).map((game: any) => (
+            {hotGames.slice(0, 12).map((game: Game) => (
               <GameCard game={game} type="hot" key={game.id} />
             ))}
           </Row>
@@ -134,9 +135,9 @@ const HotGames: React.FC<{
 
 // 新品推荐模块
 const NewGames: React.FC<{
-  games: any[];
+  games: Game[];
   loading: boolean;
-  error: any;
+  error: unknown;
 }> = ({ games, loading, error }) => {
   const newGames = [...games].sort((a, b) => {
     return new Date(b.releaseDate || 0).getTime() - new Date(a.releaseDate || 0).getTime();
@@ -157,7 +158,7 @@ const NewGames: React.FC<{
           <div className="error-message">加载失败，请重试</div>
         ) : (
           <Row gutter={[16, 24]}>
-            {newGames.slice(0, 8).map((game: any) => (
+            {newGames.slice(0, 8).map((game: Game) => (
               <GameCard game={game} type="new" key={game.id} />
             ))}
           </Row>
@@ -212,11 +213,11 @@ const GameCategories: React.FC = () => {
 
 // 限时折扣模块
 const DiscountGames: React.FC<{
-  games: any[];
+  games: Game[];
   loading: boolean;
-  error: any;
+  error: unknown;
 }> = ({ games, loading, error }) => {
-  const discountGames = games.filter((game: any) => game.price > 0);
+  const discountGames = games.filter((game: Game) => game.price > 0);
 
   return (
     <div className="home-section">
@@ -233,7 +234,7 @@ const DiscountGames: React.FC<{
           <div className="error-message">加载失败，请重试</div>
         ) : (
           <Row gutter={[16, 24]}>
-            {discountGames.slice(0, 8).map((game: any) => (
+            {discountGames.slice(0, 8).map((game: Game) => (
               <GameCard game={game} type="discount" key={game.id} />
             ))}
           </Row>

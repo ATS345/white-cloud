@@ -225,7 +225,7 @@ export const isInternalIp = (ip: string): boolean => {
 };
 
 // 增强的防止原型污染
-export const safeObject = <T extends object>(obj: any): T => {
+export const safeObject = <T extends object>(obj: unknown): T => {
   if (obj === null || typeof obj !== 'object') {
     return obj as T;
   }
@@ -311,7 +311,7 @@ export const isSafeUrl = (url: string): boolean => {
     // 只允许http和https协议
     const allowedProtocols = ['http:', 'https:'];
     return allowedProtocols.includes(parsedUrl.protocol);
-  } catch (error) {
+  } catch {
     // 解析失败，不是有效的URL
     return false;
   }
@@ -321,44 +321,45 @@ export const isSafeUrl = (url: string): boolean => {
 export const safeJsonParse = <T>(jsonString: string, defaultValue: T): T => {
   try {
     // 检查是否包含__proto__或constructor.prototype，防止原型污染
-    if (/__proto__|constructor\s*\.\s*prototype/.test(jsonString)) {
+    if (/\b__proto__\b|\bconstructor\b\s*\.\s*prototype\b/.test(jsonString)) {
       return defaultValue;
     }
     // 解析JSON
     const parsed = JSON.parse(jsonString);
     return parsed as T;
-  } catch (error) {
+  } catch {
     // 解析失败，返回默认值
     return defaultValue;
   }
 };
 
 // 安全地获取对象属性，防止原型链污染
-export const safeGet = (obj: any, path: string, defaultValue: any = undefined): any => {
+export const safeGet = <T>(obj: unknown, path: string, defaultValue: T | undefined = undefined): T | undefined => {
   try {
     const keys = path.split('.');
-    let result = obj;
+    let result: unknown = obj;
     for (const key of keys) {
       // 防止访问原型链属性
       if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
         return defaultValue;
       }
-      result = result[key];
-      if (result === undefined) {
+      // 类型断言，确保可以安全访问属性
+      result = (result as Record<string, unknown>)[key];
+      if (result === undefined || result === null) {
         return defaultValue;
       }
     }
-    return result;
-  } catch (error) {
+    return result as T;
+  } catch {
     return defaultValue;
   }
 };
 
 // 安全地设置对象属性，防止原型链污染
-export const safeSet = (obj: any, path: string, value: any): boolean => {
+export const safeSet = (obj: unknown, path: string, value: unknown): boolean => {
   try {
     const keys = path.split('.');
-    let current = obj;
+    let current = obj as Record<string, unknown>;
     for (let i = 0; i < keys.length - 1; i++) {
       const key = keys[i];
       // 防止设置原型链属性
@@ -368,7 +369,7 @@ export const safeSet = (obj: any, path: string, value: any): boolean => {
       if (current[key] === undefined) {
         current[key] = {};
       }
-      current = current[key];
+      current = current[key] as Record<string, unknown>;
     }
     const lastKey = keys[keys.length - 1];
     // 防止设置原型链属性
@@ -377,7 +378,7 @@ export const safeSet = (obj: any, path: string, value: any): boolean => {
     }
     current[lastKey] = value;
     return true;
-  } catch (error) {
+  } catch {
     return false;
   }
 };

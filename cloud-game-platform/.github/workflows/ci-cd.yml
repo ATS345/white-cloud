@@ -1,0 +1,66 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run lint
+      run: npm run lint
+
+    - name: Run TypeScript check
+      run: npx tsc -b
+
+    - name: Run tests
+      run: npm run test:run
+
+    - name: Build production
+      run: npm run build
+
+    - name: Upload production build
+      uses: actions/upload-artifact@v4
+      with:
+        name: build
+        path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+
+    steps:
+    - name: Download production build
+      uses: actions/download-artifact@v4
+      with:
+        name: build
+        path: dist
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        force_orphan: true
+        publish_branch: gh-pages
+
+    - name: Send deployment notification
+      run: |
+        echo "Deployment completed successfully!"
+        echo "Live URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"

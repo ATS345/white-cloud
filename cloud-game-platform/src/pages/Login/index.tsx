@@ -10,7 +10,7 @@ const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const onFinish = (_values: any) => {
+  const onFinish = () => {
     setLoading(true);
     // 模拟登录请求
     setTimeout(() => {
