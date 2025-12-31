@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -9,6 +9,7 @@ import * as Sentry from '@sentry/react'
 import './index.css'
 import { store } from './store'
 import { queryClient } from './lib/react-query'
+// 直接导入路由配置，不能使用lazy加载
 import router from './routes'
 
 // 初始化Sentry监控系统
@@ -27,7 +28,9 @@ createRoot(document.getElementById('root')!).render(
     <ConfigProvider locale={zhCN}>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <Suspense fallback={<div className="loading">加载中...</div>}>
+            <RouterProvider router={router} />
+          </Suspense>
         </QueryClientProvider>
       </Provider>
     </ConfigProvider>
