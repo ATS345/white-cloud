@@ -118,7 +118,7 @@ const GameLibrary: React.FC = () => {
               <Col xs={24} sm={12} md={8} lg={6} key={game.id}>
                 <Card
                   hoverable
-                  cover={<img alt={game.name} src={game.image} />}
+                  cover={<img alt={game.name} src={game.image} loading="lazy" />}
                   className="library-game-card"
                 >
                   <Card.Meta

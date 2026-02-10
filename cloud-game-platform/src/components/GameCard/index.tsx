@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Card, Button, Tag } from 'antd';
 import { DownloadOutlined, StarOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
@@ -121,4 +121,4 @@ const GameCard: React.FC<GameCardProps> = ({ game, type }) => {
   );
 };
 
-export default GameCard;
+export default memo(GameCard);

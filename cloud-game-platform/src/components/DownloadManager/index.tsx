@@ -254,7 +254,7 @@ const DownloadManager: React.FC<DownloadManagerProps> = ({ visible, onClose }) =
             ]}
           >
             <List.Item.Meta
-              avatar={<img src={download.image} alt={download.name} className="download-item-image" />}
+              avatar={<img src={download.image} alt={download.name} className="download-item-image" loading="lazy" />}
               title={download.name}
               description={
                 <>

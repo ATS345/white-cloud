@@ -22,7 +22,7 @@ const BannerCarousel: React.FC = () => {
     <Carousel autoplay className="banner-carousel" effect="fade" dotPosition="bottom">
       {carouselItems.map(item => (
         <div key={item.id} className="carousel-item">
-          <img alt={item.alt} src={item.image} />
+          <img alt={item.alt} src={item.image} loading="lazy" />
           <div className="carousel-overlay">
             <div className="carousel-content">
               <Title level={2} className="carousel-title">{item.title}</Title>
