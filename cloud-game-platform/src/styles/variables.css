@@ -95,6 +95,7 @@
   --text-secondary: var(--gray-600);
   --text-light: var(--gray-400);
   --bg-color: #fafbff; /* 云朵背景色 */
+  --bg-color-light: var(--gray-100); /* 浅色背景 */
   --card-bg: var(--white);
   --header-bg: var(--white);
   --sidebar-bg: #001529;
@@ -104,16 +105,16 @@
   --sidebar-width: 200px;
 }
 
-/* 响应式断点 */
+/* 响应式断点 - 与Ant Design保持一致 */
 @media (min-width: 0px) {
   :root {
     --breakpoint-xs: 0px;
   }
 }
 
-@media (min-width: 480px) {
+@media (min-width: 576px) {
   :root {
-    --breakpoint-sm: 480px;
+    --breakpoint-sm: 576px;
   }
 }
 
@@ -185,6 +186,7 @@
   /* 其他 - 深色模式 */
   --border-color: var(--gray-300);
   --bg-color: #14142a;
+  --bg-color-light: var(--gray-100); /* 浅色背景 */
   --card-bg: var(--white);
   --header-bg: var(--white);
   --sidebar-bg: #1a1a2e;

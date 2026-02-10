@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Carousel, Button, Input, Select, Row, Spin, Typography, Space, Statistic } from 'antd';
+import { Carousel, Button, Input, Select, Row, Col, Spin, Typography, Space, Statistic } from 'antd';
 import { SearchOutlined, StarOutlined, FireOutlined, PlusOutlined, AppstoreOutlined, GiftOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { useGame } from '../../hooks/useGame';
@@ -124,7 +124,9 @@ const HotGames: React.FC<{
         ) : (
           <Row gutter={[16, 24]}>
             {hotGames.slice(0, 12).map((game: Game) => (
-              <GameCard game={game} type="hot" key={game.id} />
+              <Col xs={24} sm={12} md={8} lg={6} key={game.id}>
+                <GameCard game={game} type="hot" />
+              </Col>
             ))}
           </Row>
         )}
@@ -159,7 +161,9 @@ const NewGames: React.FC<{
         ) : (
           <Row gutter={[16, 24]}>
             {newGames.slice(0, 8).map((game: Game) => (
-              <GameCard game={game} type="new" key={game.id} />
+              <Col xs={24} sm={12} md={8} lg={6} key={game.id}>
+                <GameCard game={game} type="new" />
+              </Col>
             ))}
           </Row>
         )}
@@ -235,7 +239,9 @@ const DiscountGames: React.FC<{
         ) : (
           <Row gutter={[16, 24]}>
             {discountGames.slice(0, 8).map((game: Game) => (
-              <GameCard game={game} type="discount" key={game.id} />
+              <Col xs={24} sm={12} md={8} lg={6} key={game.id}>
+                <GameCard game={game} type="discount" />
+              </Col>
             ))}
           </Row>
         )}

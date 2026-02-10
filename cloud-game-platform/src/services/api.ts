@@ -63,6 +63,10 @@ class ApiService {
 
   // 请求处理
   private handleRequest(config: ApiConfig) {
+    // 设置默认重试配置
+    config.retry = config.retry ?? 3;
+    config.retryDelay = config.retryDelay ?? 1000;
+    
     // 从本地存储获取token
     const token = localStorage.getItem('token');
     if (token) {
