@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiStar, FiDownload, FiShoppingCart, FiShare2, FiCheck } from 'react-icons/fi';
 import Navbar from '../components/Navbar';
+import ReviewList from '../components/ReviewList';
+import ReviewForm from '../components/ReviewForm';
 import axios from 'axios';
 
 interface GameDetail {
@@ -31,6 +33,7 @@ const GameDetailPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [reviewsUpdated, setReviewsUpdated] = useState(false);
 
   const addToCart = () => {
     if (!game) return;
@@ -69,6 +72,11 @@ const GameDetailPage: React.FC = () => {
     // Show success state
     setIsAddedToCart(true);
     setTimeout(() => setIsAddedToCart(false), 2000);
+  };
+
+  const handleReviewSubmitted = () => {
+    // Toggle reviewsUpdated to trigger a refresh
+    setReviewsUpdated(!reviewsUpdated);
   };
 
   useEffect(() => {
@@ -168,9 +176,21 @@ const GameDetailPage: React.FC = () => {
 
             <div className="flex flex-wrap items-center gap-4">
               <div className="text-2xl font-bold">${game.price.toFixed(2)}</div>
-              <button className="px-6 py-3 bg-primary-500 hover:bg-primary-600 rounded-lg transition duration-300 flex items-center">
-                <FiShoppingCart className="mr-2" />
-                Add to Cart
+              <button 
+              onClick={addToCart}
+              className={`px-6 py-3 rounded-lg transition duration-300 flex items-center ${isAddedToCart ? 'bg-green-500 hover:bg-green-600' : 'bg-primary-500 hover:bg-primary-600'}`}
+            >
+                {isAddedToCart ? (
+                  <>
+                    <FiCheck className="mr-2" />
+                    Added to Cart
+                  </>
+                ) : (
+                  <>
+                    <FiShoppingCart className="mr-2" />
+                    Add to Cart
+                  </>
+                )}
               </button>
               <button className="px-6 py-3 bg-secondary-800 hover:bg-secondary-700 rounded-lg transition duration-300 flex items-center">
                 <FiDownload className="mr-2" />
@@ -248,6 +268,21 @@ const GameDetailPage: React.FC = () => {
                     <div className="bg-green-500 h-2 rounded-full" style={{ width: '92%' }}></div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Reviews Section */}
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold mb-8">Reviews</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Review Form */}
+              <div className="lg:col-span-1">
+                <ReviewForm gameId={game.id} onReviewSubmitted={handleReviewSubmitted} />
+              </div>
+              {/* Review List */}
+              <div className="lg:col-span-2">
+                <ReviewList gameId={game.id} />
               </div>
             </div>
           </div>

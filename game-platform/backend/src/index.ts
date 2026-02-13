@@ -5,6 +5,8 @@ import authRoutes from './routes/auth';
 import gameRoutes from './routes/games';
 import categoryRoutes from './routes/categories';
 import orderRoutes from './routes/orders';
+import reviewRoutes from './routes/reviews';
+import statsRoutes from './routes/stats';
 
 // 加载环境变量
 dotenv.config();
@@ -39,6 +41,12 @@ app.use('/api/categories', categoryRoutes);
 
 // 订单路由
 app.use('/api/orders', orderRoutes);
+
+// 评论路由
+app.use('/api', reviewRoutes);
+
+// 统计路由
+app.use('/api', statsRoutes);
 
 // 404处理
 app.use('*', (req, res) => {
