@@ -20,7 +20,7 @@ const CategoriesPage: React.FC = () => {
         const response = await axios.get('http://localhost:3001/api/categories');
         setCategories(response.data);
         setLoading(false);
-      } catch (err: any) {
+      } catch {
         setError('Failed to fetch categories');
         setLoading(false);
       }

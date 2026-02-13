@@ -1,115 +1,212 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret, SignOptions } from 'jsonwebtoken';
 import { authMiddleware } from '../middleware/auth';
 
 const router = express.Router();
 
-// Mock user database
-let users: any[] = [];
+// 优化：使用Map存储用户，提高查找性能
+const usersMap = new Map<number, any>();
+const emailToIdMap = new Map<string, number>();
+const usernameToIdMap = new Map<string, number>();
 let nextUserId = 1;
 
-// Register route
-router.post('/register', async (req, res) => {
+// 密码哈希配置
+const BCRYPT_SALT_ROUNDS = 12; // 增加哈希强度
+
+// JWT配置
+const JWT_SECRET: Secret = process.env.JWT_SECRET as Secret;
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
+const jwtOptions: SignOptions = {
+  expiresIn: JWT_EXPIRES_IN as any
+};
+
+// 输入验证函数
+const validateRegisterInput = (req: express.Request, res: express.Response) => {
   const { username, email, password } = req.body;
 
-  // Validate input
+  // 基本验证
   if (!username || !email || !password) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
-  // Check if user already exists
-  if (users.some(user => user.email === email)) {
+  // 用户名验证
+  if (username.length < 3 || username.length > 20) {
+    return res.status(400).json({ error: 'Username must be between 3 and 20 characters' });
+  }
+
+  // 邮箱验证
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Invalid email format' });
+  }
+
+  // 密码验证
+  if (password.length < 6) {
+    return res.status(400).json({ error: 'Password must be at least 6 characters long' });
+  }
+
+  // 检查邮箱是否已注册
+  if (emailToIdMap.has(email)) {
     return res.status(400).json({ error: 'Email already registered' });
   }
 
-  if (users.some(user => user.username === username)) {
+  // 检查用户名是否已被使用
+  if (usernameToIdMap.has(username)) {
     return res.status(400).json({ error: 'Username already taken' });
   }
 
-  // Hash password
-  const passwordHash = await bcrypt.hash(password, 10);
+  return null;
+};
 
-  // Create new user
-  const newUser = {
-    id: nextUserId++,
-    username,
-    email,
-    passwordHash,
-    avatar: '',
-    bio: '',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  };
-
-  users.push(newUser);
-
-  // Generate JWT token
-  const token = jwt.sign(
-    { id: newUser.id, username: newUser.username, email: newUser.email },
-    process.env.JWT_SECRET || 'your-secret-key',
-    { expiresIn: '7d' }
-  );
-
-  res.status(201).json({
-    id: newUser.id,
-    username: newUser.username,
-    email: newUser.email,
-    token
-  });
-});
-
-// Login route
-router.post('/login', async (req, res) => {
+const validateLoginInput = (req: express.Request, res: express.Response) => {
   const { email, password } = req.body;
 
-  // Validate input
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required' });
   }
 
-  // Find user
-  const user = users.find(user => user.email === email);
-  if (!user) {
-    return res.status(401).json({ error: 'Invalid email or password' });
+  return null;
+};
+
+const validateChangePasswordInput = (req: express.Request, res: express.Response) => {
+  const { oldPassword, newPassword } = req.body;
+
+  if (!oldPassword || !newPassword) {
+    return res.status(400).json({ error: 'All fields are required' });
   }
 
-  // Check password
-  const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
-  if (!isPasswordValid) {
-    return res.status(401).json({ error: 'Invalid email or password' });
+  if (newPassword.length < 6) {
+    return res.status(400).json({ error: 'New password must be at least 6 characters long' });
   }
 
-  // Generate JWT token
-  const token = jwt.sign(
-    { id: user.id, username: user.username, email: user.email },
-    process.env.JWT_SECRET || 'your-secret-key',
-    { expiresIn: '7d' }
-  );
+  return null;
+};
 
-  res.status(200).json({
-    id: user.id,
-    username: user.username,
-    email: user.email,
-    token
-  });
+// Register route
+router.post('/register', async (req, res) => {
+  // 验证输入
+  const validationError = validateRegisterInput(req, res);
+  if (validationError) {
+    return validationError;
+  }
+
+  const { username, email, password } = req.body;
+
+  try {
+    // 哈希密码
+    const passwordHash = await bcrypt.hash(password, BCRYPT_SALT_ROUNDS);
+
+    // 创建新用户
+    const newUser = {
+      id: nextUserId++,
+      username,
+      email,
+      passwordHash,
+      avatar: '',
+      bio: '',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+
+    // 存储用户到Map中
+    usersMap.set(newUser.id, newUser);
+    emailToIdMap.set(email, newUser.id);
+    usernameToIdMap.set(username, newUser.id);
+
+    // 生成JWT token
+    const token = jwt.sign(
+      { id: newUser.id, username: newUser.username, email: newUser.email },
+      JWT_SECRET,
+      jwtOptions
+    );
+
+    // 优化：移除敏感信息
+    const { passwordHash: _, ...userWithoutPassword } = newUser;
+
+    res.status(201).json({
+      ...userWithoutPassword,
+      token
+    });
+  } catch (error) {
+    console.error('Register error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Login route
+router.post('/login', async (req, res) => {
+  // 验证输入
+  const validationError = validateLoginInput(req, res);
+  if (validationError) {
+    return validationError;
+  }
+
+  const { email, password } = req.body;
+
+  try {
+    // 优化：使用Map快速查找
+    const userId = emailToIdMap.get(email);
+    if (!userId) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    const user = usersMap.get(userId);
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    // 检查密码
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    // 生成JWT token
+    const token = jwt.sign(
+      { id: user.id, username: user.username, email: user.email },
+      JWT_SECRET,
+      jwtOptions
+    );
+
+    // 移除敏感信息
+    const { passwordHash: _, ...userWithoutPassword } = user;
+
+    res.status(200).json({
+      ...userWithoutPassword,
+      token
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 // Get current user route
 router.get('/me', authMiddleware, (req, res) => {
-  const user = users.find(user => user.id === req.user?.id);
-  if (!user) {
-    return res.status(404).json({ error: 'User not found' });
-  }
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
 
-  res.status(200).json({
-    id: user.id,
-    username: user.username,
-    email: user.email,
-    avatar: user.avatar,
-    bio: user.bio,
-    createdAt: user.createdAt
-  });
+    // 优化：使用Map快速查找
+    const user = usersMap.get(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // 移除敏感信息
+    const { passwordHash: _, ...userWithoutPassword } = user;
+
+    res.status(200).json(userWithoutPassword);
+  } catch (error) {
+    console.error('Get me error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 // Update user route
@@ -117,65 +214,96 @@ router.put('/update', authMiddleware, (req, res) => {
   const { username, bio, avatar } = req.body;
   const userId = req.user?.id;
 
-  const userIndex = users.findIndex(user => user.id === userId);
-  if (userIndex === -1) {
-    return res.status(404).json({ error: 'User not found' });
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  // Check if username is already taken
-  if (username && users.some(user => user.username === username && user.id !== userId)) {
-    return res.status(400).json({ error: 'Username already taken' });
+  try {
+    // 优化：使用Map快速查找
+    const user = usersMap.get(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // 检查用户名是否已被使用
+    if (username && username !== user.username && usernameToIdMap.has(username)) {
+      return res.status(400).json({ error: 'Username already taken' });
+    }
+
+    // 更新用户
+    const updatedUser = {
+      ...user,
+      username: username || user.username,
+      bio: bio || user.bio,
+      avatar: avatar || user.avatar,
+      updatedAt: new Date().toISOString()
+    };
+
+    // 更新Map
+    usersMap.set(userId, updatedUser);
+    
+    // 如果用户名变更，更新usernameToIdMap
+    if (username && username !== user.username) {
+      usernameToIdMap.delete(user.username);
+      usernameToIdMap.set(username, userId);
+    }
+
+    // 移除敏感信息
+    const { passwordHash: _, ...userWithoutPassword } = updatedUser;
+
+    res.status(200).json(userWithoutPassword);
+  } catch (error) {
+    console.error('Update user error:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
-
-  // Update user
-  users[userIndex] = {
-    ...users[userIndex],
-    username: username || users[userIndex].username,
-    bio: bio || users[userIndex].bio,
-    avatar: avatar || users[userIndex].avatar,
-    updatedAt: new Date().toISOString()
-  };
-
-  res.status(200).json({
-    id: users[userIndex].id,
-    username: users[userIndex].username,
-    email: users[userIndex].email,
-    bio: users[userIndex].bio,
-    avatar: users[userIndex].avatar
-  });
 });
 
 // Change password route
 router.put('/change-password', authMiddleware, async (req, res) => {
+  // 验证输入
+  const validationError = validateChangePasswordInput(req, res);
+  if (validationError) {
+    return validationError;
+  }
+
   const { oldPassword, newPassword } = req.body;
   const userId = req.user?.id;
 
-  if (!oldPassword || !newPassword) {
-    return res.status(400).json({ error: 'All fields are required' });
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const userIndex = users.findIndex(user => user.id === userId);
-  if (userIndex === -1) {
-    return res.status(404).json({ error: 'User not found' });
+  try {
+    // 优化：使用Map快速查找
+    const user = usersMap.get(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // 检查旧密码
+    const isPasswordValid = await bcrypt.compare(oldPassword, user.passwordHash);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid old password' });
+    }
+
+    // 哈希新密码
+    const newPasswordHash = await bcrypt.hash(newPassword, BCRYPT_SALT_ROUNDS);
+
+    // 更新密码
+    const updatedUser = {
+      ...user,
+      passwordHash: newPasswordHash,
+      updatedAt: new Date().toISOString()
+    };
+
+    // 更新Map
+    usersMap.set(userId, updatedUser);
+
+    res.status(200).json({ message: 'Password changed successfully' });
+  } catch (error) {
+    console.error('Change password error:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
-
-  // Check old password
-  const isPasswordValid = await bcrypt.compare(oldPassword, users[userIndex].passwordHash);
-  if (!isPasswordValid) {
-    return res.status(401).json({ error: 'Invalid old password' });
-  }
-
-  // Hash new password
-  const newPasswordHash = await bcrypt.hash(newPassword, 10);
-
-  // Update password
-  users[userIndex] = {
-    ...users[userIndex],
-    passwordHash: newPasswordHash,
-    updatedAt: new Date().toISOString()
-  };
-
-  res.status(200).json({ message: 'Password changed successfully' });
 });
 
 export default router;

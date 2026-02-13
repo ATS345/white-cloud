@@ -17,7 +17,7 @@ const users = [
 // Get game reviews
 router.get('/games/:gameId/reviews', (req, res) => {
   const { gameId } = req.params;
-  const gameReviews = reviews.filter(review => review.game_id === parseInt(gameId));
+  const gameReviews = reviews.filter(review => review.game_id === parseInt(Array.isArray(gameId) ? gameId[0] : gameId));
   res.status(200).json(gameReviews);
 });
 
@@ -26,7 +26,6 @@ router.post('/games/:gameId/reviews', authMiddleware, (req, res) => {
   const { gameId } = req.params;
   const { rating, content } = req.body;
   const userId = req.user?.id;
-  const user = users.find(u => u.id === userId);
 
   if (!rating || !content) {
     return res.status(400).json({ error: 'Rating and content are required' });
@@ -40,13 +39,13 @@ router.post('/games/:gameId/reviews', authMiddleware, (req, res) => {
   const newReview = {
     id: nextReviewId++,
     user_id: userId,
-    game_id: parseInt(gameId),
+    game_id: parseInt(Array.isArray(gameId) ? gameId[0] : gameId),
     rating,
     content,
     user: {
-      id: user?.id,
-      username: user?.username,
-      avatar: user?.avatar
+      id: userId,
+      username: `User${userId}`,
+      avatar: `https://ui-avatars.com/api/?name=User+${userId}&background=random`
     },
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
@@ -61,7 +60,7 @@ router.put('/reviews/:id', authMiddleware, (req, res) => {
   const { id } = req.params;
   const { rating, content } = req.body;
   const userId = req.user?.id;
-  const reviewIndex = reviews.findIndex(review => review.id === parseInt(id) && review.user_id === userId);
+  const reviewIndex = reviews.findIndex(review => review.id === parseInt(Array.isArray(id) ? id[0] : id) && review.user_id === userId);
 
   if (reviewIndex === -1) {
     return res.status(404).json({ error: 'Review not found' });
@@ -86,7 +85,7 @@ router.put('/reviews/:id', authMiddleware, (req, res) => {
 router.delete('/reviews/:id', authMiddleware, (req, res) => {
   const { id } = req.params;
   const userId = req.user?.id;
-  const reviewIndex = reviews.findIndex(review => review.id === parseInt(id) && review.user_id === userId);
+  const reviewIndex = reviews.findIndex(review => review.id === parseInt(Array.isArray(id) ? id[0] : id) && review.user_id === userId);
 
   if (reviewIndex === -1) {
     return res.status(404).json({ error: 'Review not found' });

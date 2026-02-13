@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { FiMenu, FiX, FiSearch, FiUser, FiShoppingCart, FiBell, FiLogOut } from 'react-icons/fi';
 
+interface User {
+  id: number;
+  username: string;
+  email: string;
+}
+
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Check if user is logged in
+  // Check if user is logged in on component mount
+  React.useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -50,6 +56,9 @@ const Navbar: React.FC = () => {
             </NavLink>
             <NavLink to="/categories" className={({ isActive }) => isActive ? 'text-primary-400 font-medium' : 'hover:text-primary-400'}>
               Categories
+            </NavLink>
+            <NavLink to="/stats" className={({ isActive }) => isActive ? 'text-primary-400 font-medium' : 'hover:text-primary-400'}>
+              Stats
             </NavLink>
             <NavLink to="/about" className={({ isActive }) => isActive ? 'text-primary-400 font-medium' : 'hover:text-primary-400'}>
               About
@@ -132,6 +141,9 @@ const Navbar: React.FC = () => {
               </NavLink>
               <NavLink to="/categories" className="hover:text-primary-400" onClick={toggleMenu}>
                 Categories
+              </NavLink>
+              <NavLink to="/stats" className="hover:text-primary-400" onClick={toggleMenu}>
+                Stats
               </NavLink>
               <NavLink to="/about" className="hover:text-primary-400" onClick={toggleMenu}>
                 About

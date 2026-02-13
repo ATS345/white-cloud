@@ -24,7 +24,7 @@ const GamesPage: React.FC = () => {
         const response = await axios.get('http://localhost:3001/api/games');
         setGames(response.data);
         setLoading(false);
-      } catch (err: any) {
+      } catch {
         setError('Failed to fetch games');
         setLoading(false);
       }

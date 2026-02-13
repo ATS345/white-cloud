@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Image from './Image';
 
 interface GameCardProps {
   id: number;
@@ -14,7 +15,7 @@ const GameCard: React.FC<GameCardProps> = ({ id, title, price, rating, coverImag
   return (
     <div className="bg-secondary-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 group">
       <div className="relative">
-        <img
+        <Image
           src={coverImage}
           alt={title}
           className="w-full h-48 object-cover group-hover:scale-105 transition duration-500"

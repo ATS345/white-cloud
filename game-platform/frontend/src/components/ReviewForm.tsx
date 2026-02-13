@@ -70,7 +70,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ gameId, onReviewSubmitted }) =>
       
       // Reset success message after 3 seconds
       setTimeout(() => setSuccess(false), 3000);
-    } catch (err: any) {
+    } catch {
       setError('Failed to submit review');
       setLoading(false);
     }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import Navbar from '../components/Navbar';
 import GameCard from '../components/GameCard';
@@ -16,7 +16,6 @@ interface Game {
 
 const CategoryGamesPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
   const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -40,7 +39,7 @@ const CategoryGamesPage: React.FC = () => {
           .join(' ');
         setCategoryName(name);
         setLoading(false);
-      } catch (err: any) {
+      } catch {
         setError('Failed to fetch category games');
         setLoading(false);
       }

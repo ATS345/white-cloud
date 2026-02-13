@@ -43,7 +43,7 @@ const AuthPage: React.FC = () => {
     try {
       if (isLogin) {
         // Login logic
-        const response = await axios.post('http://localhost:3001/api/auth/login', {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
           email: formData.email,
           password: formData.password
         });
@@ -63,7 +63,7 @@ const AuthPage: React.FC = () => {
           return;
         }
 
-        const response = await axios.post('http://localhost:3001/api/auth/register', {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
           username: formData.username,
           email: formData.email,
           password: formData.password
@@ -76,8 +76,9 @@ const AuthPage: React.FC = () => {
         // Redirect to home page
         navigate('/');
       }
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'An error occurred');
+    } catch (err) {
+      const error = err as { response?: { data?: { error?: string } } };
+      setError(error.response?.data?.error || 'An error occurred');
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FiArrowLeft, FiStar, FiDownload, FiShoppingCart, FiShare2, FiCheck } from 'react-icons/fi';
 import Navbar from '../components/Navbar';
 import ReviewList from '../components/ReviewList';
@@ -28,34 +28,42 @@ interface GameDetail {
 
 const GameDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const [game, setGame] = useState<GameDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [reviewsUpdated, setReviewsUpdated] = useState(false);
 
+  interface CartItem {
+    id: number;
+    game_id: number;
+    title: string;
+    price: number;
+    quantity: number;
+    cover_image: string;
+  }
+
   const addToCart = () => {
     if (!game) return;
     
     // Get current cart from localStorage
     const storedCart = localStorage.getItem('cart');
-    const cartItems = storedCart ? JSON.parse(storedCart) : [];
+    const cartItems: CartItem[] = storedCart ? JSON.parse(storedCart) : [];
 
     // Check if game already in cart
-    const existingItem = cartItems.find((item: any) => item.game_id === game.id);
-    let updatedCart;
+    const existingItem = cartItems.find((item) => item.game_id === game.id);
+    let updatedCart: CartItem[];
 
     if (existingItem) {
       // Update quantity if game already in cart
-      updatedCart = cartItems.map((item: any) => 
+      updatedCart = cartItems.map((item) => 
         item.game_id === game.id 
           ? { ...item, quantity: item.quantity + 1 }
           : item
       );
     } else {
       // Add new game to cart
-      const newItem = {
+      const newItem: CartItem = {
         id: Date.now(),
         game_id: game.id,
         title: game.title,
@@ -91,7 +99,7 @@ const GameDetailPage: React.FC = () => {
         const response = await axios.get(`http://localhost:3001/api/games/${id}`);
         setGame(response.data);
         setLoading(false);
-      } catch (err: any) {
+      } catch {
         setError('Failed to fetch game details');
         setLoading(false);
       }

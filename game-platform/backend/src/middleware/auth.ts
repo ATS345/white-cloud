@@ -25,7 +25,11 @@ export const authMiddleware = (req: express.Request, res: express.Response, next
   const token = authHeader.split(' ')[1];
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key') as UserPayload;
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      throw new Error('JWT secret not configured');
+    }
+    const payload = jwt.verify(token, jwtSecret) as UserPayload;
     req.user = payload;
     next();
   } catch (error) {

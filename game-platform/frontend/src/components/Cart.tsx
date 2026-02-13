@@ -14,8 +14,8 @@ interface CartItem {
 const Cart: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  useEffect(() => {
-    // Load cart from localStorage
+  // Load cart from localStorage on component mount
+  React.useEffect(() => {
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
       setCartItems(JSON.parse(storedCart));
@@ -26,29 +26,6 @@ const Cart: React.FC = () => {
     // Save cart to localStorage
     localStorage.setItem('cart', JSON.stringify(cartItems));
   }, [cartItems]);
-
-  const addToCart = (game: any) => {
-    const existingItem = cartItems.find(item => item.game_id === game.id);
-    if (existingItem) {
-      // Update quantity if game already in cart
-      setCartItems(cartItems.map(item => 
-        item.game_id === game.id 
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      ));
-    } else {
-      // Add new game to cart
-      const newItem: CartItem = {
-        id: Date.now(),
-        game_id: game.id,
-        title: game.title,
-        price: game.price,
-        quantity: 1,
-        cover_image: game.cover_image
-      };
-      setCartItems([...cartItems, newItem]);
-    }
-  };
 
   const removeFromCart = (itemId: number) => {
     setCartItems(cartItems.filter(item => item.id !== itemId));
@@ -74,8 +51,7 @@ const Cart: React.FC = () => {
 
   const handleCheckout = () => {
     // Redirect to checkout page
-    // In a real app, this would create an order and redirect to payment
-    console.log('Checkout', cartItems);
+    window.location.href = '/checkout';
   };
 
   if (cartItems.length === 0) {

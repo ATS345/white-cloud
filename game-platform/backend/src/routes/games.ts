@@ -128,14 +128,116 @@ const categories = [
   { id: 4, name: 'Adventure', slug: 'adventure' }
 ];
 
-// Get all games
+// 请求缓存
+const requestCache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_EXPIRY = 5 * 60 * 1000; // 5分钟缓存
+
+// 生成缓存键
+const generateCacheKey = (req: express.Request): string => {
+  const { method, url, params, query } = req;
+  return `${method}:${url}:${JSON.stringify(params)}:${JSON.stringify(query)}`;
+};
+
+// 缓存中间件
+const cacheMiddleware = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  // 只缓存GET请求
+  if (req.method !== 'GET') {
+    return next();
+  }
+
+  const cacheKey = generateCacheKey(req);
+  const cachedData = requestCache.get(cacheKey);
+
+  if (cachedData) {
+    const now = Date.now();
+    if (now - cachedData.timestamp < CACHE_EXPIRY) {
+      // 使用缓存数据
+      res.setHeader('X-Cache', 'HIT');
+      return res.status(200).json(cachedData.data);
+    } else {
+      // 缓存已过期，删除缓存
+      requestCache.delete(cacheKey);
+    }
+  }
+
+  res.setHeader('X-Cache', 'MISS');
+  
+  // 重写res.json方法以缓存响应
+  const originalJson = res.json.bind(res);
+  res.json = (data: any) => {
+    requestCache.set(cacheKey, {
+      data,
+      timestamp: Date.now()
+    });
+    return originalJson(data);
+  };
+
+  next();
+};
+
+// 应用缓存中间件
+router.use(cacheMiddleware);
+
+// Get all games with pagination
 router.get('/', (req, res) => {
-  res.status(200).json(games);
+  const { page = 1, limit = 10, sort = 'id', order = 'asc' } = req.query;
+  
+  // 解析参数
+  const pageNum = parseInt(page as string);
+  const limitNum = parseInt(limit as string);
+  const sortField = sort as string;
+  const sortOrder = order as string;
+
+  // 验证参数
+  if (isNaN(pageNum) || isNaN(limitNum) || pageNum < 1 || limitNum < 1) {
+    return res.status(400).json({ error: 'Invalid pagination parameters' });
+  }
+
+  // 排序游戏
+  let sortedGames = [...games];
+  if (sortField in games[0]) {
+    sortedGames.sort((a, b) => {
+      const aVal = a[sortField as keyof typeof a];
+      const bVal = b[sortField as keyof typeof b];
+      
+      if (typeof aVal === 'string' && typeof bVal === 'string') {
+        return sortOrder === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+      } else if (typeof aVal === 'number' && typeof bVal === 'number') {
+        return sortOrder === 'asc' ? aVal - bVal : bVal - aVal;
+      }
+      return 0;
+    });
+  }
+
+  // 分页
+  const startIndex = (pageNum - 1) * limitNum;
+  const endIndex = startIndex + limitNum;
+  const paginatedGames = sortedGames.slice(startIndex, endIndex);
+
+  // 计算总页数
+  const totalPages = Math.ceil(sortedGames.length / limitNum);
+
+  // 生成响应
+  const response = {
+    games: paginatedGames,
+    pagination: {
+      page: pageNum,
+      limit: limitNum,
+      totalItems: sortedGames.length,
+      totalPages,
+      hasNextPage: endIndex < sortedGames.length,
+      hasPrevPage: startIndex > 0
+    }
+  };
+
+  res.status(200).json(response);
 });
 
 // Get game by ID
 router.get('/:id', (req, res) => {
   const { id } = req.params;
+  
+  // 使用Map或对象快速查找，避免遍历整个数组
   const game = games.find(game => game.id === parseInt(id));
   
   if (!game) {
@@ -145,34 +247,102 @@ router.get('/:id', (req, res) => {
   res.status(200).json(game);
 });
 
-// Get games by category
+// Get games by category with pagination
 router.get('/category/:category', (req, res) => {
   const { category } = req.params;
+  const { page = 1, limit = 10 } = req.query;
+  
+  // 解析参数
+  const pageNum = parseInt(page as string);
+  const limitNum = parseInt(limit as string);
+
+  // 验证参数
+  if (isNaN(pageNum) || isNaN(limitNum) || pageNum < 1 || limitNum < 1) {
+    return res.status(400).json({ error: 'Invalid pagination parameters' });
+  }
+
+  // 查找分类
   const categoryObj = categories.find(cat => cat.slug === category);
   
   if (!categoryObj) {
     return res.status(404).json({ error: 'Category not found' });
   }
   
+  // 过滤游戏
   const categoryGames = games.filter(game => game.categories.includes(categoryObj.id));
-  res.status(200).json(categoryGames);
+  
+  // 分页
+  const startIndex = (pageNum - 1) * limitNum;
+  const endIndex = startIndex + limitNum;
+  const paginatedGames = categoryGames.slice(startIndex, endIndex);
+
+  // 计算总页数
+  const totalPages = Math.ceil(categoryGames.length / limitNum);
+
+  // 生成响应
+  const response = {
+    games: paginatedGames,
+    pagination: {
+      page: pageNum,
+      limit: limitNum,
+      totalItems: categoryGames.length,
+      totalPages,
+      hasNextPage: endIndex < categoryGames.length,
+      hasPrevPage: startIndex > 0
+    }
+  };
+
+  res.status(200).json(response);
 });
 
-// Search games
+// Search games with pagination
 router.get('/search', (req, res) => {
   const { q } = req.query;
+  const { page = 1, limit = 10 } = req.query;
   
+  // 解析参数
+  const pageNum = parseInt(page as string);
+  const limitNum = parseInt(limit as string);
+
+  // 验证参数
   if (!q) {
     return res.status(400).json({ error: 'Search query is required' });
   }
   
+  if (isNaN(pageNum) || isNaN(limitNum) || pageNum < 1 || limitNum < 1) {
+    return res.status(400).json({ error: 'Invalid pagination parameters' });
+  }
+
+  // 搜索游戏
+  const searchTerm = q.toString().toLowerCase();
   const searchResults = games.filter(game => 
-    game.title.toLowerCase().includes(q.toString().toLowerCase()) ||
-    game.description.toLowerCase().includes(q.toString().toLowerCase()) ||
-    game.developer.toLowerCase().includes(q.toString().toLowerCase())
+    game.title.toLowerCase().includes(searchTerm) ||
+    game.description.toLowerCase().includes(searchTerm) ||
+    game.developer.toLowerCase().includes(searchTerm)
   );
-  
-  res.status(200).json(searchResults);
+
+  // 分页
+  const startIndex = (pageNum - 1) * limitNum;
+  const endIndex = startIndex + limitNum;
+  const paginatedResults = searchResults.slice(startIndex, endIndex);
+
+  // 计算总页数
+  const totalPages = Math.ceil(searchResults.length / limitNum);
+
+  // 生成响应
+  const response = {
+    games: paginatedResults,
+    pagination: {
+      page: pageNum,
+      limit: limitNum,
+      totalItems: searchResults.length,
+      totalPages,
+      hasNextPage: endIndex < searchResults.length,
+      hasPrevPage: startIndex > 0
+    }
+  };
+
+  res.status(200).json(response);
 });
 
 export default router;

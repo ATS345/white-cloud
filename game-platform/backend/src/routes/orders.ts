@@ -1,5 +1,6 @@
 import express from 'express';
 import { authMiddleware } from '../middleware/auth';
+import { createPaymentIntent, confirmPaymentIntent } from '../services/stripe';
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ const games = [
 ];
 
 // Create order
-router.post('/', authMiddleware, (req, res) => {
+router.post('/', authMiddleware, async (req, res) => {
   const { items } = req.body;
   const userId = req.user?.id;
 
@@ -62,7 +63,20 @@ router.post('/', authMiddleware, (req, res) => {
   };
 
   orders.push(newOrder);
-  res.status(201).json(newOrder);
+
+  // Create payment intent with Stripe
+  try {
+    const paymentIntent = await createPaymentIntent(totalAmount, 'usd', newOrder.id.toString());
+    res.status(201).json({
+      ...newOrder,
+      payment_intent_id: paymentIntent.id,
+      client_secret: paymentIntent.client_secret
+    });
+  } catch (error) {
+    console.error('Error creating payment intent:', error);
+    // Return order without payment intent if Stripe fails
+    res.status(201).json(newOrder);
+  }
 });
 
 // Get user orders
@@ -76,7 +90,7 @@ router.get('/', authMiddleware, (req, res) => {
 router.get('/:id', authMiddleware, (req, res) => {
   const { id } = req.params;
   const userId = req.user?.id;
-  const order = orders.find(order => order.id === parseInt(id) && order.user_id === userId);
+  const order = orders.find(order => order.id === parseInt(Array.isArray(id) ? id[0] : id) && order.user_id === userId);
 
   if (!order) {
     return res.status(404).json({ error: 'Order not found' });
@@ -86,11 +100,11 @@ router.get('/:id', authMiddleware, (req, res) => {
 });
 
 // Pay for order
-router.put('/:id/pay', authMiddleware, (req, res) => {
+router.put('/:id/pay', authMiddleware, async (req, res) => {
   const { id } = req.params;
-  const { payment_method, transaction_id } = req.body;
+  const { payment_method_id, payment_intent_id } = req.body;
   const userId = req.user?.id;
-  const orderIndex = orders.findIndex(order => order.id === parseInt(id) && order.user_id === userId);
+  const orderIndex = orders.findIndex(order => order.id === parseInt(Array.isArray(id) ? id[0] : id) && order.user_id === userId);
 
   if (orderIndex === -1) {
     return res.status(404).json({ error: 'Order not found' });
@@ -100,16 +114,28 @@ router.put('/:id/pay', authMiddleware, (req, res) => {
     return res.status(400).json({ error: 'Order is already paid' });
   }
 
-  // Update order
-  orders[orderIndex] = {
-    ...orders[orderIndex],
-    payment_status: 'completed',
-    payment_method,
-    transaction_id,
-    updated_at: new Date().toISOString()
-  };
+  try {
+    // Confirm payment with Stripe
+    const paymentIntent = await confirmPaymentIntent(payment_intent_id, payment_method_id);
 
-  res.status(200).json(orders[orderIndex]);
+    // Update order only if payment was successful
+    if (paymentIntent.status === 'succeeded') {
+      orders[orderIndex] = {
+        ...orders[orderIndex],
+        payment_status: 'completed',
+        payment_method: 'card',
+        transaction_id: paymentIntent.id,
+        updated_at: new Date().toISOString()
+      };
+
+      res.status(200).json(orders[orderIndex]);
+    } else {
+      res.status(400).json({ error: 'Payment failed', payment_status: paymentIntent.status });
+    }
+  } catch (error) {
+    console.error('Error processing payment:', error);
+    res.status(500).json({ error: 'Payment processing failed' });
+  }
 });
 
 // Get user downloads
@@ -123,7 +149,8 @@ router.get('/downloads', authMiddleware, (req, res) => {
 router.post('/downloads/:gameId', authMiddleware, (req, res) => {
   const { gameId } = req.params;
   const userId = req.user?.id;
-  const game = games.find(g => g.id === parseInt(gameId));
+  const parsedGameId = parseInt(Array.isArray(gameId) ? gameId[0] : gameId);
+  const game = games.find(g => g.id === parsedGameId);
 
   if (!game) {
     return res.status(404).json({ error: 'Game not found' });
@@ -133,7 +160,7 @@ router.post('/downloads/:gameId', authMiddleware, (req, res) => {
   const hasPurchased = orders.some(order => 
     order.user_id === userId && 
     order.payment_status === 'completed' &&
-    order.items.some((item: any) => item.game_id === parseInt(gameId))
+    order.items.some((item: any) => item.game_id === parsedGameId)
   );
 
   if (!hasPurchased) {
@@ -144,7 +171,7 @@ router.post('/downloads/:gameId', authMiddleware, (req, res) => {
   const newDownload = {
     id: nextDownloadId++,
     user_id: userId,
-    game_id: parseInt(gameId),
+    game_id: parsedGameId,
     game_title: game.title,
     download_date: new Date().toISOString(),
     ip_address: req.ip || 'unknown'
