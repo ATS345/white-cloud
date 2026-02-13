@@ -1,6 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import authRoutes from './routes/auth';
+import gameRoutes from './routes/games';
+import categoryRoutes from './routes/categories';
+import orderRoutes from './routes/orders';
 
 // 加载环境变量
 dotenv.config();
@@ -23,6 +27,18 @@ app.get('/health', (req, res) => {
 app.get('/api', (req, res) => {
   res.status(200).json({ message: 'Welcome to Game Platform API' });
 });
+
+// 认证路由
+app.use('/api/auth', authRoutes);
+
+// 游戏路由
+app.use('/api/games', gameRoutes);
+
+// 分类路由
+app.use('/api/categories', categoryRoutes);
+
+// 订单路由
+app.use('/api/orders', orderRoutes);
 
 // 404处理
 app.use('*', (req, res) => {

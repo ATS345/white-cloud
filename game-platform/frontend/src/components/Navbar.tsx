@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { FiMenu, FiX, FiSearch, FiUser, FiShoppingCart, FiBell } from 'react-icons/fi';
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { FiMenu, FiX, FiSearch, FiUser, FiShoppingCart, FiBell, FiLogOut } from 'react-icons/fi';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = () => {
+    // Clear localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+    // Redirect to home page
+    navigate('/');
   };
 
   return (
@@ -56,13 +75,43 @@ const Navbar: React.FC = () => {
             <button className="text-secondary-300 hover:text-white">
               <FiBell className="w-5 h-5" />
             </button>
-            <button className="text-secondary-300 hover:text-white">
+            <NavLink to="/cart" className="text-secondary-300 hover:text-white">
               <FiShoppingCart className="w-5 h-5" />
-            </button>
-            <NavLink to="/auth" className="flex items-center space-x-2 text-secondary-300 hover:text-white">
-              <FiUser className="w-5 h-5" />
-              <span>Sign In</span>
             </NavLink>
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <div className="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center">
+                  <span className="text-sm font-bold">{user.username.charAt(0).toUpperCase()}</span>
+                </div>
+                <div className="relative">
+                  <button className="flex items-center space-x-2 text-secondary-300 hover:text-white">
+                    <span>{user.username}</span>
+                  </button>
+                  <div className="absolute right-0 mt-2 w-48 bg-secondary-800 rounded-lg shadow-lg py-2 z-50">
+                    <NavLink to="/profile" className="block px-4 py-2 text-sm text-secondary-300 hover:bg-secondary-700 hover:text-white">
+                      Profile
+                    </NavLink>
+                    <NavLink to="/settings" className="block px-4 py-2 text-sm text-secondary-300 hover:bg-secondary-700 hover:text-white">
+                      Settings
+                    </NavLink>
+                    <button 
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-secondary-700"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <FiLogOut className="w-4 h-4" />
+                        <span>Logout</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <NavLink to="/auth" className="flex items-center space-x-2 text-secondary-300 hover:text-white">
+                <FiUser className="w-5 h-5" />
+                <span>Sign In</span>
+              </NavLink>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -101,14 +150,35 @@ const Navbar: React.FC = () => {
                 <button className="text-secondary-300 hover:text-white">
                   <FiBell className="w-5 h-5" />
                 </button>
-                <button className="text-secondary-300 hover:text-white">
+                <NavLink to="/cart" className="text-secondary-300 hover:text-white" onClick={toggleMenu}>
                   <FiShoppingCart className="w-5 h-5" />
-                </button>
-                <NavLink to="/auth" className="flex items-center space-x-2 text-secondary-300 hover:text-white">
-                  <FiUser className="w-5 h-5" />
-                  <span>Sign In</span>
                 </NavLink>
+                {user ? (
+                  <div className="flex items-center space-x-2 text-secondary-300 hover:text-white">
+                    <div className="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center">
+                      <span className="text-sm font-bold">{user.username.charAt(0).toUpperCase()}</span>
+                    </div>
+                    <span>{user.username}</span>
+                  </div>
+                ) : (
+                  <NavLink to="/auth" className="flex items-center space-x-2 text-secondary-300 hover:text-white">
+                    <FiUser className="w-5 h-5" />
+                    <span>Sign In</span>
+                  </NavLink>
+                )}
               </div>
+              {user && (
+                <button 
+                  onClick={() => {
+                    handleLogout();
+                    toggleMenu();
+                  }}
+                  className="flex items-center space-x-2 text-red-400 hover:text-red-300"
+                >
+                  <FiLogOut className="w-5 h-5" />
+                  <span>Logout</span>
+                </button>
+              )}
             </nav>
           </div>
         )}
