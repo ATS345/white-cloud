@@ -1,16 +1,25 @@
-import { IsInt, IsPositive, IsString, IsOptional, IsEnum, IsBoolean, MinLength, MaxLength } from 'class-validator';
+import {
+  IsInt,
+  IsPositive,
+  IsString,
+  IsOptional,
+  IsEnum,
+  IsBoolean,
+  MinLength,
+  MaxLength,
+} from "class-validator";
 
 export enum UserStatus {
-  ACTIVE = 'active',
-  INACTIVE = 'inactive',
-  SUSPENDED = 'suspended',
-  BANNED = 'banned',
+  ACTIVE = "active",
+  INACTIVE = "inactive",
+  SUSPENDED = "suspended",
+  BANNED = "banned",
 }
 
 export enum UserRole {
-  USER = 'user',
-  ADMIN = 'admin',
-  SUPER_ADMIN = 'super_admin',
+  USER = "user",
+  ADMIN = "admin",
+  SUPER_ADMIN = "super_admin",
 }
 
 export class AdminUpdateUserDto {
@@ -76,7 +85,7 @@ export class AdminUserQueryDto {
 
   @IsOptional()
   @IsString()
-  sortOrder?: 'asc' | 'desc';
+  sortOrder?: "asc" | "desc";
 
   @IsOptional()
   @IsInt()

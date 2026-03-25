@@ -1,7 +1,12 @@
-import { Injectable, NotFoundException, ConflictException, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../../config/prisma/prisma.service';
-import { CreateOrderDto, OrderStatus, OrderQueryDto } from './dto';
-import { CartService } from '../cart/cart.service';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+  BadRequestException,
+} from "@nestjs/common";
+import { PrismaService } from "../../config/prisma/prisma.service";
+import { CreateOrderDto, OrderStatus, OrderQueryDto } from "./dto";
+import { CartService } from "../cart/cart.service";
 
 @Injectable()
 export class OrdersService {
@@ -11,15 +16,19 @@ export class OrdersService {
   ) {}
 
   async createOrder(userId: number, createOrderDto: CreateOrderDto) {
+    if (!createOrderDto.gameIds || createOrderDto.gameIds.length === 0) {
+      throw new BadRequestException("游戏列表不能为空");
+    }
+
     const games = await this.prisma.game.findMany({
       where: {
         id: { in: createOrderDto.gameIds },
-        status: 'published',
+        status: "published",
       },
     });
 
     if (games.length !== createOrderDto.gameIds.length) {
-      throw new BadRequestException('部分游戏不存在或暂不可购买');
+      throw new BadRequestException("部分游戏不存在或暂不可购买");
     }
 
     const existingOrders = await this.prisma.order.findMany({
@@ -31,7 +40,7 @@ export class OrdersService {
           },
         },
         status: {
-          in: ['paid', 'completed'],
+          in: ["paid", "completed"],
         },
       },
       include: {
@@ -48,7 +57,7 @@ export class OrdersService {
     );
 
     if (duplicateGames.length > 0) {
-      throw new ConflictException('您已购买部分游戏，无需重复购买');
+      throw new ConflictException("您已购买部分游戏，无需重复购买");
     }
 
     const totalAmount = games.reduce(
@@ -63,7 +72,7 @@ export class OrdersService {
         orderNumber,
         userId,
         totalAmount,
-        currency: 'CNY',
+        currency: "CNY",
         status: OrderStatus.PENDING,
         items: {
           create: games.map((game) => ({
@@ -110,7 +119,7 @@ export class OrdersService {
     const cart = await this.cartService.getCart(userId);
 
     if (cart.items.length === 0) {
-      throw new BadRequestException('购物车为空');
+      throw new BadRequestException("购物车为空");
     }
 
     const gameIds = cart.items.map((item) => item.gameId);
@@ -138,7 +147,7 @@ export class OrdersService {
         where,
         skip,
         take: limit,
-        orderBy: { createdAt: 'desc' },
+        orderBy: { createdAt: "desc" },
         include: {
           items: {
             include: {
@@ -210,7 +219,7 @@ export class OrdersService {
     });
 
     if (!order) {
-      throw new NotFoundException('订单不存在');
+      throw new NotFoundException("订单不存在");
     }
 
     return {
@@ -258,11 +267,11 @@ export class OrdersService {
     });
 
     if (!order) {
-      throw new NotFoundException('订单不存在');
+      throw new NotFoundException("订单不存在");
     }
 
     if (order.status !== OrderStatus.PENDING) {
-      throw new BadRequestException('只能取消待支付订单');
+      throw new BadRequestException("只能取消待支付订单");
     }
 
     await this.prisma.order.update({
@@ -293,7 +302,7 @@ export class OrdersService {
           },
         },
       },
-      orderBy: { completedAt: 'desc' },
+      orderBy: { completedAt: "desc" },
     });
 
     const games = orders.flatMap((order) =>
@@ -332,7 +341,7 @@ export class OrdersService {
     const timestamp = Date.now().toString();
     const random = Math.floor(Math.random() * 10000)
       .toString()
-      .padStart(4, '0');
+      .padStart(4, "0");
     return `ORD${timestamp}${random}`;
   }
 }

@@ -1,9 +1,15 @@
-import { IsInt, IsPositive, IsString, IsOptional, IsEnum } from 'class-validator';
+import {
+  IsInt,
+  IsPositive,
+  IsString,
+  IsOptional,
+  IsEnum,
+} from "class-validator";
 
 export enum CommentSort {
-  LATEST = 'latest',
-  OLDEST = 'oldest',
-  MOST_LIKED = 'most_liked',
+  LATEST = "latest",
+  OLDEST = "oldest",
+  MOST_LIKED = "most_liked",
 }
 
 export class CreateCommentDto {

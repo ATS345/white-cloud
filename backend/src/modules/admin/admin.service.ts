@@ -1,21 +1,32 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
-import { PrismaService } from '../../config/prisma/prisma.service';
-import { AdminUpdateUserDto, AdminUserQueryDto, AdminBanUserDto, UserStatus, UserRole } from './dto';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from "@nestjs/common";
+import { PrismaService } from "../../config/prisma/prisma.service";
+import {
+  AdminUpdateUserDto,
+  AdminUserQueryDto,
+  AdminBanUserDto,
+  UserStatus,
+  UserRole,
+} from "./dto";
 
 @Injectable()
 export class AdminService {
   constructor(private prisma: PrismaService) {}
 
   async getPlatformStatistics() {
-    const [totalUsers, totalGames, totalOrders, totalRevenue] = await Promise.all([
-      this.prisma.user.count(),
-      this.prisma.game.count(),
-      this.prisma.order.count(),
-      this.prisma.order.aggregate({
-        where: { status: { in: ['paid', 'completed'] } },
-        _sum: { totalAmount: true },
-      }),
-    ]);
+    const [totalUsers, totalGames, totalOrders, totalRevenue] =
+      await Promise.all([
+        this.prisma.user.count(),
+        this.prisma.game.count(),
+        this.prisma.order.count(),
+        this.prisma.order.aggregate({
+          where: { status: { in: ["paid", "completed"] } },
+          _sum: { totalAmount: true },
+        }),
+      ]);
 
     return {
       totalUsers,
@@ -34,7 +45,7 @@ export class AdminService {
       this.prisma.order.findMany({
         skip,
         take: limit,
-        orderBy: { createdAt: 'desc' },
+        orderBy: { createdAt: "desc" },
         include: {
           user: {
             select: {
@@ -87,9 +98,9 @@ export class AdminService {
 
     if (query.search) {
       where.OR = [
-        { username: { contains: query.search, mode: 'insensitive' } },
-        { email: { contains: query.search, mode: 'insensitive' } },
-        { displayName: { contains: query.search, mode: 'insensitive' } },
+        { username: { contains: query.search, mode: "insensitive" } },
+        { email: { contains: query.search, mode: "insensitive" } },
+        { displayName: { contains: query.search, mode: "insensitive" } },
       ];
     }
 
@@ -105,10 +116,10 @@ export class AdminService {
       where.emailVerified = query.emailVerified;
     }
 
-    let orderBy: any = { createdAt: 'desc' };
+    let orderBy: any = { createdAt: "desc" };
 
     if (query.sortBy) {
-      orderBy = { [query.sortBy]: query.sortOrder || 'desc' };
+      orderBy = { [query.sortBy]: query.sortOrder || "desc" };
     }
 
     const [users, total] = await Promise.all([
@@ -195,7 +206,7 @@ export class AdminService {
         lastLoginAt: true,
         orders: {
           take: 10,
-          orderBy: { createdAt: 'desc' },
+          orderBy: { createdAt: "desc" },
           select: {
             id: true,
             orderNumber: true,
@@ -208,7 +219,7 @@ export class AdminService {
         },
         reviews: {
           take: 10,
-          orderBy: { createdAt: 'desc' },
+          orderBy: { createdAt: "desc" },
           select: {
             id: true,
             gameId: true,
@@ -221,7 +232,7 @@ export class AdminService {
         },
         comments: {
           take: 10,
-          orderBy: { createdAt: 'desc' },
+          orderBy: { createdAt: "desc" },
           select: {
             id: true,
             gameId: true,
@@ -235,7 +246,7 @@ export class AdminService {
     });
 
     if (!user) {
-      throw new NotFoundException('用户不存在');
+      throw new NotFoundException("用户不存在");
     }
 
     return {
@@ -265,22 +276,32 @@ export class AdminService {
     });
 
     if (!user) {
-      throw new NotFoundException('用户不存在');
+      throw new NotFoundException("用户不存在");
     }
+
+    const updateData: any = {};
+    if (adminUpdateUserDto.username !== undefined)
+      updateData.username = adminUpdateUserDto.username;
+    if (adminUpdateUserDto.displayName !== undefined)
+      updateData.displayName = adminUpdateUserDto.displayName;
+    if (adminUpdateUserDto.email !== undefined)
+      updateData.email = adminUpdateUserDto.email;
+    if (adminUpdateUserDto.bio !== undefined)
+      updateData.bio = adminUpdateUserDto.bio;
+    if (adminUpdateUserDto.location !== undefined)
+      updateData.location = adminUpdateUserDto.location;
+    if (adminUpdateUserDto.website !== undefined)
+      updateData.website = adminUpdateUserDto.website;
+    if (adminUpdateUserDto.role !== undefined)
+      updateData.role = adminUpdateUserDto.role;
+    if (adminUpdateUserDto.status !== undefined)
+      updateData.status = adminUpdateUserDto.status;
+    if (adminUpdateUserDto.emailVerified !== undefined)
+      updateData.emailVerified = adminUpdateUserDto.emailVerified;
 
     const updated = await this.prisma.user.update({
       where: { id },
-      data: {
-        username: adminUpdateUserDto.username,
-        displayName: adminUpdateUserDto.displayName,
-        email: adminUpdateUserDto.email,
-        bio: adminUpdateUserDto.bio,
-        location: adminUpdateUserDto.location,
-        website: adminUpdateUserDto.website,
-        role: adminUpdateUserDto.role,
-        status: adminUpdateUserDto.status,
-        emailVerified: adminUpdateUserDto.emailVerified,
-      },
+      data: updateData,
       select: {
         id: true,
         username: true,
@@ -308,19 +329,111 @@ export class AdminService {
     });
 
     if (!user) {
-      throw new NotFoundException('用户不存在');
+      throw new NotFoundException("用户不存在");
     }
 
     if (user.role === UserRole.SUPER_ADMIN) {
-      throw new ForbiddenException('无法封禁超级管理员');
+      throw new ForbiddenException("无法封禁超级管理员");
     }
 
     await this.prisma.user.update({
       where: { id },
-      data: { status: UserStatus.BANNED },
+      data: {
+        status: UserStatus.BANNED,
+      },
     });
 
-    return { message: '用户已被封禁', reason: adminBanUserDto.reason };
+    return { message: "用户已被封禁", reason: adminBanUserDto.reason };
+  }
+
+  async getGames(query: any) {
+    const page = parseInt(query.page) || 1;
+    const limit = parseInt(query.limit) || 20;
+    const skip = (page - 1) * limit;
+
+    const where: any = {};
+
+    if (query.search) {
+      where.OR = [
+        { title: { contains: query.search, mode: "insensitive" } },
+        { developer: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.status) {
+      where.status = query.status;
+    }
+
+    const [games, total] = await Promise.all([
+      this.prisma.game.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+        include: {
+          _count: {
+            select: { reviews: true, comments: true },
+          },
+        },
+      }),
+      this.prisma.game.count({ where }),
+    ]);
+
+    return {
+      games,
+      total,
+      page,
+      limit,
+      pages: Math.ceil(total / limit),
+    };
+  }
+
+  async deleteGame(id: number) {
+    const game = await this.prisma.game.findUnique({
+      where: { id },
+    });
+
+    if (!game) {
+      throw new NotFoundException("游戏不存在");
+    }
+
+    await this.prisma.game.delete({
+      where: { id },
+    });
+
+    return { message: "游戏已删除" };
+  }
+
+  async deleteReview(id: number) {
+    const review = await this.prisma.review.findUnique({
+      where: { id },
+    });
+
+    if (!review) {
+      throw new NotFoundException("评论不存在");
+    }
+
+    await this.prisma.review.delete({
+      where: { id },
+    });
+
+    return { message: "评论已删除" };
+  }
+
+  async deleteComment(id: number) {
+    const comment = await this.prisma.comment.findUnique({
+      where: { id },
+    });
+
+    if (!comment) {
+      throw new NotFoundException("评论不存在");
+    }
+
+    await this.prisma.comment.delete({
+      where: { id },
+    });
+
+    return { message: "评论已删除" };
   }
 
   async unbanUser(id: number) {
@@ -329,11 +442,11 @@ export class AdminService {
     });
 
     if (!user) {
-      throw new NotFoundException('用户不存在');
+      throw new NotFoundException("用户不存在");
     }
 
     if (user.status !== UserStatus.BANNED) {
-      throw new ForbiddenException('用户未被封禁');
+      throw new ForbiddenException("用户未被封禁");
     }
 
     await this.prisma.user.update({
@@ -341,7 +454,7 @@ export class AdminService {
       data: { status: UserStatus.ACTIVE },
     });
 
-    return { message: '用户已解封' };
+    return { message: "用户已解封" };
   }
 
   async deleteUser(id: number) {
@@ -350,18 +463,18 @@ export class AdminService {
     });
 
     if (!user) {
-      throw new NotFoundException('用户不存在');
+      throw new NotFoundException("用户不存在");
     }
 
     if (user.role === UserRole.SUPER_ADMIN) {
-      throw new ForbiddenException('无法删除超级管理员');
+      throw new ForbiddenException("无法删除超级管理员");
     }
 
     await this.prisma.user.delete({
       where: { id },
     });
 
-    return { message: '用户已删除' };
+    return { message: "用户已删除" };
   }
 
   async getUserStats() {
@@ -384,11 +497,11 @@ export class AdminService {
         },
       }),
       this.prisma.user.groupBy({
-        by: ['role'],
+        by: ["role"],
         _count: true,
       }),
       this.prisma.user.groupBy({
-        by: ['status'],
+        by: ["status"],
         _count: true,
       }),
     ]);
@@ -398,14 +511,20 @@ export class AdminService {
       activeUsers,
       verifiedUsers,
       newUsersThisMonth,
-      usersByRole: usersByRole.reduce((acc, item) => {
-        acc[item.role] = item._count;
-        return acc;
-      }, {} as Record<string, number>),
-      usersByStatus: usersByStatus.reduce((acc, item) => {
-        acc[item.status] = item._count;
-        return acc;
-      }, {} as Record<string, number>),
+      usersByRole: usersByRole.reduce(
+        (acc, item) => {
+          acc[item.role] = item._count;
+          return acc;
+        },
+        {} as Record<string, number>,
+      ),
+      usersByStatus: usersByStatus.reduce(
+        (acc, item) => {
+          acc[item.status] = item._count;
+          return acc;
+        },
+        {} as Record<string, number>,
+      ),
     };
   }
 }

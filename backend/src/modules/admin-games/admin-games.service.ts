@@ -1,11 +1,15 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../../config/prisma/prisma.service';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from "@nestjs/common";
+import { PrismaService } from "../../config/prisma/prisma.service";
 import {
   AdminCreateGameDto,
   AdminUpdateGameDto,
   AdminGameQueryDto,
   GameStatus,
-} from './dto';
+} from "./dto";
 
 @Injectable()
 export class AdminGamesService {
@@ -17,7 +21,7 @@ export class AdminGamesService {
     });
 
     if (existingGame) {
-      throw new BadRequestException('游戏slug已存在');
+      throw new BadRequestException("游戏slug已存在");
     }
 
     const game = await this.prisma.game.create({
@@ -27,7 +31,7 @@ export class AdminGamesService {
         description: adminCreateGameDto.description,
         shortDescription: adminCreateGameDto.shortDescription,
         price: adminCreateGameDto.price,
-        currency: adminCreateGameDto.currency || 'CNY',
+        currency: adminCreateGameDto.currency || "CNY",
         developer: adminCreateGameDto.developer,
         publisher: adminCreateGameDto.publisher,
         releaseDate: new Date(adminCreateGameDto.releaseDate),
@@ -80,7 +84,10 @@ export class AdminGamesService {
       averageRating: game.averageRating,
       reviewCount: game.reviewCount,
       genres: game.genres.map((g) => ({ id: g.genre.id, name: g.genre.name })),
-      platforms: game.platforms.map((p) => ({ id: p.platform.id, name: p.platform.name })),
+      platforms: game.platforms.map((p) => ({
+        id: p.platform.id,
+        name: p.platform.name,
+      })),
       tags: game.tags.map((t) => ({ id: t.tag.id, name: t.tag.name })),
       createdAt: game.createdAt,
       updatedAt: game.updatedAt,
@@ -96,10 +103,10 @@ export class AdminGamesService {
 
     if (query.search) {
       where.OR = [
-        { title: { contains: query.search, mode: 'insensitive' } },
-        { slug: { contains: query.search, mode: 'insensitive' } },
-        { developer: { contains: query.search, mode: 'insensitive' } },
-        { publisher: { contains: query.search, mode: 'insensitive' } },
+        { title: { contains: query.search, mode: "insensitive" } },
+        { slug: { contains: query.search, mode: "insensitive" } },
+        { developer: { contains: query.search, mode: "insensitive" } },
+        { publisher: { contains: query.search, mode: "insensitive" } },
       ];
     }
 
@@ -115,10 +122,10 @@ export class AdminGamesService {
       where.platforms = { some: { platformId: query.platformId } };
     }
 
-    let orderBy: any = { createdAt: 'desc' };
+    let orderBy: any = { createdAt: "desc" };
 
     if (query.sortBy) {
-      orderBy = { [query.sortBy]: query.sortOrder || 'desc' };
+      orderBy = { [query.sortBy]: query.sortOrder || "desc" };
     }
 
     const [games, total] = await Promise.all([
@@ -161,8 +168,14 @@ export class AdminGamesService {
         status: game.status,
         averageRating: game.averageRating,
         reviewCount: game.reviewCount,
-        genres: game.genres.map((g) => ({ id: g.genre.id, name: g.genre.name })),
-        platforms: game.platforms.map((p) => ({ id: p.platform.id, name: p.platform.name })),
+        genres: game.genres.map((g) => ({
+          id: g.genre.id,
+          name: g.genre.name,
+        })),
+        platforms: game.platforms.map((p) => ({
+          id: p.platform.id,
+          name: p.platform.name,
+        })),
         tags: game.tags.map((t) => ({ id: t.tag.id, name: t.tag.name })),
         createdAt: game.createdAt,
         updatedAt: game.updatedAt,
@@ -205,7 +218,7 @@ export class AdminGamesService {
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     return {
@@ -225,7 +238,10 @@ export class AdminGamesService {
       averageRating: game.averageRating,
       reviewCount: game.reviewCount,
       genres: game.genres.map((g) => ({ id: g.genre.id, name: g.genre.name })),
-      platforms: game.platforms.map((p) => ({ id: p.platform.id, name: p.platform.name })),
+      platforms: game.platforms.map((p) => ({
+        id: p.platform.id,
+        name: p.platform.name,
+      })),
       tags: game.tags.map((t) => ({ id: t.tag.id, name: t.tag.name })),
       screenshots: game.screenshots,
       videos: game.videos,
@@ -248,7 +264,7 @@ export class AdminGamesService {
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     if (adminUpdateGameDto.slug && adminUpdateGameDto.slug !== game.slug) {
@@ -257,7 +273,7 @@ export class AdminGamesService {
       });
 
       if (existingGame) {
-        throw new BadRequestException('游戏slug已存在');
+        throw new BadRequestException("游戏slug已存在");
       }
     }
 
@@ -270,7 +286,9 @@ export class AdminGamesService {
       currency: adminUpdateGameDto.currency,
       developer: adminUpdateGameDto.developer,
       publisher: adminUpdateGameDto.publisher,
-      releaseDate: adminUpdateGameDto.releaseDate ? new Date(adminUpdateGameDto.releaseDate) : undefined,
+      releaseDate: adminUpdateGameDto.releaseDate
+        ? new Date(adminUpdateGameDto.releaseDate)
+        : undefined,
       coverImage: adminUpdateGameDto.coverImage,
       headerImage: adminUpdateGameDto.headerImage,
       status: adminUpdateGameDto.status,
@@ -335,8 +353,14 @@ export class AdminGamesService {
       status: updated.status,
       averageRating: updated.averageRating,
       reviewCount: updated.reviewCount,
-      genres: updated.genres.map((g) => ({ id: g.genre.id, name: g.genre.name })),
-      platforms: updated.platforms.map((p) => ({ id: p.platform.id, name: p.platform.name })),
+      genres: updated.genres.map((g) => ({
+        id: g.genre.id,
+        name: g.genre.name,
+      })),
+      platforms: updated.platforms.map((p) => ({
+        id: p.platform.id,
+        name: p.platform.name,
+      })),
       tags: updated.tags.map((t) => ({ id: t.tag.id, name: t.tag.name })),
       createdAt: updated.createdAt,
       updatedAt: updated.updatedAt,
@@ -349,14 +373,14 @@ export class AdminGamesService {
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     await this.prisma.game.delete({
       where: { id },
     });
 
-    return { message: '游戏已删除' };
+    return { message: "游戏已删除" };
   }
 
   async getGameStats() {
@@ -374,18 +398,18 @@ export class AdminGamesService {
       this.prisma.game.count({ where: { status: GameStatus.DRAFT } }),
       this.prisma.game.count({ where: { status: GameStatus.ARCHIVED } }),
       this.prisma.gameGenre.groupBy({
-        by: ['genreId'],
+        by: ["genreId"],
         _count: true,
       }),
       this.prisma.orderItem.groupBy({
-        by: ['gameId'],
+        by: ["gameId"],
         _count: true,
-        orderBy: { _count: { gameId: 'desc' } },
+        orderBy: { _count: { gameId: "desc" } },
         take: 10,
       }),
       this.prisma.game.findMany({
         where: { status: GameStatus.PUBLISHED },
-        orderBy: { averageRating: 'desc' },
+        orderBy: { averageRating: "desc" },
         take: 10,
         select: {
           id: true,
@@ -401,13 +425,16 @@ export class AdminGamesService {
       where: { id: { in: genreIds } },
     });
 
-    const gamesByGenreMap = gamesByGenre.reduce((acc, item) => {
-      const genre = genres.find((g) => g.id === item.genreId);
-      if (genre) {
-        acc[genre.name] = item._count;
-      }
-      return acc;
-    }, {} as Record<string, number>);
+    const gamesByGenreMap = gamesByGenre.reduce(
+      (acc, item) => {
+        const genre = genres.find((g) => g.id === item.genreId);
+        if (genre) {
+          acc[genre.name] = item._count;
+        }
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
 
     const topSellingGameIds = topSellingGames.map((g) => g.gameId);
     const topSellingGamesData = await this.prisma.game.findMany({

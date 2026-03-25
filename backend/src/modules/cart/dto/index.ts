@@ -1,5 +1,4 @@
-import { IsInt, IsPositive, IsOptional, ValidateNested } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsInt, IsPositive, IsOptional } from "class-validator";
 
 export class AddToCartDto {
   @IsInt()

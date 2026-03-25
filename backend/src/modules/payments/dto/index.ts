@@ -1,16 +1,16 @@
-import { IsEnum, IsString, IsOptional, IsNumber } from 'class-validator';
+import { IsEnum, IsString, IsOptional, IsNumber } from "class-validator";
 
 export enum PaymentMethod {
-  ALIPAY = 'alipay',
-  WECHAT = 'wechat',
-  CREDIT_CARD = 'credit_card',
+  ALIPAY = "alipay",
+  WECHAT = "wechat",
+  CREDIT_CARD = "credit_card",
 }
 
 export enum PaymentStatus {
-  PENDING = 'pending',
-  SUCCESS = 'success',
-  FAILED = 'failed',
-  REFUNDED = 'refunded',
+  PENDING = "pending",
+  SUCCESS = "success",
+  FAILED = "failed",
+  REFUNDED = "refunded",
 }
 
 export class CreatePaymentDto {

@@ -1,6 +1,15 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
-import { PrismaService } from '../../config/prisma/prisma.service';
-import { CreateReviewDto, UpdateReviewDto, ReviewQueryDto, ReviewSort } from './dto';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from "@nestjs/common";
+import { PrismaService } from "../../config/prisma/prisma.service";
+import {
+  CreateReviewDto,
+  UpdateReviewDto,
+  ReviewQueryDto,
+  ReviewSort,
+} from "./dto";
 
 @Injectable()
 export class ReviewsService {
@@ -12,7 +21,7 @@ export class ReviewsService {
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     const existingReview = await this.prisma.review.findUnique({
@@ -25,7 +34,7 @@ export class ReviewsService {
     });
 
     if (existingReview) {
-      throw new ForbiddenException('您已经评价过此游戏');
+      throw new ForbiddenException("您已经评价过此游戏");
     }
 
     const review = await this.prisma.review.create({
@@ -86,24 +95,24 @@ export class ReviewsService {
       where.rating = { ...where.rating, lte: query.maxRating };
     }
 
-    let orderBy: any = { createdAt: 'desc' };
+    let orderBy: any = { createdAt: "desc" };
 
     switch (query.sort) {
       case ReviewSort.OLDEST:
-        orderBy = { createdAt: 'asc' };
+        orderBy = { createdAt: "asc" };
         break;
       case ReviewSort.HIGHEST_RATING:
-        orderBy = { rating: 'desc' };
+        orderBy = { rating: "desc" };
         break;
       case ReviewSort.LOWEST_RATING:
-        orderBy = { rating: 'asc' };
+        orderBy = { rating: "asc" };
         break;
       case ReviewSort.MOST_LIKED:
-        orderBy = { likes: 'desc' };
+        orderBy = { likes: "desc" };
         break;
       case ReviewSort.LATEST:
       default:
-        orderBy = { createdAt: 'desc' };
+        orderBy = { createdAt: "desc" };
         break;
     }
 
@@ -165,7 +174,7 @@ export class ReviewsService {
     });
 
     if (!review) {
-      throw new NotFoundException('评价不存在');
+      throw new NotFoundException("评价不存在");
     }
 
     return {
@@ -188,11 +197,11 @@ export class ReviewsService {
     });
 
     if (!review) {
-      throw new NotFoundException('评价不存在');
+      throw new NotFoundException("评价不存在");
     }
 
     if (review.userId !== userId) {
-      throw new ForbiddenException('无权修改此评价');
+      throw new ForbiddenException("无权修改此评价");
     }
 
     const updated = await this.prisma.review.update({
@@ -235,11 +244,11 @@ export class ReviewsService {
     });
 
     if (!review) {
-      throw new NotFoundException('评价不存在');
+      throw new NotFoundException("评价不存在");
     }
 
     if (review.userId !== userId) {
-      throw new ForbiddenException('无权删除此评价');
+      throw new ForbiddenException("无权删除此评价");
     }
 
     const gameId = review.gameId;
@@ -250,7 +259,7 @@ export class ReviewsService {
 
     await this.updateGameRating(gameId);
 
-    return { message: '评价删除成功' };
+    return { message: "评价删除成功" };
   }
 
   async like(userId: number, id: number) {
@@ -259,7 +268,7 @@ export class ReviewsService {
     });
 
     if (!review) {
-      throw new NotFoundException('评价不存在');
+      throw new NotFoundException("评价不存在");
     }
 
     const updated = await this.prisma.review.update({
@@ -281,7 +290,7 @@ export class ReviewsService {
     });
 
     if (!review) {
-      throw new NotFoundException('评价不存在');
+      throw new NotFoundException("评价不存在");
     }
 
     const updated = await this.prisma.review.update({

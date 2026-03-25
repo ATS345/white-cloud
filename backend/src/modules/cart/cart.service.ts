@@ -1,6 +1,10 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
-import { PrismaService } from '../../config/prisma/prisma.service';
-import { AddToCartDto, UpdateCartItemDto } from './dto';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from "@nestjs/common";
+import { PrismaService } from "../../config/prisma/prisma.service";
+import { AddToCartDto, UpdateCartItemDto } from "./dto";
 
 @Injectable()
 export class CartService {
@@ -86,11 +90,11 @@ export class CartService {
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
-    if (game.status !== 'published') {
-      throw new ConflictException('该游戏暂不可购买');
+    if (game.status !== "published") {
+      throw new ConflictException("该游戏暂不可购买");
     }
 
     let cart = await this.prisma.cart.findUnique({
@@ -142,7 +146,7 @@ export class CartService {
     });
 
     if (!cart) {
-      throw new NotFoundException('购物车不存在');
+      throw new NotFoundException("购物车不存在");
     }
 
     const cartItem = await this.prisma.cartItem.findFirst({
@@ -153,7 +157,7 @@ export class CartService {
     });
 
     if (!cartItem) {
-      throw new NotFoundException('购物车项不存在');
+      throw new NotFoundException("购物车项不存在");
     }
 
     await this.prisma.cartItem.update({
@@ -170,7 +174,7 @@ export class CartService {
     });
 
     if (!cart) {
-      throw new NotFoundException('购物车不存在');
+      throw new NotFoundException("购物车不存在");
     }
 
     const cartItem = await this.prisma.cartItem.findFirst({
@@ -181,7 +185,7 @@ export class CartService {
     });
 
     if (!cartItem) {
-      throw new NotFoundException('购物车项不存在');
+      throw new NotFoundException("购物车项不存在");
     }
 
     await this.prisma.cartItem.delete({
@@ -197,7 +201,7 @@ export class CartService {
     });
 
     if (!cart) {
-      throw new NotFoundException('购物车不存在');
+      throw new NotFoundException("购物车不存在");
     }
 
     await this.prisma.cartItem.deleteMany({
@@ -216,9 +220,10 @@ export class CartService {
     });
 
     if (!cart) {
-      return 0;
+      return { count: 0 };
     }
 
-    return cart.items.reduce((sum, item) => sum + item.quantity, 0);
+    const count = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+    return { count };
   }
 }

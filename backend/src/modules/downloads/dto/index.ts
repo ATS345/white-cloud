@@ -1,11 +1,17 @@
-import { IsInt, IsPositive, IsString, IsOptional, IsEnum } from 'class-validator';
+import {
+  IsInt,
+  IsPositive,
+  IsString,
+  IsOptional,
+  IsEnum,
+} from "class-validator";
 
 export enum DownloadStatus {
-  PENDING = 'pending',
-  DOWNLOADING = 'downloading',
-  COMPLETED = 'completed',
-  FAILED = 'failed',
-  PAUSED = 'paused',
+  PENDING = "pending",
+  DOWNLOADING = "downloading",
+  COMPLETED = "completed",
+  FAILED = "failed",
+  PAUSED = "paused",
 }
 
 export class CreateDownloadDto {

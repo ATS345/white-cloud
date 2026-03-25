@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
-import { AdminGamesController } from './admin-games.controller';
-import { AdminGamesService } from './admin-games.service';
-import { PrismaModule } from '../../config/prisma/prisma.module';
+import { Module } from "@nestjs/common";
+import { AdminGamesController } from "./admin-games.controller";
+import { AdminGamesService } from "./admin-games.service";
+import { PrismaModule } from "../../config/prisma/prisma.module";
 
 @Module({
   imports: [PrismaModule],

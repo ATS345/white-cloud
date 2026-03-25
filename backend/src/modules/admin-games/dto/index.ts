@@ -1,9 +1,17 @@
-import { IsInt, IsPositive, IsString, IsOptional, IsEnum, IsBoolean, IsNumber, Min, Max } from 'class-validator';
+import {
+  IsInt,
+  IsPositive,
+  IsString,
+  IsOptional,
+  IsEnum,
+  IsNumber,
+  Min,
+} from "class-validator";
 
 export enum GameStatus {
-  DRAFT = 'draft',
-  PUBLISHED = 'published',
-  ARCHIVED = 'archived',
+  DRAFT = "draft",
+  PUBLISHED = "published",
+  ARCHIVED = "archived",
 }
 
 export class AdminCreateGameDto {
@@ -153,7 +161,7 @@ export class AdminGameQueryDto {
 
   @IsOptional()
   @IsString()
-  sortOrder?: 'asc' | 'desc';
+  sortOrder?: "asc" | "desc";
 
   @IsOptional()
   @IsInt()

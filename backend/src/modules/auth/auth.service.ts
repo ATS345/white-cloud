@@ -1,10 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { Injectable } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
 
+/**
+ * 认证服务
+ * 负责JWT令牌的验证和刷新
+ */
 @Injectable()
 export class AuthService {
   constructor(private jwtService: JwtService) {}
 
+  /**
+   * 验证JWT令牌有效性
+   * @param token JWT令牌
+   * @returns 令牌载荷，如果无效返回null
+   */
   async validateToken(token: string) {
     try {
       const payload = this.jwtService.verify(token);
@@ -14,6 +23,12 @@ export class AuthService {
     }
   }
 
+  /**
+   * 刷新访问令牌
+   * 使用刷新令牌生成新的访问令牌和刷新令牌
+   * @param refreshToken 刷新令牌
+   * @returns 新的令牌对，如果无效返回null
+   */
   async refreshTokens(refreshToken: string) {
     try {
       const payload = this.jwtService.verify(refreshToken, {

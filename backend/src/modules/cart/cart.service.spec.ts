@@ -1,11 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { NotFoundException, ConflictException } from '@nestjs/common';
-import { CartService } from './cart.service';
-import { PrismaService } from '../../config/prisma/prisma.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { NotFoundException, ConflictException } from "@nestjs/common";
+import { CartService } from "./cart.service";
+import { PrismaService } from "../../config/prisma/prisma.service";
 
-describe('CartService', () => {
+describe("CartService", () => {
   let service: CartService;
-  let prismaService: PrismaService;
 
   const mockPrismaService = {
     cart: {
@@ -35,14 +34,14 @@ describe('CartService', () => {
 
   const mockGame = {
     id: 1,
-    title: 'Test Game',
-    slug: 'test-game',
+    title: "Test Game",
+    slug: "test-game",
     price: 99.99,
-    currency: 'CNY',
-    status: 'published',
-    coverImage: 'https://example.com/cover.jpg',
-    developer: 'Test Developer',
-    publisher: 'Test Publisher',
+    currency: "CNY",
+    status: "published",
+    coverImage: "https://example.com/cover.jpg",
+    developer: "Test Developer",
+    publisher: "Test Publisher",
     releaseDate: new Date(),
     averageRating: 4.5,
     reviewCount: 100,
@@ -70,15 +69,14 @@ describe('CartService', () => {
     }).compile();
 
     service = module.get<CartService>(CartService);
-    prismaService = module.get<PrismaService>(PrismaService);
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('getCart', () => {
-    it('should return existing cart', async () => {
+  describe("getCart", () => {
+    it("should return existing cart", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue({
         ...mockCart,
         items: [mockCartItem],
@@ -86,24 +84,24 @@ describe('CartService', () => {
 
       const result = await service.getCart(1);
 
-      expect(result).toHaveProperty('id', 1);
-      expect(result).toHaveProperty('items');
-      expect(result).toHaveProperty('total');
+      expect(result).toHaveProperty("id", 1);
+      expect(result).toHaveProperty("items");
+      expect(result).toHaveProperty("total");
     });
 
-    it('should create new cart if not exists', async () => {
+    it("should create new cart if not exists", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue(null);
       mockPrismaService.cart.create.mockResolvedValue(mockCart);
 
       const result = await service.getCart(1);
 
       expect(mockPrismaService.cart.create).toHaveBeenCalled();
-      expect(result).toHaveProperty('id', 1);
+      expect(result).toHaveProperty("id", 1);
     });
   });
 
-  describe('addToCart', () => {
-    it('should add game to cart successfully', async () => {
+  describe("addToCart", () => {
+    it("should add game to cart successfully", async () => {
       mockPrismaService.game.findUnique.mockResolvedValue(mockGame);
       mockPrismaService.cart.findUnique.mockResolvedValue(mockCart);
       mockPrismaService.cartItem.findUnique.mockResolvedValue(null);
@@ -113,28 +111,38 @@ describe('CartService', () => {
         items: [mockCartItem],
       });
 
-      const result = await service.addToCart(1, { gameId: 1 });
+      await service.addToCart(1, { gameId: 1 });
 
       expect(mockPrismaService.cartItem.create).toHaveBeenCalled();
     });
 
-    it('should throw NotFoundException if game not found', async () => {
+    it("should throw NotFoundException if game not found", async () => {
       mockPrismaService.game.findUnique.mockResolvedValue(null);
 
-      await expect(service.addToCart(1, { gameId: 999 })).rejects.toThrow(NotFoundException);
+      await expect(service.addToCart(1, { gameId: 999 })).rejects.toThrow(
+        NotFoundException,
+      );
     });
 
-    it('should throw ConflictException if game not published', async () => {
-      mockPrismaService.game.findUnique.mockResolvedValue({ ...mockGame, status: 'draft' });
+    it("should throw ConflictException if game not published", async () => {
+      mockPrismaService.game.findUnique.mockResolvedValue({
+        ...mockGame,
+        status: "draft",
+      });
 
-      await expect(service.addToCart(1, { gameId: 1 })).rejects.toThrow(ConflictException);
+      await expect(service.addToCart(1, { gameId: 1 })).rejects.toThrow(
+        ConflictException,
+      );
     });
 
-    it('should update quantity if game already in cart', async () => {
+    it("should update quantity if game already in cart", async () => {
       mockPrismaService.game.findUnique.mockResolvedValue(mockGame);
       mockPrismaService.cart.findUnique.mockResolvedValue(mockCart);
       mockPrismaService.cartItem.findUnique.mockResolvedValue(mockCartItem);
-      mockPrismaService.cartItem.update.mockResolvedValue({ ...mockCartItem, quantity: 2 });
+      mockPrismaService.cartItem.update.mockResolvedValue({
+        ...mockCartItem,
+        quantity: 2,
+      });
       mockPrismaService.cart.findUnique.mockResolvedValue({
         ...mockCart,
         items: [{ ...mockCartItem, quantity: 2 }],
@@ -146,41 +154,48 @@ describe('CartService', () => {
     });
   });
 
-  describe('updateCartItem', () => {
-    it('should update cart item quantity', async () => {
+  describe("updateCartItem", () => {
+    it("should update cart item quantity", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue(mockCart);
       mockPrismaService.cartItem.findFirst.mockResolvedValue(mockCartItem);
-      mockPrismaService.cartItem.update.mockResolvedValue({ ...mockCartItem, quantity: 2 });
+      mockPrismaService.cartItem.update.mockResolvedValue({
+        ...mockCartItem,
+        quantity: 2,
+      });
       mockPrismaService.cart.findUnique.mockResolvedValue({
         ...mockCart,
         items: [{ ...mockCartItem, quantity: 2 }],
       });
 
-      const result = await service.updateCartItem(1, 1, { quantity: 2 });
+      await service.updateCartItem(1, 1, { quantity: 2 });
 
       expect(mockPrismaService.cartItem.update).toHaveBeenCalledWith(
         expect.objectContaining({
           data: { quantity: 2 },
-        })
+        }),
       );
     });
 
-    it('should throw NotFoundException if cart not found', async () => {
+    it("should throw NotFoundException if cart not found", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue(null);
 
-      await expect(service.updateCartItem(1, 1, { quantity: 2 })).rejects.toThrow(NotFoundException);
+      await expect(
+        service.updateCartItem(1, 1, { quantity: 2 }),
+      ).rejects.toThrow(NotFoundException);
     });
 
-    it('should throw NotFoundException if cart item not found', async () => {
+    it("should throw NotFoundException if cart item not found", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue(mockCart);
       mockPrismaService.cartItem.findFirst.mockResolvedValue(null);
 
-      await expect(service.updateCartItem(1, 999, { quantity: 2 })).rejects.toThrow(NotFoundException);
+      await expect(
+        service.updateCartItem(1, 999, { quantity: 2 }),
+      ).rejects.toThrow(NotFoundException);
     });
   });
 
-  describe('removeFromCart', () => {
-    it('should remove item from cart', async () => {
+  describe("removeFromCart", () => {
+    it("should remove item from cart", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue(mockCart);
       mockPrismaService.cartItem.findFirst.mockResolvedValue(mockCartItem);
       mockPrismaService.cartItem.delete.mockResolvedValue(mockCartItem);
@@ -188,36 +203,42 @@ describe('CartService', () => {
 
       await service.removeFromCart(1, 1);
 
-      expect(mockPrismaService.cartItem.delete).toHaveBeenCalledWith({ where: { id: 1 } });
+      expect(mockPrismaService.cartItem.delete).toHaveBeenCalledWith({
+        where: { id: 1 },
+      });
     });
 
-    it('should throw NotFoundException if cart not found', async () => {
+    it("should throw NotFoundException if cart not found", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue(null);
 
-      await expect(service.removeFromCart(1, 1)).rejects.toThrow(NotFoundException);
+      await expect(service.removeFromCart(1, 1)).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
-  describe('clearCart', () => {
-    it('should clear all items from cart', async () => {
+  describe("clearCart", () => {
+    it("should clear all items from cart", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue(mockCart);
       mockPrismaService.cartItem.deleteMany.mockResolvedValue({ count: 1 });
       mockPrismaService.cart.findUnique.mockResolvedValue(mockCart);
 
       await service.clearCart(1);
 
-      expect(mockPrismaService.cartItem.deleteMany).toHaveBeenCalledWith({ where: { cartId: 1 } });
+      expect(mockPrismaService.cartItem.deleteMany).toHaveBeenCalledWith({
+        where: { cartId: 1 },
+      });
     });
 
-    it('should throw NotFoundException if cart not found', async () => {
+    it("should throw NotFoundException if cart not found", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue(null);
 
       await expect(service.clearCart(1)).rejects.toThrow(NotFoundException);
     });
   });
 
-  describe('getCartItemCount', () => {
-    it('should return item count', async () => {
+  describe("getCartItemCount", () => {
+    it("should return item count", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue({
         ...mockCart,
         items: [mockCartItem, { ...mockCartItem, id: 2 }],
@@ -225,15 +246,15 @@ describe('CartService', () => {
 
       const result = await service.getCartItemCount(1);
 
-      expect(result).toBe(2);
+      expect(result).toEqual({ count: 2 });
     });
 
-    it('should return 0 if cart not found', async () => {
+    it("should return 0 if cart not found", async () => {
       mockPrismaService.cart.findUnique.mockResolvedValue(null);
 
       const result = await service.getCartItemCount(1);
 
-      expect(result).toBe(0);
+      expect(result).toEqual({ count: 0 });
     });
   });
 });

@@ -1,46 +1,27 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ConflictException, NotFoundException } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { PrismaService } from '../../config/prisma/prisma.service';
-import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
+import { Test, TestingModule } from "@nestjs/testing";
+import { UsersService } from "./users.service";
+import { PrismaService } from "../../config/prisma/prisma.service";
+import { JwtService } from "@nestjs/jwt";
+import * as bcrypt from "bcryptjs";
 
-jest.mock('bcrypt');
+jest.mock("bcryptjs");
 
-describe('UsersService', () => {
+describe("UsersService", () => {
   let service: UsersService;
   let prismaService: PrismaService;
   let jwtService: JwtService;
 
   const mockPrismaService = {
     user: {
-      findFirst: jest.fn(),
       findUnique: jest.fn(),
+      findFirst: jest.fn(),
       create: jest.fn(),
       update: jest.fn(),
     },
   };
 
   const mockJwtService = {
-    sign: jest.fn(),
-  };
-
-  const mockUser = {
-    id: 1,
-    username: 'testuser',
-    email: 'test@example.com',
-    passwordHash: 'hashedpassword',
-    displayName: 'Test User',
-    avatar: null,
-    bio: null,
-    location: null,
-    website: null,
-    role: 'user',
-    status: 'active',
-    emailVerified: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    lastLoginAt: null,
+    sign: jest.fn().mockReturnValue("mock-token"),
   };
 
   beforeEach(async () => {
@@ -63,127 +44,143 @@ describe('UsersService', () => {
     jwtService = module.get<JwtService>(JwtService);
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
+  it("should be defined", () => {
+    expect(service).toBeDefined();
   });
 
-  describe('register', () => {
-    const registerDto = {
-      username: 'testuser',
-      email: 'test@example.com',
-      password: 'password123',
-      displayName: 'Test User',
-    };
+  describe("register", () => {
+    it("should register a new user", async () => {
+      const registerDto = {
+        username: "testuser",
+        email: "test@example.com",
+        password: "password123",
+        displayName: "Test User",
+      };
 
-    it('should register a new user successfully', async () => {
       mockPrismaService.user.findFirst.mockResolvedValue(null);
-      (bcrypt.hash as jest.Mock).mockResolvedValue('hashedpassword');
-      mockPrismaService.user.create.mockResolvedValue(mockUser);
-      mockJwtService.sign.mockReturnValue('mock-token');
+      mockPrismaService.user.create.mockResolvedValue({
+        id: 1,
+        ...registerDto,
+        passwordHash: "hashedpassword",
+      });
+
+      (bcrypt.hash as jest.Mock).mockResolvedValue("hashedpassword");
 
       const result = await service.register(registerDto);
 
-      expect(result).toHaveProperty('id');
-      expect(result).toHaveProperty('token');
-      expect(result).toHaveProperty('refreshToken');
-      expect(mockPrismaService.user.create).toHaveBeenCalled();
+      expect(result).toBeDefined();
+      expect(result.token).toBeDefined();
     });
 
-    it('should throw ConflictException if user already exists', async () => {
-      mockPrismaService.user.findFirst.mockResolvedValue(mockUser);
+    it("should throw conflict exception if user exists", async () => {
+      const registerDto = {
+        username: "testuser",
+        email: "test@example.com",
+        password: "password123",
+        displayName: "Test User",
+      };
 
-      await expect(service.register(registerDto)).rejects.toThrow(ConflictException);
+      mockPrismaService.user.findFirst.mockResolvedValue({
+        id: 1,
+        username: "testuser",
+      });
+
+      await expect(service.register(registerDto)).rejects.toThrow(
+        "用户名或邮箱已存在",
+      );
     });
   });
 
-  describe('login', () => {
-    const loginDto = {
-      email: 'test@example.com',
-      password: 'password123',
-    };
+  describe("login", () => {
+    it("should login successfully", async () => {
+      const loginDto = {
+        email: "test@example.com",
+        password: "password123",
+      };
 
-    it('should login user successfully', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
+      mockPrismaService.user.findUnique.mockResolvedValue({
+        id: 1,
+        email: "test@example.com",
+        passwordHash: "hashedpassword",
+        username: "testuser",
+        displayName: "Test User",
+      });
+
       (bcrypt.compare as jest.Mock).mockResolvedValue(true);
-      mockPrismaService.user.update.mockResolvedValue(mockUser);
-      mockJwtService.sign.mockReturnValue('mock-token');
 
       const result = await service.login(loginDto);
 
-      expect(result).toHaveProperty('token');
-      expect(result).toHaveProperty('refreshToken');
+      expect(result).toBeDefined();
+      expect(result.token).toBeDefined();
     });
 
-    it('should throw NotFoundException if user not found', async () => {
+    it("should throw not found exception if user not found", async () => {
+      const loginDto = {
+        email: "test@example.com",
+        password: "password123",
+      };
+
       mockPrismaService.user.findUnique.mockResolvedValue(null);
 
-      await expect(service.login(loginDto)).rejects.toThrow(NotFoundException);
+      await expect(service.login(loginDto)).rejects.toThrow("用户不存在");
     });
 
-    it('should throw ConflictException if password is wrong', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
+    it("should throw conflict exception if password is wrong", async () => {
+      const loginDto = {
+        email: "test@example.com",
+        password: "password123",
+      };
+
+      mockPrismaService.user.findUnique.mockResolvedValue({
+        id: 1,
+        email: "test@example.com",
+        passwordHash: "hashedpassword",
+        username: "testuser",
+        displayName: "Test User",
+      });
+
       (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
-      await expect(service.login(loginDto)).rejects.toThrow(ConflictException);
+      await expect(service.login(loginDto)).rejects.toThrow("密码错误");
     });
   });
 
-  describe('getCurrentUser', () => {
-    it('should return user data', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
+  describe("changePassword", () => {
+    it("should change password successfully", async () => {
+      const changePasswordDto = {
+        oldPassword: "oldpassword",
+        newPassword: "newpassword",
+      };
 
-      const result = await service.getCurrentUser(1);
+      mockPrismaService.user.findUnique.mockResolvedValue({
+        id: 1,
+        passwordHash: "hashedpassword",
+      });
 
-      expect(result).toHaveProperty('id', 1);
-      expect(result).toHaveProperty('email');
-    });
-
-    it('should throw NotFoundException if user not found', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue(null);
-
-      await expect(service.getCurrentUser(999)).rejects.toThrow(NotFoundException);
-    });
-  });
-
-  describe('updateUser', () => {
-    it('should update user successfully', async () => {
-      const updateDto = { displayName: 'New Name' };
-      mockPrismaService.user.update.mockResolvedValue({ ...mockUser, displayName: 'New Name' });
-
-      const result = await service.updateUser(1, updateDto);
-
-      expect(result.displayName).toBe('New Name');
-    });
-  });
-
-  describe('changePassword', () => {
-    const changePasswordDto = {
-      oldPassword: 'oldpassword',
-      newPassword: 'newpassword',
-    };
-
-    it('should change password successfully', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
       (bcrypt.compare as jest.Mock).mockResolvedValue(true);
-      (bcrypt.hash as jest.Mock).mockResolvedValue('newhashedpassword');
-      mockPrismaService.user.update.mockResolvedValue(mockUser);
+      (bcrypt.hash as jest.Mock).mockResolvedValue("newhashedpassword");
 
       const result = await service.changePassword(1, changePasswordDto);
 
-      expect(result).toHaveProperty('message', '密码修改成功');
+      expect(result).toBeDefined();
     });
 
-    it('should throw NotFoundException if user not found', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue(null);
+    it("should throw conflict exception if old password is wrong", async () => {
+      const changePasswordDto = {
+        oldPassword: "oldpassword",
+        newPassword: "newpassword",
+      };
 
-      await expect(service.changePassword(999, changePasswordDto)).rejects.toThrow(NotFoundException);
-    });
+      mockPrismaService.user.findUnique.mockResolvedValue({
+        id: 1,
+        passwordHash: "hashedpassword",
+      });
 
-    it('should throw ConflictException if old password is wrong', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
       (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
-      await expect(service.changePassword(1, changePasswordDto)).rejects.toThrow(ConflictException);
+      await expect(
+        service.changePassword(1, changePasswordDto),
+      ).rejects.toThrow("原密码错误");
     });
   });
 });

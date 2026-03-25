@@ -1,6 +1,15 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
-import { PrismaService } from '../../config/prisma/prisma.service';
-import { CreateCommentDto, UpdateCommentDto, CommentQueryDto, CommentSort } from './dto';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from "@nestjs/common";
+import { PrismaService } from "../../config/prisma/prisma.service";
+import {
+  CreateCommentDto,
+  UpdateCommentDto,
+  CommentQueryDto,
+  CommentSort,
+} from "./dto";
 
 @Injectable()
 export class CommentsService {
@@ -12,7 +21,7 @@ export class CommentsService {
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     const comment = await this.prisma.comment.create({
@@ -61,18 +70,18 @@ export class CommentsService {
       where.userId = query.userId;
     }
 
-    let orderBy: any = { createdAt: 'desc' };
+    let orderBy: any = { createdAt: "desc" };
 
     switch (query.sort) {
       case CommentSort.OLDEST:
-        orderBy = { createdAt: 'asc' };
+        orderBy = { createdAt: "asc" };
         break;
       case CommentSort.MOST_LIKED:
-        orderBy = { likes: 'desc' };
+        orderBy = { likes: "desc" };
         break;
       case CommentSort.LATEST:
       default:
-        orderBy = { createdAt: 'desc' };
+        orderBy = { createdAt: "desc" };
         break;
     }
 
@@ -133,7 +142,7 @@ export class CommentsService {
     });
 
     if (!comment) {
-      throw new NotFoundException('评论不存在');
+      throw new NotFoundException("评论不存在");
     }
 
     return {
@@ -155,11 +164,11 @@ export class CommentsService {
     });
 
     if (!comment) {
-      throw new NotFoundException('评论不存在');
+      throw new NotFoundException("评论不存在");
     }
 
     if (comment.userId !== userId) {
-      throw new ForbiddenException('无权修改此评论');
+      throw new ForbiddenException("无权修改此评论");
     }
 
     const updated = await this.prisma.comment.update({
@@ -196,18 +205,18 @@ export class CommentsService {
     });
 
     if (!comment) {
-      throw new NotFoundException('评论不存在');
+      throw new NotFoundException("评论不存在");
     }
 
     if (comment.userId !== userId) {
-      throw new ForbiddenException('无权删除此评论');
+      throw new ForbiddenException("无权删除此评论");
     }
 
     await this.prisma.comment.delete({
       where: { id },
     });
 
-    return { message: '评论删除成功' };
+    return { message: "评论删除成功" };
   }
 
   async like(userId: number, id: number) {
@@ -216,7 +225,7 @@ export class CommentsService {
     });
 
     if (!comment) {
-      throw new NotFoundException('评论不存在');
+      throw new NotFoundException("评论不存在");
     }
 
     const updated = await this.prisma.comment.update({
@@ -237,7 +246,7 @@ export class CommentsService {
     });
 
     if (!comment) {
-      throw new NotFoundException('评论不存在');
+      throw new NotFoundException("评论不存在");
     }
 
     const updated = await this.prisma.comment.update({

@@ -1,11 +1,17 @@
-import { IsArray, IsInt, IsPositive, IsOptional, IsEnum, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsInt,
+  IsPositive,
+  IsOptional,
+  IsEnum,
+} from "class-validator";
 
 export enum OrderStatus {
-  PENDING = 'pending',
-  PAID = 'paid',
-  COMPLETED = 'completed',
-  CANCELLED = 'cancelled',
-  REFUNDED = 'refunded',
+  PENDING = "pending",
+  PAID = "paid",
+  COMPLETED = "completed",
+  CANCELLED = "cancelled",
+  REFUNDED = "refunded",
 }
 
 export class CreateOrderDto {

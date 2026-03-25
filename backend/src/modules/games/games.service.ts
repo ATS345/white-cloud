@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../../config/prisma/prisma.service';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { PrismaService } from "../../config/prisma/prisma.service";
 
 @Injectable()
 export class GamesService {
@@ -35,7 +35,9 @@ export class GamesService {
         where,
         skip,
         take: limit,
-        orderBy: query.sort ? { [query.sort]: query.order || 'desc' } : { createdAt: 'desc' },
+        orderBy: query.sort
+          ? { [query.sort]: query.order || "desc" }
+          : { createdAt: "desc" },
         include: {
           genres: { include: { genre: true } },
           platforms: { include: { platform: true } },
@@ -46,7 +48,7 @@ export class GamesService {
     ]);
 
     return {
-      list: list.map(game => ({
+      list: list.map((game) => ({
         id: game.id,
         title: game.title,
         slug: game.slug,
@@ -59,9 +61,15 @@ export class GamesService {
         coverImage: game.coverImage,
         averageRating: game.averageRating,
         reviewCount: game.reviewCount,
-        genres: game.genres.map(g => ({ id: g.genre.id, name: g.genre.name })),
-        platforms: game.platforms.map(p => ({ id: p.platform.id, name: p.platform.name })),
-        tags: game.tags.map(t => ({ id: t.tag.id, name: t.tag.name })),
+        genres: game.genres.map((g) => ({
+          id: g.genre.id,
+          name: g.genre.name,
+        })),
+        platforms: game.platforms.map((p) => ({
+          id: p.platform.id,
+          name: p.platform.name,
+        })),
+        tags: game.tags.map((t) => ({ id: t.tag.id, name: t.tag.name })),
       })),
       pagination: {
         total,
@@ -87,7 +95,7 @@ export class GamesService {
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     return {
@@ -106,9 +114,12 @@ export class GamesService {
       headerImage: game.headerImage,
       averageRating: game.averageRating,
       reviewCount: game.reviewCount,
-      genres: game.genres.map(g => ({ id: g.genre.id, name: g.genre.name })),
-      platforms: game.platforms.map(p => ({ id: p.platform.id, name: p.platform.name })),
-      tags: game.tags.map(t => ({ id: t.tag.id, name: t.tag.name })),
+      genres: game.genres.map((g) => ({ id: g.genre.id, name: g.genre.name })),
+      platforms: game.platforms.map((p) => ({
+        id: p.platform.id,
+        name: p.platform.name,
+      })),
+      tags: game.tags.map((t) => ({ id: t.tag.id, name: t.tag.name })),
       screenshots: game.screenshots,
       videos: game.videos,
       features: game.features,
@@ -133,7 +144,7 @@ export class GamesService {
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     return {
@@ -152,9 +163,12 @@ export class GamesService {
       headerImage: game.headerImage,
       averageRating: game.averageRating,
       reviewCount: game.reviewCount,
-      genres: game.genres.map(g => ({ id: g.genre.id, name: g.genre.name })),
-      platforms: game.platforms.map(p => ({ id: p.platform.id, name: p.platform.name })),
-      tags: game.tags.map(t => ({ id: t.tag.id, name: t.tag.name })),
+      genres: game.genres.map((g) => ({ id: g.genre.id, name: g.genre.name })),
+      platforms: game.platforms.map((p) => ({
+        id: p.platform.id,
+        name: p.platform.name,
+      })),
+      tags: game.tags.map((t) => ({ id: t.tag.id, name: t.tag.name })),
       screenshots: game.screenshots,
       videos: game.videos,
       features: game.features,
@@ -167,7 +181,7 @@ export class GamesService {
   async findHot(limit: number) {
     const games = await this.prisma.game.findMany({
       take: limit,
-      orderBy: { reviewCount: 'desc' },
+      orderBy: { reviewCount: "desc" },
       select: {
         id: true,
         title: true,
@@ -184,7 +198,7 @@ export class GamesService {
   async findNew(limit: number) {
     const games = await this.prisma.game.findMany({
       take: limit,
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
       select: {
         id: true,
         title: true,
@@ -200,10 +214,10 @@ export class GamesService {
 
   async findGenres() {
     const genres = await this.prisma.genre.findMany({
-      orderBy: { name: 'asc' },
+      orderBy: { name: "asc" },
     });
 
-    return genres.map(genre => ({
+    return genres.map((genre) => ({
       id: genre.id,
       name: genre.name,
       slug: genre.slug,
@@ -212,10 +226,10 @@ export class GamesService {
 
   async findPlatforms() {
     const platforms = await this.prisma.platform.findMany({
-      orderBy: { name: 'asc' },
+      orderBy: { name: "asc" },
     });
 
-    return platforms.map(platform => ({
+    return platforms.map((platform) => ({
       id: platform.id,
       name: platform.name,
       slug: platform.slug,

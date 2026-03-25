@@ -1,7 +1,16 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../../config/prisma/prisma.service';
-import { CreateDownloadDto, UpdateDownloadDto, DownloadQueryDto, DownloadStatus } from './dto';
-import { OrdersService } from '../orders/orders.service';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from "@nestjs/common";
+import { PrismaService } from "../../config/prisma/prisma.service";
+import {
+  CreateDownloadDto,
+  UpdateDownloadDto,
+  DownloadQueryDto,
+  DownloadStatus,
+} from "./dto";
+import { OrdersService } from "../orders/orders.service";
 
 @Injectable()
 export class DownloadsService {
@@ -16,21 +25,23 @@ export class DownloadsService {
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     const myGames = await this.ordersService.getMyGames(userId);
-    const hasPurchased = myGames.games.some((g) => g.id === createDownloadDto.gameId);
+    const hasPurchased = myGames.games.some(
+      (g) => g.id === createDownloadDto.gameId,
+    );
 
     if (!hasPurchased) {
-      throw new BadRequestException('您未购买此游戏，无法下载');
+      throw new BadRequestException("您未购买此游戏，无法下载");
     }
 
     const existingDownload = await this.prisma.download.findFirst({
       where: {
         userId,
         gameId: createDownloadDto.gameId,
-        platform: createDownloadDto.platform || 'windows',
+        platform: createDownloadDto.platform || "windows",
         status: {
           in: [DownloadStatus.PENDING, DownloadStatus.DOWNLOADING],
         },
@@ -45,7 +56,7 @@ export class DownloadsService {
       data: {
         userId,
         gameId: createDownloadDto.gameId,
-        platform: createDownloadDto.platform || 'windows',
+        platform: createDownloadDto.platform || "windows",
         status: DownloadStatus.PENDING,
       },
       include: {
@@ -96,7 +107,7 @@ export class DownloadsService {
         where,
         skip,
         take: limit,
-        orderBy: { createdAt: 'desc' },
+        orderBy: { createdAt: "desc" },
         include: {
           game: true,
         },
@@ -144,7 +155,7 @@ export class DownloadsService {
     });
 
     if (!download) {
-      throw new NotFoundException('下载记录不存在');
+      throw new NotFoundException("下载记录不存在");
     }
 
     return {
@@ -172,7 +183,11 @@ export class DownloadsService {
     };
   }
 
-  async update(userId: number, id: number, updateDownloadDto: UpdateDownloadDto) {
+  async update(
+    userId: number,
+    id: number,
+    updateDownloadDto: UpdateDownloadDto,
+  ) {
     const download = await this.prisma.download.findFirst({
       where: {
         id,
@@ -181,7 +196,7 @@ export class DownloadsService {
     });
 
     if (!download) {
-      throw new NotFoundException('下载记录不存在');
+      throw new NotFoundException("下载记录不存在");
     }
 
     const updateData: any = {
@@ -241,11 +256,11 @@ export class DownloadsService {
     });
 
     if (!download) {
-      throw new NotFoundException('下载记录不存在');
+      throw new NotFoundException("下载记录不存在");
     }
 
     if (download.status !== DownloadStatus.DOWNLOADING) {
-      throw new BadRequestException('只能暂停正在下载的任务');
+      throw new BadRequestException("只能暂停正在下载的任务");
     }
 
     return this.update(userId, id, {
@@ -262,11 +277,11 @@ export class DownloadsService {
     });
 
     if (!download) {
-      throw new NotFoundException('下载记录不存在');
+      throw new NotFoundException("下载记录不存在");
     }
 
     if (download.status !== DownloadStatus.PAUSED) {
-      throw new BadRequestException('只能恢复已暂停的任务');
+      throw new BadRequestException("只能恢复已暂停的任务");
     }
 
     return this.update(userId, id, {
@@ -283,37 +298,41 @@ export class DownloadsService {
     });
 
     if (!download) {
-      throw new NotFoundException('下载记录不存在');
+      throw new NotFoundException("下载记录不存在");
     }
 
     if (download.status === DownloadStatus.COMPLETED) {
-      throw new BadRequestException('无法取消已完成的下载');
+      throw new BadRequestException("无法取消已完成的下载");
     }
 
     await this.prisma.download.delete({
       where: { id },
     });
 
-    return { message: '下载已取消' };
+    return { message: "下载已取消" };
   }
 
-  async getDownloadUrl(userId: number, gameId: number, platform: string = 'windows') {
+  async getDownloadUrl(
+    userId: number,
+    gameId: number,
+    platform: string = "windows",
+  ) {
     const game = await this.prisma.game.findUnique({
       where: { id: gameId },
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     const myGames = await this.ordersService.getMyGames(userId);
     const hasPurchased = myGames.games.some((g) => g.id === gameId);
 
     if (!hasPurchased) {
-      throw new BadRequestException('您未购买此游戏，无法下载');
+      throw new BadRequestException("您未购买此游戏，无法下载");
     }
 
-    const cdnUrl = process.env.CDN_URL || 'https://cdn.cloudcurtain.com';
+    const cdnUrl = process.env.CDN_URL || "https://cdn.cloudcurtain.com";
     const downloadUrl = `${cdnUrl}/games/${game.slug}/${platform}/installer.exe`;
 
     return {
@@ -321,9 +340,9 @@ export class DownloadsService {
       gameId,
       platform,
       title: game.title,
-      version: '1.0.0',
-      size: '2.5 GB',
-      checksum: 'abc123def456',
+      version: "1.0.0",
+      size: "2.5 GB",
+      checksum: "abc123def456",
     };
   }
 }

@@ -1,7 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
-import { CommunityService } from './community.service';
+import { Controller, Get } from "@nestjs/common";
+import { CommunityService } from "./community.service";
 
-@Controller('community')
+@Controller("community")
 export class CommunityController {
   constructor(private readonly communityService: CommunityService) {}
 

@@ -1,11 +1,19 @@
-import { IsInt, IsPositive, IsString, IsOptional, IsEnum, Min, Max } from 'class-validator';
+import {
+  IsInt,
+  IsPositive,
+  IsString,
+  IsOptional,
+  IsEnum,
+  Min,
+  Max,
+} from "class-validator";
 
 export enum ReviewSort {
-  LATEST = 'latest',
-  OLDEST = 'oldest',
-  HIGHEST_RATING = 'highest_rating',
-  LOWEST_RATING = 'lowest_rating',
-  MOST_LIKED = 'most_liked',
+  LATEST = "latest",
+  OLDEST = "oldest",
+  HIGHEST_RATING = "highest_rating",
+  LOWEST_RATING = "lowest_rating",
+  MOST_LIKED = "most_liked",
 }
 
 export class CreateReviewDto {

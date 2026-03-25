@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { OrdersController } from './orders.controller';
-import { OrdersService } from './orders.service';
-import { PrismaModule } from '../../config/prisma/prisma.module';
-import { CartModule } from '../cart/cart.module';
+import { Module } from "@nestjs/common";
+import { OrdersController } from "./orders.controller";
+import { OrdersService } from "./orders.service";
+import { PrismaModule } from "../../config/prisma/prisma.module";
+import { CartModule } from "../cart/cart.module";
 
 @Module({
   imports: [PrismaModule, CartModule],
