@@ -1,0 +1,91 @@
+# Prometheus 配置文件
+# 云幕游戏商店平台监控系统
+
+global:
+  scrape_interval: 15s      # 默认抓取间隔
+  evaluation_interval: 15s  # 规则评估间隔
+  external_labels:
+    monitor: 'yunmu-game-store'
+    environment: 'production'
+
+# 告警规则文件
+rule_files:
+  - '/etc/prometheus/rules/*.yml'
+
+# Alertmanager配置
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+# 抓取配置
+scrape_configs:
+  # Prometheus自身监控
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          instance: 'prometheus'
+          service: 'monitoring'
+
+  # 后端API服务监控
+  - job_name: 'yunmu-backend'
+    metrics_path: '/api/metrics'
+    static_configs:
+      - targets: ['backend:3000']
+        labels:
+          service: 'backend'
+          component: 'api'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'yunmu-backend'
+
+  # PostgreSQL数据库监控
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+        labels:
+          service: 'database'
+          component: 'postgresql'
+
+  # Redis缓存监控
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+        labels:
+          service: 'cache'
+          component: 'redis'
+
+  # Elasticsearch监控
+  - job_name: 'elasticsearch'
+    static_configs:
+      - targets: ['elasticsearch-exporter:9114']
+        labels:
+          service: 'search'
+          component: 'elasticsearch'
+
+  # Node Exporter - 系统资源监控
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          service: 'infrastructure'
+          component: 'node'
+
+  # cAdvisor - 容器监控 (暂时禁用)
+  # - job_name: 'cadvisor'
+  #   static_configs:
+  #     - targets: ['cadvisor:8080']
+  #       labels:
+  #         service: 'infrastructure'
+  #         component: 'containers'
+
+# 远程写入配置（可选，用于长期存储）
+# remote_write:
+#   - url: "http://remote-storage:9090/api/v1/write"
+
+# 远程读取配置（可选）
+# remote_read:
+#   - url: "http://remote-storage:9090/api/v1/read"

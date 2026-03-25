@@ -1,0 +1,145 @@
+# PostgreSQL Exporter 自定义查询配置
+# 用于收集更详细的数据库指标
+
+pg_stat_statements:
+  query: |
+    SELECT 
+      queryid,
+      query,
+      calls,
+      total_time / 1000 as total_time_seconds,
+      mean_time / 1000 as mean_time_seconds,
+      min_time / 1000 as min_time_seconds,
+      max_time / 1000 as max_time_seconds,
+      rows,
+      shared_blks_hit,
+      shared_blks_read
+    FROM pg_stat_statements
+    ORDER BY total_time DESC
+    LIMIT 20
+  metrics:
+    - queryid:
+        usage: LABEL
+        description: "Query ID"
+    - query:
+        usage: LABEL
+        description: "Query text"
+    - calls:
+        usage: COUNTER
+        description: "Number of times executed"
+    - total_time_seconds:
+        usage: COUNTER
+        description: "Total time spent in seconds"
+    - mean_time_seconds:
+        usage: GAUGE
+        description: "Mean time spent in seconds"
+    - min_time_seconds:
+        usage: GAUGE
+        description: "Minimum time spent in seconds"
+    - max_time_seconds:
+        usage: GAUGE
+        description: "Maximum time spent in seconds"
+    - rows:
+        usage: COUNTER
+        description: "Rows retrieved or affected"
+    - shared_blks_hit:
+        usage: COUNTER
+        description: "Shared block cache hits"
+    - shared_blks_read:
+        usage: COUNTER
+        description: "Shared block disk reads"
+
+pg_replication:
+  query: |
+    SELECT 
+      client_addr,
+      state,
+      sent_lsn,
+      write_lsn,
+      flush_lsn,
+      replay_lsn,
+      EXTRACT(EPOCH FROM (now() - reply_time)) as replication_lag_seconds
+    FROM pg_stat_replication
+  metrics:
+    - client_addr:
+        usage: LABEL
+        description: "Client IP address"
+    - state:
+        usage: LABEL
+        description: "Replication state"
+    - sent_lsn:
+        usage: COUNTER
+        description: "Sent LSN"
+    - write_lsn:
+        usage: COUNTER
+        description: "Write LSN"
+    - flush_lsn:
+        usage: COUNTER
+        description: "Flush LSN"
+    - replay_lsn:
+        usage: COUNTER
+        description: "Replay LSN"
+    - replication_lag_seconds:
+        usage: GAUGE
+        description: "Replication lag in seconds"
+
+pg_table_size:
+  query: |
+    SELECT 
+      schemaname,
+      tablename,
+      pg_total_relation_size(schemaname || '.' || tablename) as total_size_bytes,
+      pg_relation_size(schemaname || '.' || tablename) as table_size_bytes,
+      pg_indexes_size(schemaname || '.' || tablename) as indexes_size_bytes
+    FROM pg_tables
+    WHERE schemaname NOT IN ('pg_catalog', 'information_schema')
+    ORDER BY total_size_bytes DESC
+    LIMIT 20
+  metrics:
+    - schemaname:
+        usage: LABEL
+        description: "Schema name"
+    - tablename:
+        usage: LABEL
+        description: "Table name"
+    - total_size_bytes:
+        usage: GAUGE
+        description: "Total table size including indexes"
+    - table_size_bytes:
+        usage: GAUGE
+        description: "Table size"
+    - indexes_size_bytes:
+        usage: GAUGE
+        description: "Indexes size"
+
+pg_index_usage:
+  query: |
+    SELECT 
+      schemaname,
+      tablename,
+      indexname,
+      idx_scan,
+      idx_tup_read,
+      idx_tup_fetch
+    FROM pg_stat_user_indexes
+    ORDER BY idx_scan DESC
+    LIMIT 20
+  metrics:
+    - schemaname:
+        usage: LABEL
+        description: "Schema name"
+    - tablename:
+        usage: LABEL
+        description: "Table name"
+    - indexname:
+        usage: LABEL
+        description: "Index name"
+    - idx_scan:
+        usage: COUNTER
+        description: "Number of index scans"
+    - idx_tup_read:
+        usage: COUNTER
+        description: "Number of index entries read"
+    - idx_tup_fetch:
+        usage: COUNTER
+        description: "Number of heap tuples fetched"

@@ -1,0 +1,364 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  username      String    @unique @db.VarChar(50)
+  email         String    @unique @db.VarChar(100)
+  passwordHash  String    @map("password_hash") @db.VarChar(255)
+  displayName   String?   @map("display_name") @db.VarChar(100)
+  avatar        String?   @db.VarChar(255)
+  bio           String?   @db.Text
+  location      String?   @db.VarChar(100)
+  website       String?   @db.VarChar(255)
+  role          String    @default("user") @db.VarChar(20)
+  status        String    @default("active") @db.VarChar(20)
+  emailVerified Boolean   @default(false) @map("email_verified")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  lastLoginAt   DateTime? @map("last_login_at")
+
+  orders        Order[]
+  reviews       Review[]
+  comments      Comment[]
+  notifications Notification[]
+  wishlists    WishlistItem[]
+  cart          Cart?
+  downloads     Download[]
+
+  @@index([status])
+  @@map("users")
+}
+
+model Game {
+  id              Int       @id @default(autoincrement())
+  title           String    @db.VarChar(255)
+  slug            String    @unique @db.VarChar(255)
+  description     String    @db.Text
+  shortDescription String?   @map("short_description") @db.Text
+  price           Decimal   @db.Decimal(10, 2)
+  currency        String    @default("CNY") @db.VarChar(3)
+  developer       String    @db.VarChar(255)
+  publisher       String    @db.VarChar(255)
+  releaseDate     DateTime  @map("release_date")
+  status          String    @default("draft") @db.VarChar(20)
+  coverImage      String    @map("cover_image") @db.VarChar(500)
+  headerImage     String?   @map("header_image") @db.VarChar(500)
+  averageRating   Decimal?  @map("average_rating") @db.Decimal(3, 2)
+  reviewCount     Int       @default(0) @map("review_count")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  genres          GameGenre[]
+  platforms       GamePlatform[]
+  tags            GameTag[]
+  screenshots     Screenshot[]
+  videos          Video[]
+  features        GameFeature[]
+  languages       GameLanguage[]
+  orderItems      OrderItem[]
+  reviews         Review[]
+  comments        Comment[]
+  wishlistItems    WishlistItem[]
+  cartItems       CartItem[]
+  downloads       Download[]
+
+  @@index([status])
+  @@index([slug])
+  @@map("games")
+}
+
+model Genre {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  slug      String   @unique @db.VarChar(100)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  games     GameGenre[]
+
+  @@map("genres")
+}
+
+model GameGenre {
+  gameId  Int
+  genreId Int
+
+  game  Genre @relation(fields: [genreId], references: [id], onDelete: Cascade)
+  genre Game  @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@id([gameId, genreId])
+  @@map("game_genres")
+}
+
+model Platform {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  slug      String   @unique @db.VarChar(100)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  games GamePlatform[]
+
+  @@map("platforms")
+}
+
+model GamePlatform {
+  gameId     Int
+  platformId Int
+
+  game     Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  platform Platform @relation(fields: [platformId], references: [id], onDelete: Cascade)
+
+  @@id([gameId, platformId])
+  @@map("game_platforms")
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  slug      String   @unique @db.VarChar(100)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  games GameTag[]
+
+  @@map("tags")
+}
+
+model GameTag {
+  gameId Int
+  tagId Int
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([gameId, tagId])
+  @@map("game_tags")
+}
+
+model Screenshot {
+  id           Int      @id @default(autoincrement())
+  gameId       Int      @map("game_id")
+  url          String   @db.VarChar(500)
+  thumbnailUrl String?  @map("thumbnail_url") @db.VarChar(500)
+  caption      String?  @db.VarChar(255)
+  sortOrder    Int      @default(0) @map("sort_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@map("screenshots")
+}
+
+model Video {
+  id           Int      @id @default(autoincrement())
+  gameId       Int      @map("game_id")
+  url          String   @db.VarChar(500)
+  thumbnailUrl String?  @map("thumbnail_url") @db.VarChar(500)
+  caption      String?  @db.VarChar(255)
+  sortOrder    Int      @default(0) @map("sort_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@map("videos")
+}
+
+model GameFeature {
+  id          Int      @id @default(autoincrement())
+  gameId      Int      @map("game_id")
+  name        String   @db.VarChar(255)
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@map("game_features")
+}
+
+model GameLanguage {
+  id         Int      @id @default(autoincrement())
+  gameId     Int      @map("game_id")
+  name       String   @db.VarChar(100)
+  interface  Boolean  @default(false)
+  audio      Boolean  @default(false)
+  subtitles  Boolean  @default(false)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@map("game_languages")
+}
+
+model Order {
+  id              Int       @id @default(autoincrement())
+  orderNumber     String    @unique @map("order_number") @db.VarChar(50)
+  userId          Int       @map("user_id")
+  totalAmount     Decimal   @map("total_amount") @db.Decimal(10, 2)
+  currency        String    @default("CNY") @db.VarChar(3)
+  status          String    @default("pending") @db.VarChar(20)
+  paymentMethod   String?   @map("payment_method") @db.VarChar(50)
+  shippingAddress String?   @map("shipping_address") @db.Text
+  billingAddress  String?   @map("billing_address") @db.Text
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  completedAt     DateTime? @map("completed_at")
+
+  user    User        @relation(fields: [userId], references: [id])
+  items   OrderItem[]
+  payments Payment[]
+
+  @@index([userId])
+  @@index([status])
+  @@map("orders")
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int     @map("order_id")
+  gameId    Int     @map("game_id")
+  title     String  @db.VarChar(255)
+  price     Decimal @db.Decimal(10, 2)
+  quantity  Int     @default(1)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  game  Game  @relation(fields: [gameId], references: [id])
+
+  @@map("order_items")
+}
+
+model Payment {
+  id            Int       @id @default(autoincrement())
+  orderId       Int       @map("order_id")
+  transactionId String?   @unique @map("transaction_id") @db.VarChar(100)
+  paymentMethod String    @map("payment_method") @db.VarChar(50)
+  amount        Decimal   @db.Decimal(10, 2)
+  currency      String    @default("CNY") @db.VarChar(3)
+  status        String    @default("pending") @db.VarChar(20)
+  createdAt     DateTime  @default(now()) @map("created_at")
+  completedAt   DateTime? @map("completed_at")
+
+  order Order @relation(fields: [orderId], references: [id])
+
+  @@index([transactionId])
+  @@map("payments")
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  gameId    Int      @map("game_id")
+  userId    Int      @map("user_id")
+  content   String   @db.Text
+  rating    Int
+  likes     Int      @default(0)
+  dislikes  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([gameId, userId])
+  @@index([gameId])
+  @@index([userId])
+  @@map("reviews")
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  gameId    Int      @map("game_id")
+  userId    Int      @map("user_id")
+  content   String   @db.Text
+  likes     Int      @default(0)
+  dislikes  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([gameId])
+  @@map("comments")
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  type      String   @db.VarChar(50)
+  title     String   @db.VarChar(255)
+  content   String   @db.Text
+  status    String   @default("unread") @db.VarChar(20)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("notifications")
+}
+
+model WishlistItem {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  gameId    Int      @map("game_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, gameId])
+  @@map("wishlist_items")
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  cartId    Int      @map("cart_id")
+  gameId    Int      @map("game_id")
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, gameId])
+  @@map("cart_items")
+}
+
+model Download {
+  id              Int       @id @default(autoincrement())
+  userId          Int       @map("user_id")
+  gameId          Int       @map("game_id")
+  platform        String    @db.VarChar(50)
+  status          String    @default("pending") @db.VarChar(20)
+  progress        Int       @default(0)
+  downloadPath    String?   @map("download_path") @db.VarChar(500)
+  fileSize        BigInt?   @map("file_size")
+  downloadedSize  BigInt?   @map("downloaded_size")
+  speed           Float?
+  errorMessage    String?   @map("error_message") @db.Text
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  completedAt     DateTime? @map("completed_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@map("downloads")
+}

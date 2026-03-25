@@ -1,0 +1,369 @@
+# 告警规则配置
+# 云幕游戏商店平台监控系统
+
+groups:
+  # ==================== 基础设施告警 ====================
+  - name: infrastructure
+    rules:
+      # CPU使用率告警
+      - alert: HighCPUUsage
+        expr: |
+          100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+          category: infrastructure
+          component: cpu
+        annotations:
+          summary: "CPU使用率过高"
+          description: "实例 {{ $labels.instance }} CPU使用率超过80%，当前值: {{ $value | printf \"%.2f\" }}%"
+          runbook_url: "https://wiki.yunmu.com/runbook/cpu-usage"
+
+      - alert: CriticalCPUUsage
+        expr: |
+          100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 95
+        for: 2m
+        labels:
+          severity: critical
+          category: infrastructure
+          component: cpu
+        annotations:
+          summary: "CPU使用率严重过高"
+          description: "实例 {{ $labels.instance }} CPU使用率超过95%，当前值: {{ $value | printf \"%.2f\" }}%，需要立即处理"
+
+      # 内存使用率告警
+      - alert: HighMemoryUsage
+        expr: |
+          (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          category: infrastructure
+          component: memory
+        annotations:
+          summary: "内存使用率过高"
+          description: "实例 {{ $labels.instance }} 内存使用率超过85%，当前值: {{ $value | printf \"%.2f\" }}%"
+
+      - alert: CriticalMemoryUsage
+        expr: |
+          (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 95
+        for: 2m
+        labels:
+          severity: critical
+          category: infrastructure
+          component: memory
+        annotations:
+          summary: "内存使用率严重过高"
+          description: "实例 {{ $labels.instance }} 内存使用率超过95%，当前值: {{ $value | printf \"%.2f\" }}%，可能导致OOM"
+
+      # 磁盘空间告警
+      - alert: DiskSpaceLow
+        expr: |
+          (node_filesystem_avail_bytes / node_filesystem_size_bytes) * 100 < 20
+        for: 5m
+        labels:
+          severity: warning
+          category: infrastructure
+          component: disk
+        annotations:
+          summary: "磁盘空间不足"
+          description: "实例 {{ $labels.instance }} 磁盘 {{ $labels.mountpoint }} 剩余空间不足20%，当前值: {{ $value | printf \"%.2f\" }}%"
+
+      - alert: DiskSpaceCritical
+        expr: |
+          (node_filesystem_avail_bytes / node_filesystem_size_bytes) * 100 < 10
+        for: 2m
+        labels:
+          severity: critical
+          category: infrastructure
+          component: disk
+        annotations:
+          summary: "磁盘空间严重不足"
+          description: "实例 {{ $labels.instance }} 磁盘 {{ $labels.mountpoint }} 剩余空间不足10%，当前值: {{ $value | printf \"%.2f\" }}%"
+
+      # 磁盘IO告警
+      - alert: HighDiskIO
+        expr: |
+          irate(node_disk_io_time_seconds_total[5m]) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          category: infrastructure
+          component: disk
+        annotations:
+          summary: "磁盘IO过高"
+          description: "实例 {{ $labels.instance }} 磁盘 {{ $labels.device }} IO使用率超过80%"
+
+  # ==================== 应用服务告警 ====================
+  - name: application
+    rules:
+      # 服务不可用告警
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+          category: application
+        annotations:
+          summary: "服务不可用"
+          description: "服务 {{ $labels.job }} 实例 {{ $labels.instance }} 已停止响应超过1分钟"
+
+      # HTTP错误率告警
+      - alert: HighErrorRate
+        expr: |
+          (sum(rate(yunmu_http_requests_total{status_code=~"5.."}[5m])) 
+          / sum(rate(yunmu_http_requests_total[5m]))) * 100 > 1
+        for: 5m
+        labels:
+          severity: critical
+          category: application
+          component: api
+        annotations:
+          summary: "API错误率过高"
+          description: "HTTP 5xx错误率超过1%，当前值: {{ $value | printf \"%.2f\" }}%"
+
+      # HTTP响应时间告警
+      - alert: HighResponseTime
+        expr: |
+          histogram_quantile(0.95, sum(rate(yunmu_http_request_duration_seconds_bucket[5m])) by (le)) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+          category: application
+          component: api
+        annotations:
+          summary: "API响应时间过长"
+          description: "P95响应时间超过500ms，当前值: {{ $value | humanizeDuration }}"
+
+      # 请求量异常告警
+      - alert: LowRequestRate
+        expr: |
+          sum(rate(yunmu_http_requests_total[5m])) < 10
+        for: 10m
+        labels:
+          severity: warning
+          category: application
+          component: api
+        annotations:
+          summary: "请求量异常低"
+          description: "API请求量持续低于10 req/s，可能存在服务异常"
+
+      # 请求量激增告警
+      - alert: HighRequestRate
+        expr: |
+          sum(rate(yunmu_http_requests_total[5m])) > 1000
+        for: 5m
+        labels:
+          severity: warning
+          category: application
+          component: api
+        annotations:
+          summary: "请求量激增"
+          description: "API请求量持续超过1000 req/s，可能需要扩容"
+
+  # ==================== 数据库告警 ====================
+  - name: database
+    rules:
+      # 数据库连接数告警
+      - alert: HighDatabaseConnections
+        expr: |
+          (yunmu_db_active_connections / yunmu_db_connection_pool_size) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          category: database
+          component: postgresql
+        annotations:
+          summary: "数据库连接数过高"
+          description: "数据库连接数使用率超过80%，当前值: {{ $value | printf \"%.2f\" }}%"
+
+      # 数据库连接数严重告警
+      - alert: CriticalDatabaseConnections
+        expr: |
+          (yunmu_db_active_connections / yunmu_db_connection_pool_size) * 100 > 95
+        for: 2m
+        labels:
+          severity: critical
+          category: database
+          component: postgresql
+        annotations:
+          summary: "数据库连接数即将耗尽"
+          description: "数据库连接数使用率超过95%，当前值: {{ $value | printf \"%.2f\" }}%"
+
+      # 慢查询告警
+      - alert: SlowDatabaseQueries
+        expr: |
+          histogram_quantile(0.95, rate(yunmu_db_query_duration_seconds_bucket[5m])) > 1
+        for: 5m
+        labels:
+          severity: warning
+          category: database
+          component: postgresql
+        annotations:
+          summary: "数据库查询过慢"
+          description: "P95查询时间超过1秒，当前值: {{ $value | humanizeDuration }}"
+
+      # 数据库复制延迟告警
+      - alert: DatabaseReplicationLag
+        expr: |
+          pg_replication_lag_seconds > 10
+        for: 5m
+        labels:
+          severity: warning
+          category: database
+          component: postgresql
+        annotations:
+          summary: "数据库复制延迟"
+          description: "数据库复制延迟超过10秒，当前值: {{ $value | humanizeDuration }}"
+
+  # ==================== Redis告警 ====================
+  - name: redis
+    rules:
+      # Redis内存使用告警
+      - alert: HighRedisMemory
+        expr: |
+          (redis_memory_used_bytes / redis_memory_max_bytes) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          category: cache
+          component: redis
+        annotations:
+          summary: "Redis内存使用过高"
+          description: "Redis内存使用率超过80%，当前值: {{ $value | printf \"%.2f\" }}%"
+
+      # Redis连接数告警
+      - alert: HighRedisConnections
+        expr: |
+          redis_connected_clients > 1000
+        for: 5m
+        labels:
+          severity: warning
+          category: cache
+          component: redis
+        annotations:
+          summary: "Redis连接数过高"
+          description: "Redis连接数超过1000，当前值: {{ $value }}"
+
+      # Redis命中率告警
+      - alert: LowRedisHitRate
+        expr: |
+          (redis_keyspace_hits / (redis_keyspace_hits + redis_keyspace_misses)) * 100 < 80
+        for: 10m
+        labels:
+          severity: warning
+          category: cache
+          component: redis
+        annotations:
+          summary: "Redis命中率过低"
+          description: "Redis命中率低于80%，当前值: {{ $value | printf \"%.2f\" }}%，可能需要优化缓存策略"
+
+      # Redis拒绝连接告警
+      - alert: RedisRejectedConnections
+        expr: |
+          increase(redis_rejected_connections_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          category: cache
+          component: redis
+        annotations:
+          summary: "Redis拒绝连接"
+          description: "Redis在5分钟内拒绝了 {{ $value }} 个连接请求，可能达到最大连接数限制"
+
+  # ==================== 业务指标告警 ====================
+  - name: business
+    rules:
+      # 支付成功率告警
+      - alert: LowPaymentSuccessRate
+        expr: |
+          (sum(rate(yunmu_business_payment_success_total[10m])) 
+          / (sum(rate(yunmu_business_payment_success_total[10m])) + sum(rate(yunmu_business_payment_failed_total[10m])))) * 100 < 90
+        for: 10m
+        labels:
+          severity: critical
+          category: business
+          component: payment
+        annotations:
+          summary: "支付成功率过低"
+          description: "支付成功率低于90%，当前值: {{ $value | printf \"%.2f\" }}%，影响业务收入"
+
+      # 订单量异常告警
+      - alert: LowOrderVolume
+        expr: |
+          sum(increase(yunmu_business_orders_total[1h])) < 10
+        for: 30m
+        labels:
+          severity: warning
+          category: business
+          component: order
+        annotations:
+          summary: "订单量异常低"
+          description: "过去1小时订单量低于10单，可能存在业务异常"
+
+      # 活跃用户下降告警
+      - alert: ActiveUsersDrop
+        expr: |
+          (yunmu_business_active_users{period="daily"} / yunmu_business_active_users{period="daily"} offset 1d) < 0.5
+        for: 1h
+        labels:
+          severity: warning
+          category: business
+          component: user
+        annotations:
+          summary: "活跃用户大幅下降"
+          description: "日活用户相比昨日下降超过50%，当前值: {{ $value | humanizePercentage }}"
+
+  # ==================== Elasticsearch告警 ====================
+  - name: elasticsearch
+    rules:
+      # 集群状态告警
+      - alert: ElasticsearchClusterRed
+        expr: |
+          elasticsearch_cluster_health_status{color="red"} == 1
+        for: 1m
+        labels:
+          severity: critical
+          category: search
+          component: elasticsearch
+        annotations:
+          summary: "Elasticsearch集群状态异常"
+          description: "Elasticsearch集群状态为RED，部分分片不可用"
+
+      - alert: ElasticsearchClusterYellow
+        expr: |
+          elasticsearch_cluster_health_status{color="yellow"} == 1
+        for: 10m
+        labels:
+          severity: warning
+          category: search
+          component: elasticsearch
+        annotations:
+          summary: "Elasticsearch集群状态降级"
+          description: "Elasticsearch集群状态为YELLOW，副本分片未分配"
+
+      # 节点状态告警
+      - alert: ElasticsearchNodeDown
+        expr: |
+          elasticsearch_cluster_health_number_of_nodes < 3
+        for: 1m
+        labels:
+          severity: critical
+          category: search
+          component: elasticsearch
+        annotations:
+          summary: "Elasticsearch节点下线"
+          description: "Elasticsearch集群节点数少于3个，当前值: {{ $value }}"
+
+      # JVM堆内存告警
+      - alert: ElasticsearchHighHeap
+        expr: |
+          (elasticsearch_jvm_memory_used_bytes{area="heap"} / elasticsearch_jvm_memory_max_bytes{area="heap"}) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          category: search
+          component: elasticsearch
+        annotations:
+          summary: "Elasticsearch堆内存使用过高"
+          description: "Elasticsearch JVM堆内存使用率超过85%，当前值: {{ $value | printf \"%.2f\" }}%"

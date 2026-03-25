@@ -1,0 +1,43 @@
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: 'smtp.example.com:587'
+  smtp_from: 'alert@yunmu-game-store.com'
+  smtp_auth_username: 'alert@yunmu-game-store.com'
+  smtp_auth_password: 'your_email_password'
+
+route:
+  group_by: ['alertname', 'severity']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  receiver: 'default-receiver'
+  routes:
+    - match:
+        severity: critical
+      receiver: 'critical-receiver'
+    - match:
+        severity: warning
+      receiver: 'warning-receiver'
+
+receivers:
+  - name: 'default-receiver'
+    email_configs:
+      - to: 'admin@yunmu-game-store.com'
+
+  - name: 'critical-receiver'
+    email_configs:
+      - to: 'admin@yunmu-game-store.com,oncall@yunmu-game-store.com'
+    webhook_configs:
+      - url: 'http://backend:3000/api/v1/alert/webhook'
+        send_resolved: true
+
+  - name: 'warning-receiver'
+    email_configs:
+      - to: 'admin@yunmu-game-store.com'
+
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'instance']

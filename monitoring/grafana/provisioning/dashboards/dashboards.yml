@@ -1,0 +1,15 @@
+# Grafana 仪表板配置
+apiVersion: 1
+
+providers:
+  - name: 'Yunmu Dashboards'
+    orgId: 1
+    folder: 'Yunmu'
+    folderUid: 'yunmu'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/json
+      foldersFromFilesStructure: false
