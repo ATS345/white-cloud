@@ -2,9 +2,8 @@
 FROM node:20-alpine AS frontend-builder
 
 WORKDIR /app
-
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 
 COPY . .
 RUN npm run build
@@ -13,7 +12,7 @@ RUN npm run build
 FROM nginx:alpine AS frontend-production
 
 COPY --from=frontend-builder /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY frontend.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
