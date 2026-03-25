@@ -1,5 +1,6 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '@/utils/api';
+import { mockGames } from '@/utils/mockData';
 
 interface Game {
   id: number;
@@ -48,24 +49,57 @@ const initialState: GamesState = {
 export const fetchGames = createAsyncThunk(
   'games/fetchGames',
   async (params: { page?: number; limit?: number; genre?: number; platform?: number; search?: string }) => {
-    const response = await api.get('/games', { params });
-    return response;
+    try {
+      const response = await api.get('/games', { params });
+      return response;
+    } catch {
+      // 后端不可用时使用 Mock 数据
+      let filtered = [...mockGames];
+      if (params.search) {
+        filtered = filtered.filter(g => g.title.toLowerCase().includes(params.search!.toLowerCase()));
+      }
+      if (params.genre) {
+        filtered = filtered.filter(g => g.genres.some(genre => genre.id === params.genre));
+      }
+      if (params.platform) {
+        filtered = filtered.filter(g => g.platforms.some(p => p.id === params.platform));
+      }
+      const page = params.page || 1;
+      const limit = params.limit || 12;
+      const start = (page - 1) * limit;
+      return {
+        list: filtered.slice(start, start + limit),
+        pagination: { total: filtered.length, page, limit, pages: Math.ceil(filtered.length / limit) },
+      };
+    }
   }
 );
 
 export const fetchGameBySlug = createAsyncThunk(
   'games/fetchGameBySlug',
   async (slug: string) => {
-    const response = await api.get(`/games/slug/${slug}`);
-    return response;
+    try {
+      const response = await api.get(`/games/slug/${slug}`);
+      return response;
+    } catch {
+      const game = mockGames.find(g => g.slug === slug);
+      if (!game) throw new Error('游戏不存在');
+      return game;
+    }
   }
 );
 
 export const fetchGameById = createAsyncThunk(
   'games/fetchGameById',
   async (id: number) => {
-    const response = await api.get(`/games/${id}`);
-    return response;
+    try {
+      const response = await api.get(`/games/${id}`);
+      return response;
+    } catch {
+      const game = mockGames.find(g => g.id === id);
+      if (!game) throw new Error('游戏不存在');
+      return game;
+    }
   }
 );
 
@@ -88,8 +122,13 @@ const gamesSlice = createSlice({
       })
       .addCase(fetchGames.fulfilled, (state, action) => {
         state.loading = false;
-        state.games = action.payload.list;
-        state.pagination = action.payload.pagination;
+        state.games = action.payload?.list || [];
+        state.pagination = action.payload?.pagination || {
+          total: 0,
+          page: 1,
+          limit: 10,
+          pages: 0,
+        };
       })
       .addCase(fetchGames.rejected, (state, action) => {
         state.loading = false;

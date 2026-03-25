@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Card, Row, Col, Button, Typography, Steps, Progress, Alert, Space, Divider } from 'antd'
-import { DownloadOutlined, WindowsOutlined, AppleOutlined, AndroidOutlined, CheckCircleOutlined, SafetyOutlined, ThunderboltOutlined } from '@ant-design/icons'
+import { Card, Row, Col, Button, Typography, Steps, Progress, Alert, Space, Divider, message, Modal } from 'antd'
+import { DownloadOutlined, WindowsOutlined, AppleOutlined, AndroidOutlined, CheckCircleOutlined, SafetyOutlined, ThunderboltOutlined, FolderOpenOutlined, InfoCircleOutlined } from '@ant-design/icons'
 
 const { Title, Paragraph, Text } = Typography
 const { Step } = Steps
@@ -12,6 +12,9 @@ interface DownloadItem {
   icon: React.ReactNode
   status: 'idle' | 'downloading' | 'completed'
   progress: number
+  downloadUrl: string
+  fileName: string
+  available: boolean
 }
 
 const Download = () => {
@@ -22,7 +25,10 @@ const Download = () => {
       size: '125 MB',
       icon: <WindowsOutlined style={{ fontSize: '48px', color: '#0078D7' }} />,
       status: 'idle',
-      progress: 0
+      progress: 0,
+      downloadUrl: '/downloads/yunmu-game-store-setup.exe',
+      fileName: 'yunmu-game-store-setup.exe',
+      available: false
     },
     {
       platform: 'macOS',
@@ -30,7 +36,10 @@ const Download = () => {
       size: '132 MB',
       icon: <AppleOutlined style={{ fontSize: '48px', color: '#999' }} />,
       status: 'idle',
-      progress: 0
+      progress: 0,
+      downloadUrl: '/downloads/yunmu-game-store.dmg',
+      fileName: 'yunmu-game-store.dmg',
+      available: false
     },
     {
       platform: 'Android',
@@ -38,13 +47,46 @@ const Download = () => {
       size: '85 MB',
       icon: <AndroidOutlined style={{ fontSize: '48px', color: '#3DDC84' }} />,
       status: 'idle',
-      progress: 0
+      progress: 0,
+      downloadUrl: '/downloads/yunmu-game-store.apk',
+      fileName: 'yunmu-game-store.apk',
+      available: false
     }
   ])
 
   const [currentStep, setCurrentStep] = useState(0)
 
   const handleDownload = (index: number) => {
+    const item = downloads[index]
+    
+    if (!item.available) {
+      Modal.info({
+        title: '演示环境提示',
+        content: (
+          <div>
+            <Paragraph>当前为演示环境，安装包文件尚未部署。</Paragraph>
+            <Paragraph>如需获取实际安装包，请：</Paragraph>
+            <ul>
+              <li>联系开发团队获取</li>
+              <li>等待正式发布</li>
+              <li>自行构建项目（参考项目文档）</li>
+            </ul>
+          </div>
+        ),
+        onOk() {},
+      })
+      return
+    }
+    
+    const link = document.createElement('a')
+    link.href = item.downloadUrl
+    link.download = item.fileName
+    link.style.display = 'none'
+    
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    
     const newDownloads = [...downloads]
     newDownloads[index].status = 'downloading'
     setDownloads(newDownloads)
@@ -58,10 +100,36 @@ const Download = () => {
         } else {
           updated[index].status = 'completed'
           clearInterval(interval)
+          message.success(`${item.platform} 版本下载完成！`)
         }
         return updated
       })
     }, 500)
+  }
+
+  const handleInstall = (index: number) => {
+    const item = downloads[index]
+    
+    if (!item.available) {
+      message.warning('当前为演示环境，请先获取有效的安装包文件')
+      return
+    }
+    
+    message.info('请在下载文件夹中找到安装包并双击运行安装程序')
+    
+    if (window.showDirectoryPicker) {
+      message.info('安装程序已下载到您的下载文件夹，请手动运行安装')
+    } else {
+      const link = document.createElement('a')
+      link.href = item.downloadUrl
+      link.download = item.fileName
+      link.click()
+      message.success('正在重新下载安装包...')
+    }
+  }
+
+  const handleOpenDownloadFolder = () => {
+    message.info('请在浏览器下载管理器中查看下载文件位置')
   }
 
   const downloadSteps = [
@@ -119,9 +187,18 @@ const Download = () => {
         </div>
 
         <Alert
+          message="演示环境提示"
+          description="当前为开发演示环境，安装包文件尚未部署。如需实际安装包，请联系开发团队或参考项目文档自行构建。"
+          type="info"
+          showIcon
+          icon={<InfoCircleOutlined />}
+          style={{ marginBottom: '40px', borderRadius: '8px' }}
+        />
+
+        <Alert
           message="安全下载保障"
           description="所有下载文件均经过严格安全检测，确保您的设备安全无忧"
-          type="info"
+          type="success"
           showIcon
           style={{ marginBottom: '40px', borderRadius: '8px' }}
         />
@@ -135,7 +212,8 @@ const Download = () => {
                   textAlign: 'center',
                   height: '100%',
                   borderRadius: '12px',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                  opacity: item.available ? 1 : 0.8
                 }}
               >
                 <div style={{ marginBottom: '20px' }}>
@@ -145,6 +223,7 @@ const Download = () => {
                 <Space direction="vertical" size="small" style={{ marginBottom: '20px', width: '100%' }}>
                   <Text type="secondary">版本: {item.version}</Text>
                   <Text type="secondary">大小: {item.size}</Text>
+                  {!item.available && <Text type="warning">演示模式</Text>}
                 </Space>
                 
                 {item.status === 'idle' && (
@@ -159,7 +238,7 @@ const Download = () => {
                       border: 'none'
                     }}
                   >
-                    立即下载
+                    {item.available ? '立即下载' : '演示下载'}
                   </Button>
                 )}
                 
@@ -183,9 +262,23 @@ const Download = () => {
                     <div style={{ color: '#52c41a', fontWeight: 'bold', marginBottom: '10px' }}>
                       下载完成
                     </div>
-                    <Button type="primary" size="large" style={{ width: '100%' }}>
-                      安装应用
-                    </Button>
+                    <Space direction="vertical" style={{ width: '100%' }}>
+                      <Button 
+                        type="primary" 
+                        size="large" 
+                        icon={<FolderOpenOutlined />}
+                        onClick={() => handleInstall(index)}
+                        style={{ width: '100%' }}
+                      >
+                        安装应用
+                      </Button>
+                      <Button 
+                        size="small"
+                        onClick={handleOpenDownloadFolder}
+                      >
+                        打开下载文件夹
+                      </Button>
+                    </Space>
                   </div>
                 )}
               </Card>

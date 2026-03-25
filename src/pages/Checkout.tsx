@@ -12,6 +12,25 @@ const { Step } = Steps
 
 type PaymentMethod = 'alipay' | 'wechat' | 'credit_card'
 
+interface OrderResponse {
+  id: number;
+  orderNumber: string;
+  totalAmount: number;
+  status: string;
+}
+
+interface PaymentResponse {
+  paymentId: string;
+  amount: number;
+  status: string;
+  paymentUrl?: string;
+}
+
+interface CartItem {
+  game?: { coverImage?: string; title?: string; developer?: string; price?: number };
+  quantity: number;
+}
+
 const Checkout: React.FC = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
@@ -20,8 +39,8 @@ const Checkout: React.FC = () => {
   
   const [currentStep, setCurrentStep] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('alipay')
-  const [order, setOrder] = useState<any>(null)
-  const [payment, setPayment] = useState<any>(null)
+  const [order, setOrder] = useState<OrderResponse | null>(null)
+  const [payment, setPayment] = useState<PaymentResponse | null>(null)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -46,12 +65,13 @@ const Checkout: React.FC = () => {
 
     setLoading(true)
     try {
-      const response = await api.post('/orders/from-cart')
+      const response = await api.post('/orders/from-cart') as OrderResponse
       setOrder(response)
       setCurrentStep(1)
       message.success('订单创建成功')
-    } catch (error: any) {
-      message.error(error.message || '创建订单失败')
+    } catch (error: unknown) {
+      const msg = (error as { message?: string })?.message
+      message.error(msg || '创建订单失败')
     } finally {
       setLoading(false)
     }
@@ -65,7 +85,7 @@ const Checkout: React.FC = () => {
       const response = await api.post(`/payments/orders/${order.id}`, {
         paymentMethod,
         returnUrl: `${window.location.origin}/checkout?step=result`
-      })
+      }) as PaymentResponse
       setPayment(response)
       setCurrentStep(2)
       
@@ -74,8 +94,9 @@ const Checkout: React.FC = () => {
       }
       
       message.success('支付请求已发起，请在新窗口完成支付')
-    } catch (error: any) {
-      message.error(error.message || '支付请求失败')
+    } catch (error: unknown) {
+      const msg = (error as { message?: string })?.message
+      message.error(msg || '支付请求失败')
     } finally {
       setLoading(false)
     }
@@ -86,7 +107,7 @@ const Checkout: React.FC = () => {
 
     setLoading(true)
     try {
-      const response = await api.get(`/payments/${payment.paymentId}`)
+      const response = await api.get(`/payments/${payment.paymentId}`) as { status: string }
       if (response.status === 'success') {
         setCurrentStep(3)
         dispatch(clearCart())
@@ -94,8 +115,9 @@ const Checkout: React.FC = () => {
       } else {
         message.info('支付尚未完成，请完成支付后重试')
       }
-    } catch (error: any) {
-      message.error(error.message || '查询支付状态失败')
+    } catch (error: unknown) {
+      const msg = (error as { message?: string })?.message
+      message.error(msg || '查询支付状态失败')
     } finally {
       setLoading(false)
     }
@@ -110,8 +132,9 @@ const Checkout: React.FC = () => {
       setCurrentStep(3)
       dispatch(clearCart())
       message.success('模拟支付成功')
-    } catch (error: any) {
-      message.error(error.message || '模拟支付失败')
+    } catch (error: unknown) {
+      const msg = (error as { message?: string })?.message
+      message.error(msg || '模拟支付失败')
     } finally {
       setLoading(false)
     }
@@ -167,7 +190,7 @@ const Checkout: React.FC = () => {
               <List
                 itemLayout="horizontal"
                 dataSource={items}
-                renderItem={(item: any) => (
+                renderItem={(item: CartItem) => (
                   <List.Item>
                     <List.Item.Meta
                       avatar={

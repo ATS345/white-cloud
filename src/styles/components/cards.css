@@ -1,0 +1,425 @@
+/* ============================================
+   云幕游戏商店 - 卡片组件样式
+   ============================================ */
+
+/* ============================================
+   游戏卡片
+   ============================================ */
+.game-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.game-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 245, 212, 0.3);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 245, 212, 0.1);
+}
+
+/* 卡片封面 */
+.game-card-cover {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 比例 */
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.game-card-cover img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.game-card:hover .game-card-cover img {
+  transform: scale(1.05);
+}
+
+/* 封面叠加层 */
+.game-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.game-card:hover .game-card-overlay {
+  opacity: 1;
+}
+
+/* 价格标签 - 斜切设计 */
+.game-card-price {
+  position: absolute;
+  top: 12px;
+  left: -24px;
+  padding: 6px 28px 6px 24px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+  transform: skewX(-20deg);
+  box-shadow: 0 4px 12px rgba(255, 159, 28, 0.4);
+}
+
+.game-card-price span {
+  display: inline-block;
+  transform: skewX(20deg);
+}
+
+.game-card-price.free {
+  background: linear-gradient(135deg, var(--color-success), #059669);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* 折扣标签 */
+.game-card-discount {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-secondary);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px rgba(255, 46, 99, 0.4);
+}
+
+/* 卡片内容区 */
+.game-card-body {
+  padding: var(--space-md);
+}
+
+.game-card-genre {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.game-card-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 评分组件 */
+.game-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--space-md);
+}
+
+.game-card-rating svg {
+  color: var(--color-accent);
+  filter: drop-shadow(0 0 4px rgba(255, 159, 28, 0.5));
+}
+
+.game-card-rating-value {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.game-card-rating-count {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* 卡片底部 */
+.game-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.game-card-price-text {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+}
+
+.game-card-price-text.free {
+  color: var(--color-success);
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+/* 卡片内购按钮 */
+.game-card-add-btn {
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+}
+
+.game-card-add-btn:hover {
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.5);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   特色卡片 - 大尺寸展示卡片
+   ============================================ */
+.feature-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.feature-card:hover {
+  border-color: rgba(0, 245, 212, 0.2);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    var(--shadow-neon);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-card-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: var(--color-primary);
+  background: rgba(0, 245, 212, 0.1);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.1);
+}
+
+.feature-card-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.feature-card-desc {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ============================================
+   玻璃态卡片
+   ============================================ */
+.glass-card {
+  background: rgba(22, 22, 26, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: all var(--transition-normal);
+}
+
+.glass-card:hover {
+  background: rgba(22, 22, 26, 0.8);
+  border-color: rgba(0, 245, 212, 0.15);
+  box-shadow: 0 0 30px rgba(0, 245, 212, 0.08);
+}
+
+/* ============================================
+   统计卡片
+   ============================================ */
+.stat-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0;
+  transition: all var(--transition-normal);
+}
+
+.stat-card:hover::after {
+  opacity: 1;
+}
+
+.stat-card-value {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.stat-card-value.neon {
+  color: var(--color-primary);
+  text-shadow: 0 0 20px rgba(0, 245, 212, 0.5);
+}
+
+.stat-card-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   列表卡片 - 横向展示
+   ============================================ */
+.list-card {
+  display: flex;
+  gap: var(--space-lg);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.list-card:hover {
+  border-color: rgba(0, 245, 212, 0.3);
+  background: rgba(0, 245, 212, 0.03);
+}
+
+.list-card-cover {
+  width: 240px;
+  height: 135px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.list-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.list-card:hover .list-card-cover img {
+  transform: scale(1.05);
+}
+
+.list-card-content {
+  flex: 1;
+  padding: var(--space-md) var(--space-md) var(--space-md) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.list-card-meta {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.list-card-genre {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.list-card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.list-card-developer {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.list-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .list-card {
+    flex-direction: column;
+  }
+
+  .list-card-cover {
+    width: 100%;
+    height: 180px;
+  }
+
+  .list-card-content {
+    padding: var(--space-md);
+  }
+}

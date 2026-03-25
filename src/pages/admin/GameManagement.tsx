@@ -1,26 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Input, Select, Modal, Form, message, Tag, Space, Upload, DatePicker } from 'antd';
-import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import api from '@/utils/api';
 
 const { Option } = Select;
 const { Search } = Input;
 const { RangePicker } = DatePicker;
 
+interface GameRecord {
+  id: number;
+  title: string;
+  slug?: string;
+  description?: string;
+  shortDescription?: string;
+  price: number;
+  developer?: string;
+  publisher?: string;
+  releaseDate?: string;
+  status?: string;
+  genres?: { id: number; name: string }[];
+  platforms?: { id: number; name: string }[];
+  coverImage?: string;
+}
+
 const GameManagement: React.FC = () => {
-  const [games, setGames] = useState<any[]>([]);
+  const [games, setGames] = useState<GameRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const [editingGame, setEditingGame] = useState<any>(null);
+  const [editingGame, setEditingGame] = useState<GameRecord | null>(null);
   const [form] = Form.useForm();
   const [searchText, setSearchText] = useState('');
   const [genreFilter, setGenreFilter] = useState('');
 
   useEffect(() => {
     fetchGames();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText, genreFilter]);
 
-  const fetchGames = async () => {
+  const fetchGames = React.useCallback(async () => {
     setLoading(true);
     try {
       const response = await api.get('/admin/games', {
@@ -36,9 +53,9 @@ const GameManagement: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchText, genreFilter]);
 
-  const handleEdit = (game: any) => {
+  const handleEdit = (game: GameRecord) => {
     setEditingGame(game);
     form.setFieldsValue({
       title: game.title,
@@ -50,8 +67,8 @@ const GameManagement: React.FC = () => {
       publisher: game.publisher,
       releaseDate: game.releaseDate ? [game.releaseDate] : null,
       status: game.status,
-      genres: game.genres?.map((g: any) => g.id) || [],
-      platforms: game.platforms?.map((p: any) => p.id) || [],
+      genres: game.genres?.map((g: { id: number }) => g.id) || [],
+      platforms: game.platforms?.map((p: { id: number }) => p.id) || [],
     });
     setModalVisible(true);
   };
@@ -67,7 +84,7 @@ const GameManagement: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: Record<string, unknown>) => {
     try {
       const gameData = {
         ...values,
@@ -137,7 +154,7 @@ const GameManagement: React.FC = () => {
     {
       title: '操作',
       key: 'action',
-      render: (_: any, record: any) => (
+      render: (_: unknown, record: GameRecord) => (
         <Space size="middle">
           <Button 
             type="primary" 

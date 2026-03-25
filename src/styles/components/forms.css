@@ -1,0 +1,408 @@
+/* ============================================
+   云幕游戏商店 - 表单组件样式
+   ============================================ */
+
+/* ============================================
+   输入框
+   ============================================ */
+.input-neon {
+  width: 100%;
+  padding: 14px 18px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: all var(--transition-normal);
+}
+
+.input-neon:hover {
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.input-neon:focus {
+  border-color: var(--color-primary);
+  background: rgba(0, 245, 212, 0.05);
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.15);
+}
+
+.input-neon::placeholder {
+  color: var(--text-muted);
+}
+
+.input-neon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 错误状态 */
+.input-neon.error {
+  border-color: var(--color-error);
+}
+
+.input-neon.error:focus {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+}
+
+/* 成功状态 */
+.input-neon.success {
+  border-color: var(--color-success);
+}
+
+.input-neon.success:focus {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+}
+
+/* ============================================
+   输入框组
+   ============================================ */
+.input-group {
+  margin-bottom: var(--space-lg);
+}
+
+.input-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.input-label.required::after {
+  content: ' *';
+  color: var(--color-error);
+}
+
+.input-helper {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+.input-error {
+  font-size: 12px;
+  color: var(--color-error);
+  margin-top: var(--space-xs);
+}
+
+/* ============================================
+   文本域
+   ============================================ */
+textarea.input-neon {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ============================================
+   复选框 & 单选框
+   ============================================ */
+.checkbox-neon,
+.radio-neon {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-neon input,
+.radio-neon input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-mark,
+.radio-mark {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+/* 复选框 */
+.checkbox-mark {
+  border-radius: var(--radius-sm);
+}
+
+.checkbox-neon:hover .checkbox-mark {
+  border-color: var(--color-primary);
+}
+
+.checkbox-neon input:checked + .checkbox-mark {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border-color: transparent;
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+}
+
+.checkbox-neon input:checked + .checkbox-mark::after {
+  content: '';
+  width: 6px;
+  height: 10px;
+  border: solid var(--bg-primary);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+
+/* 单选框 */
+.radio-mark {
+  border-radius: 50%;
+}
+
+.radio-neon:hover .radio-mark {
+  border-color: var(--color-primary);
+}
+
+.radio-neon input:checked + .radio-mark {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+}
+
+.radio-neon input:checked + .radio-mark::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 245, 212, 0.5);
+}
+
+.checkbox-label,
+.radio-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.checkbox-neon:hover .checkbox-label,
+.radio-neon:hover .radio-label {
+  color: var(--text-primary);
+}
+
+/* ============================================
+   开关
+   ============================================ */
+.toggle-neon {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.toggle-neon input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: var(--text-secondary);
+  border-radius: 50%;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+}
+
+.toggle-neon:hover .toggle-track {
+  border-color: var(--border-strong);
+}
+
+.toggle-neon input:checked + .toggle-track {
+  background: rgba(0, 245, 212, 0.2);
+  border-color: var(--color-primary);
+}
+
+.toggle-neon input:checked + .toggle-track .toggle-thumb {
+  transform: translateX(24px);
+  background: var(--color-primary);
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+}
+
+/* ============================================
+   下拉选择
+   ============================================ */
+.select-neon {
+  position: relative;
+}
+
+.select-trigger {
+  width: 100%;
+  padding: 14px 18px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  transition: all var(--transition-normal);
+}
+
+.select-trigger:hover {
+  border-color: var(--border-strong);
+}
+
+.select-trigger.open {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.15);
+}
+
+.select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-fast);
+}
+
+.select-trigger.open + .select-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.select-option {
+  padding: 12px 18px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.select-option:hover {
+  background: rgba(0, 245, 212, 0.1);
+  color: var(--text-primary);
+}
+
+.select-option.selected {
+  background: rgba(0, 245, 212, 0.15);
+  color: var(--color-primary);
+}
+
+/* ============================================
+   滑块
+   ============================================ */
+.slider-neon {
+  position: relative;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  margin: var(--space-lg) 0;
+}
+
+.slider-track {
+  position: absolute;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+}
+
+.slider-thumb {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  box-shadow:
+    0 0 10px rgba(0, 245, 212, 0.5),
+    var(--shadow-md);
+  transition: transform var(--transition-fast);
+}
+
+.slider-thumb:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.slider-thumb:active {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* ============================================
+   标签
+   ============================================ */
+.tag-neon {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tag-neon:hover {
+  color: var(--color-primary);
+  border-color: rgba(0, 245, 212, 0.3);
+  background: rgba(0, 245, 212, 0.05);
+}
+
+.tag-neon.active {
+  color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border-color: transparent;
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+}
+
+.tag-neon-secondary.active {
+  background: linear-gradient(135deg, var(--color-secondary), #D91A4D);
+  box-shadow: 0 0 10px rgba(255, 46, 99, 0.3);
+}
+
+.tag-neon-accent.active {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+  box-shadow: 0 0 10px rgba(255, 159, 28, 0.3);
+}

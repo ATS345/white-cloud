@@ -30,7 +30,7 @@ const Register = () => {
     }
   }, [error, dispatch])
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: { username: string; email: string; password: string }) => {
     setLoading(true)
     dispatch(register({
       username: values.username,

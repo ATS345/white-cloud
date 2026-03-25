@@ -34,7 +34,7 @@ const Login = () => {
     }
   }, [error, dispatch])
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: { username: string; password: string }) => {
     setLoading(true)
     dispatch(login({
       email: values.username, // 支持使用邮箱登录
@@ -99,7 +99,7 @@ const Login = () => {
               <Form.Item name="remember" valuePropName="checked" noStyle>
                 <Checkbox>记住我</Checkbox>
               </Form.Item>
-              <Link to="/forget-password" style={{ color: '#667eea' }}>
+              <Link to="/forgot-password" style={{ color: '#667eea' }}>
                 忘记密码？
               </Link>
             </div>

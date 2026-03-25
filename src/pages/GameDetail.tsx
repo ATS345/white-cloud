@@ -1,51 +1,95 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Button, Rate, Tag, List, Avatar, Input, Spin, Carousel, Tabs, Descriptions } from 'antd';
-import { ShoppingCartOutlined, HeartOutlined, DownloadOutlined, StarOutlined, MessageOutlined, ShareOutlined } from '@ant-design/icons';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Row, Col, Card, Button, Rate, Tag, List, Avatar, Input, Spin, Carousel, Tabs, Descriptions, message, Breadcrumb } from 'antd';
+import { ShoppingCartOutlined, HeartOutlined, DownloadOutlined, HomeOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@/store';
 import { addToCart } from '@/store/slices/cartSlice';
 import api from '@/utils/api';
+import { mockGames } from '@/utils/mockData';
 
 const { TabPane } = Tabs;
+
+interface GameScreenshot { id: number; url: string }
+interface GameTag { id: number; name: string }
+interface CommentItem {
+  id: number;
+  content: string;
+  createdAt: string;
+  user?: { displayName?: string; avatar?: string };
+}
+interface ReviewItem {
+  id: number;
+  rating: number;
+  content: string;
+  createdAt: string;
+  user?: { displayName?: string; avatar?: string };
+}
+interface GameData {
+  id: number;
+  title: string;
+  slug: string;
+  coverImage: string;
+  headerImage?: string;
+  description: string;
+  price: number;
+  developer?: string;
+  publisher?: string;
+  releaseDate?: string;
+  averageRating?: number;
+  reviewCount?: number;
+  screenshots?: GameScreenshot[];
+  genres?: GameTag[];
+  platforms?: GameTag[];
+  languages?: GameTag[];
+  features?: GameTag[];
+}
 
 const GameDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-  const [game, setGame] = useState<any>(null);
+  const [game, setGame] = useState<GameData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [reviews, setReviews] = useState<any[]>([]);
-  const [comments, setComments] = useState<any[]>([]);
+  const [comments, setComments] = useState<CommentItem[]>([]);
+  const [reviews, setReviews] = useState<ReviewItem[]>([]);
+  const [newComment, setNewComment] = useState('');
+  const [submitting, setSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState('details');
 
-  useEffect(() => {
-    if (slug) {
-      fetchGameDetails()
-    }
-  }, [slug])
-
-  const fetchGameDetails = async () => {
+  const fetchGameDetails = React.useCallback(async () => {
     setLoading(true)
     try {
-      const gameResponse = await api.get(`/games/slug/${slug}`)
+      const gameResponse = await api.get(`/games/slug/${slug}`) as GameData
       setGame(gameResponse)
       
       if (gameResponse?.id) {
         const [reviewsResponse, commentsResponse] = await Promise.all([
           api.get(`/reviews`, { params: { gameId: gameResponse.id } }).catch(() => ({ list: [] })),
           api.get(`/comments`, { params: { gameId: gameResponse.id } }).catch(() => ({ list: [] }))
-        ])
+        ]) as [{ list: ReviewItem[] }, { list: CommentItem[] }]
         setReviews(reviewsResponse.list || [])
         setComments(commentsResponse.list || [])
       }
-    } catch (error) {
-      console.error('获取游戏详情失败:', error)
+    } catch {
+      // 使用 Mock 数据
+      const mockGame = mockGames.find(g => g.slug === slug);
+      if (mockGame) {
+        setGame(mockGame as unknown as GameData);
+        setReviews([]);
+        setComments([]);
+      }
     } finally {
       setLoading(false)
     }
-  }
+  }, [slug])
+
+  useEffect(() => {
+    if (slug) {
+      fetchGameDetails()
+    }
+  }, [slug, fetchGameDetails])
 
   const handleAddToCart = () => {
     if (!isAuthenticated) {
@@ -72,6 +116,33 @@ const GameDetail: React.FC = () => {
     navigate('/download');
   };
 
+  const handleSubmitComment = async () => {
+    if (!isAuthenticated) {
+      message.warning('请先登录');
+      navigate('/login');
+      return;
+    }
+    if (!newComment.trim()) {
+      message.warning('请输入评论内容');
+      return;
+    }
+    
+    try {
+      setSubmitting(true);
+      const response = await api.post('/comments', {
+        gameId: game.id,
+        content: newComment.trim(),
+      }) as CommentItem;
+      setComments(prev => [response, ...prev]);
+      setNewComment('');
+      message.success('评论发表成功');
+    } catch (error) {
+      message.error('评论发表失败，请稍后重试');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   if (loading) {
     return (
       <div style={{ padding: '100px 0', textAlign: 'center' }}>
@@ -89,8 +160,18 @@ const GameDetail: React.FC = () => {
   }
 
   return (
-    <div style={{ padding: '24px', maxWidth: '1200px', margin: '0 auto' }}>
-      <Row gutter={[24, 24]}>
+    <div style={{ background: '#0a0a0f', minHeight: 'calc(100vh - 128px)', padding: '24px 5%' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        {/* 面包屑 */}
+        <Breadcrumb
+          style={{ marginBottom: '20px' }}
+          items={[
+            { title: <Link to="/"><HomeOutlined /> 首页</Link> },
+            { title: <Link to="/games"><AppstoreOutlined /> 游戏商店</Link> },
+            { title: game.title },
+          ]}
+        />
+        <Row gutter={[24, 24]}>
         <Col xs={24} lg={16}>
           <Carousel autoplay style={{ marginBottom: '24px' }}>
             <div>
@@ -100,7 +181,7 @@ const GameDetail: React.FC = () => {
                 style={{ width: '100%', height: '400px', objectFit: 'cover' }}
               />
             </div>
-            {game.screenshots?.map((screenshot: any) => (
+            {game.screenshots?.map((screenshot: GameScreenshot) => (
               <div key={screenshot.id}>
                 <img
                   src={screenshot.url}
@@ -139,8 +220,20 @@ const GameDetail: React.FC = () => {
                 )}
               />
               <div style={{ marginTop: '24px' }}>
-                <Input.TextArea rows={4} placeholder="写下你的评论..." />
-                <Button type="primary" style={{ marginTop: '12px' }}>
+                <Input.TextArea 
+                  rows={4} 
+                  placeholder="写下你的评论..." 
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  disabled={!isAuthenticated}
+                />
+                <Button 
+                  type="primary" 
+                  style={{ marginTop: '12px' }}
+                  onClick={handleSubmitComment}
+                  loading={submitting}
+                  disabled={!isAuthenticated || !newComment.trim()}
+                >
                   发表评论
                 </Button>
               </div>
@@ -152,7 +245,7 @@ const GameDetail: React.FC = () => {
                     {game.averageRating || 0}
                   </div>
                   <div>
-                    <Rate disabled defaultValue={game.averageRating || 0} count={5} size="large" />
+                    <Rate disabled defaultValue={game.averageRating || 0} count={5} />
                     <div style={{ marginTop: '8px', color: '#999' }}>
                       {game.reviewCount} 条评价
                     </div>
@@ -168,7 +261,7 @@ const GameDetail: React.FC = () => {
                         <Avatar src={item.user?.avatar} />
                         <div>
                           <div>{item.user?.displayName}</div>
-                          <Rate disabled defaultValue={item.rating} count={5} size="small" />
+                          <Rate disabled defaultValue={item.rating} count={5} style={{ fontSize: '12px' }} />
                         </div>
                       </div>
                       <div style={{ color: '#999', fontSize: '12px' }}>
@@ -202,7 +295,7 @@ const GameDetail: React.FC = () => {
                 {game.developer} • {game.publisher}
               </div>
               <div style={{ marginBottom: '16px' }}>
-                {game.genres?.map((genre: any) => (
+                {game.genres?.map((genre: GameTag) => (
                   <Tag key={genre.id} style={{ margin: '4px' }}>
                     {genre.name}
                   </Tag>
@@ -258,21 +351,21 @@ const GameDetail: React.FC = () => {
 
             <Descriptions column={1} style={{ marginTop: '24px' }}>
               <Descriptions.Item label="平台">
-                {game.platforms?.map((platform: any) => (
+                {game.platforms?.map((platform: GameTag) => (
                   <Tag key={platform.id} style={{ margin: '4px' }}>
                     {platform.name}
                   </Tag>
                 ))}
               </Descriptions.Item>
               <Descriptions.Item label="支持语言">
-                {game.languages?.map((lang: any) => (
+                {game.languages?.map((lang: GameTag) => (
                   <Tag key={lang.id} style={{ margin: '4px' }}>
                     {lang.name}
                   </Tag>
                 ))}
               </Descriptions.Item>
               <Descriptions.Item label="游戏特色">
-                {game.features?.map((feature: any) => (
+                {game.features?.map((feature: GameTag) => (
                   <Tag key={feature.id} style={{ margin: '4px' }}>
                     {feature.name}
                   </Tag>
@@ -282,6 +375,7 @@ const GameDetail: React.FC = () => {
           </Card>
         </Col>
       </Row>
+      </div>
     </div>
   );
 };

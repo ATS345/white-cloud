@@ -1,25 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Input, Select, Modal, Form, message, Tag, Space } from 'antd';
-import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import api from '@/utils/api';
 
 const { Option } = Select;
 const { Search } = Input;
 
+interface UserRecord {
+  id: number;
+  username: string;
+  email: string;
+  displayName?: string;
+  role: string;
+  status?: string;
+  createdAt?: string;
+}
+
 const UserManagement: React.FC = () => {
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<UserRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const [editingUser, setEditingUser] = useState<any>(null);
+  const [editingUser, setEditingUser] = useState<UserRecord | null>(null);
   const [form] = Form.useForm();
   const [searchText, setSearchText] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
 
   useEffect(() => {
     fetchUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText, roleFilter]);
 
-  const fetchUsers = async () => {
+  const fetchUsers = React.useCallback(async () => {
     setLoading(true);
     try {
       const response = await api.get('/admin/users', {
@@ -35,9 +46,9 @@ const UserManagement: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchText, roleFilter]);
 
-  const handleEdit = (user: any) => {
+  const handleEdit = (user: UserRecord) => {
     setEditingUser(user);
     form.setFieldsValue({
       username: user.username,
@@ -60,7 +71,7 @@ const UserManagement: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: Record<string, unknown>) => {
     try {
       if (editingUser) {
         await api.put(`/admin/users/${editingUser.id}`, values);
@@ -129,7 +140,7 @@ const UserManagement: React.FC = () => {
     {
       title: '操作',
       key: 'action',
-      render: (_: any, record: any) => (
+      render: (_: unknown, record: UserRecord) => (
         <Space size="middle">
           <Button 
             type="primary" 

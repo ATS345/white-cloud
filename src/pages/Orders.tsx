@@ -2,16 +2,43 @@ import React, { useEffect } from 'react';
 import { Table, Card, Tag, Button, Spin, Empty, Modal } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from '@/store';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/store';
 import api from '@/utils/api';
+
+interface OrderItem {
+  id: number;
+  price: number;
+  quantity: number;
+  game: { title: string; coverImage: string; developer?: string };
+}
+
+interface Payment {
+  id: number;
+  transactionId?: string;
+  paymentMethod: string;
+  amount: number;
+  status: string;
+  completedAt?: string;
+}
+
+interface Order {
+  id: number;
+  orderNumber: string;
+  status: string;
+  totalAmount: number;
+  createdAt: string;
+  paymentMethod?: string;
+  items: OrderItem[];
+  payments?: Payment[];
+}
 
 const Orders: React.FC = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
-  const [orders, setOrders] = React.useState<any[]>([]);
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const [orders, setOrders] = React.useState<Order[]>([]);
   const [loading, setLoading] = React.useState(false);
-  const [selectedOrder, setSelectedOrder] = React.useState<any>(null);
+  const [selectedOrder, setSelectedOrder] = React.useState<Order | null>(null);
   const [modalVisible, setModalVisible] = React.useState(false);
 
   const fetchOrders = async () => {
@@ -43,7 +70,7 @@ const Orders: React.FC = () => {
     );
   }
 
-  const handleViewOrder = (order: any) => {
+  const handleViewOrder = (order: Order) => {
     setSelectedOrder(order);
     setModalVisible(true);
   };
@@ -92,7 +119,7 @@ const Orders: React.FC = () => {
       title: '游戏',
       dataIndex: 'items',
       key: 'items',
-      render: (items: any[]) => (
+      render: (items: OrderItem[]) => (
         <div>
           {items.map((item, index) => (
             <div key={item.id}>
@@ -130,7 +157,7 @@ const Orders: React.FC = () => {
     {
       title: '操作',
       key: 'action',
-      render: (_: any, record: any) => (
+      render: (_: unknown, record: Order) => (
         <Button
           type="link"
           icon={<EyeOutlined />}
@@ -208,7 +235,7 @@ const Orders: React.FC = () => {
             <div style={{ marginBottom: '24px' }}>
               <strong>游戏列表：</strong>
               <div style={{ marginTop: '12px' }}>
-                {selectedOrder.items.map((item: any) => (
+                {selectedOrder.items.map((item: OrderItem) => (
                   <div
                     key={item.id}
                     style={{
@@ -243,7 +270,7 @@ const Orders: React.FC = () => {
               <div>
                 <strong>支付记录：</strong>
                 <div style={{ marginTop: '12px' }}>
-                  {selectedOrder.payments.map((payment: any) => (
+                  {selectedOrder.payments.map((payment: Payment) => (
                     <div
                       key={payment.id}
                       style={{

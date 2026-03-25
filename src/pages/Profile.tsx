@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react'
-import { Card, Form, Input, Button, Avatar, Upload, message, Tabs, Space, Checkbox } from 'antd'
+import { Card, Form, Input, Button, Avatar, Upload, message, Tabs, Checkbox } from 'antd'
 import { UserOutlined, MailOutlined, LockOutlined, CameraOutlined } from '@ant-design/icons'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from '@/store/hooks'
 import { fetchCurrentUser } from '@/store/slices/authSlice'
+import type { RootState } from '@/store'
 import api from '@/utils/api'
 
 const { TabPane } = Tabs
 const { TextArea } = Input
 
 const Profile = () => {
-  const dispatch = useDispatch()
-  const { user, loading } = useSelector((state: any) => state.auth)
+  const dispatch = useAppDispatch()
+  const { user, loading } = useSelector((state: RootState) => state.auth)
   const [activeTab, setActiveTab] = useState('profile')
   const [profileForm] = Form.useForm()
   const [passwordForm] = Form.useForm()
@@ -33,9 +35,9 @@ const Profile = () => {
     }
   }, [user, profileForm])
 
-  const handleProfileSubmit = async (values: any) => {
+  const handleProfileSubmit = async (values: Record<string, unknown>) => {
     try {
-      await api.put('/auth/me', values)
+      await api.put('/users/me', values)
       message.success('个人资料更新成功')
       dispatch(fetchCurrentUser())
     } catch (error) {
@@ -43,9 +45,9 @@ const Profile = () => {
     }
   }
 
-  const handlePasswordSubmit = async (values: any) => {
+  const handlePasswordSubmit = async (values: Record<string, unknown>) => {
     try {
-      await api.put('/auth/me/password', values)
+      await api.put('/users/me/password', values)
       message.success('密码修改成功')
       passwordForm.resetFields()
     } catch (error) {
@@ -53,20 +55,20 @@ const Profile = () => {
     }
   }
 
-  const handleSettingsSubmit = async (values: any) => {
+  const handleSettingsSubmit = async (values: Record<string, unknown>) => {
     try {
-      await api.put('/auth/me/settings', values)
+      await api.put('/users/me/settings', values)
       message.success('设置更新成功')
     } catch (error) {
       message.error('更新失败，请稍后重试')
     }
   }
 
-  const handleAvatarUpload = async (file: any) => {
+  const handleAvatarUpload = async (file: File) => {
     try {
       const formData = new FormData()
       formData.append('avatar', file)
-      await api.post('/auth/me/avatar', formData)
+      await api.post('/users/me/avatar', formData)
       message.success('头像上传成功')
       dispatch(fetchCurrentUser())
     } catch (error) {

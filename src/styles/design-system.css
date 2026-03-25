@@ -1,0 +1,505 @@
+/* ============================================
+   云幕游戏商店 - UI设计系统
+   Retro-Futuristic + Cyberpunk Neon 风格
+   ============================================ */
+
+/* Google Fonts 导入 */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ============================================
+   CSS 变量 - 设计令牌
+   ============================================ */
+:root {
+  /* 色彩系统 */
+  --color-primary: #00F5D4;         /* 电光青 - 主色调 */
+  --color-primary-dark: #00D4AA;    /* 深青色 */
+  --color-secondary: #FF2E63;        /* 霓虹粉 - 次要色 */
+  --color-accent: #FF9F1C;          /* 琥珀橙 - 强调色 */
+  --color-accent-dark: #FF7A1C;     /* 深橙色 */
+
+  /* 背景色 */
+  --bg-primary: #0D0D0D;            /* 纯黑 */
+  --bg-secondary: #1A1A2E;          /* 深空蓝黑 */
+  --bg-surface: #16161A;            /* 炭黑 - 卡片/面板 */
+  --bg-elevated: #1E1E24;           /* 提升表面 */
+
+  /* 文字色 */
+  --text-primary: #FFFFFF;          /* 主要文字 */
+  --text-secondary: #9CA3AF;        /* 次要文字 */
+  --text-muted: #6B7280;            /* 弱化文字 */
+
+  /* 状态色 */
+  --color-success: #10B981;
+  --color-warning: #FBBF24;
+  --color-error: #EF4444;
+  --color-info: #00F5D4;
+
+  /* 边框色 */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.2);
+
+  /* 霓虹发光效果 */
+  --glow-primary: 0 0 20px rgba(0, 245, 212, 0.4);
+  --glow-secondary: 0 0 20px rgba(255, 46, 99, 0.4);
+  --glow-accent: 0 0 20px rgba(255, 159, 28, 0.4);
+
+  /* 字体 */
+  --font-display: 'Orbitron', sans-serif;      /* 标题字体 */
+  --font-body: 'Rajdhani', sans-serif;         /* 正文字体 */
+  --font-mono: 'JetBrains Mono', monospace;    /* 等宽字体 */
+
+  /* 间距系统 */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* 圆角系统 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* 过渡 */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* 阴影 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-neon: 0 0 30px rgba(0, 245, 212, 0.15);
+}
+
+/* ============================================
+   基础样式重置
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================
+   滚动条样式
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-primary), var(--color-primary-dark));
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ============================================
+   霓虹发光效果
+   ============================================ */
+.neon-text {
+  color: var(--color-primary);
+  text-shadow:
+    0 0 10px rgba(0, 245, 212, 0.8),
+    0 0 20px rgba(0, 245, 212, 0.5),
+    0 0 40px rgba(0, 245, 212, 0.3);
+}
+
+.neon-text-secondary {
+  color: var(--color-secondary);
+  text-shadow:
+    0 0 10px rgba(255, 46, 99, 0.8),
+    0 0 20px rgba(255, 46, 99, 0.5),
+    0 0 40px rgba(255, 46, 99, 0.3);
+}
+
+.neon-text-accent {
+  color: var(--color-accent);
+  text-shadow:
+    0 0 10px rgba(255, 159, 28, 0.8),
+    0 0 20px rgba(255, 159, 28, 0.5),
+    0 0 40px rgba(255, 159, 28, 0.3);
+}
+
+/* ============================================
+   字体工具类
+   ============================================ */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   玻璃态效果
+   ============================================ */
+.glass {
+  background: rgba(22, 22, 26, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+}
+
+.glass-dark {
+  background: rgba(13, 13, 13, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ============================================
+   斜切效果
+   ============================================ */
+.skew-x {
+  transform: skewX(-10deg);
+}
+
+.skew-x-reverse {
+  transform: skewX(10deg);
+}
+
+.skew-y {
+  transform: skewY(-3deg);
+}
+
+/* ============================================
+   动画
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 10px rgba(0, 245, 212, 0.8),
+      0 0 20px rgba(0, 245, 212, 0.5),
+      0 0 40px rgba(0, 245, 212, 0.3);
+  }
+  50% {
+    opacity: 0.85;
+    text-shadow:
+      0 0 15px rgba(0, 245, 212, 1),
+      0 0 30px rgba(0, 245, 212, 0.7),
+      0 0 60px rgba(0, 245, 212, 0.4);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.6s ease-out forwards;
+}
+
+.animate-neon-pulse {
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ============================================
+   响应式容器
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+}
+
+/* ============================================
+   Ant Design 深色主题覆盖
+   ============================================ */
+.ant-layout {
+  background: var(--bg-primary) !important;
+}
+
+/* 按钮样式覆盖 */
+.ant-btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)) !important;
+  border: none !important;
+  box-shadow: var(--glow-primary);
+}
+
+.ant-btn-primary:hover {
+  background: var(--color-primary) !important;
+  box-shadow: 0 0 30px rgba(0, 245, 212, 0.6) !important;
+}
+
+/* 输入框样式覆盖 */
+.ant-input,
+.ant-input-affix-wrapper {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: var(--border-default) !important;
+  color: var(--text-primary) !important;
+}
+
+.ant-input:focus,
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.15) !important;
+}
+
+/* 选择器样式覆盖 */
+.ant-select-selector {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: var(--border-default) !important;
+}
+
+.ant-select-selection-item {
+  color: var(--text-primary) !important;
+}
+
+.ant-select-dropdown {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-default);
+}
+
+/* 标签样式覆盖 */
+.ant-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-default);
+  color: var(--text-secondary);
+}
+
+/* 卡片样式覆盖 */
+.ant-card {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+/* 模态框样式覆盖 */
+.ant-modal-content {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-default);
+}
+
+.ant-modal-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+
+.ant-modal-title {
+  color: var(--text-primary) !important;
+}
+
+/* 分页样式覆盖 */
+.ant-pagination-item a {
+  color: var(--text-secondary) !important;
+}
+
+.ant-pagination-item-active {
+  border-color: var(--color-primary) !important;
+}
+
+.ant-pagination-item-active a {
+  color: var(--color-primary) !important;
+}
+
+/* Tabs 样式覆盖 */
+.ant-tabs-tab {
+  color: var(--text-secondary) !important;
+}
+
+.ant-tabs-tab:hover {
+  color: var(--text-primary) !important;
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--color-primary) !important;
+}
+
+.ant-tabs-ink-bar {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)) !important;
+}
+
+/* Rate 评分样式覆盖 */
+.ant-rate-star-full svg,
+.ant-rate-star-second svg {
+  color: var(--color-accent) !important;
+  filter: drop-shadow(0 0 4px rgba(255, 159, 28, 0.5));
+}
+
+/* ============================================
+   扫描线效果（复古CRT）
+   ============================================ */
+.scanline-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.05) 0px,
+    rgba(0, 0, 0, 0.05) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+/* ============================================
+   网格布局辅助
+   ============================================ */
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}

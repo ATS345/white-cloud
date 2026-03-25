@@ -6,6 +6,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@/store';
 import { fetchCart, updateCartItem, removeFromCart, clearCart } from '@/store/slices/cartSlice';
 
+interface CartGame {
+  id: number;
+  title: string;
+  coverImage: string;
+  developer?: string;
+  price: number;
+}
+
+interface CartRecord {
+  id: number;
+  quantity: number;
+  game: CartGame;
+}
+
 const Cart: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -53,7 +67,7 @@ const Cart: React.FC = () => {
       title: '游戏',
       dataIndex: 'game',
       key: 'game',
-      render: (game: any) => (
+      render: (game: CartGame) => (
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <img
             src={game.coverImage}
@@ -73,7 +87,7 @@ const Cart: React.FC = () => {
       title: '价格',
       dataIndex: 'game',
       key: 'price',
-      render: (game: any) => (
+      render: (game: CartGame) => (
         <span style={{ color: '#ff6b6b', fontWeight: 'bold' }}>
           ¥{game.price}
         </span>
@@ -83,7 +97,7 @@ const Cart: React.FC = () => {
       title: '数量',
       dataIndex: 'quantity',
       key: 'quantity',
-      render: (quantity: number, record: any) => (
+      render: (quantity: number, record: CartRecord) => (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Button
             size="small"
@@ -105,7 +119,7 @@ const Cart: React.FC = () => {
     {
       title: '小计',
       key: 'subtotal',
-      render: (_: any, record: any) => (
+      render: (_: unknown, record: CartRecord) => (
         <span style={{ color: '#ff6b6b', fontWeight: 'bold' }}>
           ¥{(record.game.price * record.quantity).toFixed(2)}
         </span>
@@ -114,7 +128,7 @@ const Cart: React.FC = () => {
     {
       title: '操作',
       key: 'action',
-      render: (_: any, record: any) => (
+      render: (_: unknown, record: CartRecord) => (
         <Button
           danger
           size="small"
