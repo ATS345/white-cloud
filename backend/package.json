@@ -1,6 +1,6 @@
 {
   "name": "cloudcurtain-backend",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "云幕游戏商店平台 - 后端服务",
   "main": "dist/main.js",
   "scripts": {

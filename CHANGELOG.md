@@ -5,6 +5,32 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.1.0] - 2026-03-26
+
+### 新增功能
+- ✨ 完整的合并发布流程文档
+- ✨ Git分支策略（main/develop/staging/testing）
+- ✨ 发布检查清单模板
+- ✨ 回滚预案文档
+
+### Bug修复
+- 🐛 修复前端测试用例（Games.test.tsx、Home.test.tsx、AppFooter.test.tsx、AppHeader.test.tsx）
+- 🐛 修复useNavigate() Hook使用问题（添加BrowserRouter包装器）
+- 🐛 修复按钮文本匹配器问题（使用文本包含匹配）
+
+### 测试改进
+- ✅ 前端测试通过率从 54/58 提升到 58/58（100%）
+- ✅ 后端测试保持 51/51 通过率（100%）
+
+### 文档完善
+- 📚 添加完整的发布流程文档（docs/RELEASE_PROCESS.md）
+- 📚 添加任务完成最终报告（docs/TASK_COMPLETION_FINAL_REPORT.md）
+- 📚 添加发布日志模板（docs/RELEASE_LOG_2025-05-24.md）
+
+### 配置优化
+- ⚙️ 验证监控配置（Alertmanager、Prometheus、Grafana）
+- ⚙️ 更新.gitignore文件
+
 ## [1.0.0] - 2026-03-19
 
 ### 新增功能
