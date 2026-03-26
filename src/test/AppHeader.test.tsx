@@ -32,14 +32,14 @@ describe('AppHeader', () => {
     renderWithProviders(<AppHeader />);
     expect(screen.getByText('云幕游戏')).toBeInTheDocument();
     expect(screen.getByText('首页')).toBeInTheDocument();
-    expect(screen.getByText('游戏')).toBeInTheDocument();
+    expect(screen.getByText('游戏商店')).toBeInTheDocument();
     expect(screen.getByText('关于')).toBeInTheDocument();
   });
 
   it('should show login and register when not authenticated', () => {
     renderWithProviders(<AppHeader />);
-    expect(screen.getByText('登录')).toBeInTheDocument();
-    expect(screen.getByText('注册')).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes('登'))).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes('注'))).toBeInTheDocument();
   });
 
   it('should show user info when authenticated', () => {

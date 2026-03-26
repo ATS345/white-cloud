@@ -36,9 +36,13 @@ describe('Home Page', () => {
     expect(document.body).toBeInTheDocument();
   });
 
-  it('should show loading state initially', () => {
+  it('should render hero banner section', () => {
     renderWithProviders(<Home />);
-    const spinner = document.querySelector('.ant-spin');
-    expect(spinner || screen.getByText(/加载/i) || document.body).toBeTruthy();
+    expect(screen.getByText('为什么选择云幕游戏')).toBeInTheDocument();
+  });
+
+  it('should render hot games section', () => {
+    renderWithProviders(<Home />);
+    expect(screen.getByText('热门游戏')).toBeInTheDocument();
   });
 });

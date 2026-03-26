@@ -36,9 +36,10 @@ const renderWithProviders = (ui: React.ReactElement, store = createTestStore()) 
 describe('Games Page', () => {
   it('should render search and filter controls', () => {
     renderWithProviders(<Games />);
-    expect(screen.getByPlaceholderText('搜索游戏')).toBeInTheDocument();
-    expect(screen.getByText('选择类型')).toBeInTheDocument();
-    expect(screen.getByText('选择平台')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('搜索游戏名称...')).toBeInTheDocument();
+    expect(screen.getByText('筛选')).toBeInTheDocument();
+    expect(screen.getByText('游戏类型')).toBeInTheDocument();
+    expect(screen.getByText('游戏平台')).toBeInTheDocument();
   });
 
   it('should show loading state', () => {
@@ -97,13 +98,13 @@ describe('Games Page', () => {
 
     renderWithProviders(<Games />, store);
     await waitFor(() => {
-      expect(screen.getByText('选择类型')).toBeInTheDocument();
+      expect(screen.getByText('游戏类型')).toBeInTheDocument();
     });
   });
 
   it('should allow search input', () => {
     renderWithProviders(<Games />);
-    const searchInput = screen.getByPlaceholderText('搜索游戏');
+    const searchInput = screen.getByPlaceholderText('搜索游戏名称...');
     fireEvent.change(searchInput, { target: { value: 'test game' } });
     expect(searchInput).toHaveValue('test game');
   });
