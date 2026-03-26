@@ -3,7 +3,7 @@ global:
   smtp_smarthost: 'smtp.163.com:465'
   smtp_from: 'sftaccf@163.com'
   smtp_auth_username: 'sftaccf@163.com'
-  smtp_auth_password: 'HEurd35zATTMb9th'
+  smtp_auth_password: 'YOUR_163_AUTHORIZATION_CODE'
   smtp_require_tls: true
   smtp_hello: 'yunmu-game-store'
 
@@ -32,7 +32,7 @@ receivers:
         from: 'sftaccf@163.com'
         smarthost: 'smtp.163.com:465'
         auth_username: 'sftaccf@163.com'
-        auth_password: 'HEurd35zATTMb9th'
+        auth_password: 'YOUR_163_AUTHORIZATION_CODE'
         require_tls: true
         send_resolved: true
         headers:
@@ -44,7 +44,7 @@ receivers:
         from: 'sftaccf@163.com'
         smarthost: 'smtp.163.com:465'
         auth_username: 'sftaccf@163.com'
-        auth_password: 'HEurd35zATTMb9th'
+        auth_password: 'YOUR_163_AUTHORIZATION_CODE'
         require_tls: true
         send_resolved: true
         headers:
@@ -65,7 +65,7 @@ receivers:
         from: 'sftaccf@163.com'
         smarthost: 'smtp.163.com:465'
         auth_username: 'sftaccf@163.com'
-        auth_password: 'HEurd35zATTMb9th'
+        auth_password: 'YOUR_163_AUTHORIZATION_CODE'
         require_tls: true
         send_resolved: true
         headers:
@@ -77,7 +77,7 @@ receivers:
         from: 'sftaccf@163.com'
         smarthost: 'smtp.163.com:465'
         auth_username: 'sftaccf@163.com'
-        auth_password: 'HEurd35zATTMb9th'
+        auth_password: 'YOUR_163_AUTHORIZATION_CODE'
         require_tls: true
         send_resolved: true
         headers:

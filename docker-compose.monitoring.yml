@@ -26,10 +26,13 @@ services:
       - "3001:3000"
     volumes:
       - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/config/grafana.ini:/etc/grafana/grafana.ini:ro
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin123
       - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=redis-datasource
     networks:
       - yunmu-network
     depends_on:
@@ -50,29 +53,68 @@ services:
     networks:
       - yunmu-network
 
-  redis:
-    image: redis:7-alpine
-    container_name: yunmu-redis
+  node-exporter:
+    image: prom/node-exporter:v1.6.0
+    container_name: yunmu-node-exporter
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "9100:9100"
     volumes:
-      - redis_data:/data
-    command: redis-server --appendonly yes
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--path.rootfs=/rootfs'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
     networks:
       - yunmu-network
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:v0.12.0
+    container_name: yunmu-postgres-exporter
+    restart: unless-stopped
+    ports:
+      - "9187:9187"
+    environment:
+      - DATA_SOURCE_NAME=postgresql://yunmu:yunmu123@postgres:5432/yunmu_game_store?sslmode=disable
+    volumes:
+      - ./monitoring/postgres-exporter/queries.yaml:/queries.yaml:ro
+    command:
+      - '--extend.query-path=/queries.yaml'
+    networks:
+      - yunmu-network
+
+  redis-exporter:
+    image: oliver006/redis_exporter:v1.50.0
+    container_name: yunmu-redis-exporter
+    restart: unless-stopped
+    ports:
+      - "9121:9121"
+    environment:
+      - REDIS_ADDR=redis://redis:6379
+      - REDIS_PASSWORD=redis123
+    networks:
+      - yunmu-network
+
+  elasticsearch-exporter:
+    image: quay.io/prometheuscommunity/elasticsearch-exporter:v1.6.0
+    container_name: yunmu-elasticsearch-exporter
+    restart: unless-stopped
+    ports:
+      - "9114:9114"
+    command:
+      - '--es.uri=http://elasticsearch:9200'
+    networks:
+      - yunmu-network
 
 volumes:
   prometheus_data:
   grafana_data:
   alertmanager_data:
-  redis_data:
 
 networks:
   yunmu-network:
-    external: true
+    external:
+      name: yunmu-game-store_yunmu-network

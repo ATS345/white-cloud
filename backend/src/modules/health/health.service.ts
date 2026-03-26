@@ -115,55 +115,30 @@ export class HealthService {
     try {
       const startTime = Date.now();
 
-      // 执行简单查询测试连接
+      // 执行简单查询测试连接（兼容SQLite和PostgreSQL）
       await this.prisma.$queryRaw`SELECT 1`;
 
       const responseTime = Date.now() - startTime;
 
-      // 获取连接池状态
-      const connectionResult = await this.prisma.$queryRaw<
-        Array<{ count: bigint }>
-      >`
-        SELECT count(*) FROM pg_stat_activity 
-        WHERE datname = current_database()
-      `;
-      const activeConnections = Number(connectionResult[0]?.count || 0);
-
-      // 获取最大连接数
-      const maxConnResult = await this.prisma.$queryRaw<
-        Array<{ setting: string }>
-      >`
-        SELECT setting FROM pg_settings WHERE name = 'max_connections'
-      `;
-      const maxConnections = Number(maxConnResult[0]?.setting || 100);
-
       // 判断健康状态
       let status = HealthStatus.HEALTHY;
       let message = "数据库连接正常";
-
-      const connectionUsage = activeConnections / maxConnections;
 
       if (responseTime > 1000) {
         status = HealthStatus.DEGRADED;
         message = "数据库响应时间过长";
       }
 
-      if (connectionUsage > 0.9) {
-        status = HealthStatus.UNHEALTHY;
-        message = "数据库连接数接近上限";
-      } else if (connectionUsage > 0.7) {
-        status = HealthStatus.DEGRADED;
-        message = "数据库连接数较高";
-      }
+      // 获取数据库类型
+      const dbProvider = process.env.DATABASE_URL?.includes('postgresql') ? 'PostgreSQL' : 'SQLite';
 
       return {
         status,
         message,
         details: {
           responseTime: `${responseTime}ms`,
-          activeConnections,
-          maxConnections,
-          connectionUsage: `${(connectionUsage * 100).toFixed(1)}%`,
+          databaseType: dbProvider,
+          status: 'connected'
         },
         timestamp: new Date(),
       };

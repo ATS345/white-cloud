@@ -1,11 +1,10 @@
 global:
   resolve_timeout: 5m
-  smtp_smarthost: 'smtp.163.com:465'
-  smtp_from: 'sftaccf@163.com'
-  smtp_auth_username: 'sftaccf@163.com'
-  smtp_auth_password: 'HEurd35zATTMb9th'
+  smtp_smarthost: 'smtp.your-company.com:587'
+  smtp_from: 'alert@yunmu-game-store.com'
+  smtp_auth_username: 'alert@yunmu-game-store.com'
+  smtp_auth_password: 'your-actual-smtp-password'
   smtp_require_tls: true
-  smtp_hello: 'yunmu-game-store'
 
 route:
   group_by: ['alertname', 'severity', 'job']
@@ -29,10 +28,10 @@ receivers:
   - name: 'default-receiver'
     email_configs:
       - to: 'admin@yunmu-game-store.com'
-        from: 'sftaccf@163.com'
-        smarthost: 'smtp.163.com:465'
-        auth_username: 'sftaccf@163.com'
-        auth_password: 'HEurd35zATTMb9th'
+        from: 'alert@yunmu-game-store.com'
+        smarthost: 'smtp.your-company.com:587'
+        auth_username: 'alert@yunmu-game-store.com'
+        auth_password: 'your-actual-smtp-password'
         require_tls: true
         send_resolved: true
         headers:
@@ -41,10 +40,10 @@ receivers:
   - name: 'critical-receiver'
     email_configs:
       - to: 'admin@yunmu-game-store.com,oncall@yunmu-game-store.com'
-        from: 'sftaccf@163.com'
-        smarthost: 'smtp.163.com:465'
-        auth_username: 'sftaccf@163.com'
-        auth_password: 'HEurd35zATTMb9th'
+        from: 'alert@yunmu-game-store.com'
+        smarthost: 'smtp.your-company.com:587'
+        auth_username: 'alert@yunmu-game-store.com'
+        auth_password: 'your-actual-smtp-password'
         require_tls: true
         send_resolved: true
         headers:
@@ -62,10 +61,10 @@ receivers:
   - name: 'warning-receiver'
     email_configs:
       - to: 'admin@yunmu-game-store.com'
-        from: 'sftaccf@163.com'
-        smarthost: 'smtp.163.com:465'
-        auth_username: 'sftaccf@163.com'
-        auth_password: 'HEurd35zATTMb9th'
+        from: 'alert@yunmu-game-store.com'
+        smarthost: 'smtp.your-company.com:587'
+        auth_username: 'alert@yunmu-game-store.com'
+        auth_password: 'your-actual-smtp-password'
         require_tls: true
         send_resolved: true
         headers:
@@ -74,10 +73,10 @@ receivers:
   - name: 'info-receiver'
     email_configs:
       - to: 'admin@yunmu-game-store.com'
-        from: 'sftaccf@163.com'
-        smarthost: 'smtp.163.com:465'
-        auth_username: 'sftaccf@163.com'
-        auth_password: 'HEurd35zATTMb9th'
+        from: 'alert@yunmu-game-store.com'
+        smarthost: 'smtp.your-company.com:587'
+        auth_username: 'alert@yunmu-game-store.com'
+        auth_password: 'your-actual-smtp-password'
         require_tls: true
         send_resolved: true
         headers:
